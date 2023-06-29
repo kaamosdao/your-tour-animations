@@ -14,6 +14,7 @@ $ make install
 ```
 $ make serve
 ```
+
 #### _(open http://localhost:3000 with your browser to see the result)_
 
 ## Build app
@@ -23,8 +24,11 @@ $ make build
 ```
 
 ## Start app
+
 #### _(Before make sure, that you create a build)_
+
 ```
 $ make start
 ```
+
 #### _(open http://localhost:3000 with your browser to see the result)_

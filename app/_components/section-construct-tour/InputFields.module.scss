@@ -1,0 +1,166 @@
+@import './_styles/global/variables.scss';
+@import './_styles/global/mixin.scss';
+
+.inputFields {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(7, min-content);
+  row-gap: 30px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+
+  @media (min-width: $desktop-md-width) {
+    grid-template-columns: repeat(2, 389px);
+    grid-template-rows: repeat(4, min-content);
+    column-gap: 20px;
+    row-gap: 34px;
+  }
+
+  @media (min-width: 1300px) {
+    grid-template-columns: repeat(2, 48.7%);
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    grid-template-columns: repeat(2, 48.5%);
+    column-gap: 3%;
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.itemTextarea {
+  grid-column: 1 / -1;
+}
+
+.itemSelect {
+  position: relative;
+}
+
+.itemSelect::after {
+  position: absolute;
+  top: 49px;
+  right: 15px;
+  width: 18px;
+  height: 11px;
+  background-image: url('/img/svg-icons/select-arrow.svg');
+  background-repeat: no-repeat;
+  content: '';
+
+  @media (min-width: $desktop-md-width) {
+    top: 65px;
+    right: 24px;
+  }
+}
+
+.input,
+.select {
+  width: 100%;
+  height: 44px;
+  margin-top: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  @include font(normal, 16px, 142%);
+  color: $black;
+  background-color: $beige100;
+  border: 1px solid $beige200;
+  border-radius: 10px;
+
+  @media (min-width: $desktop-md-width) {
+    height: 68px;
+    margin-top: 7px;
+    padding: 18px;
+    @include font(normal, 20px, 141%);
+  }
+}
+
+.input::placeholder {
+  color: $grey300;
+}
+
+.input:focus,
+.input:focus-visible {
+  color: $black;
+  border: 1px solid $grey300;
+  outline: none;
+}
+
+.input:hover {
+  background-color: $beige200;
+  cursor: pointer;
+}
+
+.select {
+  color: $black;
+  appearance: none;
+
+  @media (max-width: $mobile-width) {
+    height: 46px;
+  }
+}
+
+.select:hover {
+  background-color: $beige200;
+  cursor: pointer;
+}
+
+.select:invalid {
+  color: $grey300;
+}
+
+.select:focus {
+  color: $black;
+  outline: none;
+}
+
+.textarea {
+  width: 100%;
+  height: 132px;
+  margin-top: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  @include font(normal, 16px, 142%);
+  color: $black;
+  background-color: $beige100;
+  border: 1px solid $beige200;
+  border-radius: 10px;
+  resize: none;
+
+  @media (min-width: $desktop-md-width) {
+    margin-top: 7px;
+    padding: 20px;
+    height: 152px;
+    @include font(normal, 20px, 141%);
+  }
+}
+
+.textarea:hover {
+  background-color: $beige200;
+  cursor: pointer;
+}
+
+.textarea:focus-visible {
+  color: $black;
+  border: 1px solid $grey300;
+  outline: none;
+}
+
+.label {
+  text-align: left;
+  width: 100%;
+  @include font(normal, 16px, 142%);
+
+  @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%);
+  }
+}

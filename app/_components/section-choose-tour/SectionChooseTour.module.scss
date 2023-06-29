@@ -1,0 +1,21 @@
+@import './_styles/global/variables.scss';
+@import './_styles/global/mixin.scss';
+
+.chooseTour {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 360px;
+}
+
+.title {
+  margin: 75px 0 0 0;
+  @include font(bold, 34px, 112%, 0.02em);
+  color: $black;
+
+  @media (min-width: $desktop-md-width) {
+    margin-top: 136px;
+    @include font(bold, 59px, 124%);
+  }
+}

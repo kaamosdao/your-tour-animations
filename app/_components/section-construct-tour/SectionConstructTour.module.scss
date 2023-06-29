@@ -1,0 +1,146 @@
+@import './_styles/global/variables.scss';
+@import './_styles/global/mixin.scss';
+
+.constructTour {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 360px;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  margin: 75px 0 0 0;
+  @include font(bold, 34px, 112%, 0.02em);
+  color: $black;
+
+  @media (min-width: $desktop-md-width) {
+    margin-top: 170px;
+    @include font(bold, 59px, 124%);
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    margin-top: 105px;
+  }
+}
+
+.description {
+  margin: 20px 0 0 0;
+  padding: 0 18px;
+  @include font(normal, 16px, 142%);
+  color: $grey300;
+
+  @media (min-width: $desktop-md-width) {
+    margin-top: 30px;
+    @include font(normal, 20px, 142%);
+  }
+}
+
+.description br {
+  @media (min-width: $tablet-md-width) {
+    display: none;
+  }
+
+  @media (min-width: $desktop-md-width) {
+    display: block;
+  }
+}
+
+.form {
+  width: 318px;
+  min-height: 1110px;
+  margin: 41px 0 0 0;
+  padding: 20px 20px 40px;
+  box-sizing: border-box;
+  background-color: $white;
+  border-radius: 30px;
+
+  @media (min-width: $tablet-md-width) {
+    width: 80%;
+    padding: 4.7%;
+  }
+
+  @media (min-width: $desktop-md-width) {
+    width: 918px;
+    min-height: 966px;
+    margin-top: 100px;
+    padding: 60px;
+    border-radius: 50px;
+  }
+
+  @media (min-width: 1300px) {
+    width: 70.6%;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    width: 61%;
+    min-height: 986px;
+    padding: 3.65%;
+  }
+}
+
+.buttons {
+  margin: 30px 0 0 0;
+  text-align: start;
+
+  @media (min-width: $desktop-md-width) {
+    margin-top: 33px;
+  }
+}
+
+.buttonFind {
+  width: 134px;
+  min-height: 47px;
+  padding: 12px;
+  @include font(normal, 16px, 142%);
+  color: $white;
+  background-color: $green400;
+  border: none;
+  border-radius: 10px;
+
+  @media (min-width: $desktop-md-width) {
+    width: 235px;
+    min-height: 58px;
+    padding: 15px;
+    @include font(normal, 20px, 142%);
+  }
+}
+
+.buttonFind:hover {
+  background-color: $green300;
+  cursor: pointer;
+}
+
+.buttonFind:active {
+  background-color: $green200;
+}
+
+.buttonClear {
+  width: 134px;
+  min-height: 47px;
+  margin-left: 10px;
+  padding: 12px;
+  @include font(normal, 16px, 142%);
+  color: $green400;
+  background-color: $green100;
+  border: none;
+  border-radius: 10px;
+
+  @media (min-width: $desktop-md-width) {
+    min-width: 235px;
+    min-height: 58px;
+    margin-left: 30px;
+    padding: 15px;
+    @include font(normal, 20px, 142%);
+  }
+}
+
+.buttonClear:hover {
+  background-color: $grey100;
+  cursor: pointer;
+}
+
+.buttonClear:active {
+  background-color: $grey200;
+}

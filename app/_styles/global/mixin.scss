@@ -1,0 +1,33 @@
+@mixin font(
+  $weight: normal,
+  $size: 14px,
+  $height: 24px,
+  $letter-spacing: normal
+) {
+  font-family: $font-family;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $height;
+  letter-spacing: $letter-spacing;
+}
+
+@mixin bgWithGradient($url: '') {
+  background-image: linear-gradient(
+      360deg,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0.06) 48.44%,
+      rgba(0, 0, 0, 0.5) 100%
+    ),
+    url($url);
+  background-repeat: no-repeat;
+}
+
+@mixin bgWithGradientSecond($url: '') {
+  background-image: linear-gradient(
+      270deg,
+      rgba(0, 0, 0, 0) 0.01%,
+      rgba(0, 0, 0, 0.2) 100%
+    ),
+    url($url);
+  background-repeat: no-repeat;
+}

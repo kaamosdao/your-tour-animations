@@ -1,13 +1,15 @@
-import styles from './page.module.css';
+import Footer from './_components/Footer';
+import Header from './_components/header/Header';
+import HeaderFixed from './_components/header-fixed/HeaderFixed';
+import Main from './_components/Main';
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Your Tour
-        </p>
-      </div>
-    </main>
-  );
-}
+const Home = () => (
+  <>
+    <Header />
+    <HeaderFixed />
+    <Main />
+    <Footer />
+  </>
+);
+
+export default Home;

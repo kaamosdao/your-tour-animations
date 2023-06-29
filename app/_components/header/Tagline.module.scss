@@ -1,0 +1,94 @@
+@import './_styles/global/variables.scss';
+@import './_styles/global/mixin.scss';
+
+.tagline {
+  margin: 0 auto;
+  width: 250px;
+  text-align: center;
+  color: $white;
+
+  @media (min-width: $tablet-lg-width) {
+    width: 610px;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    width: 620px;
+  }
+}
+
+.title {
+  margin-top: 52px;
+  margin-bottom: 0;
+  @include font(bold, 34px, 112%, 0.02em);
+
+  @media (min-width: $tablet-lg-width) {
+    margin-top: 119px;
+    margin-bottom: 0;
+    @include font(bold, 96px, 109%, 0.02em);
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    margin-top: 121px;
+  }
+}
+
+.description {
+  margin-top: 40px;
+  @include font(normal, 16px, 144%);
+
+  @media (min-width: $tablet-lg-width) {
+    margin-top: 52px;
+    @include font(normal, 20px, 142%);
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    margin-top: 52px;
+  }
+}
+
+.description br:first-child {
+  display: none;
+
+  @media (min-width: $tablet-lg-width) {
+    display: block;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    display: none;
+  }
+}
+
+.description br:last-child {
+  display: none;
+
+  @media (min-width: $desktop-lg-width) {
+    display: block;
+  }
+}
+
+.button {
+  width: 114px;
+  min-height: 33px;
+  margin-top: 24px;
+  @include font(normal, 16px, 144%);
+  background-color: $white;
+  border: none;
+  border-radius: 10px;
+
+  @media (min-width: $tablet-lg-width) {
+    width: 118px;
+    min-height: 34px;
+    margin-top: 28px;
+    @include font(normal, 17px, 142%);
+  }
+}
+
+.button:hover {
+  color: $white;
+  background-color: $orange200;
+  cursor: pointer;
+}
+
+.button:active {
+  background-color: $orange100;
+}

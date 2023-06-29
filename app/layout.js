@@ -1,4 +1,4 @@
-import './globals.css';
+import './_styles/style.scss';
 
 export const metadata = {
   title: 'Your Tour',

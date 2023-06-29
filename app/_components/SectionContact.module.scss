@@ -1,0 +1,110 @@
+@import './_styles/global/variables.scss';
+@import './_styles/global/mixin.scss';
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 360px;
+  min-height: 285px;
+  margin: 75px auto 0;
+  text-align: center;
+
+  @media (min-width: $tablet-lg-width) {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-template-rows: max-content max-content;
+    width: 670px;
+    min-height: 370px;
+    margin-top: 77px;
+    text-align: start;
+  }
+
+  @media (min-width: $desktop-md-width) {
+    width: 770px;
+    min-height: 370px;
+    margin-top: 135px;
+  }
+}
+
+.title {
+  order: 2;
+  align-self: center;
+  margin: 24px 0 0 0;
+  @include font(bold, 23px, 120%, 0.04em);
+  color: $black;
+
+  @media (min-width: $tablet-lg-width) {
+    display: block;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    align-self: flex-end;
+    width: 100%;
+    margin: -7px 0 0 20px;
+    @include font(500, 23px, 120%, 0.04em);
+  }
+
+  @media (min-width: $desktop-md-width) {
+    width: 365px;
+    margin: -7px 0 0 29px;
+    @include font(500, 35px, 122%, 0.004em);
+  }
+}
+
+.text {
+  order: 3;
+  margin: 20px 0 0 0;
+  @include font(normal, 16px, 142%);
+  color: $grey300;
+
+  @media (min-width: $tablet-lg-width) {
+    display: block;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    width: 100%;
+    margin: 20px 0 0 20px;
+    @include font(normal, 16px, 142%);
+  }
+
+  @media (min-width: $desktop-md-width) {
+    width: 365px;
+    margin: 20px 0 0 29px;
+    @include font(normal, 20px, 142%);
+  }
+}
+
+.link {
+  color: $black;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link:active {
+  color: $green400;
+  text-decoration: underline;
+}
+
+.picture {
+  order: 1;
+  align-self: center;
+  width: 36.1%;
+
+  @media (min-width: $tablet-lg-width) {
+    grid-column: 1 / 2;
+    grid-row: 1 / -1;
+    width: auto;
+  }
+}
+
+.picture img {
+  width: 100%;
+  height: 100%;
+
+  @media (min-width: $tablet-lg-width) {
+    width: auto;
+  }
+}
