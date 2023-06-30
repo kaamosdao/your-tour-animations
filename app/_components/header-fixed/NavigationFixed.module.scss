@@ -53,6 +53,16 @@
   text-decoration: none;
 }
 
+.linkActive {
+  position: relative;
+  color: $orange200;
+  text-decoration: none;
+}
+
+.linkActive:hover {
+  cursor: default;
+}
+
 .link:hover:after {
   position: absolute;
   right: 0;
