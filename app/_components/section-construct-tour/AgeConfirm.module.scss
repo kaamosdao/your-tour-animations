@@ -1,5 +1,5 @@
-@import './app/_styles/global/variables.scss';
-@import './app/_styles/global/mixin.scss';
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
 
 .ageConfirm {
   text-align: start;
@@ -47,14 +47,14 @@
   width: 20px;
   height: 20px;
   box-sizing: border-box;
-  border: 1.5px solid $black;
+  border: 1.5px solid var(--main-text-color);
   border-radius: 50%;
 
   @media (min-width: $desktop-md-width) {
     top: -1px;
     width: 26px;
     height: 26px;
-    border: 2px solid $black;
+    border: 2px solid var(--main-text-color);
   }
 }
 
@@ -78,7 +78,7 @@
   left: 4.2px;
   width: 9.23px;
   height: 9.23px;
-  background-color: $black;
+  background-color: var(--main-text-color);
   border-radius: 50%;
   content: '';
 

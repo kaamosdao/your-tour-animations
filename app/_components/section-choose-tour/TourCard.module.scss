@@ -1,5 +1,5 @@
-@import './app/_styles/global/variables.scss';
-@import './app/_styles/global/mixin.scss';
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
 
 .tourCard {
   position: relative;
@@ -9,7 +9,7 @@
   min-height: 318px;
   padding: 25px 25px 13px 25px;
   box-sizing: border-box;
-  color: $white;
+  color: var(--third-text-color);
   text-decoration: none;
   border-radius: 20px;
   background-size: 100%;
@@ -52,11 +52,11 @@
 }
 
 .tourCard:hover .button {
-  background-color: $green400;
+  background-color: var(--btn-bg-color);
 }
 
 .tourCard:active .button {
-  background-color: $orange200;
+  background-color: var(--active-link-color);
 }
 
 .title {

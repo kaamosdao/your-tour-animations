@@ -1,5 +1,5 @@
-@import './app/_styles/global/variables.scss';
-@import './app/_styles/global/mixin.scss';
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
 
 .item {
   position: relative;
@@ -40,7 +40,7 @@
 .socialLink {
   position: relative;
   @include font(normal, 20px, 142%, 0.004em);
-  color: $white;
+  color: var(--third-text-color);
   text-decoration: none;
 }
 
@@ -58,16 +58,16 @@
   right: 0;
   bottom: 0;
   height: 1px;
-  background-color: $white;
+  background-color: var(--third-text-color);
   content: '';
 }
 
 .socialLink:active {
-  color: $orange200;
+  color: var(--active-link-color);
 }
 
 .socialLink:active:after {
-  background-color: $orange200;
+  background-color: var(--active-link-color);
 }
 
 .historyCard {
@@ -78,7 +78,7 @@
   min-height: 455px;
   padding: 30px 30px 18px;
   box-sizing: border-box;
-  color: $white;
+  color: var(--third-text-color);
   text-decoration: none;
   text-align: start;
   border: none;
@@ -115,11 +115,11 @@
 }
 
 .historyCard:hover .historyCardButton {
-  background-color: $green400;
+  background-color: var(--btn-hover-color);
 }
 
 .historyCard:active .historyCardButton {
-  background-color: $orange200;
+  background-color: var(--active-link-color);
 }
 
 .camping {
@@ -325,7 +325,7 @@
   top: 0;
   left: -16px;
   font-size: 30px;
-  color: $white;
+  color: var(--third-text-color);
   content: '·';
 
   @media (min-width: $desktop-md-width) {

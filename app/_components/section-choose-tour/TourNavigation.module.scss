@@ -1,5 +1,5 @@
-@import './app/_styles/global/variables.scss';
-@import './app/_styles/global/mixin.scss';
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
 
 .nav {
   display: flex;
@@ -11,7 +11,7 @@
   margin: 31px 31px 0;
   padding: 0;
   @include font(bold, 16px, 142%);
-  color: $black;
+  color: var(--main-text-color);
   list-style-type: none;
 
   @media (min-width: $desktop-md-width) {
@@ -25,7 +25,7 @@
 
 .navLink {
   position: relative;
-  color: $black;
+  color: var(--main-text-color);
   text-decoration: none;
 }
 
@@ -36,7 +36,7 @@
   bottom: -5px;
   left: 0;
   height: 2px;
-  background-color: $black;
+  background-color: var(--main-text-color);
   content: '';
 }
 
@@ -45,7 +45,7 @@
 }
 
 .navLinkCurrent {
-  color: $orange200;
+  color: var(--active-link-color);
 }
 
 .navLinkCurrent::after {
@@ -55,7 +55,7 @@
   bottom: -2px;
   left: 0;
   height: 2px;
-  background-color: $orange200;
+  background-color: var(--active-link-color);
   content: '';
 
   @media (min-width: $desktop-md-width) {

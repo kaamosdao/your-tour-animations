@@ -1,11 +1,11 @@
-@import './app/_styles/global/variables.scss';
-@import './app/_styles/global/mixin.scss';
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
 
 .footer {
   display: flex;
   justify-content: center;
   min-width: 360px;
-  background-color: $beige200;
+  background-color: var(--sec-bg-color);
 }
 
 .container {
@@ -31,7 +31,7 @@
 .text {
   margin: 22px 0 0 0;
   @include font(normal, 16px, 142%);
-  color: $grey300;
+  color: var(--sec-text-color);
 
   @media (min-width: $desktop-md-width) {
     margin: 0;
@@ -127,7 +127,7 @@
 }
 
 .socialsLink {
-  color: $black;
+  color: var(--main-text-color);
   text-decoration: none;
 }
 
@@ -141,6 +141,6 @@
   left: 0;
   bottom: 0;
   height: 1px;
-  background-color: $black;
+  background-color: var(--main-text-color);
   content: '';
 }

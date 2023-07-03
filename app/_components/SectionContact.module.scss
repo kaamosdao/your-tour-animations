@@ -1,5 +1,5 @@
-@import './app/_styles/global/variables.scss';
-@import './app/_styles/global/mixin.scss';
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
 
 .contact {
   display: flex;
@@ -33,7 +33,7 @@
   align-self: center;
   margin: 24px 0 0 0;
   @include font(bold, 23px, 120%, 0.04em);
-  color: $black;
+  color: var(--main-text-color);
 
   @media (min-width: $tablet-lg-width) {
     display: block;
@@ -56,7 +56,7 @@
   order: 3;
   margin: 20px 0 0 0;
   @include font(normal, 16px, 142%);
-  color: $grey300;
+  color: var(--sec-text-color);
 
   @media (min-width: $tablet-lg-width) {
     display: block;
@@ -75,7 +75,7 @@
 }
 
 .link {
-  color: $black;
+  color: var(--main-text-color);
   text-decoration: none;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .link:active {
-  color: $green400;
+  color: var(--active-link-sec-color);
   text-decoration: underline;
 }
 

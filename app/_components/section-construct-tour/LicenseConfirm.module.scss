@@ -1,5 +1,5 @@
-@import './app/_styles/global/variables.scss';
-@import './app/_styles/global/mixin.scss';
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
 
 .licenseConfirm {
   text-align: start;
@@ -19,14 +19,14 @@
   width: 20px;
   height: 20px;
   box-sizing: border-box;
-  border: 1.5px solid $black;
+  border: 1.5px solid var(--main-text-color);
   border-radius: 4px;
 
   @media (min-width: $desktop-md-width) {
     top: 1px;
     width: 26px;
     height: 26px;
-    border: 2px solid $black;
+    border: 2px solid var(--main-text-color);
   }
 }
 
@@ -60,7 +60,7 @@
   width: 230px;
   margin-left: 30px;
   @include font(normal, 16px, 142%);
-  color: $grey300;
+  color: var(--sec-text-color);
 
   @media (min-width: $tablet-md-width) {
     width: 80%;
@@ -79,7 +79,7 @@
 
 .checkboxLink {
   position: relative;
-  color: $black;
+  color: var(--main-text-color);
   text-decoration: none;
 }
 
@@ -89,5 +89,5 @@
 }
 
 .checkboxLink:active {
-  color: $green400;
+  color: var(--active-link-sec-color);
 }

@@ -1,5 +1,5 @@
-@import './app/_styles/global/variables.scss';
-@import './app/_styles/global/mixin.scss';
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
 
 .card {
   display: flex;
@@ -10,7 +10,7 @@
   border-radius: 20px;
   box-sizing: border-box;
   text-align: start;
-  background-color: $beige200;
+  background-color: var(-sec-bg-color);
   border: none;
 
   @media (min-width: $tablet-md-width) {
@@ -41,7 +41,7 @@
 .text {
   margin: 0;
   @include font(bold, 16px, 144%);
-  color: $black;
+  color: var(--main-text-color);
 
   @media (min-width: $desktop-md-width) {
     @include font(bold, 23px, 122%);
@@ -96,7 +96,7 @@
   margin: 0;
   padding: 0;
   @include font(normal, 16px, 142%, -0.01em);
-  color: $grey300;
+  color: var(--sec-text-color);
 
   @media (min-width: $desktop-md-width) {
     margin-top: 5px;

@@ -1,5 +1,5 @@
-@import './app/_styles/global/variables.scss';
-@import './app/_styles/global/mixin.scss';
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
 
 .inputFields {
   margin: 0;
@@ -71,9 +71,9 @@
   padding: 10px;
   box-sizing: border-box;
   @include font(normal, 16px, 142%);
-  color: $black;
-  background-color: $beige100;
-  border: 1px solid $beige200;
+  color: var(--main-text-color);
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--sec-bg-color);
   border-radius: 10px;
 
   @media (min-width: $desktop-md-width) {
@@ -85,23 +85,23 @@
 }
 
 .input::placeholder {
-  color: $grey300;
+  color: var(--sec-text-color);
 }
 
 .input:focus,
 .input:focus-visible {
-  color: $black;
-  border: 1px solid $grey300;
+  color: var(--main-text-color);
+  border: 1px solid var(--sec-text-color);
   outline: none;
 }
 
 .input:hover {
-  background-color: $beige200;
+  background-color: var(--sec-bg-color);
   cursor: pointer;
 }
 
 .select {
-  color: $black;
+  color: var(--main-text-color);
   appearance: none;
 
   @media (max-width: $mobile-width) {
@@ -110,16 +110,16 @@
 }
 
 .select:hover {
-  background-color: $beige200;
+  background-color: var(--sec-bg-color);
   cursor: pointer;
 }
 
 .select:invalid {
-  color: $grey300;
+  color: var(--sec-text-color);
 }
 
 .select:focus {
-  color: $black;
+  color: var(--main-text-color);
   outline: none;
 }
 
@@ -130,9 +130,9 @@
   padding: 10px;
   box-sizing: border-box;
   @include font(normal, 16px, 142%);
-  color: $black;
-  background-color: $beige100;
-  border: 1px solid $beige200;
+  color: var(--main-text-color);
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--sec-bg-color);
   border-radius: 10px;
   resize: none;
 
@@ -145,13 +145,13 @@
 }
 
 .textarea:hover {
-  background-color: $beige200;
+  background-color: var(--sec-bg-color);
   cursor: pointer;
 }
 
 .textarea:focus-visible {
-  color: $black;
-  border: 1px solid $grey300;
+  color: var(--main-text-color);
+  border: 1px solid #a6a6a6;
   outline: none;
 }
 

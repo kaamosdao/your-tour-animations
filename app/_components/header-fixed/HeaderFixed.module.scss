@@ -1,4 +1,4 @@
-@import './app/_styles/global/variables.scss';
+@import './app/_styles/variables.scss';
 
 .headerFixed {
   z-index: 10;
@@ -8,7 +8,7 @@
   top: 0;
   width: 100%;
   min-height: 88px;
-  background-color: rgba(243, 239, 232, 0.6);
+  background-color: var(--header-bg-color);
   backdrop-filter: blur(27px);
 }
 

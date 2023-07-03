@@ -4,7 +4,7 @@
   $height: 24px,
   $letter-spacing: normal
 ) {
-  font-family: $font-family;
+  font-family: var(--font-family);
   font-weight: $weight;
   font-size: $size;
   line-height: $height;

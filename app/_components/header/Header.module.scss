@@ -1,5 +1,5 @@
-@import './app/_styles/global/variables.scss';
-@import './app/_styles/global/mixin.scss';
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
 
 .header {
   position: absolute;
@@ -18,7 +18,7 @@
   min-height: 88px;
   margin: 0 5.5%;
   @include font(normal, 16px, 142%);
-  color: $white;
+  color: var(--third-text-color);
 
   @media (min-width: $desktop-md-width) {
     justify-content: initial;
@@ -63,13 +63,13 @@
 
 .link {
   position: relative;
-  color: $white;
+  color: var(--third-text-color);
   text-decoration: none;
 }
 
 .linkActive {
   position: relative;
-  color: $orange200;
+  color: var(--active-link-color);
   text-decoration: none;
 }
 
@@ -83,7 +83,7 @@
   left: 0;
   bottom: -2px;
   height: 1px;
-  background-color: $white;
+  background-color: var(--third-text-color);
   content: '';
 }
 
@@ -101,7 +101,7 @@
   position: relative;
   margin: 0;
   padding: 0;
-  color: $white;
+  color: var(--third-text-color);
   text-decoration: none;
 }
 
@@ -111,6 +111,6 @@
   left: 0;
   bottom: 0;
   height: 1px;
-  background-color: $white;
+  background-color: var(--third-text-color);
   content: '';
 }

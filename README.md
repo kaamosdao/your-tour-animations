@@ -1,4 +1,5 @@
 # YourTour
+
 [![Linter](https://github.com/kaamosdao/your-tour-animations/actions/workflows/linter.yml/badge.svg)](https://github.com/kaamosdao/your-tour-animations/actions/workflows/linter.yml)
 
 Test task for Salt &amp; Pepper. Web page with adaptive web design about perfect travels.

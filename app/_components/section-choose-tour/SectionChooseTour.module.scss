@@ -1,5 +1,5 @@
-@import './app/_styles/global/variables.scss';
-@import './app/_styles/global/mixin.scss';
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
 
 .chooseTour {
   display: flex;
@@ -12,7 +12,7 @@
 .title {
   margin: 75px 0 0 0;
   @include font(bold, 34px, 112%, 0.02em);
-  color: $black;
+  color: var(--main-text-color);
 
   @media (min-width: $desktop-md-width) {
     margin-top: 136px;

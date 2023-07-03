@@ -1,5 +1,5 @@
-@import './app/_styles/global/variables.scss';
-@import './app/_styles/global/mixin.scss';
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
 
 .constructTour {
   display: flex;
@@ -13,7 +13,7 @@
 .title {
   margin: 75px 0 0 0;
   @include font(bold, 34px, 112%, 0.02em);
-  color: $black;
+  color: var(--main-text-color);
 
   @media (min-width: $desktop-md-width) {
     margin-top: 170px;
@@ -29,7 +29,7 @@
   margin: 20px 0 0 0;
   padding: 0 18px;
   @include font(normal, 16px, 142%);
-  color: $grey300;
+  color: var(--sec-text-color);
 
   @media (min-width: $desktop-md-width) {
     margin-top: 30px;
@@ -53,7 +53,7 @@
   margin: 41px 0 0 0;
   padding: 20px 20px 40px;
   box-sizing: border-box;
-  background-color: $white;
+  background-color: var(--third-bg-color);
   border-radius: 30px;
 
   @media (min-width: $tablet-md-width) {
@@ -94,8 +94,8 @@
   min-height: 47px;
   padding: 12px;
   @include font(normal, 16px, 142%);
-  color: $white;
-  background-color: $green400;
+  color: var(--third-text-color);
+  background-color: var(--btn-bg-color);
   border: none;
   border-radius: 10px;
 
@@ -108,12 +108,12 @@
 }
 
 .buttonFind:hover {
-  background-color: $green300;
+  background-color: var(--btn-hover-sec-color);
   cursor: pointer;
 }
 
 .buttonFind:active {
-  background-color: $green200;
+  background-color: var(--btn-active-color);
 }
 
 .buttonClear {
@@ -122,8 +122,8 @@
   margin-left: 10px;
   padding: 12px;
   @include font(normal, 16px, 142%);
-  color: $green400;
-  background-color: $green100;
+  color: var(--btn-text-color);
+  background-color: var(--btn-bg-sec-color);
   border: none;
   border-radius: 10px;
 
@@ -137,10 +137,10 @@
 }
 
 .buttonClear:hover {
-  background-color: $grey100;
+  background-color: var(--btn-hover-third-color);
   cursor: pointer;
 }
 
 .buttonClear:active {
-  background-color: $grey200;
+  background-color: var(--btn-active-sec-color);
 }
