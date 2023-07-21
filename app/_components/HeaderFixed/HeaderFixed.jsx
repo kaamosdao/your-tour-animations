@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 
-import NavigationFixed from './NavigationFixed';
+import NavigationFixed from './NavigationFixed/index';
 
 import s from './HeaderFixed.module.scss';
 
