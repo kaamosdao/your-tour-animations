@@ -1,4 +1,4 @@
-import TourCard from './TourCard';
+import TourCard from '../TourCard/TourCard';
 
 import s from './TourLinks.module.scss';
 

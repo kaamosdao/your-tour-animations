@@ -1,5 +1,5 @@
-import ChooseTourNavigation from './TourNavigation';
-import TourLinks from './TourLinks';
+import ChooseTourNavigation from './TourNavigation/index';
+import TourLinks from './TourLinks/index';
 
 import s from './SectionChooseTour.module.scss';
 
