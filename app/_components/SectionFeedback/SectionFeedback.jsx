@@ -1,4 +1,4 @@
-import FeedbackCard from './FeedbackCard';
+import FeedbackCard from './FeedbackCard/index';
 
 import s from './SectionFeedback.module.scss';
 

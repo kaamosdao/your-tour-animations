@@ -10,7 +10,7 @@
   border-radius: 20px;
   box-sizing: border-box;
   text-align: start;
-  background-color: var(-sec-bg-color);
+  background-color: var(--sec-bg-color);
   border: none;
 
   @media (min-width: $tablet-md-width) {
