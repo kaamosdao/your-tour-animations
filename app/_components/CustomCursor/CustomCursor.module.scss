@@ -1,0 +1,52 @@
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
+
+.cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: $orange200;
+  z-index: 100;
+  pointer-events: none;
+}
+
+// .dot {
+//   // position: fixed;
+//   width: 8px;
+//   height: 8px;
+//   border-radius: 50%;
+//   background-color: $orange200;
+//   z-index: 100;
+//   // transform: translate(-50%, -50%);
+//   pointer-events: none;
+//   // mix-blend-mode: difference;
+// }
+
+.follower {
+  position: fixed;
+  background-color: transparent;
+  z-index: 100;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+.text {
+  position: fixed;
+  @include font(normal, 18px, 16px);
+  opacity: 0;
+  z-index: 100;
+  transform: translate(-50%, -130%);
+}
+
+.circle {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid $white;
+  border-radius: 50%;
+  background-color: transparent;
+  z-index: 100;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
