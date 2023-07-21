@@ -1,6 +1,9 @@
-import Header from './_components/header/Header';
-import HeaderFixed from './_components/header-fixed/HeaderFixed';
-import Footer from './_components/Footer';
+import Providers from '@/providers/providers';
+
+import Header from './_components/Header/index';
+import HeaderFixed from './_components/HeaderFixed/index';
+import Footer from './_components/Footer/index';
+import CustomCursor from './_components/CustomCursor/index';
 
 import './_styles/style.scss';
 
@@ -14,10 +17,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Header />
-        <HeaderFixed />
-        {children}
-        <Footer />
+        <Providers>
+          <CustomCursor />
+          <Header />
+          <HeaderFixed />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
