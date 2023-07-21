@@ -8,25 +8,15 @@
   border-radius: 50%;
   background-color: $orange200;
   z-index: 100;
+  transform: translate(-100px);
   pointer-events: none;
 }
-
-// .dot {
-//   // position: fixed;
-//   width: 8px;
-//   height: 8px;
-//   border-radius: 50%;
-//   background-color: $orange200;
-//   z-index: 100;
-//   // transform: translate(-50%, -50%);
-//   pointer-events: none;
-//   // mix-blend-mode: difference;
-// }
 
 .follower {
   position: fixed;
   background-color: transparent;
   z-index: 100;
+  transform: translate(-100px);
   pointer-events: none;
   mix-blend-mode: difference;
 }

@@ -67,9 +67,7 @@ const CustomCursor = () => {
 
   return (
     <div>
-      <div ref={cursorRef} className={s.cursor} id="cursor">
-        {/* <div className={s.dot} id="dot" /> */}
-      </div>
+      <div ref={cursorRef} className={s.cursor} id="cursor" />
       <div ref={cursorFollowerRef} className={s.follower} id="follower">
         <div className={s.circle} id="circle" />
         <div className={s.text} id="text" />
