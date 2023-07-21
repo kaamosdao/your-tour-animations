@@ -1,4 +1,4 @@
-import HistoryCard from './HistoryCard';
+import HistoryCard from './HistoryCard/index';
 
 import s from './SectionHistories.module.scss';
 
