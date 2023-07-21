@@ -34,6 +34,7 @@ body {
   line-height: 142%;
   letter-spacing: normal;
   background-color: var(--main-bg-color);
+  cursor: none;
 }
 
 img {
@@ -88,7 +89,6 @@ img {
 
 .button-more:hover {
   background: none;
-  cursor: pointer;
 
   @media (min-width: $desktop-md-width) {
     background-color: var(--btn-bg-color);
