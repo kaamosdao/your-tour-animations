@@ -10,6 +10,8 @@ import { setStuck } from '@/store/slices/cursorSlice';
 import useCursorRef from '@/hooks/useCursorRef';
 import useCursorFollowerRef from '@/hooks/useCursorFollowerRef';
 
+import YourTourIcon from '@/public/img/svg-icons/yourtour.svg';
+
 import s from './Header.module.scss';
 
 const Header = () => {
@@ -89,21 +91,7 @@ const Header = () => {
           onMouseEnter={onMouseEnterLogo}
           onMouseLeave={onMouseLeaveLogo}
         >
-          <picture>
-            <source
-              media="(min-width: 1024px)"
-              srcSet="/img/svg-icons/yourtour-mobile.svg"
-              width="181"
-              height="32"
-            />
-            <img
-              src="/img/svg-icons/yourtour-mobile.svg"
-              alt="YourTour logo"
-              width="133"
-              height="22"
-              loading="lazy"
-            />
-          </picture>
+          <YourTourIcon className={s.icon} />
         </Link>
         <ul className={s.links}>
           <li className={s.item}>

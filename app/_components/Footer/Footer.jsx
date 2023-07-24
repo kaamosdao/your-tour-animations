@@ -1,11 +1,14 @@
 'use client';
 
 import { useRef } from 'react';
-import cn from 'classnames';
 import { gsap } from 'gsap';
 
 import useCursorRef from '@/hooks/useCursorRef';
 import useCursorFollowerRef from '@/hooks/useCursorFollowerRef';
+
+import VkIcon from '@/public/img/svg-icons/vk.svg';
+import FacebookIcon from '@/public/img/svg-icons/facebook.svg';
+import InstagramIcon from '@/public/img/svg-icons/instagram.svg';
 
 import s from './Footer.module.scss';
 
@@ -46,7 +49,8 @@ const Footer = () => {
       <div className={s.container}>
         <p className={s.text}>Наши социальные сети</p>
         <ul className={s.socials}>
-          <li className={cn(s.socialsItem, s.socialsInstagram)}>
+          <li className={s.socialsItem}>
+            <InstagramIcon className={s.instagramIcon} />
             <a
               className={s.socialsLink}
               href="https://instagram.com/"
@@ -56,7 +60,8 @@ const Footer = () => {
               instagram
             </a>
           </li>
-          <li className={cn(s.socialsItem, s.socialsFacebook)}>
+          <li className={s.socialsItem}>
+            <FacebookIcon className={s.facebookIcon} />
             <a
               className={s.socialsLink}
               href="https://facebook.com/"
@@ -67,10 +72,11 @@ const Footer = () => {
             </a>
           </li>
           <li
-            className={cn(s.socialsItem, s.socialsVkontakte)}
+            className={s.socialsItem}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
           >
+            <VkIcon className={s.vkIcon} />
             <a className={s.socialsLink} href="https://vk.com/">
               vkontakte
             </a>

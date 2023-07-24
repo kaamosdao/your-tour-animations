@@ -10,6 +10,8 @@
 }
 
 .navigation {
+  @include font(normal, 16px, 142%);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,13 +19,13 @@
   width: auto;
   min-height: 88px;
   margin: 0 5.5%;
-  @include font(normal, 16px, 142%);
   color: var(--third-text-color);
 
   @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%);
+
     justify-content: initial;
     min-width: 910px;
-    @include font(normal, 20px, 142%);
   }
 
   @media (min-width: $desktop-lg-width) {
@@ -113,4 +115,16 @@
   height: 1px;
   background-color: var(--third-text-color);
   content: '';
+}
+
+.icon {
+  width: 133px;
+  height: 22px;
+
+  fill: var(--third-text-color);
+
+  @media (min-width: $desktop-md-width) {
+    width: 181px;
+    height: 32px;
+  }
 }

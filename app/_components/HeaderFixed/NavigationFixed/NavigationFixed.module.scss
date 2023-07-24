@@ -2,16 +2,19 @@
 @import './app/_styles/mixin.scss';
 
 .navigationFixed {
+  @include font(normal, 16px, 142%);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-width: 320px;
   width: 100%;
   margin: 0 5.5%;
-  @include font(normal, 16px, 142%);
   color: var(--main-text-color);
 
   @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%);
+
     justify-content: initial;
     min-width: 910px;
   }
@@ -19,7 +22,6 @@
   @media (min-width: $desktop-lg-width) {
     min-width: 1168px;
     margin: 0 19.6%;
-    @include font(normal, 20px, 142%);
   }
 }
 
@@ -42,7 +44,7 @@
 .item:not(:first-child) {
   margin-left: 30px;
 
-  @media (min-width: $desktop-md-width) {
+  @media (min-width: $desktop-lg-width) {
     margin-left: 51px;
   }
 }
@@ -99,4 +101,16 @@
   height: 1px;
   background-color: var(--main-text-color);
   content: '';
+}
+
+.icon {
+  width: 133px;
+  height: 22px;
+
+  fill: var(--main-text-color);
+
+  @media (min-width: $desktop-md-width) {
+    width: 181px;
+    height: 32px;
+  }
 }

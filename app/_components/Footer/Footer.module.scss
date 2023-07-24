@@ -29,33 +29,37 @@
 }
 
 .text {
-  margin: 22px 0 0 0;
   @include font(normal, 16px, 142%);
+
+  margin: 22px 0 0 0;
   color: var(--sec-text-color);
 
   @media (min-width: $desktop-md-width) {
-    margin: 0;
     @include font(normal, 20px, 142%);
+
+    margin: 0;
   }
 }
 
 .socials {
+  @include font(normal, 16px, 142%);
+
   display: grid;
   grid-template-columns: repeat(3, max-content);
   column-gap: 40px;
   row-gap: 10px;
   margin: 7px 0 0 25px;
   padding: 0 10px 10px 10px;
-  @include font(normal, 16px, 142%);
   list-style-type: none;
 
   @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%);
+
     column-gap: 62px;
     row-gap: 10px;
     max-width: 650px;
     margin: 0 -11px 0 0;
     padding: 10px;
-    @include font(normal, 20px, 142%);
   }
 
   @media (min-width: $desktop-lg-width) {
@@ -72,57 +76,51 @@
   }
 }
 
-.socialsInstagram::after {
-  position: absolute;
-  top: 6px;
-  left: -18px;
-  width: 14px;
-  height: 14px;
-  background-image: url('/img/svg-icons/instagram.svg');
-  background-size: 77% auto;
-  background-repeat: no-repeat;
-  content: '';
-
-  @media (min-width: $desktop-md-width) {
-    top: 8px;
-    left: -26px;
-    background-size: 100% auto;
-  }
-}
-
-.socialsFacebook:after {
-  position: absolute;
-  top: 4px;
-  left: -15px;
-  width: 8px;
-  height: 17px;
-  background-image: url('/img/svg-icons/facebook.svg');
-  background-size: 77% auto;
-  background-repeat: no-repeat;
-  content: '';
-
-  @media (min-width: $desktop-md-width) {
-    top: 5px;
-    left: -23px;
-    background-size: 100% auto;
-  }
-}
-
-.socialsVkontakte:after {
+.vkIcon {
   position: absolute;
   top: 8px;
   left: -22px;
-  width: 20px;
-  height: 12px;
-  background-image: url('/img/svg-icons/vk.svg');
-  background-size: 77% auto;
-  background-repeat: no-repeat;
-  content: '';
+  width: 15px;
+  height: 9px;
+  fill: var(--sec-text-color);
 
   @media (min-width: $desktop-md-width) {
     top: 10px;
     left: -31px;
-    background-size: 100% auto;
+    width: 20px;
+    height: 12px;
+  }
+}
+
+.instagramIcon {
+  position: absolute;
+  top: 6px;
+  left: -18px;
+  width: 11px;
+  height: 11px;
+  fill: var(--sec-text-color);
+
+  @media (min-width: $desktop-md-width) {
+    top: 8px;
+    left: -26px;
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.facebookIcon {
+  position: absolute;
+  top: 4px;
+  left: -15px;
+  width: 7px;
+  height: 13px;
+  fill: var(--sec-text-color);
+
+  @media (min-width: $desktop-md-width) {
+    top: 5px;
+    left: -23px;
+    width: 8px;
+    height: 17px;
   }
 }
 
