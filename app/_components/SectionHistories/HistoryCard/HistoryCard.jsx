@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
@@ -5,6 +8,8 @@ import { gsap } from 'gsap';
 
 import { setStuck } from '@/store/slices/cursorSlice';
 import useCursorFollowerRef from '@/hooks/useCursorFollowerRef';
+
+import ButtonMore from '../../ButtonMore/index';
 
 import s from './HistoryCard.module.scss';
 
@@ -22,6 +27,17 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
   const dispatch = useDispatch();
 
   const cursorFollower = useCursorFollowerRef();
+
+  const [hovered, setHovered] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  const onMouseDown = () => {
+    setClicked(true);
+  };
+
+  const onMouseUp = () => {
+    setClicked(false);
+  };
 
   const onMouseEnter = (e) => {
     const link = e.currentTarget;
@@ -54,6 +70,8 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
   };
 
   const onMouseEnterCard = () => {
+    setHovered(true);
+
     const cursorText = cursorFollower.current.querySelector('#text');
     const cursorCircle = cursorFollower.current.querySelector('#circle');
 
@@ -77,6 +95,9 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
   };
 
   const onMouseLeaveCard = () => {
+    setHovered(false);
+    setClicked(false);
+
     const cursorText = cursorFollower.current.querySelector('#text');
     const cursorCircle = cursorFollower.current.querySelector('#circle');
 
@@ -118,12 +139,16 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
         href="/"
         onMouseEnter={onMouseEnterCard}
         onMouseLeave={onMouseLeaveCard}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
       >
         <h3 className={s.historyCardTitle}>{title}</h3>
         <p className={s.historyCardText}>{text}</p>
         {list && <List items={list} />}
         <footer className={s.historyCardFooter}>
-          <p className={cn(s.historyCardButton, 'button-more')}>Подробнее</p>
+          <div className={cn(s.historyCardButton)}>
+            <ButtonMore isHovered={hovered} isClicked={clicked} />
+          </div>
         </footer>
       </a>
     </li>

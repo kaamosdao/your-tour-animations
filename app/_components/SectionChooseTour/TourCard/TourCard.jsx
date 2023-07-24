@@ -1,15 +1,33 @@
+'use client';
+
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { gsap } from 'gsap';
 
 import useCursorFollowerRef from '@/hooks/useCursorFollowerRef';
 
+import ButtonMore from '../../ButtonMore/index';
+
 import s from './TourCard.module.scss';
 
 const TourCard = ({ name, title, price }) => {
   const cursorFollower = useCursorFollowerRef();
 
+  const [hovered, setHovered] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  const onMouseDown = () => {
+    setClicked(true);
+  };
+
+  const onMouseUp = () => {
+    setClicked(false);
+  };
+
   const onMouseEnter = () => {
+    setHovered(true);
+
     const cursorText = cursorFollower.current.querySelector('#text');
     const cursorCircle = cursorFollower.current.querySelector('#circle');
 
@@ -33,6 +51,9 @@ const TourCard = ({ name, title, price }) => {
   };
 
   const onMouseLeave = () => {
+    setHovered(false);
+    setClicked(false);
+
     const cursorText = cursorFollower.current.querySelector('#text');
     const cursorCircle = cursorFollower.current.querySelector('#circle');
 
@@ -60,10 +81,14 @@ const TourCard = ({ name, title, price }) => {
       href="/tour"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
     >
       <h3 className={s.title}>{title}</h3>
       <p className={s.price}>{price}</p>
-      <p className={cn(s.button, 'button-more')}>Подробнее</p>
+      <div className={cn(s.button)}>
+        <ButtonMore isHovered={hovered} isClicked={clicked} />
+      </div>
     </a>
   );
 };

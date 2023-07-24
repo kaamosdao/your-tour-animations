@@ -38,8 +38,9 @@
 }
 
 .socialLink {
-  position: relative;
   @include font(normal, 20px, 142%, 0.004em);
+
+  position: relative;
   color: var(--third-text-color);
   text-decoration: none;
 }
@@ -114,60 +115,63 @@
   transform: scale(1.2);
 }
 
-.historyCard:hover .historyCardButton {
-  background-color: var(--btn-hover-color);
-}
-
-.historyCard:active .historyCardButton {
-  background-color: var(--active-link-color);
-}
-
 .camping {
   @include bgWithGradientSecond('/img/histories/camping-mobile.jpg');
 
   @media (min-resolution: 2dppx) {
     @include bgWithGradientSecond('/img/histories/camping-mobile@2x.jpg');
+
     background-size: 100% auto;
   }
 
   @media (min-width: 361px) {
     @include bgWithGradientSecond('/img/histories/camping-desktop-md.jpg');
+
     background-position: right;
     background-size: 749px auto;
+
     @media (min-resolution: 2dppx) {
       @include bgWithGradientSecond('/img/histories/camping-desktop-md@2x.jpg');
+
       background-size: 918px auto;
     }
   }
 
   @media (min-width: $desktop-md-width) {
     @include bgWithGradientSecond('/img/histories/camping-desktop-md.jpg');
+
     background-position: initial;
     background-size: 100% auto;
 
     @media (min-resolution: 2dppx) {
       @include bgWithGradientSecond('/img/histories/camping-desktop-md@2x.jpg');
+
       background-size: 918px auto;
     }
   }
 
   @media (min-width: 1025px) {
     @include bgWithGradientSecond('/img/histories/camping-desktop-lg.jpg');
+
     background-position: right;
     background-size: 1170px auto;
+
     @media (min-resolution: 2dppx) {
       @include bgWithGradientSecond('/img/histories/camping-desktop-lg@2x.jpg');
+
       background-size: 1170px auto;
     }
   }
 
   @media (min-width: $desktop-lg-width) {
     @include bgWithGradientSecond('/img/histories/camping-desktop-lg.jpg');
+
     background-position: initial;
     background-size: 100% auto;
 
     @media (min-resolution: 2dppx) {
       @include bgWithGradientSecond('/img/histories/camping-desktop-lg@2x.jpg');
+
       background-size: 100% auto;
     }
   }
@@ -178,47 +182,58 @@
 
   @media (min-resolution: 2dppx) {
     @include bgWithGradientSecond('/img/histories/fire-mobile@2x.jpg');
+
     background-size: 318px auto;
   }
 
   @media (min-width: 361px) {
     @include bgWithGradientSecond('/img/histories/fire-desktop-md.jpg');
+
     background-position: 50%;
     background-size: 749px auto;
+
     @media (min-resolution: 2dppx) {
       @include bgWithGradientSecond('/img/histories/fire-desktop-md@2x.jpg');
+
       background-size: 918px auto;
     }
   }
 
   @media (min-width: $desktop-md-width) {
     @include bgWithGradientSecond('/img/histories/fire-desktop-md.jpg');
+
     background-position: initial;
     background-size: 100% auto;
 
     @media (min-resolution: 2dppx) {
       @include bgWithGradientSecond('/img/histories/fire-desktop-md@2x.jpg');
+
       background-size: 918px auto;
     }
   }
 
   @media (min-width: 1025px) {
     @include bgWithGradientSecond('/img/histories/fire-desktop-lg.jpg');
+
     background-position: right;
     background-size: 1170px auto;
+
     @media (min-resolution: 2dppx) {
       @include bgWithGradientSecond('/img/histories/fire-desktop-lg@2x.jpg');
+
       background-size: 1170px auto;
     }
   }
 
   @media (min-width: $desktop-lg-width) {
     @include bgWithGradientSecond('/img/histories/fire-desktop-lg.jpg');
+
     background-position: initial;
     background-size: 100% auto;
 
     @media (min-resolution: 2dppx) {
       @include bgWithGradientSecond('/img/histories/fire-desktop-lg@2x.jpg');
+
       background-size: 100% auto;
     }
   }
@@ -229,74 +244,89 @@
 
   @media (min-resolution: 2dppx) {
     @include bgWithGradientSecond('/img/histories/shore-mobile@2x.jpg');
+
     background-size: 318px auto;
   }
 
   @media (min-width: 361px) {
     @include bgWithGradientSecond('/img/histories/shore-desktop-md.jpg');
+
     background-position: 50%;
     background-size: 749px auto;
+
     @media (min-resolution: 2dppx) {
       @include bgWithGradientSecond('/img/histories/shore-desktop-md@2x.jpg');
+
       background-size: 918px auto;
     }
   }
 
   @media (min-width: $desktop-md-width) {
     @include bgWithGradientSecond('/img/histories/shore-desktop-md.jpg');
+
     background-position: initial;
     background-size: 100% auto;
 
     @media (min-resolution: 2dppx) {
       @include bgWithGradientSecond('/img/histories/shore-desktop-md@2x.jpg');
+
       background-size: 918px auto;
     }
   }
 
   @media (min-width: 1025px) {
     @include bgWithGradientSecond('/img/histories/shore-desktop-lg.jpg');
+
     background-position: right;
     background-size: 1170px auto;
+
     @media (min-resolution: 2dppx) {
       @include bgWithGradientSecond('/img/histories/shore-desktop-lg@2x.jpg');
+
       background-size: 1170px auto;
     }
   }
 
   @media (min-width: $desktop-lg-width) {
     @include bgWithGradientSecond('/img/histories/shore-desktop-lg.jpg');
+
     background-position: initial;
     background-size: 100% auto;
 
     @media (min-resolution: 2dppx) {
       @include bgWithGradientSecond('/img/histories/shore-desktop-lg@2x.jpg');
+
       background-size: 100% auto;
     }
   }
 }
 
 .historyCardTitle {
+  @include font(bold, 23px, 120%, 0.04em);
+
   z-index: 2;
   width: 60%;
   margin: 2px 0 0 0;
-  @include font(bold, 23px, 120%, 0.04em);
 
   @media (min-width: $desktop-md-width) {
-    width: 100%;
     @include font(normal, 35px, 122%, 0.004em);
+
+    width: 100%;
   }
 }
 
 .historyCardText {
+  @include font(normal, 16px, 142%);
+
   z-index: 2;
   width: 100%;
   margin: 20px 0 0 0;
-  @include font(normal, 16px, 142%);
 
   @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%, 0.0005em);
+
     width: 70%;
     margin-top: 35px;
-    @include font(normal, 20px, 142%, 0.0005em);
   }
 
   @media (min-width: $desktop-lg-width) {
@@ -305,14 +335,16 @@
 }
 
 .historyCardList {
+  @include font(normal, 16px, 142%);
+
   margin: 25px 0 0 24px;
   padding: 0;
-  @include font(normal, 16px, 142%);
   list-style-type: none;
 
   @media (min-width: $desktop-md-width) {
-    margin: 26px 0 0 30px;
     @include font(normal, 20px, 142%);
+
+    margin: 26px 0 0 30px;
   }
 }
 
@@ -342,6 +374,7 @@
 
 .historyCardButton {
   margin: 0 0 6px -15px;
+
   @media (min-width: $desktop-md-width) {
     margin: 0 0 0 -20px;
   }
