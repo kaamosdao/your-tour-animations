@@ -31,10 +31,10 @@ const CustomCursor = () => {
 
       if (isStuck) {
         const linkItem = e.target;
-        const linkItemBox = linkItem.getBoundingClientRect();
+        const { left, top, width, height } = linkItem.getBoundingClientRect();
 
-        xFollower = Math.round(linkItemBox.left + linkItemBox.width / 2);
-        yFollower = Math.round(linkItemBox.top + linkItemBox.height / 2);
+        xFollower = Math.round(left + width / 2);
+        yFollower = Math.round(top + height / 2);
       } else {
         xFollower = e.clientX;
         yFollower = e.clientY;
@@ -50,29 +50,19 @@ const CustomCursor = () => {
       moveYFollower(yFollower);
     };
 
-    gsap.set(cursorRef.current, {
-      xPercent: -50,
-      yPercent: -50,
-    });
-
-    gsap.set(cursorFollowerRef.current, {
-      xPercent: -50,
-      yPercent: -50,
-    });
-
     window.addEventListener('mousemove', moveCursor);
 
     return () => window.removeEventListener('mousemove', moveCursor);
   }, [isStuck, cursorRef, cursorFollowerRef]);
 
   return (
-    <div>
+    <>
       <div ref={cursorRef} className={s.cursor} id="cursor" />
       <div ref={cursorFollowerRef} className={s.follower} id="follower">
         <div className={s.circle} id="circle" />
         <div className={s.text} id="text" />
       </div>
-    </div>
+    </>
   );
 };
 

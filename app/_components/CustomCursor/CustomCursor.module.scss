@@ -6,9 +6,9 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: $orange200;
+  background-color: var(--cursor-color);
   z-index: 100;
-  transform: translate(-100px);
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -22,8 +22,9 @@
 }
 
 .text {
-  position: fixed;
   @include font(normal, 18px, 16px);
+
+  position: fixed;
   opacity: 0;
   z-index: 100;
   transform: translate(-50%, -130%);
