@@ -56,24 +56,27 @@
 }
 
 .checkboxLabel {
+  @include font(normal, 16px, 142%);
+
   display: block;
   width: 230px;
   margin-left: 30px;
-  @include font(normal, 16px, 142%);
   color: var(--sec-text-color);
 
   @media (min-width: $tablet-md-width) {
     width: 80%;
   }
   @media (min-width: $desktop-md-width) {
+    @include font(normal, 17px, 142%, -0.01em);
+
     display: inline;
     margin-left: 37px;
-    @include font(normal, 17px, 142%, -0.01em);
   }
 
   @media (min-width: $desktop-lg-width) {
-    margin-left: 43px;
     @include font(normal, 17px, 142%, -0.007em);
+
+    margin-left: 43px;
   }
 }
 

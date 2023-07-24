@@ -11,13 +11,15 @@
 }
 
 .title {
-  margin: 75px 0 0 0;
   @include font(bold, 34px, 112%, 0.02em);
+
+  margin: 75px 0 0 0;
   color: var(--main-text-color);
 
   @media (min-width: $desktop-md-width) {
-    margin-top: 170px;
     @include font(bold, 59px, 124%);
+
+    margin-top: 170px;
   }
 
   @media (min-width: $desktop-lg-width) {
@@ -26,14 +28,16 @@
 }
 
 .description {
+  @include font(normal, 16px, 142%);
+
   margin: 20px 0 0 0;
   padding: 0 18px;
-  @include font(normal, 16px, 142%);
   color: var(--sec-text-color);
 
   @media (min-width: $desktop-md-width) {
-    margin-top: 30px;
     @include font(normal, 20px, 142%);
+
+    margin-top: 30px;
   }
 }
 
@@ -90,20 +94,22 @@
 }
 
 .buttonFind {
+  @include font(normal, 16px, 142%);
+
   width: 134px;
   min-height: 47px;
   padding: 12px;
-  @include font(normal, 16px, 142%);
   color: var(--third-text-color);
   background-color: var(--btn-bg-color);
   border: none;
   border-radius: 10px;
 
   @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%);
+
     width: 235px;
     min-height: 58px;
     padding: 15px;
-    @include font(normal, 20px, 142%);
   }
 }
 
@@ -117,22 +123,24 @@
 }
 
 .buttonClear {
+  @include font(normal, 16px, 142%);
+
   width: 134px;
   min-height: 47px;
   margin-left: 10px;
   padding: 12px;
-  @include font(normal, 16px, 142%);
   color: var(--btn-text-color);
   background-color: var(--btn-bg-sec-color);
   border: none;
   border-radius: 10px;
 
   @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%);
+
     min-width: 235px;
     min-height: 58px;
     margin-left: 30px;
     padding: 15px;
-    @include font(normal, 20px, 142%);
   }
 }
 

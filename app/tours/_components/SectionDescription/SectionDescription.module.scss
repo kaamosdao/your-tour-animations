@@ -81,13 +81,15 @@
 }
 
 .title {
-  margin: 0;
-  padding-top: 140px;
   @include font(bold, 34px, 112%, 0.02em);
 
+  margin: 0;
+  padding-top: 140px;
+
   @media (min-width: var(--tablet-lg-width)) {
-    padding-top: 207px;
     @include font(bold, 96px, 109%, 0.02em);
+
+    padding-top: 207px;
   }
 
   @media (min-width: var(--desktop-lg-width)) {
@@ -96,12 +98,14 @@
 }
 
 .description {
-  margin-top: 40px;
   @include font(normal, 16px, 144%);
 
+  margin-top: 40px;
+
   @media (min-width: var(--tablet-lg-width)) {
-    margin-top: 52px;
     @include font(normal, 20px, 142%);
+
+    margin-top: 52px;
   }
 
   @media (min-width: var(--desktop-lg-width)) {
@@ -130,19 +134,21 @@
 }
 
 .button {
+  @include font(normal, 16px, 144%);
+
   width: 114px;
   min-height: 33px;
   margin-top: 24px;
-  @include font(normal, 16px, 144%);
   background-color: var(--btn-bg-third-color);
   border: none;
   border-radius: 10px;
 
   @media (min-width: var(--tablet-lg-width)) {
+    @include font(normal, 17px, 142%);
+
     width: 118px;
     min-height: 34px;
     margin-top: 28px;
-    @include font(normal, 17px, 142%);
   }
 }
 

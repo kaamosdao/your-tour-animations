@@ -2,6 +2,8 @@
 @import './app/_styles/mixin.scss';
 
 .nav {
+  @include font(bold, 16px, 142%);
+
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -10,16 +12,16 @@
   width: auto;
   margin: 31px 31px 0;
   padding: 0;
-  @include font(bold, 16px, 142%);
   color: var(--main-text-color);
   list-style-type: none;
 
   @media (min-width: $desktop-md-width) {
+    @include font(bold, 23px, 122%, 0.003em);
+
     column-gap: 30px;
     justify-content: normal;
     width: 700px;
     margin-top: 36px;
-    @include font(bold, 23px, 122%, 0.003em);
   }
 }
 

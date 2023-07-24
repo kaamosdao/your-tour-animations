@@ -11,13 +11,15 @@
 }
 
 .title {
-  margin: 75px 0 0 0;
   @include font(bold, 34px, 112%, 0.02em);
+
+  margin: 75px 0 0 0;
   color: var(--main-text-color);
 
   @media (min-width: $desktop-md-width) {
-    margin-top: 134px;
     @include font(bold, 59px, 124%);
+
+    margin-top: 134px;
   }
 
   @media (min-width: $desktop-lg-width) {
@@ -26,15 +28,17 @@
 }
 
 .description {
+  @include font(normal, 16px, 142%);
+
   margin: 20px 0 0 0;
   padding: 0 20px;
-  @include font(normal, 16px, 142%);
   color: var(--sec-text-color);
 
   @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%);
+
     margin-top: 30px;
     padding: 0;
-    @include font(normal, 20px, 142%);
   }
 }
 

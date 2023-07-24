@@ -39,8 +39,9 @@
 }
 
 .text {
-  margin: 0;
   @include font(bold, 16px, 144%);
+
+  margin: 0;
   color: var(--main-text-color);
 
   @media (min-width: $desktop-md-width) {
@@ -77,30 +78,34 @@
 }
 
 .name {
+  @include font(bold, 23px, 120%, 0.04em);
+
   grid-area: 1 / 1 / 2 / 2;
   align-self: flex-end;
   margin: 11px 0 0 0;
   padding: 0;
-  @include font(bold, 23px, 120%, 0.04em);
 
   @media (min-width: $desktop-md-width) {
+    @include font(500, 35px, 122%);
+
     align-self: center;
     margin: 0;
-    @include font(500, 35px, 122%);
   }
 }
 
 .tour {
+  @include font(normal, 16px, 142%, -0.01em);
+
   grid-area: 2 / 1 / -2 / 2;
   align-self: flex-end;
   margin: 0;
   padding: 0;
-  @include font(normal, 16px, 142%, -0.01em);
   color: var(--sec-text-color);
 
   @media (min-width: $desktop-md-width) {
-    margin-top: 5px;
     @include font(normal, 17px, 142%, -0.01em);
+
+    margin-top: 5px;
   }
 
   @media (min-width: $desktop-lg-width) {

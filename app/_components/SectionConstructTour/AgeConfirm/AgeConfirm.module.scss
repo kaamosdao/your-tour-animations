@@ -13,8 +13,9 @@
 }
 
 .title {
-  padding: 0;
   @include font(normal, 16px, 142%);
+
+  padding: 0;
 
   @media (min-width: $desktop-md-width) {
     @include font(normal, 20px, 142%);
@@ -59,12 +60,14 @@
 }
 
 .radioLabel {
-  margin-left: 30px;
   @include font(normal, 16px, 142%);
 
+  margin-left: 30px;
+
   @media (min-width: $desktop-md-width) {
-    margin-left: 37px;
     @include font(normal, 20px, 142%);
+
+    margin-left: 37px;
   }
 }
 

@@ -10,12 +10,14 @@
 }
 
 .title {
-  margin: 75px 0 0 0;
   @include font(bold, 34px, 112%, 0.02em);
+
+  margin: 75px 0 0 0;
   color: var(--main-text-color);
 
   @media (min-width: $desktop-md-width) {
-    margin-top: 136px;
     @include font(bold, 59px, 124%);
+
+    margin-top: 136px;
   }
 }
