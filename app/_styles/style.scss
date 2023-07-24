@@ -22,6 +22,7 @@
   --btn-active-color: #{$green200};
   --btn-active-sec-color: #{$grey200};
   --btn-active-third-color: #{$orange100};
+  --cursor-color: #{$orange200};
 
   --font-family: 'Roboto', 'Arial', sans-serif;
 }
@@ -51,50 +52,4 @@ img {
   border: 0;
   clip: rect(0 0 0 0);
   overflow: hidden;
-}
-
-.button-more {
-  position: relative;
-  width: 149px;
-  min-height: 37px;
-  padding: 7px 15px;
-  box-sizing: border-box;
-  border-radius: 50px;
-  @include font(bold, 16px, 142%);
-  color: var(--third-text-color);
-  text-decoration: none;
-
-  @media (min-width: $desktop-md-width) {
-    width: 199px;
-    padding-left: 20px;
-    padding-right: 59px;
-    @include font(bold, 23px, 122%);
-  }
-}
-
-.button-more::after {
-  position: absolute;
-  top: 9px;
-  right: 12px;
-  width: 22px;
-  height: 16px;
-  background-image: url('/img/svg-icons/arrow.svg');
-  content: '';
-
-  @media (min-width: $desktop-md-width) {
-    top: 11px;
-    right: 21px;
-  }
-}
-
-.button-more:hover {
-  background: none;
-
-  @media (min-width: $desktop-md-width) {
-    background-color: var(--btn-bg-color);
-  }
-}
-
-.button-more:active {
-  background-color: var(--btn-hover-fourth-color);
 }
