@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import Picture from '../../Picture';
+
 import s from './FeedbackCard.module.scss';
 
 const FeedbackCard = ({ name, user, tour, text }) => (
@@ -15,28 +17,19 @@ const FeedbackCard = ({ name, user, tour, text }) => (
         Тур:&nbsp;
         {tour}
       </p>
-      <picture className={s.avatarPicture}>
-        <source
-          type="image/webp"
-          srcSet={`/img/avatars/${user}.webp`}
-          width="75"
-          height="75"
-        />
-        <source
-          type="image/jpeg"
-          srcSet={`/img/avatars/${user}.jpg`}
-          width="75"
-          height="75"
-        />
-        <img
-          className={s.avatar}
-          type="image/jpeg"
-          src={`/img/avatars/${user}.jpg`}
-          alt="Аватар"
-          width="75"
-          height="75"
-        />
-      </picture>
+      <div className={s.avatarContainer}>
+        <div className={s.avatarPicture}>
+          <Picture
+            defaultImg={{
+              width: 75,
+              height: 75,
+              url: `/img/avatars/${user}`,
+            }}
+            alt="Аватар"
+            format="jpg"
+          />
+        </div>
+      </div>
     </div>
   </li>
 );

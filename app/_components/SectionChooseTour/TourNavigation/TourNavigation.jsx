@@ -1,11 +1,15 @@
 import { useDispatch } from 'react-redux';
-import cn from 'classnames';
+import classnames from 'classnames/bind';
 import { gsap } from 'gsap';
 
 import { setStuck } from '@/store/slices/cursorSlice';
 import useCursorFollowerRef from '@/hooks/useCursorFollowerRef';
 
+import { navigation } from '@/data';
+
 import s from './TourNavigation.module.scss';
+
+const cn = classnames.bind(s);
 
 const TourNavigation = () => {
   const dispatch = useDispatch();
@@ -47,56 +51,18 @@ const TourNavigation = () => {
 
   return (
     <ul className={s.nav}>
-      <li className={s.navItem}>
-        <a
-          className={cn(s.navLink, s.navLinkCurrent)}
-          href="/"
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-        >
-          Популярные
-        </a>
-      </li>
-      <li className={s.navItem}>
-        <a
-          className={s.navLink}
-          href="/"
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-        >
-          Авторские
-        </a>
-      </li>
-      <li className={s.navItem}>
-        <a
-          className={s.navLink}
-          href="/"
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-        >
-          Походы
-        </a>
-      </li>
-      <li className={s.navItem}>
-        <a
-          className={s.navLink}
-          href="/"
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-        >
-          Сплавы
-        </a>
-      </li>
-      <li className={s.navItem}>
-        <a
-          className={s.navLink}
-          href="/"
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-        >
-          Велопрогулки
-        </a>
-      </li>
+      {navigation.map(({ name, current, link }) => (
+        <li key={name} className={s.navItem}>
+          <a
+            className={cn(s.navLink, { navLinkCurrent: current })}
+            href={link}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          >
+            {name}
+          </a>
+        </li>
+      ))}
     </ul>
   );
 };

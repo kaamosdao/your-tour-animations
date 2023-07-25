@@ -123,6 +123,15 @@
 }
 
 .avatarPicture {
-  grid-area: 1 / 2 / -1 / -1;
+  width: 75px;
+  height: 75px;
   border-radius: 100px;
+  overflow: hidden;
+}
+
+.avatarContainer {
+  grid-area: 1 / 2 / -1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

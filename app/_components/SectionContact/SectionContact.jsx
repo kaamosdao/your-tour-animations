@@ -4,6 +4,8 @@ import { gsap } from 'gsap';
 import useCursorRef from '@/hooks/useCursorRef';
 import useCursorFollowerRef from '@/hooks/useCursorFollowerRef';
 
+import Picture from '../Picture';
+
 import s from './SectionContact.module.scss';
 
 const SectionContact = () => {
@@ -58,63 +60,27 @@ const SectionContact = () => {
           yourtour@gmail.com
         </a>
       </p>
-      <picture className={s.picture}>
-        <source
-          type="image/webp"
-          media="(min-width: 1920px)"
-          srcSet="
-            /img/histories/icon-village-desktop-lg.webp    1x,
-            /img/histories/icon-village-desktop-lg@2x.webp 2x
-          "
-          width="370"
-          height="370"
+      <div className={s.picture}>
+        <Picture
+          desktopImg={{
+            width: 370,
+            height: 370,
+            url: '/img/histories/icon-village-desktop-lg',
+          }}
+          tabletImg={{
+            width: 370,
+            height: 370,
+            url: '/img/histories/icon-village-desktop-md',
+          }}
+          defaultImg={{
+            width: 133,
+            height: 130,
+            url: '/img/histories/icon-village-mobile',
+          }}
+          alt="Деревня у озера в горах"
+          format="png"
         />
-        <source
-          type="image/webp"
-          media="(min-width: 500px)"
-          srcSet="
-            /img/histories/icon-village-desktop-md.webp    1x,
-            /img/histories/icon-village-desktop-md@2x.webp 2x
-          "
-          width="370"
-          height="370"
-        />
-        <source
-          type="image/webp"
-          srcSet="
-            /img/histories/icon-village-mobile.webp    1x,
-            /img/histories/icon-village-mobile@2x.webp 2x
-          "
-          width="133"
-          height="130"
-        />
-        <source
-          media="(min-width: 1920px)"
-          srcSet="
-            /img/histories/icon-village-desktop-lg.png    1x,
-            /img/histories/icon-village-desktop-lg@2x.png 2x
-          "
-          width="370"
-          height="370"
-        />
-        <source
-          media="(min-width: 500px)"
-          srcSet="
-            /img/histories/icon-village-desktop-md.png    1x,
-            /img/histories/icon-village-desktop-md@2x.png 2x
-          "
-          width="370"
-          height="370"
-        />
-        <img
-          src="/img/histories/icon-village-mobile.png"
-          srcSet="/img/histories/icon-village-mobile@2x.png 2x"
-          alt="Самолет в небе"
-          width="133"
-          height="130"
-          loading="lazy"
-        />
-      </picture>
+      </div>
     </section>
   );
 };

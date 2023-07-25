@@ -7,6 +7,11 @@ import useCursorFollowerRef from '@/hooks/useCursorFollowerRef';
 
 import s from './AgeConfirm.module.scss';
 
+const radios = [
+  { value: 'yes', label: 'Да' },
+  { value: 'nope', label: 'Нет' },
+];
+
 const AgeConfirm = () => {
   const cursor = useCursorRef();
   const cursorFollower = useCursorFollowerRef();
@@ -62,44 +67,27 @@ const AgeConfirm = () => {
     <fieldset className={s.ageConfirm}>
       <legend className={s.title}>Вам есть 18 лет?</legend>
       <ul className={s.list}>
-        <li className={s.item}>
-          <label
-            className={s.radio}
-            htmlFor="yes"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
-            <input
-              className={cn('visually-hidden', s.radioInput)}
-              type="radio"
-              name="age-confirmation"
-              id="yes"
-              value="yep"
-              required
-            />
-            <span className={s.radioMark} />
-            <span className={s.radioLabel}>Да</span>
-          </label>
-        </li>
-        <li className={s.item}>
-          <label
-            className={s.radio}
-            htmlFor="nope"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
-            <input
-              className={cn('visually-hidden', s.radioInput)}
-              type="radio"
-              name="age-confirmation"
-              id="nope"
-              value="nope"
-              required
-            />
-            <span className={s.radioMark} />
-            <span className={s.radioLabel}>Нет</span>
-          </label>
-        </li>
+        {radios.map(({ value, label }) => (
+          <li key={value} className={s.item}>
+            <label
+              className={s.radio}
+              htmlFor={value}
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
+            >
+              <input
+                className={cn('visually-hidden', s.radioInput)}
+                type="radio"
+                name="age-confirmation"
+                id={value}
+                value={value}
+                required
+              />
+              <span className={s.radioMark} />
+              <span className={s.radioLabel}>{label}</span>
+            </label>
+          </li>
+        ))}
       </ul>
     </fieldset>
   );

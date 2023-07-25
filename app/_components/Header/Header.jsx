@@ -12,6 +12,8 @@ import useCursorFollowerRef from '@/hooks/useCursorFollowerRef';
 
 import YourTourIcon from '@/public/img/svg-icons/yourtour.svg';
 
+import { links } from '@/data/index';
+
 import s from './Header.module.scss';
 
 const Header = () => {
@@ -94,46 +96,18 @@ const Header = () => {
           <YourTourIcon className={s.icon} />
         </Link>
         <ul className={s.links}>
-          <li className={s.item}>
-            <Link
-              className={pathname === '/tours' ? s.linkActive : s.link}
-              href="/tours"
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}
-            >
-              Туры
-            </Link>
-          </li>
-          <li className={s.item}>
-            <Link
-              className={pathname === '/create' ? s.linkActive : s.link}
-              href="/create"
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}
-            >
-              Создать тур
-            </Link>
-          </li>
-          <li className={s.item}>
-            <Link
-              className={pathname === '/feedback' ? s.linkActive : s.link}
-              href="/feedback"
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}
-            >
-              Отзывы
-            </Link>
-          </li>
-          <li className={s.item}>
-            <Link
-              className={pathname === '/stories' ? s.linkActive : s.link}
-              href="/stories"
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}
-            >
-              Истории
-            </Link>
-          </li>
+          {links.map(({ path, title }) => (
+            <li key={path} className={s.item}>
+              <Link
+                className={pathname === `/${path}` ? s.linkActive : s.link}
+                href={`/${path}`}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+              >
+                {title}
+              </Link>
+            </li>
+          ))}
         </ul>
         <a
           className={s.phone}
