@@ -1,24 +1,27 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import classNames from 'classnames/bind';
+import { useRef, useEffect } from 'react';
 
 import NavigationFixed from './NavigationFixed/index';
 
 import s from './HeaderFixed.module.scss';
 
-const cn = classNames.bind(s);
-
 const HeaderFixed = () => {
-  const [show, setShow] = useState(false);
+  const headerRef = useRef();
 
   useEffect(() => {
     const handleScroll = () => {
       const distance = 450;
-      if (window.scrollY >= distance && !show) {
-        setShow(true);
-      } else if (window.scrollY < distance && show) {
-        setShow(false);
+      const position = window.scrollY;
+
+      if (window.scrollY === 0) {
+        headerRef.current.style.display = 'none';
+      } else {
+        headerRef.current.style.display = 'flex';
+      }
+
+      if (window.scrollY <= distance) {
+        headerRef.current.style.opacity = position / distance;
       }
     };
 
@@ -27,10 +30,10 @@ const HeaderFixed = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [show]);
+  }, []);
 
   return (
-    <header className={cn('headerFixed', { showHeaderFixed: show })}>
+    <header ref={headerRef} className={s.headerFixed}>
       <NavigationFixed />
     </header>
   );

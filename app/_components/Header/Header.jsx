@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
@@ -22,8 +22,29 @@ const Header = () => {
 
   const cursor = useCursorRef();
   const cursorFollower = useCursorFollowerRef();
+  const headerRef = useRef();
 
   const pulseAnimation = useRef();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const distance = 450;
+      const position = window.scrollY;
+
+      if (window.scrollY <= distance) {
+        headerRef.current.style.opacity = 1 - position / distance;
+        headerRef.current.style.display = 'block';
+      } else {
+        headerRef.current.style.display = 'none';
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const onMouseEnter = (e) => {
     const link = e.currentTarget;
@@ -85,7 +106,7 @@ const Header = () => {
   };
 
   return (
-    <header className={s.header}>
+    <header ref={headerRef} className={s.header}>
       <nav className={s.navigation}>
         <Link
           className={s.logo}

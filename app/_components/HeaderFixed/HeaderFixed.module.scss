@@ -3,15 +3,12 @@
 .headerFixed {
   z-index: 10;
   position: fixed;
-  display: none;
+  display: flex;
   align-items: center;
   top: 0;
   width: 100%;
   min-height: 88px;
   background-color: var(--header-bg-color);
   backdrop-filter: blur(27px);
-}
-
-.showHeaderFixed {
-  display: flex;
+  opacity: 0;
 }
