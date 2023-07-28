@@ -82,23 +82,27 @@ class CursorAnimation {
     duration = 0.5,
     ease = 'sine.in'
   ) {
-    gsap.to(this.follower, {
-      mixBlendMode: 'normal',
-      duration: 0.0,
-    });
-
-    gsap.to(this.cursorText, {
-      color,
-      text,
-      opacity: 1,
-      duration,
-      ease,
-    });
-
-    gsap.to(this.cursorCircle, {
-      scale: 0,
-      duration: 0.3,
-    });
+    gsap
+      .timeline()
+      .to(this.follower, {
+        mixBlendMode: 'normal',
+        duration: 0.0,
+      })
+      .to(this.cursorText, {
+        color,
+        text,
+        opacity: 1,
+        duration,
+        ease,
+      })
+      .to(
+        this.cursorCircle,
+        {
+          scale: 0,
+          duration: 0.3,
+        },
+        0
+      );
   }
 
   reset(
@@ -113,31 +117,46 @@ class CursorAnimation {
       this.dotAnimation.kill();
     }
 
-    gsap.to([this.cursorCircle, this.follower, this.cursor], {
-      scale: 1,
-      duration: scales.scaleDuration,
-      ease: eases.scaleEase,
-    });
-
-    gsap.to(this.cursorCircle, {
-      width: '40px',
-      height: '40px',
-      borderRadius: '50%',
-      padding: '0',
-      duration: scales.cssDuration,
-    });
-
-    gsap.to(this.follower, {
-      mixBlendMode: 'difference',
-      duration: 0.0,
-    });
-
-    gsap.to(this.cursorText, {
-      text: '',
-      opacity: 0,
-      duration: scales.textDuration,
-      ease: eases.textEase,
-    });
+    gsap
+      .timeline()
+      .to(
+        [this.cursorCircle, this.follower, this.cursor],
+        {
+          scale: 1,
+          duration: scales.scaleDuration,
+          ease: eases.scaleEase,
+        },
+        0
+      )
+      .to(
+        this.cursorCircle,
+        {
+          width: '40px',
+          height: '40px',
+          borderRadius: '50%',
+          padding: '0',
+          duration: scales.cssDuration,
+        },
+        0
+      )
+      .to(
+        this.follower,
+        {
+          mixBlendMode: 'difference',
+          duration: 0.0,
+        },
+        0
+      )
+      .to(
+        this.cursorText,
+        {
+          text: '',
+          opacity: 0,
+          duration: scales.textDuration,
+          ease: eases.textEase,
+        },
+        0
+      );
   }
 }
 
