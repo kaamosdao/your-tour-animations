@@ -8,6 +8,9 @@ const nextConfig = {
 
     return config;
   },
+  eslint: {
+    dirs: ['app', 'data', 'providers', 'store', 'utils'],
+  },
 };
 
 module.exports = nextConfig;
