@@ -1,39 +1,22 @@
 'use client';
 
-import { useRef } from 'react';
-import { gsap } from 'gsap';
+import { useDispatch } from 'react-redux';
 
-import useCursorRef from '@/hooks/useCursorRef';
-import useCursorFollowerRef from '@/hooks/useCursorFollowerRef';
+import { setCursor } from '@/store/slices/cursorSlice';
+
+import cursorState from '@/utils/types';
 
 import s from './SectionDescription.module.scss';
 
 const SectionDescription = () => {
-  const cursor = useCursorRef();
-  const cursorFollower = useCursorFollowerRef();
-
-  const pulseAnimation = useRef();
+  const dispatch = useDispatch();
 
   const onMouseEnter = () => {
-    pulseAnimation.current = gsap
-      .timeline()
-      .to([cursorFollower.current, cursor.current], {
-        scale: 1.2,
-        duration: 0.5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power1.in',
-      });
+    dispatch(setCursor(cursorState.pulse));
   };
 
   const onMouseLeave = () => {
-    pulseAnimation.current.kill();
-
-    gsap.to([cursorFollower.current, cursor.current], {
-      scale: 1,
-      duration: 0.5,
-      ease: 'power1.in',
-    });
+    dispatch(setCursor(cursorState.default));
   };
 
   return (

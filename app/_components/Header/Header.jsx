@@ -4,15 +4,13 @@ import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { gsap } from 'gsap';
 
-import { setStuck } from '@/store/slices/cursorSlice';
-import useCursorRef from '@/hooks/useCursorRef';
-import useCursorFollowerRef from '@/hooks/useCursorFollowerRef';
+import { setCursor, setStuck } from '@/store/slices/cursorSlice';
 
 import YourTourIcon from '@/public/img/svg-icons/yourtour.svg';
 
 import { links } from '@/data/index';
+import cursorState from '@/utils/types';
 
 import s from './Header.module.scss';
 
@@ -20,19 +18,20 @@ const Header = () => {
   const pathname = usePathname();
   const dispatch = useDispatch();
 
-  const cursor = useCursorRef();
-  const cursorFollower = useCursorFollowerRef();
   const headerRef = useRef();
 
-  const pulseAnimation = useRef();
-
   useEffect(() => {
-    const handleScroll = () => {
-      const distance = 450;
-      const position = window.scrollY;
+    const distance = 450;
 
+    if (window.scrollY <= distance) {
+      headerRef.current.style.display = 'block';
+    } else {
+      headerRef.current.style.display = 'none';
+    }
+
+    const handleScroll = () => {
       if (window.scrollY <= distance) {
-        headerRef.current.style.opacity = 1 - position / distance;
+        headerRef.current.style.opacity = 1 - window.scrollY / distance;
         headerRef.current.style.display = 'block';
       } else {
         headerRef.current.style.display = 'none';
@@ -48,61 +47,35 @@ const Header = () => {
 
   const onMouseEnter = (e) => {
     const link = e.currentTarget;
-    const linkBox = link.getBoundingClientRect();
-
-    const cursorCircle = cursorFollower.current.querySelector('#circle');
+    const { left, top, width, height } = link.getBoundingClientRect();
 
     if (!link.className.includes('linkActive')) {
-      dispatch(setStuck(true));
+      dispatch(setCursor(cursorState.stuck));
 
-      gsap.to(cursorCircle, {
-        width: linkBox.width,
-        height: linkBox.height,
-        borderRadius: '3px',
-        padding: '4px',
-        duration: 0.5,
-      });
+      dispatch(
+        setStuck({
+          left,
+          top,
+          width,
+          height,
+          borderRadius: '3px',
+          padding: '4px',
+        })
+      );
     }
   };
 
   const onMouseLeave = () => {
-    const cursorCircle = cursorFollower.current.querySelector('#circle');
-
-    dispatch(setStuck(false));
-
-    gsap.to(cursorCircle, {
-      width: '40px',
-      height: '40px',
-      borderRadius: '50%',
-      padding: '0',
-      duration: 0.5,
-    });
+    dispatch(setCursor(cursorState.default));
+    dispatch(setStuck(null));
   };
 
   const onMouseEnterLogo = () => {
-    pulseAnimation.current = gsap.timeline().fromTo(
-      [cursorFollower.current, cursor.current],
-      {
-        scale: 1.0,
-      },
-      {
-        scale: 1.2,
-        duration: 0.5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power1.in',
-      }
-    );
+    dispatch(setCursor(cursorState.pulse));
   };
 
   const onMouseLeaveLogo = () => {
-    pulseAnimation.current.kill();
-
-    gsap.to([cursorFollower.current, cursor.current], {
-      scale: 1,
-      duration: 0.3,
-      ease: 'power1.in',
-    });
+    dispatch(setCursor(cursorState.default));
   };
 
   return (

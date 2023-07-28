@@ -1,18 +1,20 @@
 'use client';
 
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { gsap } from 'gsap';
 
-import useCursorFollowerRef from '@/hooks/useCursorFollowerRef';
+import { setCursor } from '@/store/slices/cursorSlice';
+
+import cursorState from '@/utils/types';
 
 import ButtonMore from '../../ButtonMore/index';
 
 import s from './TourCard.module.scss';
 
 const TourCard = ({ name, title, price }) => {
-  const cursorFollower = useCursorFollowerRef();
+  const dispatch = useDispatch();
 
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -27,52 +29,13 @@ const TourCard = ({ name, title, price }) => {
 
   const onMouseEnter = () => {
     setHovered(true);
-
-    const cursorText = cursorFollower.current.querySelector('#text');
-    const cursorCircle = cursorFollower.current.querySelector('#circle');
-
-    gsap.to(cursorFollower.current, {
-      mixBlendMode: 'normal',
-      duration: 0.0,
-    });
-
-    gsap.to(cursorText, {
-      color: 'var(--third-text-color)',
-      text: 'Подробнее',
-      opacity: 1,
-      duration: 0.5,
-      ease: 'sine.in',
-    });
-
-    gsap.to(cursorCircle, {
-      scale: 0,
-      duration: 0.3,
-    });
+    dispatch(setCursor(cursorState.text));
   };
 
   const onMouseLeave = () => {
     setHovered(false);
     setClicked(false);
-
-    const cursorText = cursorFollower.current.querySelector('#text');
-    const cursorCircle = cursorFollower.current.querySelector('#circle');
-
-    gsap.to(cursorFollower.current, {
-      mixBlendMode: 'difference',
-      duration: 0.0,
-    });
-
-    gsap.to(cursorText, {
-      text: '',
-      opacity: 0,
-      duration: 0.5,
-      ease: 'sine.in',
-    });
-
-    gsap.to(cursorCircle, {
-      scale: 1,
-      duration: 0.3,
-    });
+    dispatch(setCursor(cursorState.default));
   };
 
   return (

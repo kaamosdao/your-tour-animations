@@ -1,9 +1,9 @@
+import { useDispatch } from 'react-redux';
 import cn from 'classnames';
-import { gsap } from 'gsap';
-import { useRef } from 'react';
 
-import useCursorRef from '@/hooks/useCursorRef';
-import useCursorFollowerRef from '@/hooks/useCursorFollowerRef';
+import { setCursor } from '@/store/slices/cursorSlice';
+
+import cursorState from '@/utils/types';
 
 import s from './AgeConfirm.module.scss';
 
@@ -13,54 +13,14 @@ const radios = [
 ];
 
 const AgeConfirm = () => {
-  const cursor = useCursorRef();
-  const cursorFollower = useCursorFollowerRef();
-
-  const cursorAnimation = useRef();
+  const dispatch = useDispatch();
 
   const onMouseEnter = () => {
-    cursorAnimation.current = gsap
-      .timeline()
-      .to([cursorFollower.current], {
-        scale: 0,
-        duration: 0.3,
-        ease: 'power1.in',
-      })
-      .fromTo(
-        [cursor.current],
-        {
-          scale: 1.0,
-        },
-        {
-          scale: 2.0,
-          duration: 0.3,
-          opacity: 0.6,
-          ease: 'power1.in',
-        },
-        '<'
-      )
-      .to([cursor.current], {
-        scale: 1.8,
-        duration: 0.2,
-        ease: 'power1.in',
-      })
-      .to([cursor.current], {
-        scale: 3.0,
-        duration: 0.3,
-        delay: 0.1,
-        ease: 'power1.in',
-      });
+    dispatch(setCursor(cursorState.growDot));
   };
 
   const onMouseLeave = () => {
-    cursorAnimation.current.kill();
-
-    gsap.to([cursorFollower.current, cursor.current], {
-      scale: 1,
-      duration: 0.3,
-      opacity: 1,
-      ease: 'power1.in',
-    });
+    dispatch(setCursor(cursorState.default));
   };
 
   return (

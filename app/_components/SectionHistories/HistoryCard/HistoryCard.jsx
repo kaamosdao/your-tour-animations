@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { gsap } from 'gsap';
 
-import { setStuck } from '@/store/slices/cursorSlice';
-import useCursorFollowerRef from '@/hooks/useCursorFollowerRef';
+import { setCursor, setStuck } from '@/store/slices/cursorSlice';
+
+import cursorState from '@/utils/types';
 
 import ButtonMore from '../../ButtonMore/index';
 
@@ -26,8 +26,6 @@ const List = ({ items }) => (
 const HistoryCard = ({ title, name, text, list, socials }) => {
   const dispatch = useDispatch();
 
-  const cursorFollower = useCursorFollowerRef();
-
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
 
@@ -39,84 +37,39 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
     setClicked(false);
   };
 
-  const onMouseEnter = (e) => {
+  const onMouseEnterSocials = (e) => {
     const link = e.currentTarget;
-    const linkBox = link.getBoundingClientRect();
-    const cursorCircle = cursorFollower.current.querySelector('#circle');
+    const { left, top, width, height } = link.getBoundingClientRect();
 
-    dispatch(setStuck(true));
+    dispatch(setCursor(cursorState.stuck));
 
-    gsap.to(cursorCircle, {
-      width: linkBox.width,
-      height: linkBox.height,
-      borderRadius: '3px',
-      padding: '4px',
-      duration: 0.5,
-    });
+    dispatch(
+      setStuck({
+        left,
+        top,
+        width,
+        height,
+        borderRadius: '3px',
+        padding: '4px',
+      })
+    );
   };
 
-  const onMouseLeave = () => {
-    const cursorCircle = cursorFollower.current.querySelector('#circle');
-
-    dispatch(setStuck(false));
-
-    gsap.to(cursorCircle, {
-      width: '40px',
-      height: '40px',
-      borderRadius: '50%',
-      padding: '0',
-      duration: 0.5,
-    });
+  const onMouseLeaveSocials = () => {
+    dispatch(setCursor(cursorState.default));
+    dispatch(setStuck(null));
   };
 
   const onMouseEnterCard = () => {
     setHovered(true);
-
-    const cursorText = cursorFollower.current.querySelector('#text');
-    const cursorCircle = cursorFollower.current.querySelector('#circle');
-
-    gsap.to(cursorFollower.current, {
-      mixBlendMode: 'normal',
-      duration: 0.0,
-    });
-
-    gsap.to(cursorText, {
-      color: 'var(--third-text-color)',
-      text: 'Подробнее',
-      opacity: 1,
-      duration: 0.5,
-      ease: 'sine.in',
-    });
-
-    gsap.to(cursorCircle, {
-      scale: 0,
-      duration: 0.3,
-    });
+    dispatch(setCursor(cursorState.default));
+    dispatch(setCursor(cursorState.text));
   };
 
   const onMouseLeaveCard = () => {
     setHovered(false);
     setClicked(false);
-
-    const cursorText = cursorFollower.current.querySelector('#text');
-    const cursorCircle = cursorFollower.current.querySelector('#circle');
-
-    gsap.to(cursorFollower.current, {
-      mixBlendMode: 'difference',
-      duration: 0.0,
-    });
-
-    gsap.to(cursorText, {
-      text: '',
-      opacity: 0,
-      duration: 0.5,
-      ease: 'sine.in',
-    });
-
-    gsap.to(cursorCircle, {
-      scale: 1,
-      duration: 0.3,
-    });
+    dispatch(setCursor(cursorState.default));
   };
 
   return (
@@ -127,8 +80,8 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
             className={s.socialLink}
             key={social}
             href="/"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
+            onMouseEnter={onMouseEnterSocials}
+            onMouseLeave={onMouseLeaveSocials}
           >
             {social}
           </a>

@@ -10,18 +10,19 @@ const HeaderFixed = () => {
   const headerRef = useRef();
 
   useEffect(() => {
+    if (window.scrollY === 0) {
+      headerRef.current.style.display = 'none';
+    } else {
+      headerRef.current.style.display = 'flex';
+      headerRef.current.style.opacity = 1;
+    }
+
     const handleScroll = () => {
       const distance = 450;
-      const position = window.scrollY;
-
-      if (window.scrollY === 0) {
-        headerRef.current.style.display = 'none';
-      } else {
-        headerRef.current.style.display = 'flex';
-      }
 
       if (window.scrollY <= distance) {
-        headerRef.current.style.opacity = position / distance;
+        headerRef.current.style.display = 'flex';
+        headerRef.current.style.opacity = window.scrollY / distance;
       }
     };
 
