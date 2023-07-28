@@ -1,8 +1,13 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-const selectStuck = createSelector(
-  (state) => state.cursor.isStuck,
+const selectStuckData = createSelector(
+  (state) => state.cursor.stuckData,
   (isStuck) => isStuck
 );
 
-export default selectStuck;
+export const selectCursorState = createSelector(
+  (state) => state.cursor.state,
+  (state) => state
+);
+
+export default selectStuckData;

@@ -3,20 +3,26 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
+import cursorState from '@/utils/types';
+
 const initialState = {
-  isStuck: false,
+  stuckData: null,
+  state: cursorState.default,
 };
 
 const cursorSlice = createSlice({
-  name: 'contacts',
+  name: 'cursor',
   initialState,
   reducers: {
     setStuck: (state, { payload }) => {
-      state.isStuck = payload;
+      state.stuckData = payload;
+    },
+    setCursor: (state, { payload }) => {
+      state.state = payload;
     },
   },
 });
 
-export const { setStuck } = cursorSlice.actions;
+export const { setStuck, setCursor } = cursorSlice.actions;
 
 export default cursorSlice.reducer;
