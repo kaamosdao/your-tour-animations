@@ -6,7 +6,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import cursorState from '@/utils/types';
 
 const initialState = {
-  stuckData: null,
+  data: null,
   state: cursorState.default,
 };
 
@@ -14,11 +14,9 @@ const cursorSlice = createSlice({
   name: 'cursor',
   initialState,
   reducers: {
-    setStuck: (state, { payload }) => {
-      state.stuckData = payload;
-    },
     setCursor: (state, { payload }) => {
-      state.state = payload;
+      state.state = payload.type;
+      state.data = payload.data;
     },
   },
 });
