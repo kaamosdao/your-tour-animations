@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { gsap } from 'gsap';
 import { EaselPlugin } from 'gsap/EaselPlugin';
 import { TextPlugin } from 'gsap/TextPlugin';
-import { Transition } from 'react-transition-group';
+import { Transition, TransitionGroup } from 'react-transition-group';
 
-import selectStuckData, {
+import selectCursorData, {
   selectCursorState,
 } from '@/store/selectors/cursorSelectors';
 
@@ -23,18 +23,12 @@ const CustomCursor = () => {
   const animation = useRef(null);
 
   const cursorState = useSelector(selectCursorState);
-  const stuckCursorData = useSelector(selectStuckData);
-
-  const [inTransition, setInTransition] = useState(false);
+  const cursorData = useSelector(selectCursorData);
 
   useEffect(() => {
     gsap.registerPlugin(EaselPlugin, TextPlugin);
     animation.current = new CursorAnimation(cursor, follower);
   }, []);
-
-  useEffect(() => {
-    setInTransition((prev) => !prev);
-  }, [cursorState]);
 
   useEffect(() => {
     const moveXFollower = getMoveX(follower.current, 0.6);
@@ -44,8 +38,8 @@ const CustomCursor = () => {
       let xFollower;
       let yFollower;
 
-      if (stuckCursorData) {
-        const { left, top, width, height } = stuckCursorData;
+      if (cursorState === cursorStateType.stuck) {
+        const { left, top, width, height } = cursorData;
 
         xFollower = Math.round(left + width / 2);
         yFollower = Math.round(top + height / 2);
@@ -67,20 +61,16 @@ const CustomCursor = () => {
     window.addEventListener('mousemove', moveCursor);
 
     return () => window.removeEventListener('mousemove', moveCursor);
-  }, [stuckCursorData, cursor, follower]);
+  }, [cursorData, cursorState, cursor, follower]);
 
   const onEnter = () => {
-    animation.current.reset();
-  };
-
-  const onEntering = () => {
     switch (cursorState) {
       case cursorStateType.pulse:
         animation.current.pulse();
         break;
 
       case cursorStateType.stuck:
-        animation.current.stuck(stuckCursorData);
+        animation.current.stuck(cursorData);
         break;
 
       case cursorStateType.growDot:
@@ -88,7 +78,10 @@ const CustomCursor = () => {
         break;
 
       case cursorStateType.text:
-        animation.current.text();
+        animation.current.text(cursorData);
+        break;
+      case cursorStateType.default:
+        animation.current.reset();
         break;
 
       default:
@@ -96,28 +89,21 @@ const CustomCursor = () => {
     }
   };
 
-  const onExit = onEnter;
-  const onExiting = onEntering;
-
   return (
-    <Transition
-      in={inTransition}
-      timeout={300}
-      onEnter={onEnter}
-      onExit={onExit}
-      onEntering={onEntering}
-      onExiting={onExiting}
-    >
-      {() => (
-        <>
-          <div ref={cursor} className={s.cursor} id="cursor" />
-          <div ref={follower} className={s.follower} id="follower">
-            <div className={s.circle} id="circle" />
-            <div className={s.text} id="text" />
-          </div>
-        </>
-      )}
-    </Transition>
+    <>
+      <div ref={cursor} className={s.cursor} id="cursor" />
+      <div ref={follower} className={s.follower} id="follower">
+        <TransitionGroup component={null}>
+          <Transition key={cursorState} timeout={0} onEnter={onEnter}>
+            {cursorState === 'text' ? (
+              <div className={s.text} id="text" />
+            ) : (
+              <div className={s.circle} id="circle" />
+            )}
+          </Transition>
+        </TransitionGroup>
+      </div>
+    </>
   );
 };
 
