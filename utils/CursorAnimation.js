@@ -5,8 +5,6 @@ class CursorAnimation {
   constructor(cursorRef, followerRef) {
     this.cursor = cursorRef.current;
     this.follower = followerRef.current;
-    this.cursorCircle = this.follower.querySelector('#circle');
-    this.cursorText = this.follower.querySelector('#text');
     this.pulseAnimation = React.createRef(null).current;
     this.dotAnimation = React.createRef(null).current;
   }
@@ -29,7 +27,7 @@ class CursorAnimation {
 
   stuck(stuckData, duration = 0.5) {
     const { width, height, borderRadius, padding } = stuckData;
-    gsap.to(this.cursorCircle, {
+    gsap.to(this.follower.querySelector('#circle'), {
       width,
       height,
       borderRadius,
@@ -88,7 +86,7 @@ class CursorAnimation {
         mixBlendMode: 'normal',
         duration: 0.0,
       })
-      .to(this.cursorText, {
+      .to(this.follower.querySelector('#text'), {
         color,
         text,
         opacity: 1,
@@ -96,7 +94,7 @@ class CursorAnimation {
         ease,
       })
       .to(
-        this.cursorCircle,
+        this.follower.querySelector('#circle'),
         {
           scale: 0,
           duration: 0.3,
@@ -117,10 +115,19 @@ class CursorAnimation {
       this.dotAnimation.kill();
     }
 
+    if (this.follower.querySelector('#text')) {
+      gsap.to(this.follower.querySelector('#text'), {
+        text: '',
+        opacity: 0,
+        duration: scales.textDuration,
+        ease: eases.textEase,
+      });
+    }
+
     gsap
       .timeline()
       .to(
-        [this.cursorCircle, this.follower, this.cursor],
+        [this.follower.querySelector('#circle'), this.follower, this.cursor],
         {
           scale: 1,
           duration: scales.scaleDuration,
@@ -128,8 +135,15 @@ class CursorAnimation {
         },
         0
       )
-      .to(
-        this.cursorCircle,
+      .fromTo(
+        this.follower.querySelector('#circle'),
+        {
+          width: '0px',
+          height: '0px',
+          borderRadius: '50%',
+          padding: '0',
+          duration: scales.cssDuration,
+        },
         {
           width: '40px',
           height: '40px',
@@ -144,16 +158,6 @@ class CursorAnimation {
         {
           mixBlendMode: 'difference',
           duration: 0.0,
-        },
-        0
-      )
-      .to(
-        this.cursorText,
-        {
-          text: '',
-          opacity: 0,
-          duration: scales.textDuration,
-          ease: eases.textEase,
         },
         0
       );
