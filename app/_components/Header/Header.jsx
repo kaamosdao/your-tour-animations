@@ -1,22 +1,19 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-
-import { setCursor, setStuck } from '@/store/slices/cursorSlice';
 
 import YourTourIcon from '@/public/img/svg-icons/yourtour.svg';
 
 import { links } from '@/data/index';
-import cursorState from '@/utils/types';
+
+import HoverCursor from '../CustomCursor/HoverCursor';
 
 import s from './Header.module.scss';
 
 const Header = () => {
   const pathname = usePathname();
-  const dispatch = useDispatch();
 
   const headerRef = useRef();
 
@@ -45,72 +42,33 @@ const Header = () => {
     };
   }, []);
 
-  const onMouseEnter = (e) => {
-    const link = e.currentTarget;
-    const { left, top, width, height } = link.getBoundingClientRect();
-
-    if (!link.className.includes('linkActive')) {
-      dispatch(setCursor(cursorState.stuck));
-
-      dispatch(
-        setStuck({
-          left,
-          top,
-          width,
-          height,
-          borderRadius: '3px',
-          padding: '4px',
-        })
-      );
-    }
-  };
-
-  const onMouseLeave = () => {
-    dispatch(setCursor(cursorState.default));
-    dispatch(setStuck(null));
-  };
-
-  const onMouseEnterLogo = () => {
-    dispatch(setCursor(cursorState.pulse));
-  };
-
-  const onMouseLeaveLogo = () => {
-    dispatch(setCursor(cursorState.default));
-  };
-
   return (
     <header ref={headerRef} className={s.header}>
       <nav className={s.navigation}>
-        <Link
-          className={s.logo}
-          href="/"
-          onMouseEnter={onMouseEnterLogo}
-          onMouseLeave={onMouseLeaveLogo}
-        >
-          <YourTourIcon className={s.icon} />
-        </Link>
+        <HoverCursor cursorType="pulse">
+          <Link className={s.logo} href="/">
+            <YourTourIcon className={s.icon} />
+          </Link>
+        </HoverCursor>
         <ul className={s.links}>
           {links.map(({ path, title }) => (
             <li key={path} className={s.item}>
-              <Link
-                className={pathname === `/${path}` ? s.linkActive : s.link}
-                href={`/${path}`}
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
-              >
-                {title}
-              </Link>
+              <HoverCursor cursorType="stuck" activeLink="linkActive">
+                <Link
+                  className={pathname === `/${path}` ? s.linkActive : s.link}
+                  href={`/${path}`}
+                >
+                  {title}
+                </Link>
+              </HoverCursor>
             </li>
           ))}
         </ul>
-        <a
-          className={s.phone}
-          href="tel:89999999999"
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-        >
-          +7 999 999 99 99
-        </a>
+        <HoverCursor cursorType="stuck">
+          <a className={s.phone} href="tel:89999999999">
+            +7 999 999 99 99
+          </a>
+        </HoverCursor>
       </nav>
     </header>
   );

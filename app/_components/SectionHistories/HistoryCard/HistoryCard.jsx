@@ -1,15 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-import { setCursor, setStuck } from '@/store/slices/cursorSlice';
-
-import cursorState from '@/utils/types';
-
-import ButtonMore from '../../ButtonMore/index';
+import ButtonMore from '../../ButtonMore';
+import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './HistoryCard.module.scss';
 
@@ -24,8 +20,6 @@ const List = ({ items }) => (
 );
 
 const HistoryCard = ({ title, name, text, list, socials }) => {
-  const dispatch = useDispatch();
-
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
 
@@ -37,73 +31,39 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
     setClicked(false);
   };
 
-  const onMouseEnterSocials = (e) => {
-    const link = e.currentTarget;
-    const { left, top, width, height } = link.getBoundingClientRect();
-
-    dispatch(setCursor(cursorState.stuck));
-
-    dispatch(
-      setStuck({
-        left,
-        top,
-        width,
-        height,
-        borderRadius: '3px',
-        padding: '4px',
-      })
-    );
-  };
-
-  const onMouseLeaveSocials = () => {
-    dispatch(setCursor(cursorState.default));
-    dispatch(setStuck(null));
-  };
-
-  const onMouseEnterCard = () => {
-    setHovered(true);
-    dispatch(setCursor(cursorState.default));
-    dispatch(setCursor(cursorState.text));
-  };
-
-  const onMouseLeaveCard = () => {
-    setHovered(false);
-    setClicked(false);
-    dispatch(setCursor(cursorState.default));
-  };
-
   return (
     <li className={s.item}>
       <div className={s.socials}>
         {socials.map((social) => (
-          <a
-            className={s.socialLink}
-            key={social}
-            href="/"
-            onMouseEnter={onMouseEnterSocials}
-            onMouseLeave={onMouseLeaveSocials}
-          >
-            {social}
-          </a>
+          <HoverCursor key={social} cursorType="stuck">
+            <a className={s.socialLink} href="/">
+              {social}
+            </a>
+          </HoverCursor>
         ))}
       </div>
-      <a
-        className={cn(s.historyCard, s[name])}
-        href="/"
-        onMouseEnter={onMouseEnterCard}
-        onMouseLeave={onMouseLeaveCard}
-        onMouseDown={onMouseDown}
-        onMouseUp={onMouseUp}
+      <HoverCursor
+        cursorType="text"
+        data="Подробнее"
+        fnsOnEnter={[() => setHovered(true)]}
+        fnsOnLeave={[() => setHovered(false), () => setClicked(false)]}
       >
-        <h3 className={s.historyCardTitle}>{title}</h3>
-        <p className={s.historyCardText}>{text}</p>
-        {list && <List items={list} />}
-        <footer className={s.historyCardFooter}>
-          <div className={cn(s.historyCardButton)}>
-            <ButtonMore isHovered={hovered} isClicked={clicked} />
-          </div>
-        </footer>
-      </a>
+        <a
+          className={cn(s.historyCard, s[name])}
+          href="/"
+          onMouseDown={onMouseDown}
+          onMouseUp={onMouseUp}
+        >
+          <h3 className={s.historyCardTitle}>{title}</h3>
+          <p className={s.historyCardText}>{text}</p>
+          {list && <List items={list} />}
+          <footer className={s.historyCardFooter}>
+            <div className={cn(s.historyCardButton)}>
+              <ButtonMore isHovered={hovered} isClicked={clicked} />
+            </div>
+          </footer>
+        </a>
+      </HoverCursor>
     </li>
   );
 };

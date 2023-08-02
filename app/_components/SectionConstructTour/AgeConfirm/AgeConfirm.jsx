@@ -1,9 +1,6 @@
-import { useDispatch } from 'react-redux';
 import cn from 'classnames';
 
-import { setCursor } from '@/store/slices/cursorSlice';
-
-import cursorState from '@/utils/types';
+import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './AgeConfirm.module.scss';
 
@@ -12,29 +9,14 @@ const radios = [
   { value: 'nope', label: 'Нет' },
 ];
 
-const AgeConfirm = () => {
-  const dispatch = useDispatch();
-
-  const onMouseEnter = () => {
-    dispatch(setCursor(cursorState.growDot));
-  };
-
-  const onMouseLeave = () => {
-    dispatch(setCursor(cursorState.default));
-  };
-
-  return (
-    <fieldset className={s.ageConfirm}>
-      <legend className={s.title}>Вам есть 18 лет?</legend>
-      <ul className={s.list}>
-        {radios.map(({ value, label }) => (
-          <li key={value} className={s.item}>
-            <label
-              className={s.radio}
-              htmlFor={value}
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}
-            >
+const AgeConfirm = () => (
+  <fieldset className={s.ageConfirm}>
+    <legend className={s.title}>Вам есть 18 лет?</legend>
+    <ul className={s.list}>
+      {radios.map(({ value, label }) => (
+        <li key={value} className={s.item}>
+          <HoverCursor cursorType="growDot">
+            <label className={s.radio} htmlFor={value}>
               <input
                 className={cn('visually-hidden', s.radioInput)}
                 type="radio"
@@ -46,11 +28,11 @@ const AgeConfirm = () => {
               <span className={s.radioMark} />
               <span className={s.radioLabel}>{label}</span>
             </label>
-          </li>
-        ))}
-      </ul>
-    </fieldset>
-  );
-};
+          </HoverCursor>
+        </li>
+      ))}
+    </ul>
+  </fieldset>
+);
 
 export default AgeConfirm;

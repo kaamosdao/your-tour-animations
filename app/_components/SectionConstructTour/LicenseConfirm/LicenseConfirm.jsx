@@ -1,34 +1,16 @@
-import { useDispatch } from 'react-redux';
 import cn from 'classnames';
 
-import { setCursor } from '@/store/slices/cursorSlice';
-
-import cursorState from '@/utils/types';
+import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './LicenseConfirm.module.scss';
 
-const LicenseConfirm = () => {
-  const dispatch = useDispatch();
-
-  const onMouseEnter = () => {
-    dispatch(setCursor(cursorState.growDot));
-  };
-
-  const onMouseLeave = () => {
-    dispatch(setCursor(cursorState.default));
-  };
-
-  return (
-    <fieldset className={s.licenseConfirm}>
-      <legend className="visually-hidden">
-        Принятие условий Лицензионного договора.
-      </legend>
-      <label
-        className={s.checkbox}
-        htmlFor="yep"
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-      >
+const LicenseConfirm = () => (
+  <fieldset className={s.licenseConfirm}>
+    <legend className="visually-hidden">
+      Принятие условий Лицензионного договора.
+    </legend>
+    <HoverCursor cursorType="growDot">
+      <label className={s.checkbox} htmlFor="yep">
         <input
           className={cn('visually-hidden', s.checkboxInput)}
           type="checkbox"
@@ -44,8 +26,8 @@ const LicenseConfirm = () => {
           </a>
         </span>
       </label>
-    </fieldset>
-  );
-};
+    </HoverCursor>
+  </fieldset>
+);
 
 export default LicenseConfirm;

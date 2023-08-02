@@ -1,35 +1,17 @@
 /* eslint-disable no-octal-escape */
-import { useDispatch } from 'react-redux';
 import cn from 'classnames';
 
-import { setCursor } from '@/store/slices/cursorSlice';
-
-import cursorState from '@/utils/types';
+import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './InputFields.module.scss';
 
-const InputFields = () => {
-  const dispatch = useDispatch();
-
-  const onMouseEnter = () => {
-    dispatch(setCursor(cursorState.growDot));
-  };
-
-  const onMouseLeave = () => {
-    dispatch(setCursor(cursorState.default));
-  };
-
-  return (
-    <fieldset className={s.inputFields}>
-      <legend className="visually-hidden">Заполните поля</legend>
-      <ul className={s.list}>
-        <li className={s.item}>
-          <label
-            className={s.label}
-            htmlFor="name"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
+const InputFields = () => (
+  <fieldset className={s.inputFields}>
+    <legend className="visually-hidden">Заполните поля</legend>
+    <ul className={s.list}>
+      <li className={s.item}>
+        <HoverCursor cursorType="growDot">
+          <label className={s.label} htmlFor="name">
             Имя
             <input
               className={s.input}
@@ -40,14 +22,11 @@ const InputFields = () => {
               required
             />
           </label>
-        </li>
-        <li className={cn(s.item, s.itemSelect)}>
-          <label
-            className={s.label}
-            htmlFor="direction"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
+        </HoverCursor>
+      </li>
+      <li className={cn(s.item, s.itemSelect)}>
+        <HoverCursor cursorType="growDot">
+          <label className={s.label} htmlFor="direction">
             Направление
             <select
               className={s.select}
@@ -64,14 +43,11 @@ const InputFields = () => {
               <option value="expensive">To the Moon</option>
             </select>
           </label>
-        </li>
-        <li className={s.item}>
-          <label
-            className={s.label}
-            htmlFor="email"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
+        </HoverCursor>
+      </li>
+      <li className={s.item}>
+        <HoverCursor cursorType="growDot">
+          <label className={s.label} htmlFor="email">
             Email
             <input
               className={s.input}
@@ -82,14 +58,11 @@ const InputFields = () => {
               required
             />
           </label>
-        </li>
-        <li className={s.item}>
-          <label
-            className={s.label}
-            htmlFor="phone"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
+        </HoverCursor>
+      </li>
+      <li className={s.item}>
+        <HoverCursor cursorType="growDot">
+          <label className={s.label} htmlFor="phone">
             Телефон
             <input
               className={s.input}
@@ -101,14 +74,11 @@ const InputFields = () => {
               required
             />
           </label>
-        </li>
-        <li className={s.item}>
-          <label
-            className={s.label}
-            htmlFor="dateFrom"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
+        </HoverCursor>
+      </li>
+      <li className={s.item}>
+        <HoverCursor cursorType="growDot">
+          <label className={s.label} htmlFor="dateFrom">
             Дата от
             <input
               className={s.input}
@@ -120,14 +90,11 @@ const InputFields = () => {
               required
             />
           </label>
-        </li>
-        <li className={s.item}>
-          <label
-            className={s.label}
-            htmlFor="dateTo"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
+        </HoverCursor>
+      </li>
+      <li className={s.item}>
+        <HoverCursor cursorType="growDot">
+          <label className={s.label} htmlFor="dateTo">
             Дата до
             <input
               className={s.input}
@@ -139,21 +106,18 @@ const InputFields = () => {
               required
             />
           </label>
-        </li>
-        <li className={cn(s.item, s.itemTextarea)}>
-          <label
-            className={s.label}
-            htmlFor="comment"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
+        </HoverCursor>
+      </li>
+      <li className={cn(s.item, s.itemTextarea)}>
+        <HoverCursor cursorType="growDot">
+          <label className={s.label} htmlFor="comment">
             Комментарий
             <textarea className={s.textarea} name="comment" id="comment" />
           </label>
-        </li>
-      </ul>
-    </fieldset>
-  );
-};
+        </HoverCursor>
+      </li>
+    </ul>
+  </fieldset>
+);
 
 export default InputFields;
