@@ -1,4 +1,4 @@
-import SectionDescription from './_components/section-description/SectionDescription';
+import SectionDescription from './_components/SectionDescription/SectionDescription';
 
 const Tours = () => (
   <main>

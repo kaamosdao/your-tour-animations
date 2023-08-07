@@ -1,0 +1,219 @@
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
+
+.photos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 360px;
+  text-align: center;
+}
+
+.title {
+  @include font(bold, 34px, 112%, 0.02em);
+
+  margin: 75px 0 0 0;
+  color: var(--main-text-color);
+
+  @media (min-width: $desktop-md-width) {
+    @include font(bold, 59px, 124%);
+
+    margin-top: 134px;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    margin-top: 135px;
+  }
+}
+
+.description {
+  @include font(normal, 16px, 142%);
+
+  margin: 20px 0 0 0;
+  padding: 0 20px;
+  color: var(--sec-text-color);
+
+  @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%);
+
+    margin-top: 30px;
+    padding: 0;
+  }
+}
+
+.description br {
+  display: none;
+
+  @media (min-width: $desktop-md-width) {
+    display: block;
+  }
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 318px;
+  width: 88.3%;
+  max-width: 350px;
+  margin: 50px 0 0 0;
+  padding: 0;
+  list-style-type: none;
+
+  @media (min-width: $tablet-md-width) {
+    max-width: 670px;
+  }
+
+  @media (min-width: $desktop-md-width) {
+    width: 96.1%;
+    max-width: 1165px;
+    margin-top: 99px;
+  }
+
+  @media (min-width: 1600px) {
+    max-width: 1565px;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    width: 96.9%;
+    max-width: none;
+    margin-top: 98px;
+  }
+}
+
+.item {
+  margin-bottom: 18px;
+  border-radius: 20px;
+  overflow: hidden;
+
+  @media (min-width: $desktop-md-width) {
+    margin-bottom: 29px;
+    border-radius: 50px;
+  }
+  @media (min-width: $desktop-lg-width) {
+    margin-bottom: 32px;
+  }
+}
+
+.item img {
+  width: 100%;
+  height: 100%;
+  @media (min-width: 1500px) {
+    object-fit: cover;
+  }
+}
+
+.itemAirplane,
+.itemCanyon,
+.itemSunset,
+.itemRoad,
+.itemHouses,
+.itemLake,
+.itemTown,
+.itemSupboard {
+  aspect-ratio: 15 / 11;
+  width: 47.1%;
+  max-width: 165px;
+  border-radius: 20px;
+  overflow: hidden;
+
+  @media (min-width: $tablet-md-width) {
+    aspect-ratio: 24 / 23;
+    max-width: 314px;
+    max-height: 300px;
+  }
+  @media (min-width: $desktop-md-width) {
+    width: 32%;
+    max-width: 365px;
+    max-height: 350px;
+    border-radius: 50px;
+  }
+  @media (min-width: $desktop-lg-width) {
+    aspect-ratio: 25 / 17;
+    width: 23.7%;
+    max-width: none;
+    max-height: none;
+  }
+}
+
+.itemCliff,
+.itemMap,
+.itemBridge,
+.itemCar,
+.itemStreet {
+  aspect-ratio: 9 / 10;
+  width: 31.1%;
+  max-width: 108px;
+  border-radius: 20px;
+  overflow: hidden;
+
+  @media (min-width: $tablet-md-width) {
+    aspect-ratio: 23 / 30;
+    max-width: 231px;
+    max-height: 301px;
+  }
+  @media (min-width: $desktop-md-width) {
+    width: 23.5%;
+    max-width: 268px;
+    max-height: 350px;
+    border-radius: 50px;
+  }
+  @media (min-width: $desktop-lg-width) {
+    aspect-ratio: 22 / 19;
+    width: 18.6%;
+    max-width: none;
+    max-height: none;
+  }
+}
+
+.itemCanyon {
+  display: none;
+  @media (min-width: 1600px) {
+    display: block;
+  }
+  @media (min-width: $desktop-lg-width) {
+    display: block;
+  }
+}
+
+.itemSunset {
+  display: none;
+  @media (min-width: $desktop-md-width) {
+    display: block;
+  }
+}
+
+.itemMap {
+  display: none;
+  @media (min-width: $desktop-md-width) {
+    display: block;
+  }
+}
+
+.itemBridge {
+  display: none;
+  @media (min-width: 1600px) {
+    display: block;
+  }
+  @media (min-width: $desktop-lg-width) {
+    display: block;
+  }
+}
+
+.itemTown {
+  display: none;
+  @media (min-width: $desktop-md-width) {
+    display: block;
+  }
+}
+
+.itemSupboard {
+  display: none;
+  @media (min-width: 1600px) {
+    display: block;
+  }
+  @media (min-width: $desktop-lg-width) {
+    display: block;
+  }
+}

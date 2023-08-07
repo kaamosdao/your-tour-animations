@@ -5,6 +5,8 @@
   },
   "extends": [
     "airbnb",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:import/recommended",
     "prettier",
@@ -29,6 +31,8 @@
     "react/jsx-props-no-spreading": 0,
     "import/no-extraneous-dependencies": 0,
     "import/extensions": 0,
-    "function-paren-newline": 0
+    "function-paren-newline": 0,
+    "import/no-unresolved": [2, { "ignore": ["^@.*"] }],
+    "react/require-default-props": 0
   }
 }

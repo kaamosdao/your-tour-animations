@@ -1,10 +1,10 @@
-import SectionDescription from './_components/section-description/SectionDescription';
-import SectionChooseTour from './_components/section-choose-tour/SectionChooseTour';
-import SectionConstructTour from './_components/section-construct-tour/SectionConstructTour';
-import SectionContact from './_components/SectionContact';
-import SectionFeedback from './_components/section-feedback/SectionFeedback';
-import SectionHistories from './_components/section-histories/SectionHistories';
-import SectionPhotos from './_components/SectionPhotos';
+import SectionDescription from './_components/SectionDescription/SectionDescription';
+import SectionChooseTour from './_components/SectionChooseTour/SectionChooseTour';
+import SectionConstructTour from './_components/SectionConstructTour/SectionConstructTour';
+import SectionContact from './_components/SectionContact/SectionContact';
+import SectionFeedback from './_components/SectionFeedback/SectionFeedback';
+import SectionHistories from './_components/SectionHistories/SectionHistories';
+import SectionPhotos from './_components/SectionPhotos/SectionPhotos';
 
 const Home = () => (
   <main>

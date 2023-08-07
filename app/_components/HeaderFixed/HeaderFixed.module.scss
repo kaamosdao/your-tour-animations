@@ -1,0 +1,15 @@
+@import './app/_styles/variables.scss';
+
+.headerFixed {
+  z-index: 10;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  min-height: 88px;
+  background-color: var(--header-bg-color);
+  backdrop-filter: blur(27px);
+  opacity: 0;
+  transition: all 700ms ease-out;
+}

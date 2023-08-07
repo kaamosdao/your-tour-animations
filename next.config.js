@@ -1,4 +1,16 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
+
+    return config;
+  },
+  eslint: {
+    dirs: ['app', 'data', 'providers', 'store', 'utils'],
+  },
+};
 
 module.exports = nextConfig;
