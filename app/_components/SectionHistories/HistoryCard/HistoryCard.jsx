@@ -35,7 +35,7 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
 
   useEffect(() => {
     const { width, height } = canvasHolder.current.getBoundingClientRect();
-
+    // console.log('render');
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(70, width / height, 0.001, 100);
@@ -104,7 +104,9 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
       renderer.setSize(canvasWidth, canvasHeight);
     };
     window.addEventListener('resize', resize);
-  }, [canvas, name]);
+
+    return () => window.removeEventListener('resize', resize);
+  }, [name]);
 
   const onMouseDown = () => {
     setClicked(true);
@@ -115,7 +117,7 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
   };
 
   return (
-    <div ref={canvasHolder} className={s.item}>
+    <div id="item" ref={canvasHolder} className={s.item}>
       <HoverCursor
         cursorType="text"
         data="Подробнее"
