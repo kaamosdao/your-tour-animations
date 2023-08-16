@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import * as THREE from 'three';
-// import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 import ButtonMore from '../../ButtonMore';
 import HoverCursor from '../../CustomCursor/HoverCursor';
@@ -38,10 +38,10 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
     // console.log('render');
     const scene = new THREE.Scene();
 
-    const camera = new THREE.PerspectiveCamera(70, width / height, 0.001, 100);
+    const camera = new THREE.PerspectiveCamera(53, width / height, 0.001, 100);
     camera.position.z = 1;
 
-    const plane = new THREE.PlaneGeometry(30, 30, 1, 1);
+    const plane = new THREE.PlaneGeometry(1, 1, 1, 1);
 
     const uniforms = {
       u_resolution: {
@@ -52,6 +52,10 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
         type: 't',
         value: new THREE.TextureLoader().load(getHistoryImgPath(name)),
       },
+      uvRate: {
+        type: 'v2',
+        value: new THREE.Vector2(1, 1),
+      },
     };
 
     const material = new THREE.ShaderMaterial({
@@ -61,26 +65,28 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
     });
 
     const mesh = new THREE.Mesh(plane, material);
-
+    // console.log(mesh.geometry.parameters);
     const light = new THREE.AmbientLight(0xffffff, 100);
 
     scene.add(mesh, light, camera);
 
-    // const controls = new OrbitControls(camera, canvas.current);
+    const controls = new OrbitControls(camera, canvas.current);
 
     const renderer = new THREE.WebGLRenderer({ canvas: canvas.current });
     renderer.setSize(width, height);
     renderer.setClearColor('#333', 1);
 
     function animate() {
-      // controls.update();
+      controls.update();
       renderer.render(scene, camera);
     }
     renderer.setAnimationLoop(animate);
 
     const resize = () => {
+      // console.log('resize');
       const { width: canvasWidth, height: canvasHeight } =
         canvasHolder.current.getBoundingClientRect();
+      const aspect = canvasWidth / canvasHeight;
 
       if (
         window.innerWidth === 360 ||
@@ -88,6 +94,8 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
         window.innerWidth === 1024 ||
         window.innerWidth === 1025
       ) {
+        // console.log(window.innerWidth);
+        // console.log('load');
         material.uniforms.image.value = new THREE.TextureLoader().load(
           getHistoryImgPath(name)
         );
@@ -98,11 +106,26 @@ const HistoryCard = ({ title, name, text, list, socials }) => {
         canvasHeight
       );
 
-      camera.aspect = canvasWidth / canvasHeight;
+      camera.aspect = aspect;
       camera.updateProjectionMatrix();
 
       renderer.setSize(canvasWidth, canvasHeight);
+
+      
+      const distance = camera.position.z - mesh.position.z;
+      camera.fov = 2 * (180 / Math.PI) * Math.atan(1 / (2 * distance));
+      
+      if (aspect > 1) {
+        mesh.scale.x = aspect;
+        material.uniforms.uvRate.value.y = 1 / aspect;
+      } else {
+        mesh.scale.y = 1 / aspect;
+        material.uniforms.uvRate.value.x = aspect;
+      }
     };
+
+    resize();
+
     window.addEventListener('resize', resize);
 
     return () => window.removeEventListener('resize', resize);
