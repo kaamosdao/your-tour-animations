@@ -5,7 +5,6 @@ precision mediump float;
 uniform vec2 u_resolution;
 uniform vec2 uvRate;
 varying vec2 vUv;
-varying vec2 vUv1;
 varying vec3 vPosition;
 
 void main() {
@@ -13,10 +12,9 @@ void main() {
 
   vPosition = position;
 
-  vec2 _uv = uv - 0.5;
-  vUv1 = _uv;
-  vUv1 *= uvRate.xy;
-  vUv1 += 0.5;
+  vUv -= 0.5;
+  vUv *= uvRate.xy;
+  vUv += 0.5;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
