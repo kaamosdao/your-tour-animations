@@ -86,21 +86,11 @@ const HistorySlider = () => {
     });
 
     if (moveSlide) {
-      material.uniforms.imageNext.value = new THREE.TextureLoader().load(
-        `img/histories/${
-          histories[historyNum.current].name
-        }-desktop-lg${ratioString}.jpg`
-      );
       gsap.to(material.uniforms.progress, {
         value: 1,
         duration: 2,
       });
     } else {
-      material.uniforms.image.value = new THREE.TextureLoader().load(
-        `img/histories/${
-          histories[historyNum.current].name
-        }-desktop-lg${ratioString}.jpg`
-      );
       gsap.to(material.uniforms.progress, {
         value: 0,
         duration: 2,
