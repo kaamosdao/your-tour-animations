@@ -2,7 +2,6 @@
 precision mediump float;
 #endif
 
-uniform vec2 u_resolution;
 uniform vec2 uvRate;
 varying vec2 vUv;
 varying vec3 vPosition;
