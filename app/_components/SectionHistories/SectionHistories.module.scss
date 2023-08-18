@@ -67,25 +67,3 @@
     margin-top: 98px;
   }
 }
-
-.controls {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px;
-}
-
-.arrow {
-  width: 35px;
-  height: 35px;
-  fill: var(--main-text-color);
-}
-
-.arrow:hover {
-  fill: var(--btn-bg-color);
-}
-
-.button {
-  border: none;
-  background: none;
-  padding: 0;
-}
