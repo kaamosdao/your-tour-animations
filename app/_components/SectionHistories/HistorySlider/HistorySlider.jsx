@@ -3,9 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import * as THREE from 'three';
-
-import { gsap } from 'gsap';
 
 import ButtonMore from '../../ButtonMore';
 import HoverCursor from '../../CustomCursor/HoverCursor';
@@ -15,10 +12,8 @@ import Right from '@/public/img/svg-icons/arrow-right.svg';
 
 import { histories } from '@/data';
 
-import vShader from './_shaders/vertex.glsl';
-import fShader from './_shaders/fragment.glsl';
-
 import s from './HistorySlider.module.scss';
+import Scene from '@/utils/Scene';
 
 const List = ({ items }) => (
   <ul className={s.historyCardList}>
@@ -33,107 +28,23 @@ const List = ({ items }) => (
 const HistorySlider = () => {
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
-  const [historyNum, setHistoryNum] = useState({ current: 0, prev: 1 });
-  const [moveSlide, setMoveSlide] = useState(false);
+  const [number, setNumber] = useState(0);
 
   const canvas = useRef(null);
   const canvasHolder = useRef(null);
+  const scene = useRef(null);
 
   useEffect(() => {
-    const { width, height } = canvasHolder.current.getBoundingClientRect();
-    const scene = new THREE.Scene();
+    scene.current?.moveSlide(number);
+  }, [number]);
 
-    const camera = new THREE.OrthographicCamera(
-      -0.5,
-      0.5,
-      0.5,
-      -0.5,
-      -1000,
-      1000
-    );
+  useEffect(() => {
+    scene.current = new Scene(canvas.current, canvasHolder.current);
 
-    const plane = new THREE.PlaneGeometry(1, 1, 1, 1);
-    const ratioString = window.devicePixelRatio === 1 ? '' : '@2x';
+    scene.current.addResize();
 
-    const uniforms = {
-      progress: { type: 'f', value: moveSlide ? 0 : 1 },
-      image: {
-        type: 't',
-        value: new THREE.TextureLoader().load(
-          `img/histories/${
-            histories[moveSlide ? historyNum.prev : historyNum.current].name
-          }-desktop-lg${ratioString}.jpg`
-        ),
-      },
-      imageNext: {
-        type: 't',
-        value: new THREE.TextureLoader().load(
-          `img/histories/${
-            histories[moveSlide ? historyNum.current : historyNum.prev].name
-          }-desktop-lg${ratioString}.jpg`
-        ),
-      },
-      uvRate: {
-        type: 'v2',
-        value: new THREE.Vector2(1, 1),
-      },
-    };
-
-    const material = new THREE.ShaderMaterial({
-      vertexShader: vShader,
-      fragmentShader: fShader,
-      uniforms,
-    });
-
-    if (moveSlide) {
-      gsap.to(material.uniforms.progress, {
-        value: 1,
-        duration: 2,
-      });
-    } else {
-      gsap.to(material.uniforms.progress, {
-        value: 0,
-        duration: 2,
-      });
-    }
-
-    const mesh = new THREE.Mesh(plane, material);
-
-    const light = new THREE.AmbientLight(0xffffff, 100);
-
-    scene.add(mesh, light, camera);
-
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas.current });
-    renderer.setSize(width, height);
-
-    function animate() {
-      renderer.render(scene, camera);
-    }
-    renderer.setAnimationLoop(animate);
-
-    const resize = () => {
-      const { width: canvasWidth, height: canvasHeight } =
-        canvasHolder.current.getBoundingClientRect();
-      const viewportAspect = canvasWidth / canvasHeight;
-      const imgAspect = 1170 / 567;
-
-      camera.updateProjectionMatrix();
-
-      renderer.setSize(canvasWidth, canvasHeight);
-
-      if (imgAspect > viewportAspect) {
-        material.uniforms.uvRate.value = [viewportAspect / imgAspect, 1];
-      } else {
-        material.uniforms.uvRate.value = [1, imgAspect / viewportAspect];
-      }
-    };
-
-    resize();
-
-    window.addEventListener('resize', resize);
-
-    return () => window.removeEventListener('resize', resize);
-  }, [historyNum, moveSlide]);
+    return scene.current.removeResize();
+  }, []);
 
   const onMouseDown = () => {
     setClicked(true);
@@ -144,23 +55,11 @@ const HistorySlider = () => {
   };
 
   const onRightClick = () => {
-    setHistoryNum((prev) => {
-      if (prev.current + 1 > histories.length - 1) {
-        return { current: 0, prev: prev.current };
-      }
-      return { current: prev.current + 1, prev: prev.current };
-    });
-    setMoveSlide(!moveSlide);
+    setNumber(number + 1 > histories.length - 1 ? 0 : number + 1);
   };
 
   const onLeftClick = () => {
-    setHistoryNum((prev) => {
-      if (prev.current - 1 < 0) {
-        return { current: histories.length - 1, prev: prev.current };
-      }
-      return { current: prev.current - 1, prev: prev.current };
-    });
-    setMoveSlide(!moveSlide);
+    setNumber(number - 1 < 0 ? histories.length - 1 : number - 1);
   };
 
   return (
@@ -180,22 +79,16 @@ const HistorySlider = () => {
             onMouseUp={onMouseUp}
           />
         </HoverCursor>
-        <h3 className={s.historyCardTitle}>
-          {histories[historyNum.current].title}
-        </h3>
-        <p className={s.historyCardText}>
-          {histories[historyNum.current].text}
-        </p>
-        {histories[historyNum.current].list && (
-          <List items={histories[historyNum.current].list} />
-        )}
+        <h3 className={s.historyCardTitle}>{histories[number].title}</h3>
+        <p className={s.historyCardText}>{histories[number].text}</p>
+        {histories[number].list && <List items={histories[number].list} />}
         <footer className={s.historyCardFooter}>
           <div className={cn(s.historyCardButton)}>
             <ButtonMore isHovered={hovered} isClicked={clicked} />
           </div>
         </footer>
         <div className={s.socials}>
-          {histories[historyNum.current].socials.map((social) => (
+          {histories[number].socials.map((social) => (
             <HoverCursor key={social} cursorType="stuck">
               <a className={s.socialLink} href="/">
                 {social}
