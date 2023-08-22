@@ -42,21 +42,28 @@ class Scene {
     this.width = width;
     this.height = height;
 
-    const imgWidth = 1170;
-    const imgHeight = 567;
+    this.imgWidth = 1170;
+    this.imgHeight = 567;
 
-    const viewportAspect = width / height;
-    const imgAspect = imgWidth / imgHeight;
+    const viewportAspect = this.width / this.height;
+    const imgAspect = this.imgWidth / this.imgHeight;
 
     this.camera.updateProjectionMatrix();
 
-    this.renderer.setSize(width, height);
+    this.renderer.setSize(this.width, this.height);
 
     if (imgAspect > viewportAspect) {
       this.material.uniforms.uvRate.value = [viewportAspect / imgAspect, 1];
     } else {
       this.material.uniforms.uvRate.value = [1, imgAspect / viewportAspect];
     }
+  }
+
+  scale(scale) {
+    gsap.to(this.plane.scale, {
+      x: scale,
+      y: scale,
+    });
   }
 
   addObjects() {

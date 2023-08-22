@@ -35,6 +35,14 @@ const HistorySlider = () => {
   const scene = useRef(null);
 
   useEffect(() => {
+    if (hovered) {
+      scene.current?.scale(1.2);
+    } else {
+      scene.current?.scale(1.0);
+    }
+  }, [hovered]);
+
+  useEffect(() => {
     scene.current?.moveSlide(number);
   }, [number]);
 
