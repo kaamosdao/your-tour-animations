@@ -3,6 +3,10 @@
 import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+import { gsap } from 'gsap';
+
+import Scene from '@/utils/Scene';
+import { histories } from '@/data';
 
 import ButtonMore from '../../ButtonMore';
 import HoverCursor from '../../CustomCursor/HoverCursor';
@@ -10,10 +14,7 @@ import HoverCursor from '../../CustomCursor/HoverCursor';
 import Left from '@/public/img/svg-icons/arrow-left.svg';
 import Right from '@/public/img/svg-icons/arrow-right.svg';
 
-import { histories } from '@/data';
-
 import s from './HistorySlider.module.scss';
-import Scene from '@/utils/Scene';
 
 const List = ({ items }) => (
   <ul className={s.historyCardList}>
@@ -35,16 +36,50 @@ const HistorySlider = () => {
   const scene = useRef(null);
 
   useEffect(() => {
+    const title = canvasHolder.current?.querySelector(
+      'h3[class*="historyCardTitle"]'
+    );
+    const text = canvasHolder.current?.querySelector(
+      'p[class*="historyCardText"]'
+    );
+    const list = canvasHolder.current?.querySelector(
+      'ul[class*="historyCardList"]'
+    );
+    const socials = canvasHolder.current?.querySelectorAll(
+      'a[class*="socialLink"]'
+    );
+
+    gsap
+      .timeline()
+      .fromTo(
+        [title, text, list],
+        {
+          x: 1000,
+        },
+        {
+          x: 0,
+          ease: 'back.out(1.0)',
+          duration: 1,
+          stagger: 0.1,
+        }
+      )
+      .fromTo(
+        socials,
+        { y: -1000 },
+        { y: 0, ease: 'elastic.out(1.0, 1.0)', stagger: 0.1, duration: 1 },
+        '<'
+      );
+
+    scene.current?.moveSlide(number);
+  }, [number]);
+
+  useEffect(() => {
     if (hovered) {
       scene.current?.scale(1.2);
     } else {
       scene.current?.scale(1.0);
     }
   }, [hovered]);
-
-  useEffect(() => {
-    scene.current?.moveSlide(number);
-  }, [number]);
 
   useEffect(() => {
     scene.current = new Scene(canvas.current, canvasHolder.current);
