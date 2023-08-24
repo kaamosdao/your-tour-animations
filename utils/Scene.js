@@ -48,17 +48,22 @@ class Scene {
     const viewportAspect = this.width / this.height;
     const imgAspect = this.imgWidth / this.imgHeight;
 
+    this.material.uniforms.resolution.value = new THREE.Vector2(width, height);
+
     this.camera.updateProjectionMatrix();
 
     this.renderer.setSize(this.width, this.height);
 
     if (imgAspect > viewportAspect) {
-      this.material.uniforms.uvRate.value = [viewportAspect / imgAspect, 1];
+      this.material.uniforms.uvRate.value = new THREE.Vector2(
+        viewportAspect / imgAspect,
+        1
+      );
     } else {
-      this.material.uniforms.uvRate.value = [
+      this.material.uniforms.uvRate.value = new THREE.Vector2(
         1,
-        (imgAspect / viewportAspect) * 1,
-      ];
+        imgAspect / viewportAspect
+      );
     }
   }
 
@@ -98,8 +103,10 @@ class Scene {
           type: 'v2',
           value: new THREE.Vector2(1, 1),
         },
-        waveLength: { type: 'f', value: 0 },
-        time: { type: 'f', value: 0 },
+        resolution: {
+          type: 'v2',
+          value: new THREE.Vector2(this.width, this.height),
+        },
       },
     });
 
@@ -115,28 +122,20 @@ class Scene {
       .timeline()
       .to(this.material.uniforms.progress, {
         value: 1,
-        duration: 1,
+        duration: 0.5,
+        ease: 'power1.out',
         onComplete: () => {
           this.material.uniforms.image.value = this.textures[slideNumber];
-          this.material.uniforms.progress.value = 0;
         },
       })
-      .to(
-        this.material.uniforms.waveLength,
-        {
-          value: 0.05,
-          duration: 1,
-        },
-        '<'
-      )
-      .to(this.material.uniforms.waveLength, {
+      .to(this.material.uniforms.progress, {
         value: 0,
         duration: 0.5,
+        ease: 'power1.in',
       });
   }
 
   animate() {
-    this.material.uniforms.time.value += 0.05;
     this.renderer.render(this.scene, this.camera);
   }
 
