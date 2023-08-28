@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { gsap } from 'gsap';
 
 import Scene from '@/utils/Scene';
+import getLoopedNumber from '@/utils/getLoopedNumber';
 import { histories } from '@/data';
 
+import CardList from './CardList';
 import ButtonMore from '../../ButtonMore';
 import HoverCursor from '../../CustomCursor/HoverCursor';
 
@@ -15,16 +16,6 @@ import Left from '@/public/img/svg-icons/arrow-left.svg';
 import Right from '@/public/img/svg-icons/arrow-right.svg';
 
 import s from './HistorySlider.module.scss';
-
-const List = ({ items }) => (
-  <ul className={s.historyCardList}>
-    {items.map((name) => (
-      <li className={s.historyCardItem} key={name}>
-        {name}
-      </li>
-    ))}
-  </ul>
-);
 
 const HistorySlider = () => {
   const [hovered, setHovered] = useState(false);
@@ -36,18 +27,12 @@ const HistorySlider = () => {
   const scene = useRef(null);
 
   useEffect(() => {
-    const title = canvasHolder.current?.querySelector(
-      'h3[class*="historyCardTitle"]'
-    );
-    const text = canvasHolder.current?.querySelector(
-      'p[class*="historyCardText"]'
-    );
-    const list = canvasHolder.current?.querySelector(
-      'ul[class*="historyCardList"]'
-    );
-    const socials = canvasHolder.current?.querySelectorAll(
-      'a[class*="socialLink"]'
-    );
+    const q = gsap.utils.selector(canvasHolder);
+
+    const title = q('h3[class*="historyCardTitle"]');
+    const text = q('p[class*="historyCardText"]');
+    const list = q('ul[class*="historyCardList"]');
+    const socials = q('a[class*="socialLink"]');
 
     gsap
       .timeline()
@@ -74,19 +59,21 @@ const HistorySlider = () => {
   }, [number]);
 
   useEffect(() => {
-    if (hovered) {
-      scene.current?.scale(1.2);
-    } else {
-      scene.current?.scale(1.0);
-    }
+    scene.current?.scale(hovered ? 1.2 : 1.0);
   }, [hovered]);
 
   useEffect(() => {
     scene.current = new Scene(canvas.current, canvasHolder.current);
 
-    scene.current.addResize();
+    const resize = () => scene.current.resize();
+    window.addEventListener('resize', resize.bind(scene.current));
 
-    return scene.current.removeResize();
+    const onUnmount = () => {
+      window.removeEventListener('resize', resize);
+      scene.current.dismiss();
+    };
+
+    return onUnmount;
   }, []);
 
   const onMouseDown = () => {
@@ -98,11 +85,11 @@ const HistorySlider = () => {
   };
 
   const onRightClick = () => {
-    setNumber(number + 1 > histories.length - 1 ? 0 : number + 1);
+    setNumber(getLoopedNumber(number + 1, histories.length));
   };
 
   const onLeftClick = () => {
-    setNumber(number - 1 < 0 ? histories.length - 1 : number - 1);
+    setNumber(getLoopedNumber(number - 1, histories.length));
   };
 
   return (
@@ -124,7 +111,7 @@ const HistorySlider = () => {
         </HoverCursor>
         <h3 className={s.historyCardTitle}>{histories[number].title}</h3>
         <p className={s.historyCardText}>{histories[number].text}</p>
-        {histories[number].list && <List items={histories[number].list} />}
+        {histories[number].list && <CardList items={histories[number].list} />}
         <footer className={s.historyCardFooter}>
           <div className={cn(s.historyCardButton)}>
             <ButtonMore isHovered={hovered} isClicked={clicked} />
@@ -154,10 +141,6 @@ const HistorySlider = () => {
       </div>
     </>
   );
-};
-
-List.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default HistorySlider;
