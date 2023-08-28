@@ -19,28 +19,19 @@ class Scene {
       1000
     );
     this.renderer = new THREE.WebGLRenderer({ canvas });
-    this.width = this.canvasHolder.getBoundingClientRect().width;
-    this.height = this.canvasHolder.getBoundingClientRect().height;
+    ({ width: this.width, height: this.height } =
+      this.canvasHolder.getBoundingClientRect());
+
     this.renderer.setSize(this.width, this.height);
 
     this.addObjects();
     this.resize();
-    this.addResize();
     this.render();
   }
 
-  addResize() {
-    window.addEventListener('resize', this.resize.bind(this));
-  }
-
-  removeResize() {
-    window.removeEventListener('resize', this.resize.bind(this));
-  }
-
   resize() {
-    const { width, height } = this.canvasHolder.getBoundingClientRect();
-    this.width = width;
-    this.height = height;
+    ({ width: this.width, height: this.height } =
+      this.canvasHolder.getBoundingClientRect());
 
     this.imgWidth = 1170;
     this.imgHeight = 567;
@@ -48,7 +39,10 @@ class Scene {
     const viewportAspect = this.width / this.height;
     const imgAspect = this.imgWidth / this.imgHeight;
 
-    this.material.uniforms.resolution.value = new THREE.Vector2(width, height);
+    this.material.uniforms.resolution.value = new THREE.Vector2(
+      this.width,
+      this.height
+    );
 
     this.camera.updateProjectionMatrix();
 
@@ -80,10 +74,10 @@ class Scene {
 
     const ratioString = this.deviceRatio === 1 ? '' : '@2x';
 
+    const loader = new THREE.TextureLoader();
+
     this.textures = histories.map(({ name }) =>
-      new THREE.TextureLoader().load(
-        `img/histories/${name}-desktop-lg${ratioString}.jpg`
-      )
+      loader.load(`img/histories/${name}-desktop-lg${ratioString}.jpg`)
     );
 
     this.material = new THREE.ShaderMaterial({
@@ -135,12 +129,16 @@ class Scene {
       });
   }
 
-  animate() {
+  animate = () => {
     this.renderer.render(this.scene, this.camera);
-  }
+  };
 
   render() {
-    gsap.ticker.add(this.animate.bind(this));
+    gsap.ticker.add(this.animate);
+  }
+
+  dismiss() {
+    gsap.ticker.remove(this.animate);
   }
 }
 
