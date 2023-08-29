@@ -3,10 +3,13 @@
 import { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { gsap } from 'gsap';
+import { useSwipeable } from 'react-swipeable';
+import { clamp } from 'three/src/math/MathUtils';
 
 import Scene from '@/utils/Scene';
 import getLoopedNumber from '@/utils/getLoopedNumber';
 import { histories } from '@/data';
+import { sliderEvent } from '@/utils/types';
 
 import CardList from './CardList';
 import ButtonMore from '../../ButtonMore';
@@ -20,11 +23,48 @@ import s from './HistorySlider.module.scss';
 const HistorySlider = () => {
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
-  const [number, setNumber] = useState(0);
+  const [slide, setSlide] = useState({
+    number: 0,
+    directionSign: 1,
+    event: sliderEvent.click,
+  });
 
   const canvas = useRef(null);
   const canvasHolder = useRef(null);
   const scene = useRef(null);
+
+  const handlers = useSwipeable({
+    onSwipeStart: ({ dir }) => {
+      const directionSign = dir === 'Right' ? 1 : -1;
+
+      scene.current.onSwipeStart(
+        directionSign,
+        getLoopedNumber(slide.number + directionSign, histories.length)
+      );
+    },
+    onSwiping: ({ absX }) => {
+      scene.current.onSwiping(absX);
+    },
+    onSwiped: ({ dir, absX }) => {
+      const normalizedCoeff = 2.35 / scene.current.width;
+      const distance = clamp(absX * normalizedCoeff, 0, 1);
+      const directionSign = dir === 'Right' ? 1 : -1;
+
+      if (distance > 0.5) {
+        setSlide({
+          number: getLoopedNumber(
+            slide.number + directionSign,
+            histories.length
+          ),
+          directionSign,
+          event: sliderEvent.swipe,
+        });
+      } else {
+        scene.current.onSwiped();
+      }
+    },
+    trackMouse: true,
+  });
 
   useEffect(() => {
     const q = gsap.utils.selector(canvasHolder);
@@ -55,8 +95,14 @@ const HistorySlider = () => {
         '<'
       );
 
-    scene.current?.moveSlide(number);
-  }, [number]);
+    const { number, directionSign, event } = slide;
+
+    if (event === sliderEvent.click) {
+      scene.current?.moveSlide(number, directionSign);
+    } else {
+      scene.current.onSwiped(slide.number);
+    }
+  }, [slide]);
 
   useEffect(() => {
     scene.current?.scale(hovered ? 1.2 : 1.0);
@@ -85,11 +131,19 @@ const HistorySlider = () => {
   };
 
   const onRightClick = () => {
-    setNumber(getLoopedNumber(number + 1, histories.length));
+    setSlide({
+      number: getLoopedNumber(slide.number + 1, histories.length),
+      directionSign: 1,
+      event: sliderEvent.click,
+    });
   };
 
   const onLeftClick = () => {
-    setNumber(getLoopedNumber(number - 1, histories.length));
+    setSlide({
+      number: getLoopedNumber(slide.number - 1, histories.length),
+      directionSign: -1,
+      event: sliderEvent.click,
+    });
   };
 
   return (
@@ -101,24 +155,28 @@ const HistorySlider = () => {
           fnsOnEnter={[() => setHovered(true)]}
           fnsOnLeave={[() => setHovered(false), () => setClicked(false)]}
         >
-          <canvas
-            ref={canvas}
-            className={s.canvas}
-            href="/"
-            onMouseDown={onMouseDown}
-            onMouseUp={onMouseUp}
-          />
+          <div {...handlers}>
+            <canvas
+              ref={canvas}
+              className={s.canvas}
+              href="/"
+              onMouseDown={onMouseDown}
+              onMouseUp={onMouseUp}
+            />
+          </div>
         </HoverCursor>
-        <h3 className={s.historyCardTitle}>{histories[number].title}</h3>
-        <p className={s.historyCardText}>{histories[number].text}</p>
-        {histories[number].list && <CardList items={histories[number].list} />}
+        <h3 className={s.historyCardTitle}>{histories[slide.number].title}</h3>
+        <p className={s.historyCardText}>{histories[slide.number].text}</p>
+        {histories[slide.number].list && (
+          <CardList items={histories[slide.number].list} />
+        )}
         <footer className={s.historyCardFooter}>
           <div className={cn(s.historyCardButton)}>
             <ButtonMore isHovered={hovered} isClicked={clicked} />
           </div>
         </footer>
         <div className={s.socials}>
-          {histories[number].socials.map((social) => (
+          {histories[slide.number].socials.map((social) => (
             <HoverCursor key={social} cursorType="stuck">
               <a className={s.socialLink} href="/">
                 {social}
