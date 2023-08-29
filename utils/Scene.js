@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { gsap } from 'gsap';
+import { clamp } from 'three/src/math/MathUtils';
 
 import { histories } from '@/data';
 
@@ -101,6 +102,7 @@ class Scene {
           type: 'v2',
           value: new THREE.Vector2(this.width, this.height),
         },
+        directionSign: { type: 'f', value: 1 },
       },
     });
 
@@ -109,14 +111,15 @@ class Scene {
     this.scene.add(this.plane);
   }
 
-  moveSlide(slideNumber) {
+  moveSlide(slideNumber, directionSign) {
     this.material.uniforms.imageNext.value = this.textures[slideNumber];
+    this.material.uniforms.directionSign.value = directionSign;
 
     gsap
       .timeline()
       .to(this.material.uniforms.progress, {
         value: 1,
-        duration: 0.5,
+        duration: 0.7,
         ease: 'power1.out',
         onComplete: () => {
           this.material.uniforms.image.value = this.textures[slideNumber];
@@ -128,6 +131,49 @@ class Scene {
         ease: 'power1.in',
       });
   }
+
+  onSwipeStart = (directionSign, slideNumber) => {
+    this.material.uniforms.imageNext.value = this.textures[slideNumber];
+    this.material.uniforms.directionSign.value = directionSign;
+  };
+
+  onSwiping = (distance) => {
+    const normalizedCoeff = 2.35 / this.width;
+
+    this.material.uniforms.progress.value = clamp(
+      distance * normalizedCoeff,
+      0,
+      1
+    );
+  };
+
+  onSwiped = (slideNumber) => {
+    const { value } = this.material.uniforms.progress;
+
+    if (value <= 0.5) {
+      gsap.to(this.material.uniforms.progress, {
+        value: 0,
+        duration: 1.0 - value,
+        ease: 'power1.out',
+      });
+    } else {
+      gsap
+        .timeline()
+        .to(this.material.uniforms.progress, {
+          value: 1,
+          duration: value === 1.0 ? 0.005 : 1.2 - value,
+          ease: 'power1.out',
+          onComplete: () => {
+            this.material.uniforms.image.value = this.textures[slideNumber];
+          },
+        })
+        .to(this.material.uniforms.progress, {
+          value: 0,
+          duration: 0.5,
+          ease: 'power1.in',
+        });
+    }
+  };
 
   animate = () => {
     this.renderer.render(this.scene, this.camera);
