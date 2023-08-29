@@ -7,6 +7,6 @@ const getLoopedNumber = (number, arrLength) => {
     return 0;
   }
   return number;
-}
+};
 
 export default getLoopedNumber;
