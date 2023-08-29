@@ -6,6 +6,7 @@ uniform float progress;
 uniform sampler2D image;
 uniform sampler2D imageNext;
 uniform vec2 resolution;
+uniform float directionSign;
 
 varying vec2 vUv;
 
@@ -18,12 +19,13 @@ mat2 rotate(float a) {
 void main() {
   vec2 st = gl_FragCoord.xy/resolution.xy;
 
-  vec2 dividedUv = fract(st * vec2(20., 1.));
+  vec2 dividedUv = directionSign * fract(st * vec2(directionSign *20., directionSign *1.));
 
   vec2 displacedUv = vUv + rotate(-15.) * vec2(progress *vUv.x/4., 0.) * dividedUv;
+  vec2 displacedUvNext = vUv + rotate(-195.) * vec2(progress *vUv.x/4., 0.) * dividedUv;
 
   vec4 image = texture2D(image, displacedUv);
-  vec4 imageNext = texture2D(imageNext, displacedUv);
+  vec4 imageNext = texture2D(imageNext, displacedUvNext);
 
   vec4 color = mix(image, imageNext, progress);
 
