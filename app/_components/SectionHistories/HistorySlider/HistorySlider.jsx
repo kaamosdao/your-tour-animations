@@ -27,6 +27,7 @@ const HistorySlider = () => {
     number: 0,
     directionSign: 1,
     event: sliderEvent.click,
+    velocity: 0,
   });
 
   const canvas = useRef(null);
@@ -35,20 +36,17 @@ const HistorySlider = () => {
 
   const handlers = useSwipeable({
     onSwipeStart: ({ dir }) => {
-      const directionSign = dir === 'Right' ? 1 : -1;
+      const directionSign = dir === 'Right' ? -1 : 1;
 
-      scene.current.onSwipeStart(
-        directionSign,
-        getLoopedNumber(slide.number + directionSign, histories.length)
-      );
+      scene.current.onSwipeStart(directionSign, slide.number);
     },
     onSwiping: ({ absX }) => {
       scene.current.onSwiping(absX);
     },
-    onSwiped: ({ dir, absX }) => {
+    onSwiped: ({ dir, absX, velocity }) => {
       const normalizedCoeff = 2.35 / scene.current.width;
       const distance = clamp(absX * normalizedCoeff, 0, 1);
-      const directionSign = dir === 'Right' ? 1 : -1;
+      const directionSign = dir === 'Right' ? -1 : 1;
 
       if (distance > 0.5) {
         setSlide({
@@ -58,6 +56,7 @@ const HistorySlider = () => {
           ),
           directionSign,
           event: sliderEvent.swipe,
+          velocity,
         });
       } else {
         scene.current.onSwiped();
@@ -95,12 +94,12 @@ const HistorySlider = () => {
         '<'
       );
 
-    const { number, directionSign, event } = slide;
+    const { number, directionSign, event, velocity } = slide;
 
     if (event === sliderEvent.click) {
       scene.current?.moveSlide(number, directionSign);
     } else {
-      scene.current.onSwiped(slide.number);
+      scene.current.onSwiped(slide.number, velocity);
     }
   }, [slide]);
 
