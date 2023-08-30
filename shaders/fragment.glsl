@@ -9,6 +9,7 @@ uniform vec2 resolution;
 uniform float directionSign;
 
 varying vec2 vUv;
+varying vec2 vUvNext;
 
 mat2 rotate(float a) {
 	float s = sin(a);
@@ -22,7 +23,7 @@ void main() {
   vec2 dividedUv = directionSign * fract(st * vec2(directionSign *20., directionSign *1.));
 
   vec2 displacedUv = vUv + rotate(-15.) * vec2(progress *vUv.x/4., 0.) * dividedUv;
-  vec2 displacedUvNext = vUv + rotate(-195.) * vec2(progress *vUv.x/4., 0.) * dividedUv;
+  vec2 displacedUvNext = vUvNext + rotate(-195.) * vec2(progress *vUvNext.x/4., 0.) * dividedUv;
 
   vec4 image = texture2D(image, displacedUv);
   vec4 imageNext = texture2D(imageNext, displacedUvNext);

@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { clamp } from 'three/src/math/MathUtils';
 
+import getLoopedNumber from './getLoopedNumber';
+
 import { histories } from '@/data';
 
 import vShader from '@/shaders/vertex.glsl';
@@ -34,28 +36,54 @@ class Scene {
     ({ width: this.width, height: this.height } =
       this.canvasHolder.getBoundingClientRect());
 
-    this.imgWidth = 1170;
-    this.imgHeight = 567;
-
-    const viewportAspect = this.width / this.height;
-    const imgAspect = this.imgWidth / this.imgHeight;
-
     this.material.uniforms.resolution.value = new THREE.Vector2(
       this.width,
       this.height
     );
 
+    this.resizeImg();
+
     this.camera.updateProjectionMatrix();
 
     this.renderer.setSize(this.width, this.height);
+  }
 
+  resizeImg() {
+    const defaultWidth = 1170;
+    const defaultHeight = 567;
+
+    const imgWidth = this.currentSlideNumber
+      ? this.textures[this.currentSlideNumber].sizes.width
+      : defaultWidth;
+    const imgHeight = this.currentSlideNumber
+      ? this.textures[this.currentSlideNumber].sizes.height
+      : defaultHeight;
+
+    const imgNextWidth = this.nextSlideNumber
+      ? this.textures[this.nextSlideNumber].sizes.width
+      : defaultWidth;
+    const imgNextHeight = this.nextSlideNumber
+      ? this.textures[this.nextSlideNumber].sizes.height
+      : defaultHeight;
+
+    const viewportAspect = this.width / this.height;
+    const imgAspect = imgWidth / imgHeight;
+    const imgNextAspect = imgNextWidth / imgNextHeight;
+
+    this.camera.updateProjectionMatrix();
+
+    this.changeUvRate(imgAspect, viewportAspect, 'uvRate');
+    this.changeUvRate(imgNextAspect, viewportAspect, 'uvRateNext');
+  }
+
+  changeUvRate(imgAspect, viewportAspect, uvRateName) {
     if (imgAspect > viewportAspect) {
-      this.material.uniforms.uvRate.value = new THREE.Vector2(
+      this.material.uniforms[uvRateName].value = new THREE.Vector2(
         viewportAspect / imgAspect,
         1
       );
     } else {
-      this.material.uniforms.uvRate.value = new THREE.Vector2(
+      this.material.uniforms[uvRateName].value = new THREE.Vector2(
         1,
         imgAspect / viewportAspect
       );
@@ -77,9 +105,19 @@ class Scene {
 
     const loader = new THREE.TextureLoader();
 
-    this.textures = histories.map(({ name }) =>
-      loader.load(`img/histories/${name}-desktop-lg${ratioString}.jpg`)
-    );
+    this.textures = histories.reduce((acc, { name }) => {
+      const sizes = {};
+      const texture = loader.load(
+        `img/histories/${name}-desktop-lg${ratioString}.jpg`,
+        ({ source }) => {
+          const { naturalWidth, naturalHeight } = source.data;
+          sizes.width = naturalWidth;
+          sizes.height = naturalHeight;
+        }
+      );
+      acc.push({ texture, sizes });
+      return acc;
+    }, []);
 
     this.material = new THREE.ShaderMaterial({
       vertexShader: vShader,
@@ -88,13 +126,17 @@ class Scene {
         progress: { type: 'f', value: 0 },
         image: {
           type: 't',
-          value: this.textures[0],
+          value: this.textures[0].texture,
         },
         imageNext: {
           type: 't',
-          value: this.textures[1],
+          value: this.textures[1].texture,
         },
         uvRate: {
+          type: 'v2',
+          value: new THREE.Vector2(1, 1),
+        },
+        uvRateNext: {
           type: 'v2',
           value: new THREE.Vector2(1, 1),
         },
@@ -111,18 +153,32 @@ class Scene {
     this.scene.add(this.plane);
   }
 
-  moveSlide(slideNumber, directionSign) {
-    this.material.uniforms.imageNext.value = this.textures[slideNumber];
+  moveSlide(nextSlideNumber, directionSign) {
+    this.nextSlideNumber = nextSlideNumber;
+    this.currentSlideNumber = getLoopedNumber(
+      this.nextSlideNumber - directionSign,
+      histories.length
+    );
+
+    this.material.uniforms.imageNext.value =
+      this.textures[nextSlideNumber].texture;
+
     this.material.uniforms.directionSign.value = directionSign;
+
+    this.resizeImg();
 
     gsap
       .timeline()
       .to(this.material.uniforms.progress, {
         value: 1,
-        duration: 0.7,
+        duration: 0.5,
         ease: 'power1.out',
         onComplete: () => {
-          this.material.uniforms.image.value = this.textures[slideNumber];
+          this.currentSlideNumber = nextSlideNumber;
+          this.material.uniforms.image.value =
+            this.textures[nextSlideNumber].texture;
+
+          this.resizeImg();
         },
       })
       .to(this.material.uniforms.progress, {
@@ -132,9 +188,19 @@ class Scene {
       });
   }
 
-  onSwipeStart = (directionSign, slideNumber) => {
-    this.material.uniforms.imageNext.value = this.textures[slideNumber];
+  onSwipeStart = (directionSign, currentSlideNumber) => {
+    this.currentSlideNumber = currentSlideNumber;
+    this.nextSlideNumber = getLoopedNumber(
+      currentSlideNumber + directionSign,
+      histories.length
+    );
+
+    this.material.uniforms.imageNext.value =
+      this.textures[this.nextSlideNumber].texture;
+
     this.material.uniforms.directionSign.value = directionSign;
+
+    this.resizeImg();
   };
 
   onSwiping = (distance) => {
@@ -147,7 +213,7 @@ class Scene {
     );
   };
 
-  onSwiped = (slideNumber) => {
+  onSwiped = (nextSlideNumber, velocity) => {
     const { value } = this.material.uniforms.progress;
 
     if (value <= 0.5) {
@@ -161,10 +227,15 @@ class Scene {
         .timeline()
         .to(this.material.uniforms.progress, {
           value: 1,
-          duration: value === 1.0 ? 0.005 : 1.2 - value,
+          duration: clamp((1 - value) / velocity, 0, 0.5),
           ease: 'power1.out',
           onComplete: () => {
-            this.material.uniforms.image.value = this.textures[slideNumber];
+            this.currentSlideNumber = nextSlideNumber;
+
+            this.material.uniforms.image.value =
+              this.textures[nextSlideNumber].texture;
+
+            this.resizeImg();
           },
         })
         .to(this.material.uniforms.progress, {
