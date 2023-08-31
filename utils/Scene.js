@@ -27,8 +27,8 @@ class Scene {
 
     this.renderer.setSize(this.width, this.height);
 
-    this.addObjects();
-    this.resize();
+    this.initScene();
+
     this.render();
   }
 
@@ -49,22 +49,11 @@ class Scene {
   }
 
   resizeImg() {
-    const defaultWidth = 1170;
-    const defaultHeight = 567;
+    const imgWidth = this.textures[this.currentSlideNumber].sizes.width;
+    const imgHeight = this.textures[this.currentSlideNumber].sizes.height;
 
-    const imgWidth = this.currentSlideNumber
-      ? this.textures[this.currentSlideNumber].sizes.width
-      : defaultWidth;
-    const imgHeight = this.currentSlideNumber
-      ? this.textures[this.currentSlideNumber].sizes.height
-      : defaultHeight;
-
-    const imgNextWidth = this.nextSlideNumber
-      ? this.textures[this.nextSlideNumber].sizes.width
-      : defaultWidth;
-    const imgNextHeight = this.nextSlideNumber
-      ? this.textures[this.nextSlideNumber].sizes.height
-      : defaultHeight;
+    const imgNextWidth = this.textures[this.nextSlideNumber].sizes.width;
+    const imgNextHeight = this.textures[this.nextSlideNumber].sizes.height;
 
     const viewportAspect = this.width / this.height;
     const imgAspect = imgWidth / imgHeight;
@@ -97,13 +86,12 @@ class Scene {
     });
   }
 
-  addObjects() {
-    this.geometry = new THREE.PlaneGeometry(1, 1, 1, 1);
+  initScene() {
     this.deviceRatio = window.devicePixelRatio;
-
     const ratioString = this.deviceRatio === 1 ? '' : '@2x';
 
-    const loader = new THREE.TextureLoader();
+    const loadManager = new THREE.LoadingManager();
+    const loader = new THREE.TextureLoader(loadManager);
 
     this.textures = histories.reduce((acc, { name }) => {
       const sizes = {};
@@ -119,38 +107,45 @@ class Scene {
       return acc;
     }, []);
 
-    this.material = new THREE.ShaderMaterial({
-      vertexShader: vShader,
-      fragmentShader: fShader,
-      uniforms: {
-        progress: { type: 'f', value: 0 },
-        image: {
-          type: 't',
-          value: this.textures[0].texture,
+    loadManager.onLoad = () => {
+      this.material = new THREE.ShaderMaterial({
+        vertexShader: vShader,
+        fragmentShader: fShader,
+        uniforms: {
+          progress: { type: 'f', value: 0 },
+          image: {
+            type: 't',
+            value: this.textures[0].texture,
+          },
+          imageNext: {
+            type: 't',
+            value: this.textures[1].texture,
+          },
+          uvRate: {
+            type: 'v2',
+            value: new THREE.Vector2(1, 1),
+          },
+          uvRateNext: {
+            type: 'v2',
+            value: new THREE.Vector2(1, 1),
+          },
+          resolution: {
+            type: 'v2',
+            value: new THREE.Vector2(this.width, this.height),
+          },
+          directionSign: { type: 'f', value: 1 },
         },
-        imageNext: {
-          type: 't',
-          value: this.textures[1].texture,
-        },
-        uvRate: {
-          type: 'v2',
-          value: new THREE.Vector2(1, 1),
-        },
-        uvRateNext: {
-          type: 'v2',
-          value: new THREE.Vector2(1, 1),
-        },
-        resolution: {
-          type: 'v2',
-          value: new THREE.Vector2(this.width, this.height),
-        },
-        directionSign: { type: 'f', value: 1 },
-      },
-    });
+      });
 
-    this.plane = new THREE.Mesh(this.geometry, this.material);
+      this.geometry = new THREE.PlaneGeometry(1, 1, 1, 1);
+      this.plane = new THREE.Mesh(this.geometry, this.material);
+      this.scene.add(this.plane);
 
-    this.scene.add(this.plane);
+      this.currentSlideNumber = 0;
+      this.nextSlideNumber = 1;
+
+      this.resize();
+    };
   }
 
   moveSlide(nextSlideNumber, directionSign) {
