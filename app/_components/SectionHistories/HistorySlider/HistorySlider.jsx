@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
-import { gsap } from 'gsap';
 import { useSwipeable } from 'react-swipeable';
 import { clamp } from 'three/src/math/MathUtils';
 
@@ -23,6 +22,7 @@ import s from './HistorySlider.module.scss';
 const HistorySlider = () => {
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const [slide, setSlide] = useState({
     number: 0,
     directionSign: 1,
@@ -40,9 +40,11 @@ const HistorySlider = () => {
 
       scene.current.onSwipeStart(directionSign, slide.number);
     },
+
     onSwiping: ({ absX }) => {
       scene.current.onSwiping(absX);
     },
+
     onSwiped: ({ dir, absX, velocity }) => {
       const normalizedCoeff = 2.35 / scene.current.width;
       const distance = clamp(absX * normalizedCoeff, 0, 1);
@@ -62,44 +64,16 @@ const HistorySlider = () => {
         scene.current.onSwiped();
       }
     },
-    trackMouse: true,
+    trackMouse: !playing,
   });
 
   useEffect(() => {
-    const q = gsap.utils.selector(canvasHolder);
-
-    const title = q('h3[class*="historyCardTitle"]');
-    const text = q('p[class*="historyCardText"]');
-    const list = q('ul[class*="historyCardList"]');
-    const socials = q('a[class*="socialLink"]');
-
-    gsap
-      .timeline()
-      .fromTo(
-        [title, text, list],
-        {
-          x: 1000,
-        },
-        {
-          x: 0,
-          ease: 'back.out(1.0)',
-          duration: 1,
-          stagger: 0.1,
-        }
-      )
-      .fromTo(
-        socials,
-        { y: -1000 },
-        { y: 0, ease: 'elastic.out(1.0, 1.0)', stagger: 0.1, duration: 1 },
-        '<'
-      );
-
     const { number, directionSign, event, velocity } = slide;
 
     if (event === sliderEvent.click) {
       scene.current?.moveSlide(number, directionSign);
     } else {
-      scene.current.onSwiped(slide.number, velocity);
+      scene.current.swipeSlide(slide.number, velocity);
     }
   }, [slide]);
 
@@ -108,7 +82,7 @@ const HistorySlider = () => {
   }, [hovered]);
 
   useEffect(() => {
-    scene.current = new Scene(canvas.current, canvasHolder.current);
+    scene.current = new Scene(canvas.current, canvasHolder.current, setPlaying);
 
     const resize = () => scene.current.resize();
     window.addEventListener('resize', resize.bind(scene.current));
@@ -186,12 +160,22 @@ const HistorySlider = () => {
       </div>
       <div className={s.controls}>
         <HoverCursor cursorType="pulse">
-          <button onClick={onLeftClick} type="button" className={s.button}>
+          <button
+            onClick={onLeftClick}
+            type="button"
+            className={s.button}
+            disabled={playing}
+          >
             <Left type="button" className={s.arrow} />
           </button>
         </HoverCursor>
         <HoverCursor cursorType="pulse">
-          <button onClick={onRightClick} type="button" className={s.button}>
+          <button
+            onClick={onRightClick}
+            type="button"
+            className={s.button}
+            disabled={playing}
+          >
             <Right type="button" className={s.arrow} />
           </button>
         </HoverCursor>

@@ -10,7 +10,7 @@ import vShader from '@/shaders/vertex.glsl';
 import fShader from '@/shaders/fragment.glsl';
 
 class Scene {
-  constructor(canvas, canvasHolder) {
+  constructor(canvas, canvasHolder, setPlaying) {
     this.canvasHolder = canvasHolder;
     this.scene = new THREE.Scene();
     this.camera = new THREE.OrthographicCamera(
@@ -22,6 +22,9 @@ class Scene {
       1000
     );
     this.renderer = new THREE.WebGLRenderer({ canvas });
+
+    this.setPlaying = setPlaying;
+
     ({ width: this.width, height: this.height } =
       this.canvasHolder.getBoundingClientRect());
 
@@ -149,6 +152,8 @@ class Scene {
   }
 
   moveSlide(nextSlideNumber, directionSign) {
+    this.setPlaying(true);
+
     this.nextSlideNumber = nextSlideNumber;
     this.currentSlideNumber = getLoopedNumber(
       this.nextSlideNumber - directionSign,
@@ -162,11 +167,18 @@ class Scene {
 
     this.resizeImg();
 
+    const durationStart = 0.5;
+    const durationEnd = 0.5;
+
+    this.animateText(durationStart + durationEnd);
+
     gsap
-      .timeline()
+      .timeline({
+        onComplete: () => this.setPlaying(false),
+      })
       .to(this.material.uniforms.progress, {
         value: 1,
-        duration: 0.5,
+        duration: durationStart,
         ease: 'power1.out',
         onComplete: () => {
           this.currentSlideNumber = nextSlideNumber;
@@ -178,12 +190,14 @@ class Scene {
       })
       .to(this.material.uniforms.progress, {
         value: 0,
-        duration: 0.5,
+        duration: durationEnd,
         ease: 'power1.in',
       });
   }
 
   onSwipeStart = (directionSign, currentSlideNumber) => {
+    this.setPlaying(true);
+
     this.currentSlideNumber = currentSlideNumber;
     this.nextSlideNumber = getLoopedNumber(
       currentSlideNumber + directionSign,
@@ -208,38 +222,78 @@ class Scene {
     );
   };
 
-  onSwiped = (nextSlideNumber, velocity) => {
+  onSwiped = () => {
     const { value } = this.material.uniforms.progress;
 
-    if (value <= 0.5) {
-      gsap.to(this.material.uniforms.progress, {
-        value: 0,
-        duration: 1.0 - value,
-        ease: 'power1.out',
-      });
-    } else {
-      gsap
-        .timeline()
-        .to(this.material.uniforms.progress, {
-          value: 1,
-          duration: clamp((1 - value) / velocity, 0, 0.5),
-          ease: 'power1.out',
-          onComplete: () => {
-            this.currentSlideNumber = nextSlideNumber;
-
-            this.material.uniforms.image.value =
-              this.textures[nextSlideNumber].texture;
-
-            this.resizeImg();
-          },
-        })
-        .to(this.material.uniforms.progress, {
-          value: 0,
-          duration: 0.5,
-          ease: 'power1.in',
-        });
-    }
+    gsap.to(this.material.uniforms.progress, {
+      value: 0,
+      duration: 1.0 - value,
+      ease: 'power1.out',
+      onComplete: () => this.setPlaying(false),
+    });
   };
+
+  swipeSlide = (nextSlideNumber, velocity) => {
+    const { value } = this.material.uniforms.progress;
+
+    const durationStart = clamp((1 - value) / velocity, 0, 0.5);
+    const durationEnd = 0.5;
+
+    this.animateText(durationStart + durationEnd);
+
+    gsap
+      .timeline({
+        onComplete: () => this.setPlaying(false),
+      })
+      .to(this.material.uniforms.progress, {
+        value: 1,
+        duration: durationStart,
+        ease: 'power1.out',
+        onComplete: () => {
+          this.currentSlideNumber = nextSlideNumber;
+
+          this.material.uniforms.image.value =
+            this.textures[nextSlideNumber].texture;
+
+          this.resizeImg();
+        },
+      })
+      .to(this.material.uniforms.progress, {
+        value: 0,
+        duration: durationEnd,
+        ease: 'power1.in',
+      });
+  };
+
+  animateText(duration) {
+    const q = gsap.utils.selector(this.canvasHolder);
+
+    const title = q('h3[class*="historyCardTitle"]');
+    const text = q('p[class*="historyCardText"]');
+    const list = q('ul[class*="historyCardList"]');
+    const socials = q('a[class*="socialLink"]');
+
+    gsap
+      .timeline()
+      .fromTo(
+        [title, text, list],
+        {
+          x: 1000,
+        },
+        {
+          x: 0,
+          ease: 'back.out(1.0)',
+          duration,
+          stagger: 0.1,
+        }
+      )
+      .fromTo(
+        socials,
+        { y: -1000 },
+        { y: 0, ease: 'elastic.out(1.0, 1.0)', stagger: 0.1, duration },
+        '<'
+      );
+  }
 
   animate = () => {
     this.renderer.render(this.scene, this.camera);
