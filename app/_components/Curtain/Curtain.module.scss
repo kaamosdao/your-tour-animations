@@ -1,0 +1,24 @@
+@import './app/_styles/variables.scss';
+@import './app/_styles/mixin.scss';
+
+.curtain {
+  --cliptr: 0%;
+  --clipbr: 0%;
+  --cliptl: 0%;
+  --clipbl: 0%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--main-bg-color);
+  clip-path: polygon(
+    var(--cliptl) 0,
+    var(--cliptr) 0,
+    var(--clipbr) 100%,
+    var(--clipbl) 100%
+  );
+
+  z-index: 200;
+}
