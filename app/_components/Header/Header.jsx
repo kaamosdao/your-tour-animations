@@ -1,8 +1,12 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { usePathname, useRouter } from 'next/navigation';
+import { gsap } from 'gsap';
+
+import { setPlaying } from '@/store/slices/transitionSlice';
+import selectPlayingTransition from '@/store/selectors/transitionSelectors';
 
 import YourTourIcon from '@/public/img/svg-icons/yourtour.svg';
 
@@ -14,8 +18,14 @@ import s from './Header.module.scss';
 
 const Header = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const playing = useSelector(selectPlayingTransition);
 
   const headerRef = useRef();
+
+  const [active, setActive] = useState('/');
 
   useEffect(() => {
     const distance = 450;
@@ -42,24 +52,45 @@ const Header = () => {
     };
   }, []);
 
+  const onClick = (path) => (e) => {
+    e.preventDefault();
+
+    if (playing) {
+      return;
+    }
+
+    if (path === '/' && pathname === '/') {
+      return;
+    }
+
+    setActive(path);
+
+    dispatch(setPlaying(true));
+
+    gsap.delayedCall(0.9, () => {
+      router.push(`/${path}`);
+    });
+  };
+
   return (
     <header ref={headerRef} className={s.header}>
       <nav className={s.navigation}>
         <HoverCursor cursorType="pulse">
-          <Link className={s.logo} href="/">
+          <a className={s.logo} href="/" onClick={onClick('/')}>
             <YourTourIcon className={s.icon} />
-          </Link>
+          </a>
         </HoverCursor>
         <ul className={s.links}>
           {links.map(({ path, title }) => (
             <li key={path} className={s.item}>
               <HoverCursor cursorType="stuck" activeLink="linkActive">
-                <Link
-                  className={pathname === `/${path}` ? s.linkActive : s.link}
+                <a
+                  className={active === path ? s.linkActive : s.link}
                   href={`/${path}`}
+                  onClick={onClick(path)}
                 >
                   {title}
-                </Link>
+                </a>
               </HoverCursor>
             </li>
           ))}
