@@ -4,6 +4,7 @@ import Header from './_components/Header/index';
 import HeaderFixed from './_components/HeaderFixed/index';
 import Footer from './_components/Footer/index';
 import CustomCursor from './_components/CustomCursor/index';
+import Curtain from './_components/Curtain';
 
 import './_styles/style.scss';
 
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Providers>
+          <Curtain />
           <CustomCursor />
           <Header />
           <HeaderFixed />
