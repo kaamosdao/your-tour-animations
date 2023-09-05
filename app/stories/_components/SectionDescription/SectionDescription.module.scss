@@ -6,12 +6,12 @@
   min-height: 488px;
   background-image: url('/img/backgound-village/background-village-desktop-md.jpg');
   background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: 601px auto;
+  background-position: center;
+  background-size: auto;
 
   @media (min-resolution: 2dppx) {
     background-image: url('/img/backgound-village/background-village-desktop-md@2x.jpg');
-    background-size: 601px auto;
+    background-size: auto;
   }
 
   @media (min-width: var(--tablet-md-width)) {
@@ -68,6 +68,7 @@
 .tagline {
   margin: 0 auto;
   width: 250px;
+  padding-bottom: 80px;
   text-align: center;
   color: var(--third-text-color);
 
