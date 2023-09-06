@@ -6,4 +6,9 @@ const cursorState = {
   growDot: 'growDot',
 };
 
+export const sliderEvent = {
+  swipe: 'swipe',
+  click: 'click',
+};
+
 export default cursorState;
