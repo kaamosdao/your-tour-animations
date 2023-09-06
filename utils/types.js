@@ -14,6 +14,6 @@ export const sliderEvent = {
 export const navStyle = {
   main: 'main',
   fixed: 'fixed',
-}
+};
 
 export default cursorState;
