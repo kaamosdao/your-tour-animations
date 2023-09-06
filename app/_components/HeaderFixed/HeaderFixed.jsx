@@ -2,7 +2,9 @@
 
 import { useRef, useEffect } from 'react';
 
-import NavigationFixed from './NavigationFixed/index';
+import { navStyle } from '@/utils/types';
+
+import Navigation from '../Navigation';
 
 import s from './HeaderFixed.module.scss';
 
@@ -35,7 +37,7 @@ const HeaderFixed = () => {
 
   return (
     <header ref={headerRef} className={s.headerFixed}>
-      <NavigationFixed />
+      <Navigation style={navStyle.fixed} />
     </header>
   );
 };
