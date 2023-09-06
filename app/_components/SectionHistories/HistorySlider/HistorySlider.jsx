@@ -84,15 +84,12 @@ const HistorySlider = () => {
   useEffect(() => {
     scene.current = new Scene(canvas.current, canvasHolder.current, setPlaying);
 
-    const resize = () => scene.current.resize();
-    window.addEventListener('resize', resize.bind(scene.current));
+    window.addEventListener('resize', scene.current.resize);
 
-    const onUnmount = () => {
-      window.removeEventListener('resize', resize);
+    return () => {
+      window.removeEventListener('resize', scene.current.resize);
       scene.current.dismiss();
     };
-
-    return onUnmount;
   }, []);
 
   const onMouseDown = () => {
