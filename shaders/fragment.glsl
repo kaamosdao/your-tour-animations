@@ -22,8 +22,9 @@ void main() {
 
   vec2 dividedUv = directionSign * fract(st * vec2(directionSign *20., directionSign *1.));
 
-  vec2 displacedUv = vUv + rotate(-15.) * vec2(progress *vUv.x/4., 0.) * dividedUv;
-  vec2 displacedUvNext = vUvNext + rotate(-195.) * vec2(progress *vUvNext.x/4., 0.) * dividedUv;
+  vec2 displacedUv = vUv + rotate(-15.) * vec2(progress * mix(1. - vUv.x, vUv.x, clamp(0., 1., directionSign))/ 4., 0.) * dividedUv;
+
+  vec2 displacedUvNext = vUvNext + rotate(-195.) * vec2(progress * mix(1. - vUvNext.x, vUvNext.x, clamp(0., 1., directionSign)) /4., 0.) * dividedUv;
 
   vec4 image = texture2D(image, displacedUv);
   vec4 imageNext = texture2D(imageNext, displacedUvNext);
