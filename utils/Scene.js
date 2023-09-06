@@ -35,7 +35,7 @@ class Scene {
     this.render();
   }
 
-  resize() {
+  resize = () => {
     ({ width: this.width, height: this.height } =
       this.canvasHolder.getBoundingClientRect());
 
@@ -49,7 +49,7 @@ class Scene {
     this.camera.updateProjectionMatrix();
 
     this.renderer.setSize(this.width, this.height);
-  }
+  };
 
   resizeImg() {
     const imgWidth = this.textures[this.currentSlideNumber].sizes.width;
