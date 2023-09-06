@@ -25,7 +25,7 @@ const PageTemplate = ({ h1, h2, p }) => {
         x: 0,
         ease: 'back.out(1.0)',
         duration: 1,
-        delay: 0.3,
+        delay: 0.2,
         stagger: 0.1,
       }
     );
