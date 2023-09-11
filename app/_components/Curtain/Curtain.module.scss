@@ -2,10 +2,15 @@
 @import './app/_styles/mixin.scss';
 
 .curtain {
-  --cliptr: 0%;
-  --clipbr: 0%;
-  --cliptl: 0%;
-  --clipbl: 0%;
+  --cliptrX: 0%;
+  --cliptlX: 0%;
+  --clipbrX: 0%;
+  --clipblX: 0%;
+
+  --cliptrY: 0%;
+  --cliptlY: 0%;
+  --clipbrY: 0%;
+  --clipblY: 0%;
 
   position: fixed;
   top: 0;
@@ -14,10 +19,10 @@
   width: 100%;
   background-color: var(--main-bg-color);
   clip-path: polygon(
-    var(--cliptl) 0,
-    var(--cliptr) 0,
-    var(--clipbr) 100%,
-    var(--clipbl) 100%
+    var(--cliptlX) var(--cliptlY),
+    var(--cliptrX) var(--cliptrY),
+    var(--clipbrX) var(--clipbrY),
+    var(--clipblX) var(--clipblY)
   );
 
   z-index: 200;
