@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { usePathname, useRouter } from 'next/navigation';
 import { gsap } from 'gsap';
 
-import { setActivePage, setPlaying } from '@/store/slices/transitionSlice';
+import { setActivePage, setAnimation } from '@/store/slices/transitionSlice';
 import selectPlayingTransition, {
   selectActivePage,
 } from '@/store/selectors/transitionSelectors';
@@ -12,7 +12,7 @@ import selectPlayingTransition, {
 import YourTourIcon from '@/public/img/svg-icons/yourtour.svg';
 
 import { links } from '@/data/index';
-import { navStyle } from '@/utils/types';
+import { navStyle, transitionAnimation } from '@/utils/types';
 
 import HoverCursor from '../CustomCursor/HoverCursor';
 
@@ -37,8 +37,13 @@ const Navigation = ({ style }) => {
       return;
     }
 
+    const animation =
+      path === '/'
+        ? transitionAnimation.vertical
+        : transitionAnimation.horizontal;
+
     dispatch(setActivePage(path));
-    dispatch(setPlaying(true));
+    dispatch(setAnimation(animation));
 
     gsap.delayedCall(0.9, () => {
       router.push(`/${path}`);
