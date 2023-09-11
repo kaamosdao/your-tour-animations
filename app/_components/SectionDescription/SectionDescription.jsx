@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
 import HoverCursor from '../CustomCursor/HoverCursor';
@@ -11,7 +11,20 @@ import s from './SectionDescription.module.scss';
 const SectionDescription = () => {
   const tagline = useRef(null);
   const q = gsap.utils.selector(tagline);
-  const width = window.innerWidth;
+
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    setIsTablet(window.innerWidth >= 800);
+
+    const onResize = () => {
+      setIsTablet(window.innerWidth >= 800);
+    };
+
+    window.addEventListener('resize', onResize);
+
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
 
   useEffect(() => {
     const title = q('span[class*="line"]');
@@ -48,12 +61,10 @@ const SectionDescription = () => {
           </OverflowWrapper>
         </div>
         <div className={s.description}>
-          {width >= 800 ? (
+          {isTablet ? (
             <>
               <OverflowWrapper>
-                <p className={s.line}>
-                  Идейные соображения высшего порядка, а&nbsp;
-                </p>
+                <p className={s.line}>Идейные соображения высшего порядка, а</p>
               </OverflowWrapper>
               <OverflowWrapper>
                 <p className={s.line}>также рамки и место обучения кадров</p>
@@ -65,7 +76,7 @@ const SectionDescription = () => {
                 <p className={s.line}>Идейные соображения высшего</p>
               </OverflowWrapper>
               <OverflowWrapper>
-                <p className={s.line}>порядка, также рамки и место</p>
+                <p className={s.line}>порядка, а также рамки и место</p>
               </OverflowWrapper>
               <OverflowWrapper>
                 <p className={s.line}>обучения кадров</p>
