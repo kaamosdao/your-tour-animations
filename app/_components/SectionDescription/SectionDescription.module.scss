@@ -98,6 +98,10 @@
   }
 }
 
+.title .line {
+  display: block;
+}
+
 .description {
   @include font(normal, 16px, 144%);
 
@@ -111,26 +115,6 @@
 
   @media (min-width: $desktop-lg-width) {
     margin-top: 52px;
-  }
-}
-
-.description br:first-child {
-  display: none;
-
-  @media (min-width: $tablet-lg-width) {
-    display: block;
-  }
-
-  @media (min-width: $desktop-lg-width) {
-    display: none;
-  }
-}
-
-.description br:last-child {
-  display: none;
-
-  @media (min-width: $desktop-lg-width) {
-    display: block;
   }
 }
 
