@@ -1,8 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-const selectPlayingTransition = createSelector(
-  (state) => state.transition.playing,
-  (playing) => playing
+const selectTransitionAnimation = createSelector(
+  (state) => state.transition.animation,
+  (animation) => animation
 );
 
 export const selectActivePage = createSelector(
@@ -10,4 +10,4 @@ export const selectActivePage = createSelector(
   (activePage) => activePage
 );
 
-export default selectPlayingTransition;
+export default selectTransitionAnimation;

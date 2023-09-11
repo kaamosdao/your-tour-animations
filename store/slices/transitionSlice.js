@@ -4,7 +4,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  playing: false,
+  animation: null,
   activePage: false,
 };
 
@@ -12,8 +12,8 @@ const transitionSlice = createSlice({
   name: 'transition',
   initialState,
   reducers: {
-    setPlaying: (state, { payload }) => {
-      state.playing = payload;
+    setAnimation: (state, { payload }) => {
+      state.animation = payload;
     },
     setActivePage: (state, { payload }) => {
       state.activePage = payload;
@@ -21,6 +21,6 @@ const transitionSlice = createSlice({
   },
 });
 
-export const { setPlaying, setActivePage } = transitionSlice.actions;
+export const { setAnimation, setActivePage } = transitionSlice.actions;
 
 export default transitionSlice.reducer;
