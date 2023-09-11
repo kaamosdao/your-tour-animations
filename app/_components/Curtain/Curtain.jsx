@@ -7,8 +7,9 @@ import { gsap } from 'gsap';
 import { setAnimation } from '@/store/slices/transitionSlice';
 import selectTransitionAnimation from '@/store/selectors/transitionSelectors';
 
-import s from './Curtain.module.scss';
 import { transitionAnimation } from '@/utils/types';
+
+import s from './Curtain.module.scss';
 
 const Curtain = () => {
   const curtain = useRef(null);
@@ -20,18 +21,18 @@ const Curtain = () => {
       return;
     }
 
-    const startPoint1 =
+    const startClip1 =
       animation === transitionAnimation.vertical ? '--clipblY' : '--cliptrX';
-    const startPoint2 =
+    const startClip2 =
       animation === transitionAnimation.vertical ? '--clipbrY' : '--clipbrX';
-    const endPoint1 =
+    const endClip1 =
       animation === transitionAnimation.vertical ? '--cliptlY' : '--cliptlX';
-    const endPoint2 =
+    const endClip2 =
       animation === transitionAnimation.vertical ? '--cliptrY' : '--clipblX';
 
-    const initPoint1 =
+    const initClip1 =
       animation === transitionAnimation.vertical ? '--cliptrX' : '--clipbrY';
-    const initPoint2 =
+    const initClip2 =
       animation === transitionAnimation.vertical ? '--clipbrX' : '--clipblY';
 
     gsap
@@ -41,30 +42,30 @@ const Curtain = () => {
         },
       })
       .set(curtain.current, {
-        [initPoint1]: '100%',
-        [initPoint2]: '100%',
+        [initClip1]: '100%',
+        [initClip2]: '100%',
       })
       .to(curtain.current, {
-        [startPoint1]: '100%',
+        [startClip1]: '100%',
         duration: 1,
       })
       .to(
         curtain.current,
         {
-          [startPoint2]: '100%',
+          [startClip2]: '100%',
           duration: 1,
           delay: 0.01,
         },
         '<'
       )
       .to(curtain.current, {
-        [endPoint1]: '100%',
+        [endClip1]: '100%',
         duration: 1,
       })
       .to(
         curtain.current,
         {
-          [endPoint2]: '100%',
+          [endClip2]: '100%',
           duration: 1,
           delay: 0.01,
         },
