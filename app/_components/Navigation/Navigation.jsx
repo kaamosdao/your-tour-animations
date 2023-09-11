@@ -68,7 +68,12 @@ const Navigation = ({ style }) => {
           <li key={path} className={s.item}>
             <HoverCursor cursorType="stuck" activeLink="linkActive">
               <a
-                className={activePage === path ? s.linkActive : s.link}
+                className={
+                  activePage === path ||
+                  (!activePage && pathname === `/${path}`)
+                    ? s.linkActive
+                    : s.link
+                }
                 href={`/${path}`}
                 onClick={onClick(path)}
               >
