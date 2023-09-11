@@ -16,4 +16,9 @@ export const navStyle = {
   fixed: 'fixed',
 };
 
+export const transitionAnimation = {
+  vertical: 'vertical',
+  horizontal: 'horizontal',
+};
+
 export default cursorState;
