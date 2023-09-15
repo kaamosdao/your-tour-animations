@@ -1,7 +1,6 @@
 import Providers from '@/providers/providers';
 
 import Header from './_components/Header/index';
-import HeaderFixed from './_components/HeaderFixed/index';
 import Footer from './_components/Footer/index';
 import CustomCursor from './_components/CustomCursor/index';
 import Curtain from './_components/Curtain';
@@ -22,7 +21,6 @@ export default function RootLayout({ children }) {
           <Curtain />
           <CustomCursor />
           <Header />
-          <HeaderFixed />
           {children}
           <Footer />
         </Providers>
