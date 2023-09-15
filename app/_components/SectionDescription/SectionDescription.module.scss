@@ -68,17 +68,17 @@
 
 .tagline {
   margin: 0 auto;
-  width: 250px;
+  width: 100%;
   text-align: center;
   color: var(--third-text-color);
 
-  @media (min-width: $tablet-lg-width) {
-    width: 610px;
-  }
+  // @media (min-width: $tablet-lg-width) {
+  //   width: 610px;
+  // }
 
-  @media (min-width: $desktop-lg-width) {
-    width: 620px;
-  }
+  // @media (min-width: $desktop-lg-width) {
+  //   width: 620px;
+  // }
 }
 
 .title {

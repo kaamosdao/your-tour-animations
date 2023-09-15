@@ -84,13 +84,13 @@ const SectionDescription = () => {
             </>
           )}
         </div>
-        <HoverCursor cursorType="pulse">
-          <OverflowWrapper>
+        <OverflowWrapper>
+          <HoverCursor cursorType="pulse">
             <button className={s.button} type="button">
               Найти тур
             </button>
-          </OverflowWrapper>
-        </HoverCursor>
+          </HoverCursor>
+        </OverflowWrapper>
       </div>
     </section>
   );
