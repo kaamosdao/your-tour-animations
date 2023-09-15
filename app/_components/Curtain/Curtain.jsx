@@ -20,20 +20,15 @@ const Curtain = () => {
     if (!animation) {
       return;
     }
+    const { vertical } = transitionAnimation;
 
-    const startClip1 =
-      animation === transitionAnimation.vertical ? '--clipblY' : '--cliptrX';
-    const startClip2 =
-      animation === transitionAnimation.vertical ? '--clipbrY' : '--clipbrX';
-    const endClip1 =
-      animation === transitionAnimation.vertical ? '--cliptlY' : '--cliptlX';
-    const endClip2 =
-      animation === transitionAnimation.vertical ? '--cliptrY' : '--clipblX';
+    const startClip1 = animation === vertical ? '--clipblY' : '--cliptrX';
+    const startClip2 = animation === vertical ? '--clipbrY' : '--clipbrX';
+    const endClip1 = animation === vertical ? '--cliptlY' : '--cliptlX';
+    const endClip2 = animation === vertical ? '--cliptrY' : '--clipblX';
 
-    const initClip1 =
-      animation === transitionAnimation.vertical ? '--cliptrX' : '--clipbrY';
-    const initClip2 =
-      animation === transitionAnimation.vertical ? '--clipbrX' : '--clipblY';
+    const initClip1 = animation === vertical ? '--cliptrX' : '--clipbrY';
+    const initClip2 = animation === vertical ? '--clipbrX' : '--clipblY';
 
     gsap
       .timeline({
