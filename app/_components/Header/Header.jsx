@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-
-import { navStyle } from '@/utils/types';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import Navigation from '../Navigation';
 
@@ -10,35 +10,47 @@ import s from './Header.module.scss';
 
 const Header = () => {
   const headerRef = useRef();
+  const q = gsap.utils.selector(headerRef);
 
   useEffect(() => {
-    const distance = 450;
-
-    if (window.scrollY <= distance) {
-      headerRef.current.style.display = 'flex';
-    } else {
-      headerRef.current.style.display = 'none';
-    }
-
-    const handleScroll = () => {
-      if (window.scrollY <= distance) {
-        headerRef.current.style.opacity = 1 - window.scrollY / distance;
-        headerRef.current.style.display = 'flex';
-      } else {
-        headerRef.current.style.display = 'none';
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    gsap.registerPlugin(ScrollTrigger);
   }, []);
+
+  useEffect(() => {
+    const logo = q('svg[class*="icon"]');
+    const nav = q('nav');
+
+    gsap
+      .timeline({
+        scrollTrigger: {
+          start: 'top top',
+          end: '+=450',
+          scrub: true,
+        },
+      })
+      .to(headerRef?.current, {
+        backgroundColor: gsap.getProperty('html', '--header-bg-color'),
+        backdropFilter: 'blur(27px)',
+      })
+      .to(
+        logo,
+        {
+          fill: gsap.getProperty('html', '--main-text-color'),
+        },
+        0
+      )
+      .to(
+        nav,
+        {
+          color: gsap.getProperty('html', '--main-text-color'),
+        },
+        0
+      );
+  }, [q]);
 
   return (
     <header ref={headerRef} className={s.header}>
-      <Navigation style={navStyle.main} />
+      <Navigation />
     </header>
   );
 };
