@@ -12,13 +12,13 @@ import selectPlayingTransition, {
 import YourTourIcon from '@/public/img/svg-icons/yourtour.svg';
 
 import { links } from '@/data/index';
-import { navStyle, transitionAnimation } from '@/utils/types';
+import { transitionAnimation } from '@/utils/types';
 
 import HoverCursor from '../CustomCursor/HoverCursor';
 
 import s from './Navigation.module.scss';
 
-const Navigation = ({ style }) => {
+const Navigation = () => {
   const pathname = usePathname();
   const router = useRouter();
   const dispatch = useDispatch();
@@ -51,16 +51,10 @@ const Navigation = ({ style }) => {
   };
 
   return (
-    <nav
-      className={`${s.navigation} ${
-        style === navStyle.main ? s.navMain : s.navFixed
-      }`}
-    >
+    <nav className={s.navigation}>
       <HoverCursor cursorType="pulse">
         <a className={s.logo} href="/" onClick={onClick('/')}>
-          <YourTourIcon
-            className={style === navStyle.main ? s.iconMain : s.iconFixed}
-          />
+          <YourTourIcon className={s.icon} />
         </a>
       </HoverCursor>
       <ul className={s.links}>

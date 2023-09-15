@@ -11,11 +11,6 @@ export const sliderEvent = {
   click: 'click',
 };
 
-export const navStyle = {
-  main: 'main',
-  fixed: 'fixed',
-};
-
 export const transitionAnimation = {
   vertical: 'vertical',
   horizontal: 'horizontal',
