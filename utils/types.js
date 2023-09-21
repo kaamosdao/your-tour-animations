@@ -16,11 +16,4 @@ export const transitionAnimation = {
   horizontal: 'horizontal',
 };
 
-export const transitionState = {
-  entering: 'entering',
-  entered: 'entered',
-  exiting: 'exiting',
-  exited: 'exited',
-};
-
 export default cursorState;
