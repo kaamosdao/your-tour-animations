@@ -8,17 +8,18 @@ import HoverCursor from '../CustomCursor/HoverCursor';
 import OverflowWrapper from '../OverflowWrapper';
 
 import s from './SectionDescription.module.scss';
+import useIsVisiblePage from '@/hooks/useIsVisiblePage';
 
-const SectionDescription = ({ transitionStatus, isVisible }) => {
+const SectionDescription = () => {
   const tagline = useRef(null);
   const q = gsap.utils.selector(tagline);
+  const isVisiblePage = useIsVisiblePage();
 
   const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
-    console.log('SectionDescription', isVisible);
-    console.log(`SectionDescription`, transitionStatus);
-  }, [isVisible, transitionStatus]);
+    console.log('SectionDescription', isVisiblePage);
+  }, [isVisiblePage]);
 
   useEffect(() => {
     setIsTablet(window.innerWidth >= 800);

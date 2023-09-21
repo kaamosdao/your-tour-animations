@@ -7,18 +7,20 @@ import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { gsap } from 'gsap';
 
+import useIsVisiblePage from '@/hooks/useIsVisiblePage';
+
 import OverflowWrapper from '../OverflowWrapper';
 
 import s from './PageTemplate.module.scss';
 
-const PageTemplate = ({ isVisible, transitionStatus, h1, h2, p }) => {
+const PageTemplate = ({ h1, h2, p }) => {
   const tagline = useRef(null);
   const q = gsap.utils.selector(tagline);
+  const isVisiblePage = useIsVisiblePage();
 
   useEffect(() => {
-    console.log(`PageTemplate ${h2}`, isVisible);
-    console.log(`PageTemplate ${h2}`, transitionStatus);
-  }, [isVisible, transitionStatus, h2]);
+    console.log('PageTemplate', isVisiblePage);
+  }, [isVisiblePage]);
 
   useEffect(() => {
     const title = q('h2[class*="title"]');
