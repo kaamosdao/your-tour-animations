@@ -6,6 +6,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Transition, TransitionGroup } from 'react-transition-group';
 
+import VisiblePageContext from '@/hooks/context/VisiblePageContext';
 import isVisible from '@/utils/isVisible';
 
 const ReactTransitionGroup = ({
@@ -34,27 +35,21 @@ const ReactTransitionGroup = ({
         addEndListener={addEndListener}
       >
         {(status) => {
-          if (typeof children === 'function') {
-            return children({
-              transitionStatus: status,
-              isVisible:
-                parentIsVisible !== undefined
-                  ? isVisible(status) && parentIsVisible
-                  : isVisible(status),
-            });
-          }
-
           if (disableProps) {
             return children;
           }
 
-          return React.cloneElement(children, {
-            transitionStatus: status,
-            isVisible:
-              parentIsVisible !== undefined
-                ? isVisible(status) && parentIsVisible
-                : isVisible(status),
-          });
+          return (
+            <VisiblePageContext.Provider
+              value={
+                parentIsVisible !== undefined
+                  ? isVisible(status) && parentIsVisible
+                  : isVisible(status)
+              }
+            >
+              {children}
+            </VisiblePageContext.Provider>
+          );
         }}
       </Transition>
     </TransitionGroup>
