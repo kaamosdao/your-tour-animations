@@ -1,7 +1,9 @@
 import PageTemplate from '../_components/PageTemplate';
 
-const Stories = () => (
+const Stories = ({ transitionStatus, isVisible }) => (
   <PageTemplate
+    transitionStatus={transitionStatus}
+    isVisible={isVisible}
     h1="Страница Историй"
     h2="Истории"
     p={[

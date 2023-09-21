@@ -1,7 +1,9 @@
 import PageTemplate from '../_components/PageTemplate';
 
-const Create = () => (
+const Create = ({ transitionStatus, isVisible }) => (
   <PageTemplate
+    transitionStatus={transitionStatus}
+    isVisible={isVisible}
     h1="Страница Создания Туров"
     h2="Создать Тур"
     p={[

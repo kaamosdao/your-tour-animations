@@ -1,7 +1,9 @@
 import PageTemplate from '../_components/PageTemplate';
 
-const Feedback = () => (
+const Feedback = ({ transitionStatus, isVisible }) => (
   <PageTemplate
+    transitionStatus={transitionStatus}
+    isVisible={isVisible}
     h1="Страница Отзывов"
     h2="Отзывы"
     p={[
