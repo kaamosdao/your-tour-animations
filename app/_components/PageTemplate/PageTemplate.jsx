@@ -1,6 +1,5 @@
 'use client';
 
-/* eslint-disable no-console */
 /* eslint-disable react/no-array-index-key */
 
 import { useEffect, useRef } from 'react';
@@ -11,14 +10,9 @@ import OverflowWrapper from '../OverflowWrapper';
 
 import s from './PageTemplate.module.scss';
 
-const PageTemplate = ({ isVisible, transitionStatus, h1, h2, p }) => {
+const PageTemplate = ({ h1, h2, p }) => {
   const tagline = useRef(null);
   const q = gsap.utils.selector(tagline);
-
-  useEffect(() => {
-    console.log(`PageTemplate ${h2}`, isVisible);
-    console.log(`PageTemplate ${h2}`, transitionStatus);
-  }, [isVisible, transitionStatus, h2]);
 
   useEffect(() => {
     const title = q('h2[class*="title"]');

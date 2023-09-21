@@ -4,7 +4,6 @@ import Header from './_components/Header/index';
 import Footer from './_components/Footer/index';
 import CustomCursor from './_components/CustomCursor/index';
 import Curtain from './_components/Curtain';
-import Transition from './_components/Transition';
 
 import './_styles/style.scss';
 
@@ -22,7 +21,7 @@ export default function RootLayout({ children }) {
           <Curtain />
           <CustomCursor />
           <Header />
-          <Transition>{children}</Transition>
+          {children}
           <Footer />
         </Providers>
       </body>
