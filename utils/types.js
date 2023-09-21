@@ -11,4 +11,9 @@ export const sliderEvent = {
   click: 'click',
 };
 
+export const transitionAnimation = {
+  vertical: 'vertical',
+  horizontal: 'horizontal',
+};
+
 export default cursorState;
