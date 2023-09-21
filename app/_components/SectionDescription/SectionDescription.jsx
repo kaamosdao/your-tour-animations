@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable no-console */
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
@@ -8,11 +9,16 @@ import OverflowWrapper from '../OverflowWrapper';
 
 import s from './SectionDescription.module.scss';
 
-const SectionDescription = () => {
+const SectionDescription = ({ transitionStatus, isVisible }) => {
   const tagline = useRef(null);
   const q = gsap.utils.selector(tagline);
 
   const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    console.log('SectionDescription', isVisible);
+    console.log(`SectionDescription`, transitionStatus);
+  }, [isVisible, transitionStatus]);
 
   useEffect(() => {
     setIsTablet(window.innerWidth >= 800);

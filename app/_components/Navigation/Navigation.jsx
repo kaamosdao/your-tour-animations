@@ -2,7 +2,6 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { usePathname, useRouter } from 'next/navigation';
-import { gsap } from 'gsap';
 
 import { setActivePage, setAnimation } from '@/store/slices/transitionSlice';
 import selectPlayingTransition, {
@@ -44,10 +43,7 @@ const Navigation = () => {
 
     dispatch(setActivePage(path));
     dispatch(setAnimation(animation));
-
-    gsap.delayedCall(0.9, () => {
-      router.push(`/${path}`);
-    });
+    router.push(`/${path}`);
   };
 
   return (
