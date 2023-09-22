@@ -10,16 +10,12 @@ import s from './Header.module.scss';
 
 const Header = () => {
   const headerRef = useRef();
-  const q = gsap.utils.selector(headerRef);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
   }, []);
 
   useEffect(() => {
-    const logo = q('svg[class*="icon"]');
-    const nav = q('nav');
-
     gsap
       .timeline({
         scrollTrigger: {
@@ -29,24 +25,17 @@ const Header = () => {
         },
       })
       .to(headerRef?.current, {
-        backgroundColor: gsap.getProperty('html', '--header-bg-color'),
         backdropFilter: 'blur(27px)',
       })
       .to(
-        logo,
+        'html',
         {
-          fill: gsap.getProperty('html', '--main-text-color'),
-        },
-        0
-      )
-      .to(
-        nav,
-        {
-          color: gsap.getProperty('html', '--main-text-color'),
+          '--nav-text-color': gsap.getProperty('html', '--main-text-color'),
+          '--nav-bg-color': gsap.getProperty('html', '--header-bg-color'),
         },
         0
       );
-  }, [q]);
+  }, []);
 
   return (
     <header ref={headerRef} className={s.header}>
