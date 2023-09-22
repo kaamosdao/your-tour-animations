@@ -50,10 +50,10 @@
   position: relative;
   width: 88%;
   max-width: 670px;
-
   margin: 51px 0 0 0;
   padding: 0;
   list-style-type: none;
+  overflow: hidden;
 
   @media (min-width: $desktop-md-width) {
     width: 89.6%;

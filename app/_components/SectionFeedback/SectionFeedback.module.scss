@@ -58,6 +58,7 @@
   margin: 50px 0 0 0;
   padding: 0;
   list-style-type: none;
+  overflow: hidden;
 
   @media (min-width: $tablet-md-width) {
     grid-template-columns: 1fr;

@@ -9,6 +9,7 @@
   min-height: 285px;
   margin: 75px auto 73px;
   text-align: center;
+  overflow: hidden;
 
   @media (min-width: $tablet-lg-width) {
     display: grid;
