@@ -14,6 +14,7 @@
   padding: 0;
   color: var(--main-text-color);
   list-style-type: none;
+  overflow: hidden;
 
   @media (min-width: $desktop-md-width) {
     @include font(bold, 23px, 122%, 0.003em);

@@ -14,6 +14,7 @@
   border-radius: 20px;
   background-size: 100%;
   transition: all 0.3s ease;
+  overflow: hidden;
 
   @media (min-width: $tablet-md-width) {
     aspect-ratio: 1 / 1;
@@ -45,6 +46,7 @@
   background: inherit;
   transition: inherit;
   content: '';
+  overflow: hidden;
 }
 
 .tourCard:hover::before {
