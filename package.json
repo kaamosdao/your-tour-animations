@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@studio-freight/lenis": "^1.0.23",
     "classnames": "^2.3.2",
     "eslint-config-next": "13.4.7",
     "gsap": "^3.12.2",
