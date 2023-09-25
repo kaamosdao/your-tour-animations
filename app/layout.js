@@ -1,4 +1,4 @@
-import Providers from '@/providers/providers';
+import Providers from '@/providers/index';
 
 import Header from './_components/Header/index';
 import Footer from './_components/Footer/index';
