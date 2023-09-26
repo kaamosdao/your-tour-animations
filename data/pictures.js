@@ -1,6 +1,7 @@
 const pictures = [
   {
     name: 'itemAirplane',
+    position: ['top'],
     desktopImg: {
       width: 442,
       height: 300,
@@ -21,6 +22,7 @@ const pictures = [
   },
   {
     name: 'itemCanyon',
+    position: ['top'],
     desktopImg: null,
     tabletImg: null,
     defaultImg: {
@@ -33,6 +35,7 @@ const pictures = [
   },
   {
     name: 'itemSunset',
+    position: ['top'],
     desktopImg: {
       width: 442,
       height: 300,
@@ -49,6 +52,7 @@ const pictures = [
   },
   {
     name: 'itemRoad',
+    position: ['top'],
     desktopImg: {
       width: 442,
       height: 300,
@@ -69,6 +73,7 @@ const pictures = [
   },
   {
     name: 'itemCliff',
+    position: ['mid'],
     desktopImg: {
       width: 349,
       height: 301,
@@ -89,6 +94,7 @@ const pictures = [
   },
   {
     name: 'itemMap',
+    position: ['mid'],
     desktopImg: {
       width: 347,
       height: 301,
@@ -105,6 +111,7 @@ const pictures = [
   },
   {
     name: 'itemBridge',
+    position: ['mid'],
     desktopImg: null,
     tabletImg: null,
     defaultImg: {
@@ -117,6 +124,7 @@ const pictures = [
   },
   {
     name: 'itemCar',
+    position: ['mid'],
     desktopImg: {
       width: 347,
       height: 301,
@@ -137,6 +145,7 @@ const pictures = [
   },
   {
     name: 'itemStreet',
+    position: ['mid'],
     desktopImg: {
       width: 347,
       height: 301,
@@ -157,6 +166,7 @@ const pictures = [
   },
   {
     name: 'itemHouses',
+    position: ['bot', 'top'],
     desktopImg: {
       width: 442,
       height: 300,
@@ -177,6 +187,7 @@ const pictures = [
   },
   {
     name: 'itemLake',
+    position: ['bot', 'top'],
     desktopImg: {
       width: 442,
       height: 300,
@@ -197,6 +208,7 @@ const pictures = [
   },
   {
     name: 'itemTown',
+    position: ['bot', 'top'],
     desktopImg: {
       width: 442,
       height: 300,
@@ -213,6 +225,7 @@ const pictures = [
   },
   {
     name: 'itemSupboard',
+    position: ['bot', 'top'],
     desktopImg: null,
     tabletImg: null,
     defaultImg: {
