@@ -1,7 +1,7 @@
 const pictures = [
   {
     name: 'itemAirplane',
-    position: ['top'],
+    position: ['bot', 'top'],
     desktopImg: {
       width: 442,
       height: 300,
@@ -22,7 +22,7 @@ const pictures = [
   },
   {
     name: 'itemCanyon',
-    position: ['top'],
+    position: ['bot', 'top'],
     desktopImg: null,
     tabletImg: null,
     defaultImg: {
@@ -35,7 +35,7 @@ const pictures = [
   },
   {
     name: 'itemSunset',
-    position: ['top'],
+    position: ['bot', 'top'],
     desktopImg: {
       width: 442,
       height: 300,
@@ -52,7 +52,7 @@ const pictures = [
   },
   {
     name: 'itemRoad',
-    position: ['top'],
+    position: ['bot', 'top'],
     desktopImg: {
       width: 442,
       height: 300,
