@@ -16,4 +16,12 @@ export const transitionAnimation = {
   horizontal: 'horizontal',
 };
 
+export const sizeType = {
+  desktopLg: 'desktop-lg',
+  desktopMd: 'desktop-md',
+  tabletLg: 'tablet-lg',
+  tabletMd: 'tablet-md',
+  mobile: 'mobile',
+};
+
 export default cursorState;
