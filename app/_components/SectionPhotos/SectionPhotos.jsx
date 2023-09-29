@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import cn from 'classnames';
 
-import Picture from '../Picture';
+import Picture from './Picture';
 
 import { pictures } from '@/data/index';
 import horizontalLoop from '@/utils/horizontalLoop';
@@ -24,6 +24,7 @@ const SectionPhotos = () => {
   const botLoop = useRef();
 
   const [deviceSize, setDeviceSize] = useState(null);
+  const [devicePixelRatio, setDevicePixelRatio] = useState(1);
 
   useEffect(() => {
     gsap.registerPlugin(Draggable);
@@ -31,15 +32,21 @@ const SectionPhotos = () => {
 
   useEffect(() => {
     setDeviceSize(getDeviceSize(window.innerWidth));
+    setDevicePixelRatio(window.devicePixelRatio);
+  }, []);
 
+  useEffect(() => {
     const onResize = () => {
-      setDeviceSize(getDeviceSize(window.innerWidth));
+      const newSize = getDeviceSize(window.innerWidth);
+      if (newSize !== deviceSize) {
+        setDeviceSize(newSize);
+      }
     };
 
     window.addEventListener('resize', onResize);
 
     return () => window.removeEventListener('resize', onResize);
-  }, []);
+  }, [deviceSize]);
 
   useEffect(() => {
     const top = gsap.utils.selector(topCarousel);
@@ -52,68 +59,67 @@ const SectionPhotos = () => {
 
     if (deviceSize === sizeType.mobile) {
       gsap.set(topPictures, {
-        x: (i) => i * (topCarousel.current.clientWidth / 2),
+        x: (i) => i * (topPictures[0].clientWidth) + (i + 1) * 18,
       });
 
       gsap.set(midPictures, {
-        x: (i) => i * (midCarousel.current.clientWidth / 3),
+        x: (i) => i * (midPictures[0].clientWidth) + (i + 1) * 18,
       });
 
       gsap.set(botPictures, {
-        x: (i) => i * (botCarousel.current.clientWidth / 2),
+        x: (i) => i * (botPictures[0].clientWidth) + (i + 1) * 18,
       });
     }
 
-    if (deviceSize === sizeType.desktopMd) {
+    if (deviceSize === sizeType.tabletMd) {
       gsap.set(topPictures, {
-        x: (i) => i * (topCarousel.current.clientWidth / 3),
+        x: (i) => i * (topPictures[0].clientWidth) + (i + 1) * 20,
       });
 
       gsap.set(midPictures, {
-        x: (i) => i * (midCarousel.current.clientWidth / 4),
+        x: (i) => i * (midPictures[0].clientWidth) + (i + 1) * 20,
       });
 
       gsap.set(botPictures, {
-        x: (i) => i * (botCarousel.current.clientWidth / 3),
+        x: (i) => i * (botPictures[0].clientWidth) + (i + 1) * 20,
       });
     }
 
     if (deviceSize === sizeType.desktopLg) {
       gsap.set(topPictures, {
-        x: (i) => i * (topCarousel.current.clientWidth / 4),
+        x: (i) => i * (topPictures[0].clientWidth) + (i + 1) * 30,
       });
 
       gsap.set(midPictures, {
-        x: (i) => i * (midCarousel.current.clientWidth / 5),
+        x: (i) => i * (midPictures[0].clientWidth) + (i + 1) * 30,
       });
 
       gsap.set(botPictures, {
-        x: (i) => i * (botCarousel.current.clientWidth / 4),
+        x: (i) => i * (botPictures[0].clientWidth) + (i + 1) * 30,
       });
     }
 
-    topLoop.current = horizontalLoop(topPictures, {
-      paused: false,
-      draggable: true,
-      reversed: true,
-      repeat: -1,
-      speed: 0.7,
-    });
+    if (deviceSize) {
+      topLoop.current = horizontalLoop(topPictures, {
+        paused: false,
+        reversed: true,
+        repeat: -1,
+        speed: 0.7,
+      });
 
-    midLoop.current = horizontalLoop(midPictures, {
-      paused: false,
-      draggable: true,
-      repeat: -1,
-      speed: 0.9,
-    });
+      midLoop.current = horizontalLoop(midPictures, {
+        paused: false,
+        repeat: -1,
+        speed: 0.9,
+      });
 
-    botLoop.current = horizontalLoop(botPictures, {
-      paused: false,
-      draggable: true,
-      reversed: true,
-      repeat: -1,
-      speed: 0.6,
-    });
+      botLoop.current = horizontalLoop(botPictures, {
+        paused: false,
+        reversed: true,
+        repeat: -1,
+        speed: 0.6,
+      });
+    }
   }, [deviceSize]);
 
   return (
@@ -127,13 +133,15 @@ const SectionPhotos = () => {
       <div className={s.list}>
         <ul ref={topCarousel} className={s.top}>
           {pictures
-            .filter(({ position }) => position.includes('top'))
-            .map(({ name, desktopImg, tabletImg, defaultImg, alt, format }) => (
+            .filter(
+              ({ position, variants }) =>
+                position.includes('top') && variants[deviceSize]
+            )
+            .map(({ name, variants, alt, format }) => (
               <li key={name} className={cn(s.item, s[name])}>
                 <Picture
-                  desktopImg={desktopImg}
-                  tabletImg={tabletImg}
-                  defaultImg={defaultImg}
+                  img={variants[deviceSize]}
+                  devicePixelRatio={devicePixelRatio}
                   alt={alt}
                   format={format}
                 />
@@ -142,13 +150,15 @@ const SectionPhotos = () => {
         </ul>
         <ul ref={midCarousel} className={s.mid}>
           {pictures
-            .filter(({ position }) => position.includes('mid'))
-            .map(({ name, desktopImg, tabletImg, defaultImg, alt, format }) => (
+            .filter(
+              ({ position, variants }) =>
+                position.includes('mid') && variants[deviceSize]
+            )
+            .map(({ name, variants, alt, format }) => (
               <li key={name} className={cn(s.item, s[name])}>
                 <Picture
-                  desktopImg={desktopImg}
-                  tabletImg={tabletImg}
-                  defaultImg={defaultImg}
+                  img={variants[deviceSize]}
+                  devicePixelRatio={devicePixelRatio}
                   alt={alt}
                   format={format}
                 />
@@ -158,13 +168,15 @@ const SectionPhotos = () => {
         <ul ref={botCarousel} className={s.bot}>
           {pictures
             .reverse()
-            .filter(({ position }) => position.includes('bot'))
-            .map(({ name, desktopImg, tabletImg, defaultImg, alt, format }) => (
+            .filter(
+              ({ position, variants }) =>
+                position.includes('bot') && variants[deviceSize]
+            )
+            .map(({ name, variants, alt, format }) => (
               <li key={name} className={cn(s.item, s[name])}>
                 <Picture
-                  desktopImg={desktopImg}
-                  tabletImg={tabletImg}
-                  defaultImg={defaultImg}
+                  img={variants[deviceSize]}
+                  devicePixelRatio={devicePixelRatio}
                   alt={alt}
                   format={format}
                 />

@@ -87,30 +87,50 @@
 .bot,
 .mid {
   position: relative;
-  display: flex;
-  justify-content: space-between;
-  min-height: 300px;
   width: 100%;
-  padding-top: 16.13%;
   box-sizing: border-box;
   overflow: hidden;
   list-style-type: none;
+}
+
+.top,
+.bot {
+  height: 110px;
+
+  @media (min-width: $tablet-md-width) {
+    height: 300px;
+  }
+  @media (min-width: $desktop-lg-width) {
+    height: 300px;
+  }
+}
+
+.mid {
+  height: 110px;
+
+  @media (min-width: $tablet-md-width) {
+    height: 300px;
+  }
+  @media (min-width: $desktop-lg-width) {
+    height: 300px;
+  }
 }
 
 .item {
   position: absolute;
   top: 0;
   left: 0;
-  padding-left: 18px;
+  // margin-right: 18px;
   border-radius: 20px;
+  box-sizing: border-box;
   overflow: hidden;
 
-  @media (min-width: $desktop-md-width) {
-    padding-left: 20px;
+  @media (min-width: $tablet-md-width) {
+    // margin-right: 20px;
     border-radius: 50px;
   }
   @media (min-width: $desktop-lg-width) {
-    padding-left: 30px;
+    // margin-right: 30px;
   }
 }
 
@@ -133,6 +153,9 @@
   aspect-ratio: 15 / 11;
   width: 47.1%;
   max-width: 165px;
+
+  // width: 150px;
+  // height: 110px;
   border-radius: 20px;
   overflow: hidden;
 
@@ -140,6 +163,10 @@
     aspect-ratio: 24 / 23;
     max-width: 314px;
     max-height: 300px;
+
+    // width: 314px;
+    // height: 300px;
+    border-radius: 50px;
   }
   @media (min-width: $desktop-md-width) {
     width: 32%;
@@ -152,6 +179,9 @@
     width: 23.7%;
     max-width: none;
     max-height: none;
+
+    // width: 442px;
+    // height: 300px;
   }
 }
 
@@ -159,10 +189,19 @@
 .itemMap,
 .itemBridge,
 .itemCar,
-.itemStreet {
+.itemStreet,
+.itemBeach,
+.itemTrees,
+.itemSea,
+.itemWaves,
+.itemLegs,
+.itemIreland {
   aspect-ratio: 9 / 10;
   width: 31.1%;
   max-width: 108px;
+
+  // width: 99px;
+  // height: 110px;
   border-radius: 20px;
   overflow: hidden;
 
@@ -170,6 +209,10 @@
     aspect-ratio: 23 / 30;
     max-width: 231px;
     max-height: 301px;
+
+    // width: 231px;
+    // height: 301px;
+    border-radius: 50px;
   }
   @media (min-width: $desktop-md-width) {
     width: 23.5%;
@@ -182,6 +225,9 @@
     width: 18.6%;
     max-width: none;
     max-height: none;
+
+    // width: 347px;
+    // height: 301px;
   }
 }
 
