@@ -17,10 +17,10 @@ export const transitionAnimation = {
 };
 
 export const sizeType = {
-  desktopLg: 'desktop-lg',
-  desktopMd: 'desktop-md',
-  tabletLg: 'tablet-lg',
-  tabletMd: 'tablet-md',
+  desktopLg: 'desktopLg',
+  desktopMd: 'desktopMd',
+  tabletLg: 'tabletLg',
+  tabletMd: 'tabletMd',
   mobile: 'mobile',
 };
 
