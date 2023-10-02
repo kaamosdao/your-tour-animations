@@ -8,20 +8,20 @@ import cn from 'classnames';
 import Picture from './Picture';
 
 import { pictures } from '@/data/index';
-import horizontalLoop from '@/utils/horizontalLoop';
+import HorizontalLoop from '@/utils/HorizontalLoop';
 import getDeviceSize from '@/utils/getDeviceSize';
 import { sizeType } from '@/utils/types';
 
 import s from './SectionPhotos.module.scss';
 
 const SectionPhotos = () => {
-  const topCarousel = useRef();
-  const midCarousel = useRef();
-  const botCarousel = useRef();
+  const topCarousel = useRef(null);
+  const midCarousel = useRef(null);
+  const botCarousel = useRef(null);
 
-  const topLoop = useRef();
-  const midLoop = useRef();
-  const botLoop = useRef();
+  const topLoop = useRef(null);
+  const midLoop = useRef(null);
+  const botLoop = useRef(null);
 
   const [deviceSize, setDeviceSize] = useState(null);
   const [devicePixelRatio, setDevicePixelRatio] = useState(1);
@@ -36,16 +36,16 @@ const SectionPhotos = () => {
   }, []);
 
   useEffect(() => {
-    const onResize = () => {
+    const resize = () => {
       const newSize = getDeviceSize(window.innerWidth);
       if (newSize !== deviceSize) {
         setDeviceSize(newSize);
       }
     };
 
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', resize);
 
-    return () => window.removeEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', resize);
   }, [deviceSize]);
 
   useEffect(() => {
@@ -59,67 +59,73 @@ const SectionPhotos = () => {
 
     if (deviceSize === sizeType.mobile) {
       gsap.set(topPictures, {
-        x: (i) => i * (topPictures[0].clientWidth) + (i + 1) * 18,
+        x: (i) => i * topPictures[0].clientWidth + (i + 1) * 18,
       });
 
       gsap.set(midPictures, {
-        x: (i) => i * (midPictures[0].clientWidth) + (i + 1) * 18,
+        x: (i) => i * midPictures[0].clientWidth + (i + 1) * 18,
       });
 
       gsap.set(botPictures, {
-        x: (i) => i * (botPictures[0].clientWidth) + (i + 1) * 18,
+        x: (i) => i * botPictures[0].clientWidth + (i + 1) * 18,
       });
     }
 
     if (deviceSize === sizeType.tabletMd) {
       gsap.set(topPictures, {
-        x: (i) => i * (topPictures[0].clientWidth) + (i + 1) * 20,
+        x: (i) => i * topPictures[0].clientWidth + (i + 1) * 20,
       });
 
       gsap.set(midPictures, {
-        x: (i) => i * (midPictures[0].clientWidth) + (i + 1) * 20,
+        x: (i) => i * midPictures[0].clientWidth + (i + 1) * 20,
       });
 
       gsap.set(botPictures, {
-        x: (i) => i * (botPictures[0].clientWidth) + (i + 1) * 20,
+        x: (i) => i * botPictures[0].clientWidth + (i + 1) * 20,
       });
     }
 
     if (deviceSize === sizeType.desktopLg) {
       gsap.set(topPictures, {
-        x: (i) => i * (topPictures[0].clientWidth) + (i + 1) * 30,
+        x: (i) => i * topPictures[0].clientWidth + (i + 1) * 30,
       });
 
       gsap.set(midPictures, {
-        x: (i) => i * (midPictures[0].clientWidth) + (i + 1) * 30,
+        x: (i) => i * midPictures[0].clientWidth + (i + 1) * 30,
       });
 
       gsap.set(botPictures, {
-        x: (i) => i * (botPictures[0].clientWidth) + (i + 1) * 30,
+        x: (i) => i * botPictures[0].clientWidth + (i + 1) * 30,
       });
     }
 
     if (deviceSize) {
-      topLoop.current = horizontalLoop(topPictures, {
+      topLoop.current = new HorizontalLoop(topPictures, {
         paused: false,
         reversed: true,
         repeat: -1,
         speed: 0.7,
       });
 
-      midLoop.current = horizontalLoop(midPictures, {
+      midLoop.current = new HorizontalLoop(midPictures, {
         paused: false,
         repeat: -1,
         speed: 0.9,
       });
 
-      botLoop.current = horizontalLoop(botPictures, {
+      botLoop.current = new HorizontalLoop(botPictures, {
         paused: false,
         reversed: true,
         repeat: -1,
         speed: 0.6,
       });
     }
+
+    return () => {
+      topLoop.current?.reset();
+      midLoop.current?.reset();
+      botLoop.current?.reset();
+    };
   }, [deviceSize]);
 
   return (
