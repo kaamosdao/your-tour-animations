@@ -89,6 +89,7 @@
   border: none;
   border-radius: 20px;
   background-size: 100%;
+  cursor: grab;
 
   @media (min-width: $desktop-md-width) {
     top: 0;
@@ -103,6 +104,10 @@
     min-height: 567px;
     border-radius: 50px;
   }
+}
+
+.canvas:active {
+  cursor: grabbing;
 }
 
 .historyCardTitle {
