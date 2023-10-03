@@ -147,6 +147,11 @@ class HorizontalLoop {
   reset() {
     this.tl.kill();
     this.draggable[0].kill();
+
+    gsap.set(this.items, {
+      xPercent: 0,
+      x: 0,
+    });
   }
 }
 
