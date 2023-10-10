@@ -24,4 +24,19 @@ export const sizeType = {
   mobile: 'mobile',
 };
 
+export const transitionState = {
+  entering: 'entering',
+  entered: 'entered',
+  exiting: 'exiting',
+  exited: 'exited',
+};
+
+export const tours = {
+  popular: 'popular',
+  authors: 'authors',
+  hiking: 'hiking',
+  rafting: 'rafting',
+  bicycle: 'bicycle',
+};
+
 export default cursorState;

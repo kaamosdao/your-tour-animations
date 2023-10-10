@@ -1,6 +1,3 @@
-/* eslint-disable prefer-destructuring */
-/* eslint-disable no-param-reassign */
-
 import gsap from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 
