@@ -1,19 +1,18 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { Transition, TransitionGroup } from 'react-transition-group';
 import gsap from 'gsap';
-import classnames from 'classnames/bind';
 
 import { navigation } from '@/data';
 
-import HoverCursor from '../../CustomCursor/HoverCursor';
+import NavItem from './NavItem';
 
 import s from './TourNavigation.module.scss';
 
-const cn = classnames.bind(s);
-
-const TourNavigation = () => {
+const TourNavigation = ({ activeNav, setActiveNav }) => {
   const navRef = useRef(null);
+
   const q = gsap.utils.selector(navRef);
 
   useEffect(() => {
@@ -24,8 +23,8 @@ const TourNavigation = () => {
         scrollTrigger: {
           trigger: navRef?.current,
           start: 'top bottom',
-          end: '+=200',
-          toggleActions: 'restart play reverse pause',
+          end: '+=400',
+          toggleActions: 'restart complete none reverse',
         },
       })
       .fromTo(
@@ -42,20 +41,31 @@ const TourNavigation = () => {
       );
   }, [q]);
 
+  const onClick = (e) => {
+    setActiveNav(e.target.name);
+  };
+
   return (
     <ul ref={navRef} className={s.nav}>
-      {navigation.map(({ name, current, link }) => (
-        <li key={name}>
-          <HoverCursor cursorType="stuck" activeLink="navLinkCurrent">
-            <a
-              className={cn(s.navLink, { navLinkCurrent: current })}
-              href={link}
-            >
-              {name}
-            </a>
-          </HoverCursor>
-        </li>
-      ))}
+      <TransitionGroup component={null}>
+        {navigation.map(({ name, id }) => (
+          <Transition
+            key={`${name}${id === activeNav ? '-active' : ''}`}
+            timeout={0}
+            exit={false}
+          >
+            {(status) => (
+              <NavItem
+                onClick={onClick}
+                activeNav={activeNav}
+                name={name}
+                id={id}
+                transitionStatus={status}
+              />
+            )}
+          </Transition>
+        ))}
+      </TransitionGroup>
     </ul>
   );
 };
