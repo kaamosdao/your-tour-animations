@@ -1,28 +1,28 @@
 const navigation = [
   {
-    link: '/',
     name: 'Популярные',
     current: true,
+    id: 'popular',
   },
   {
-    link: '/',
     name: 'Авторские',
     current: false,
+    id: 'authors',
   },
   {
-    link: '/',
     name: 'Походы',
     current: false,
+    id: 'hiking',
   },
   {
-    link: '/',
     name: 'Сплавы',
     current: false,
+    id: 'rafting',
   },
   {
-    link: '/',
     name: 'Велопрогулки',
     current: false,
+    id: 'bicycle',
   },
 ];
 
