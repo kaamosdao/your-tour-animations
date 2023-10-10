@@ -285,3 +285,83 @@
     }
   }
 }
+
+.aurora {
+  @include bgWithGradient('/img/choose-tour-images/aurora-mobile.jpg');
+
+  @media (min-resolution: 2dppx) {
+    @include bgWithGradient('/img/choose-tour-images/aurora-mobile@2x.jpg');
+
+    background-size: 100% auto;
+  }
+}
+
+.bicycle {
+  @include bgWithGradient('/img/choose-tour-images/bicycle-mobile.jpg');
+
+  @media (min-resolution: 2dppx) {
+    @include bgWithGradient('/img/choose-tour-images/bicycle-mobile@2x.jpg');
+
+    background-size: 100% auto;
+  }
+}
+
+.candle {
+  @include bgWithGradient('/img/choose-tour-images/candle-mobile.jpg');
+
+  @media (min-resolution: 2dppx) {
+    @include bgWithGradient('/img/choose-tour-images/candle-mobile@2x.jpg');
+
+    background-size: 100% auto;
+  }
+}
+
+.china {
+  @include bgWithGradient('/img/choose-tour-images/china-mobile.jpg');
+
+  @media (min-resolution: 2dppx) {
+    @include bgWithGradient('/img/choose-tour-images/china-mobile@2x.jpg');
+
+    background-size: 100% auto;
+  }
+}
+
+.ganesh {
+  @include bgWithGradient('/img/choose-tour-images/ganesh-mobile.jpg');
+
+  @media (min-resolution: 2dppx) {
+    @include bgWithGradient('/img/choose-tour-images/ganesh-mobile@2x.jpg');
+
+    background-size: 100% auto;
+  }
+}
+
+.india {
+  @include bgWithGradient('/img/choose-tour-images/india-mobile.jpg');
+
+  @media (min-resolution: 2dppx) {
+    @include bgWithGradient('/img/choose-tour-images/india-mobile@2x.jpg');
+
+    background-size: 100% auto;
+  }
+}
+
+.road {
+  @include bgWithGradient('/img/choose-tour-images/road-mobile.jpg');
+
+  @media (min-resolution: 2dppx) {
+    @include bgWithGradient('/img/choose-tour-images/road-mobile@2x.jpg');
+
+    background-size: 100% auto;
+  }
+}
+
+.village {
+  @include bgWithGradient('/img/choose-tour-images/village-mobile.jpg');
+
+  @media (min-resolution: 2dppx) {
+    @include bgWithGradient('/img/choose-tour-images/village-mobile@2x.jpg');
+
+    background-size: 100% auto;
+  }
+}
