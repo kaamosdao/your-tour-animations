@@ -23,7 +23,7 @@ const TourNavigation = ({ activeNav, setActiveNav }) => {
         scrollTrigger: {
           trigger: navRef?.current,
           start: 'top bottom',
-          end: '+=400',
+          end: '+=500',
           toggleActions: 'restart complete none reverse',
         },
       })
