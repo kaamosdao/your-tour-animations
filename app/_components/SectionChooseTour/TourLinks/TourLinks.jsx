@@ -171,11 +171,10 @@ const TourLinks = ({ type, transitionStatus, isVisible }) => {
   useEffect(() => {
     let animation;
 
-    if (isVisible === true) {
+    if (isVisible) {
       // console.log(type, 'handleEnter anim!');
       animation = handleEnter();
-    }
-    if (isVisible === false) {
+    } else {
       // console.log(type, 'handleExit anim!');
       animation = handleExit();
     }
