@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import ReactTransitionGroup from '@/utils/ReactTransitionGroup';
 
 import { tours } from '@/utils/types';
 
 import TourNavigation from './TourNavigation/index';
 import TourLinks from './TourLinks/index';
+import { ReactSwitchTransition } from '../TransitionGroup';
 
 import s from './SectionChooseTour.module.scss';
 
@@ -17,16 +17,17 @@ const SectionChooseTour = () => {
     <section className={s.chooseTour}>
       <h2 className={s.title}>Выбери свой тур</h2>
       <TourNavigation activeNav={activeNav} setActiveNav={setActiveNav} />
-      <ReactTransitionGroup
+      <ReactSwitchTransition
         transitionKey={activeNav}
-        timeout={0}
+        timeout={{ exit: 500 }}
+        mode="out-in"
         // onEnter={(node) => console.log('onEnter', node)}
         // onExit={(node) => console.log('onExit', node)}
         // onEntered={(node) => console.log('onEntered', node)}
         // onExited={(node) => console.log('onExited', node)}
       >
         <TourLinks type={activeNav} />
-      </ReactTransitionGroup>
+      </ReactSwitchTransition>
     </section>
   );
 };
