@@ -19,12 +19,8 @@ const SectionChooseTour = () => {
       <TourNavigation activeNav={activeNav} setActiveNav={setActiveNav} />
       <ReactSwitchTransition
         transitionKey={activeNav}
-        timeout={{ exit: 500 }}
+        timeout={{ exit: 600 }}
         mode="out-in"
-        // onEnter={(node) => console.log('onEnter', node)}
-        // onExit={(node) => console.log('onExit', node)}
-        // onEntered={(node) => console.log('onEntered', node)}
-        // onExited={(node) => console.log('onExited', node)}
       >
         <TourLinks type={activeNav} />
       </ReactSwitchTransition>

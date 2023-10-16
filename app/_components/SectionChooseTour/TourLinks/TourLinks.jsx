@@ -1,18 +1,15 @@
 'use client';
 
-/* eslint-disable no-console */
 import { useCallback, useEffect, useRef } from 'react';
 import gsap from 'gsap';
-// import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { tours } from '@/data';
-// import { transitionState } from '@/utils/types';
 
 import TourCard from '../TourCard/TourCard';
 
 import s from './TourLinks.module.scss';
 
-const TourLinks = ({ type, transitionStatus, isVisible }) => {
+const TourLinks = ({ type, isVisible }) => {
   const cardsRef = useRef(null);
   const q = gsap.utils.selector(cardsRef);
 
@@ -20,11 +17,6 @@ const TourLinks = ({ type, transitionStatus, isVisible }) => {
     const cards = q('a');
     const width = window.innerWidth;
     const tl = gsap.timeline();
-
-    gsap.set(cards, {
-      x: 0,
-      y: 0,
-    });
 
     if (width < 800) {
       return tl.to(cards, {
@@ -86,11 +78,6 @@ const TourLinks = ({ type, transitionStatus, isVisible }) => {
     const tl = gsap.timeline();
 
     if (width < 800) {
-      gsap.set(cards, {
-        x: 2000,
-        y: 0,
-      });
-
       return tl.to(cards, {
         x: 0,
         ease: 'power1.inOut',
@@ -102,16 +89,6 @@ const TourLinks = ({ type, transitionStatus, isVisible }) => {
     if (width >= 800 && width < 1400) {
       const leftCards = cards.filter((_, i) => !(i % 2));
       const rightCards = cards.filter((_, i) => i % 2);
-
-      gsap.set(leftCards, {
-        x: -2000,
-        y: 0,
-      });
-
-      gsap.set(rightCards, {
-        x: 2000,
-        y: 0,
-      });
 
       return tl
         .to(leftCards, {
@@ -135,16 +112,6 @@ const TourLinks = ({ type, transitionStatus, isVisible }) => {
     const topCards = cards.filter((_, i) => i < 3);
     const bottomCards = cards.filter((_, i) => i > 2);
 
-    gsap.set(topCards, {
-      x: 0,
-      y: -2000,
-    });
-
-    gsap.set(bottomCards, {
-      x: 0,
-      y: 2000,
-    });
-
     return tl
       .to(topCards, {
         y: 0,
@@ -165,17 +132,12 @@ const TourLinks = ({ type, transitionStatus, isVisible }) => {
   }, [q]);
 
   useEffect(() => {
-    console.log(type, transitionStatus);
-  }, [transitionStatus, type, isVisible]);
-
-  useEffect(() => {
     let animation;
 
     if (isVisible) {
-      // console.log(type, 'handleEnter anim!');
       animation = handleEnter();
-    } else {
-      // console.log(type, 'handleExit anim!');
+    }
+    if (!isVisible) {
       animation = handleExit();
     }
 
