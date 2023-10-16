@@ -136,8 +136,7 @@ const TourLinks = ({ type, isVisible }) => {
 
     if (isVisible) {
       animation = handleEnter();
-    }
-    if (!isVisible) {
+    } else {
       animation = handleExit();
     }
 

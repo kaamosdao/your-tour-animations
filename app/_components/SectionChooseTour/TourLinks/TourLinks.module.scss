@@ -60,20 +60,20 @@
 
 .linksItem:nth-child(odd) a {
   @media (max-width: 799px) {
-    transform: translateX(2000px);
+    transform: translateX(-2000px);
   }
 
-  @media (max-width: 1399px) {
+  @media (min-width: 800px) and (max-width: 1399px) {
     transform: translateX(-2000px);
   }
 }
 
 .linksItem:nth-child(even) a {
   @media (max-width: 799px) {
-    transform: translateX(2000px);
+    transform: translateX(-2000px);
   }
 
-  @media (max-width: 1399px) {
+  @media (min-width: 800px) and (max-width: 1399px) {
     transform: translateX(2000px);
   }
 }
