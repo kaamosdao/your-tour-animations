@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
 
 import { feedbacks } from '@/data';
 
-import FeedbackCard from './FeedbackCard/index';
+import FeedbackContainer from './FeedbackContainer';
 
 import s from './SectionFeedback.module.scss';
 
@@ -53,7 +53,7 @@ const SectionFeedback = () => {
       </p>
       <ul ref={feedbackRef} className={s.list}>
         {feedbacks.map(({ name, user, tour, text }) => (
-          <FeedbackCard
+          <FeedbackContainer
             name={name}
             user={user}
             tour={tour}
