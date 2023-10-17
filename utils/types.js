@@ -39,4 +39,8 @@ export const tours = {
   bicycle: 'bicycle',
 };
 
+export const modals = {
+  feedback: 'feedback',
+};
+
 export default cursorState;
