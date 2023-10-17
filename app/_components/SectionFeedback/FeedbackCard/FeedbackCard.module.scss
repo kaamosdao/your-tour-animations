@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   width: 318px;
-  min-height: 408px;
+  height: 293px;
   padding: 20px 21px 20px 20px;
   border-radius: 20px;
   box-sizing: border-box;
@@ -26,14 +26,14 @@
 
   @media (min-width: $desktop-md-width) {
     width: auto;
-    min-height: 841px;
+    height: 421px;
     padding: 9.1% 8.9% 8.9%;
     border-radius: 50px;
   }
 
   @media (min-width: $desktop-lg-width) {
     width: auto;
-    min-height: 673px;
+    height: 365px;
     padding: 7.1% 7% 6.9%;
   }
 }
@@ -54,6 +54,23 @@
 
   @media (min-width: $desktop-md-width) {
     margin: 28px 0 70px 0;
+  }
+}
+
+.textContainer {
+  height: 138px;
+  overflow: hidden;
+
+  @media (min-width: $tablet-lg-width) {
+    height: 250px;
+  }
+
+  @media (min-width: $desktop-md-width) {
+    height: 166px;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    height: 140px;
   }
 }
 

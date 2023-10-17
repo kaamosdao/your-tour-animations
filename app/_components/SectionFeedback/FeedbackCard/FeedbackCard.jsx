@@ -6,11 +6,13 @@ import s from './FeedbackCard.module.scss';
 
 const FeedbackCard = ({ name, user, tour, text }) => (
   <li className={s.card}>
-    {text.map(({ paragraph, id }) => (
-      <p key={id} className={s.text}>
-        {paragraph}
-      </p>
-    ))}
+    <div className={s.textContainer}>
+      {text.map(({ paragraph, id }) => (
+        <p key={id} className={s.text}>
+          {paragraph}
+        </p>
+      ))}
+    </div>
     <div className={s.user}>
       <p className={s.name}>{name}</p>
       <p className={s.tour}>
