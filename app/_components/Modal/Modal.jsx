@@ -1,26 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
 
 import ClientOnlyPortal from '../ClientOnlyPortal';
 import ModalFeedback from './ModalFeedback';
 
-import s from './Modal.module.scss';
-
-const cn = classNames.bind(s);
-
 const modals = {
-  feedback: (onClose, data = null) => (
-    <ModalFeedback onClose={onClose} data={data} />
+  feedback: (onClose, modalRef, data = null) => (
+    <ModalFeedback onClose={onClose} data={data} modalRef={modalRef} />
   ),
 };
 
-const Modal = ({ onClose, type, data }) => (
+const Modal = ({ onClose, type, data, modalRef }) => (
   <ClientOnlyPortal selector="body">
-    <div className={cn('modal')} onClick={onClose} aria-hidden="true">
-      {modals[type](onClose, data)}
-    </div>
-    ,
+    {modals[type](onClose, modalRef, data)}
   </ClientOnlyPortal>
 );
 
