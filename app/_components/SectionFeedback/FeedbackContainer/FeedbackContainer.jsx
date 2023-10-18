@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import gsap from 'gsap';
 
 import { modals } from '@/utils/types';
 
 import FeedbackCard from '../FeedbackCard';
 import Modal from '../../Modal';
+import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './FeedbackContainer.module.scss';
-import HoverCursor from '../../CustomCursor/HoverCursor';
 
 const FeedbackContainer = ({ name, user, tour, text }) => {
   const [show, setShow] = useState(false);
+  const modalRef = useRef(null);
 
   return (
     <>
@@ -20,14 +22,32 @@ const FeedbackContainer = ({ name, user, tour, text }) => {
           type="button"
           onClick={() => setShow(true)}
         >
-          <FeedbackCard name={name} user={user} tour={tour} text={text} />
+          <FeedbackCard
+            name={name}
+            user={user}
+            tour={tour}
+            text={text}
+            isModal={false}
+          />
         </button>
       </HoverCursor>
       {show && (
         <Modal
-          onClose={() => setShow(false)}
+          onClose={() => {
+            gsap.to(modalRef.current, {
+              '--cliptrX': '50%',
+              '--cliptlX': '50%',
+              '--clipbrX': '50%',
+              '--clipblX': '50%',
+              duration: 0.5,
+              onComplete: () => {
+                setShow(false);
+              },
+            });
+          }}
           type={modals.feedback}
           data={{ name, user, tour, text }}
+          modalRef={modalRef}
         />
       )}
     </>
