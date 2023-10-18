@@ -4,9 +4,9 @@ import Picture from '../../Picture';
 
 import s from './FeedbackCard.module.scss';
 
-const FeedbackCard = ({ name, user, tour, text }) => (
-  <li className={s.card}>
-    <div className={s.textContainer}>
+const FeedbackCard = ({ name, user, tour, text, isModal }) => (
+  <li className={isModal ? s.cardModal : s.card}>
+    <div className={isModal ? s.textContainerModal : s.textContainer}>
       {text.map(({ paragraph, id }) => (
         <p key={id} className={s.text}>
           {paragraph}

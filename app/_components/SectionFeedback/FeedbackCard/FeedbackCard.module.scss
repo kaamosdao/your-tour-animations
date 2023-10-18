@@ -38,6 +38,40 @@
   }
 }
 
+.cardModal {
+  display: flex;
+  flex-direction: column;
+  width: 318px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 7.2% 7.4% 7.2% 7.3%;
+  border-radius: 20px;
+  box-sizing: border-box;
+  text-align: start;
+  background-color: var(--sec-bg-color);
+  border: none;
+
+  @media (min-width: $tablet-md-width) {
+    width: 80%;
+    padding: 5.2% 5.4% 5.2% 5.3%;
+  }
+
+  @media (min-width: $tablet-lg-width) {
+    width: 70%;
+  }
+
+  @media (min-width: $desktop-md-width) {
+    width: 50%;
+    padding: 4.2% 4.4% 4.2% 4.3%;
+    border-radius: 50px;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    width: 40%;
+    padding: 3.2% 3.4% 3.2% 3.3%;
+  }
+}
+
 .text {
   @include font(bold, 16px, 144%);
 
@@ -72,6 +106,11 @@
   @media (min-width: $desktop-lg-width) {
     height: 140px;
   }
+}
+
+.textContainerModal {
+  height: 100%;
+  padding-bottom: 20px;
 }
 
 .user {
