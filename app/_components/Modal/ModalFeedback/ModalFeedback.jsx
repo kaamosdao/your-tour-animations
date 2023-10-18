@@ -1,26 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import gsap from 'gsap';
 
 import FeedbackCard from '../../SectionFeedback/FeedbackCard';
 import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './ModalFeedback.module.scss';
 
-const ModalFeedback = ({ onClose, data }) => {
+const ModalFeedback = ({ onClose, data, modalRef }) => {
   const { name, user, tour, text } = data;
+
+  useEffect(() => {
+    gsap.to(modalRef?.current, {
+      '--cliptrX': '100%',
+      '--cliptlX': '0%',
+      '--clipbrX': '100%',
+      '--clipblX': '0%',
+      duration: 0.5,
+    });
+  }, [modalRef]);
 
   return (
     <div
-      className={s.container}
-      onClick={(e) => e.stopPropagation()}
+      ref={modalRef}
+      className={s.modal}
+      onClick={onClose}
       aria-hidden="true"
     >
-      <HoverCursor cursorType="pulse">
-        <button className={s.buttonClose} type="button" onClick={onClose}>
-          <span className="visually-hidden">Close</span>+
-        </button>
-      </HoverCursor>
-      <FeedbackCard name={name} user={user} tour={tour} text={text} />
+      <div
+        className={s.container}
+        onClick={(e) => e.stopPropagation()}
+        aria-hidden="true"
+      >
+        <HoverCursor cursorType="pulse">
+          <button className={s.buttonClose} type="button" onClick={onClose}>
+            <span className="visually-hidden">Close</span>+
+          </button>
+        </HoverCursor>
+        <FeedbackCard name={name} user={user} tour={tour} text={text} isModal />
+      </div>
     </div>
   );
 };

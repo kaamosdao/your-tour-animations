@@ -1,6 +1,38 @@
 @import './app/_styles/variables.scss';
 @import './app/_styles/mixin.scss';
 
+.modal {
+  --cliptrX: 50%;
+  --cliptlX: 50%;
+  --clipbrX: 50%;
+  --clipblX: 50%;
+
+  --cliptrY: 0%;
+  --cliptlY: 0%;
+  --clipbrY: 100%;
+  --clipblY: 100%;
+
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  clip-path: polygon(
+    var(--cliptlX) var(--cliptlY),
+    var(--cliptrX) var(--cliptrY),
+    var(--clipbrX) var(--clipbrY),
+    var(--clipblX) var(--clipblY)
+  );
+}
+
 .container {
   position: relative;
 }
@@ -15,6 +47,25 @@
   background-color: transparent;
   transform: rotate(45deg);
   cursor: pointer;
+
+  @media (min-width: $tablet-md-width) {
+    top: 1%;
+    right: 11%;
+  }
+
+  @media (min-width: $tablet-lg-width) {
+    right: 16%;
+  }
+
+  @media (min-width: $desktop-md-width) {
+    top: 3%;
+    right: 26.5%;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    top: 4.5%;
+    right: 31%;
+  }
 }
 
 .buttonClose:hover {
