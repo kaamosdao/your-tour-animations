@@ -35,6 +35,24 @@
 
 .container {
   position: relative;
+
+  width: 318px;
+
+  @media (min-width: $tablet-md-width) {
+    width: 80%;
+  }
+
+  @media (min-width: $tablet-lg-width) {
+    width: 70%;
+  }
+
+  @media (min-width: $desktop-md-width) {
+    width: 50%;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    width: 40%;
+  }
 }
 
 .buttonClose {
@@ -50,21 +68,21 @@
 
   @media (min-width: $tablet-md-width) {
     top: 1%;
-    right: 11%;
+    right: 1%;
   }
 
   @media (min-width: $tablet-lg-width) {
-    right: 16%;
+    right: 1%;
   }
 
   @media (min-width: $desktop-md-width) {
     top: 3%;
-    right: 26.5%;
+    right: 3.5%;
   }
 
   @media (min-width: $desktop-lg-width) {
     top: 4.5%;
-    right: 31%;
+    right: 2%;
   }
 }
 

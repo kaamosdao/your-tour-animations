@@ -41,7 +41,7 @@
 .cardModal {
   display: flex;
   flex-direction: column;
-  width: 318px;
+  width: 100%;
   height: 100%;
   margin: 0 auto;
   padding: 7.2% 7.4% 7.2% 7.3%;
@@ -52,23 +52,16 @@
   border: none;
 
   @media (min-width: $tablet-md-width) {
-    width: 80%;
     padding: 5.2% 5.4% 5.2% 5.3%;
   }
 
-  @media (min-width: $tablet-lg-width) {
-    width: 70%;
-  }
-
   @media (min-width: $desktop-md-width) {
-    width: 50%;
-    padding: 4.2% 4.4% 4.2% 4.3%;
+    padding: 7.2%;
     border-radius: 50px;
   }
 
   @media (min-width: $desktop-lg-width) {
-    width: 40%;
-    padding: 3.2% 3.4% 3.2% 3.3%;
+    padding: 5.2%;
   }
 }
 
