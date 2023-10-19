@@ -1,5 +1,7 @@
-import Providers from '@/providers/index';
+import { PrismicPreview } from '@prismicio/next';
+import { repositoryName } from '@/prismicio';
 
+import Providers from '@/providers/index';
 import Header from './_components/Header/index';
 import Footer from './_components/Footer/index';
 import CustomCursor from './_components/CustomCursor/index';
@@ -24,6 +26,7 @@ export default function RootLayout({ children }) {
           {children}
           <Footer />
         </Providers>
+        <PrismicPreview repositoryName={repositoryName} />
       </body>
     </html>
   );
