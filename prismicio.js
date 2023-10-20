@@ -22,19 +22,7 @@ const routes = [
   },
   {
     type: 'page',
-    path: '/create',
-  },
-  {
-    type: 'page',
-    path: '/feedback',
-  },
-  {
-    type: 'page',
-    path: '/stories',
-  },
-  {
-    type: 'page',
-    path: '/tours',
+    path: '/:uid',
   },
 ];
 
