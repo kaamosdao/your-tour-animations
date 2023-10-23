@@ -1,5 +1,5 @@
-import gsap from 'gsap';
-import { Draggable } from 'gsap/Draggable';
+import gsap from 'gsap/dist/gsap';
+import { Draggable } from 'gsap/dist/Draggable';
 
 class HorizontalLoop {
   constructor(items, config = {}) {

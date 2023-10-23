@@ -1,8 +1,4 @@
-import {
-  FacebookIcon,
-  InstagramIcon,
-  VkIcon,
-} from '@/app/_components/Footer/Icons';
+import { FacebookIcon, InstagramIcon, VkIcon } from '@/components/Footer/Icons';
 
 const socials = [
   {
