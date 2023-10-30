@@ -11,13 +11,6 @@ export default function RootLayout({ children }) {
   return (
     <>
       <Head>
-        <title>Your Tour</title>
-        <meta name="description" content="Travel agency" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="keywords"
-          content="travel, tours, tour, adventure, hitchhiking, hiking"
-        />
         <link rel="icon" href="/icon.png" />
       </Head>
       <Providers>
