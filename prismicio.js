@@ -16,15 +16,14 @@ export const { repositoryName } = sliceMachineConfig;
  */
 // TODO: Update the routes array to match your project's route structure.
 const routes = [
-  // Examples:
-  // {
-  // 	type: "homepage",
-  // 	path: "/",
-  // },
-  // {
-  // 	type: "page",
-  // 	path: "/:uid",
-  // },
+  {
+  	type: "homepage",
+  	path: "/",
+  },
+  {
+  	type: "page",
+  	path: "/:uid",
+  },
 ];
 
 /**
