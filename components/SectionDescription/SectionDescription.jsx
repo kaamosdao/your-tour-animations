@@ -1,43 +1,30 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { PrismicRichText } from '@prismicio/react';
+import { PrismicNextLink } from '@prismicio/next';
 
 import HoverCursor from '../CustomCursor/HoverCursor';
-import OverflowWrapper from '../OverflowWrapper';
 
 import s from './SectionDescription.module.scss';
 
-const SectionDescription = () => {
+const SectionDescription = ({ slice }) => {
   const tagline = useRef(null);
   const q = gsap.utils.selector(tagline);
 
-  const [isTablet, setIsTablet] = useState(false);
-
   useEffect(() => {
-    setIsTablet(window.innerWidth >= 800);
-
-    const onResize = () => {
-      setIsTablet(window.innerWidth >= 800);
-    };
-
-    window.addEventListener('resize', onResize);
-
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
-
-  useEffect(() => {
-    const title = q('span[class*="line"]');
-    const description = q('p[class*="line"]');
+    const title = q('h2[class*="title"]');
+    const description = q('p[class*="description"]');
     const button = q('button[class*="button"]');
 
     gsap.timeline().fromTo(
       [title, description, button],
       {
-        y: -1000,
+        x: -1000,
       },
       {
-        y: 0,
+        x: 0,
         ease: 'power3.out',
         duration: 1,
         delay: 0.2,
@@ -47,50 +34,31 @@ const SectionDescription = () => {
   }, [q]);
 
   return (
-    <section className={s.sectionDescription}>
+    <section
+      className={s.sectionDescription}
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+    >
       <div ref={tagline} className={s.tagline}>
-        <div className={s.title}>
-          <OverflowWrapper>
-            <span className={s.line}>Идеальные</span>
-          </OverflowWrapper>
-          <OverflowWrapper>
-            <span className={s.line}>путешествия</span>
-          </OverflowWrapper>
-          <OverflowWrapper>
-            <span className={s.line}>существуют</span>
-          </OverflowWrapper>
-        </div>
-        <div className={s.description}>
-          {isTablet ? (
-            <>
-              <OverflowWrapper>
-                <p className={s.line}>Идейные соображения высшего порядка, а</p>
-              </OverflowWrapper>
-              <OverflowWrapper>
-                <p className={s.line}>также рамки и место обучения кадров</p>
-              </OverflowWrapper>
-            </>
-          ) : (
-            <>
-              <OverflowWrapper>
-                <p className={s.line}>Идейные соображения высшего</p>
-              </OverflowWrapper>
-              <OverflowWrapper>
-                <p className={s.line}>порядка, а также рамки и место</p>
-              </OverflowWrapper>
-              <OverflowWrapper>
-                <p className={s.line}>обучения кадров</p>
-              </OverflowWrapper>
-            </>
-          )}
-        </div>
-        <OverflowWrapper>
-          <HoverCursor cursorType="pulse">
-            <button className={s.button} type="button">
-              Найти тур
-            </button>
-          </HoverCursor>
-        </OverflowWrapper>
+        <PrismicRichText
+          field={slice.primary.title}
+          components={{
+            heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
+          }}
+        />
+        <PrismicRichText
+          field={slice.primary.description}
+          components={{
+            paragraph: ({ children }) => (
+              <p className={s.description}>{children}</p>
+            ),
+          }}
+        />
+        <HoverCursor cursorType="pulse">
+          <PrismicNextLink field={slice.primary.button} className={s.button}>
+            {slice.primary.button_label}
+          </PrismicNextLink>
+        </HoverCursor>
       </div>
     </section>
   );

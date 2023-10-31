@@ -68,29 +68,28 @@
 
 .tagline {
   margin: 0 auto;
-  width: 100%;
+  width: 250px;
   text-align: center;
   color: var(--third-text-color);
+  overflow: hidden;
 
-  // @media (min-width: $tablet-lg-width) {
-  //   width: 610px;
-  // }
+  @media (min-width: $tablet-lg-width) {
+    width: 610px;
+  }
 
-  // @media (min-width: $desktop-lg-width) {
-  //   width: 620px;
-  // }
+  @media (min-width: $desktop-lg-width) {
+    width: 620px;
+  }
 }
 
 .title {
-  @include font(bold, 34px, 112%, 0.02em);
-
   margin: 0;
   padding-top: 140px;
+  @include font(bold, 34px, 112%, 0.02em);
 
   @media (min-width: $tablet-lg-width) {
-    @include font(bold, 96px, 109%, 0.02em);
-
     padding-top: 207px;
+    @include font(bold, 96px, 109%, 0.02em);
   }
 
   @media (min-width: $desktop-lg-width) {
@@ -98,38 +97,39 @@
   }
 }
 
-.title .line {
-  display: block;
-}
-
 .description {
   @include font(normal, 16px, 144%);
 
-  margin-top: 40px;
+  margin: 40px auto 0;
+  width: 253px;
 
   @media (min-width: $tablet-lg-width) {
     @include font(normal, 20px, 142%);
 
-    margin-top: 52px;
+    margin: 52px auto 0;
+    width: 450px;
   }
 
   @media (min-width: $desktop-lg-width) {
-    margin-top: 52px;
+    width: 562px;
   }
 }
 
 .button {
-  @include font(normal, 16px, 144%);
+  @include font(normal, 16px, 195%);
 
+  display: block;
   width: 114px;
   min-height: 33px;
-  margin-top: 24px;
+  margin: 24px auto 0;
+  color: var(--main-text-color);
   background-color: var(--third-bg-color);
   border: none;
   border-radius: 10px;
+  text-decoration: none;
 
   @media (min-width: $tablet-lg-width) {
-    @include font(normal, 17px, 142%);
+    @include font(normal, 17px, 195%);
 
     width: 118px;
     min-height: 34px;
