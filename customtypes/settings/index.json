@@ -42,6 +42,20 @@
             }
           }
         }
+      },
+      "phone_number": {
+        "type": "Number",
+        "config": {
+          "label": "Phone number",
+          "placeholder": ""
+        }
+      },
+      "phone_label": {
+        "type": "Text",
+        "config": {
+          "label": "Phone label",
+          "placeholder": ""
+        }
       }
     }
   }
