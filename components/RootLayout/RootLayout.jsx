@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
         <CustomCursor />
         <Curtain />
         <Header />
-        {children}
+        <main>{children}</main>
         <Footer />
       </Providers>
     </>

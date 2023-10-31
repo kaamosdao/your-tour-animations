@@ -9,6 +9,11 @@ import HoverCursor from '../CustomCursor/HoverCursor';
 
 import s from './SectionDescription.module.scss';
 
+const components = {
+  heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
+  paragraph: ({ children }) => <p className={s.description}>{children}</p>,
+};
+
 const SectionDescription = ({ slice }) => {
   const tagline = useRef(null);
   const q = gsap.utils.selector(tagline);
@@ -16,7 +21,7 @@ const SectionDescription = ({ slice }) => {
   useEffect(() => {
     const title = q('h2[class*="title"]');
     const description = q('p[class*="description"]');
-    const button = q('button[class*="button"]');
+    const button = q('a[class*="button"]');
 
     gsap.timeline().fromTo(
       [title, description, button],
@@ -40,19 +45,10 @@ const SectionDescription = ({ slice }) => {
       data-slice-variation={slice.variation}
     >
       <div ref={tagline} className={s.tagline}>
-        <PrismicRichText
-          field={slice.primary.title}
-          components={{
-            heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
-          }}
-        />
+        <PrismicRichText field={slice.primary.title} components={components} />
         <PrismicRichText
           field={slice.primary.description}
-          components={{
-            paragraph: ({ children }) => (
-              <p className={s.description}>{children}</p>
-            ),
-          }}
+          components={components}
         />
         <HoverCursor cursorType="pulse">
           <PrismicNextLink field={slice.primary.button} className={s.button}>

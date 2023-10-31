@@ -1,8 +1,11 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { usePathname, useRouter } from 'next/navigation';
+import { PrismicNextLink } from '@prismicio/next';
+import { createClient } from '@/prismicio';
 
 import { setActivePage, setAnimation } from '@/store/slices/transitionSlice';
 import selectPlayingTransition, {
@@ -11,7 +14,6 @@ import selectPlayingTransition, {
 
 import YourTourIcon from '@/public/img/svg-icons/yourtour.svg';
 
-import { links } from '@/data/index';
 import { transitionAnimation } from '@/utils/types';
 
 import HoverCursor from '../CustomCursor/HoverCursor';
@@ -25,6 +27,17 @@ const Navigation = () => {
 
   const playing = useSelector(selectPlayingTransition);
   const activePage = useSelector(selectActivePage);
+
+  const [settings, setSettings] = useState(null);
+
+  useEffect(() => {
+    const client = createClient();
+    const getSettings = async () => {
+      const { data } = await client.getSingle('settings');
+      setSettings(data);
+    };
+    getSettings();
+  }, []);
 
   const onClick = (path) => (e) => {
     e.preventDefault();
@@ -56,27 +69,28 @@ const Navigation = () => {
         </Link>
       </HoverCursor>
       <ul className={s.links}>
-        {links.map(({ path, title }) => (
-          <li key={path} className={s.item}>
+        {settings?.navigation.map(({ label, link }) => (
+          <li key={label} className={s.item}>
             <HoverCursor cursorType="stuck" activeLink="linkActive">
-              <Link
+              <PrismicNextLink
                 className={
-                  activePage === path || (!activePage && pathname === path)
+                  activePage === link.url ||
+                  (!activePage && pathname === link.url)
                     ? s.linkActive
                     : s.link
                 }
-                href={path}
-                onClick={onClick(path)}
+                field={link}
+                onClick={onClick(link.url)}
               >
-                {title}
-              </Link>
+                {label}
+              </PrismicNextLink>
             </HoverCursor>
           </li>
         ))}
       </ul>
       <HoverCursor cursorType="stuck">
-        <Link className={s.phone} href="tel:89999999999">
-          +7 999 999 99 99
+        <Link className={s.phone} href={`tel:${settings?.phone_number}`}>
+          {settings?.phone_label}
         </Link>
       </HoverCursor>
     </nav>
