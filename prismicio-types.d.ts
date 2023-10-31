@@ -4,7 +4,7 @@ import type * as prismic from '@prismicio/client';
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type HomepageDocumentDataSlicesSlice = never;
+type HomepageDocumentDataSlicesSlice = DescriptionSlice;
 
 /**
  * Content for HomePage documents
@@ -30,7 +30,7 @@ interface HomepageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<HomepageDocumentDataSlicesSlice>
+  slices: prismic.SliceZone<HomepageDocumentDataSlicesSlice>;
   /**
    * Meta Title field in *HomePage*
    *
@@ -39,7 +39,7 @@ interface HomepageDocumentData {
    * - **API ID Path**: homepage.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
+   */
   meta_title: prismic.KeyTextField;
 
   /**
@@ -81,7 +81,7 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
-type PageDocumentDataSlicesSlice = never;
+type PageDocumentDataSlicesSlice = DescriptionSlice;
 
 /**
  * Content for Page documents
@@ -96,7 +96,7 @@ interface PageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<PageDocumentDataSlicesSlice>
+  slices: prismic.SliceZone<PageDocumentDataSlicesSlice>;
   /**
    * Meta Title field in *Page*
    *
@@ -105,7 +105,7 @@ interface PageDocumentData {
    * - **API ID Path**: page.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
+   */
   meta_title: prismic.KeyTextField;
 
   /**
@@ -204,6 +204,28 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   navigation: prismic.GroupField<Simplify<SettingsDocumentDataNavigationItem>>;
+
+  /**
+   * Phone number field in *Settings*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.phone_number
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  phone_number: prismic.NumberField;
+
+  /**
+   * Phone label field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.phone_label
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  phone_label: prismic.KeyTextField;
 }
 
 /**
@@ -227,6 +249,141 @@ export type AllDocumentTypes =
   | PageDocument
   | SettingsDocument;
 
+/**
+ * Primary content in *Description → Primary*
+ */
+export interface DescriptionSliceDefaultPrimary {
+  /**
+   * Title field in *Description → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: description.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+
+  /**
+   * Description field in *Description → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: description.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Button field in *Description → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: description.primary.button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button: prismic.LinkField;
+
+  /**
+   * Button label field in *Description → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: description.primary.button_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_label: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Description Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type DescriptionSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<DescriptionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Description → Primary*
+ */
+export interface DescriptionSliceWithoutButtonPrimary {
+  /**
+   * Title field in *Description → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: description.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+
+  /**
+   * Description 1 field in *Description → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: description.primary.description_1
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description_1: prismic.RichTextField;
+
+  /**
+   * Description 2 field in *Description → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: description.primary.description_2
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description_2: prismic.RichTextField;
+
+  /**
+   * Description 3 field in *Description → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: description.primary.description_3
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description_3: prismic.RichTextField;
+}
+
+/**
+ * Without button variation for Description Slice
+ *
+ * - **API ID**: `withoutButton`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type DescriptionSliceWithoutButton = prismic.SharedSliceVariation<
+  'withoutButton',
+  Simplify<DescriptionSliceWithoutButtonPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Description*
+ */
+type DescriptionSliceVariation =
+  | DescriptionSliceDefault
+  | DescriptionSliceWithoutButton;
+
+/**
+ * Description Shared Slice
+ *
+ * - **API ID**: `description`
+ * - **Description**: Description
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type DescriptionSlice = prismic.SharedSlice<
+  'description',
+  DescriptionSliceVariation
+>;
+
 declare module '@prismicio/client' {
   interface CreateClient {
     (
@@ -247,6 +404,12 @@ declare module '@prismicio/client' {
       SettingsDocumentData,
       SettingsDocumentDataNavigationItem,
       AllDocumentTypes,
+      DescriptionSlice,
+      DescriptionSliceDefaultPrimary,
+      DescriptionSliceWithoutButtonPrimary,
+      DescriptionSliceVariation,
+      DescriptionSliceDefault,
+      DescriptionSliceWithoutButton,
     };
   }
 }
