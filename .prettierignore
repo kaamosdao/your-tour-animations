@@ -1,3 +1,4 @@
 .eslintrc.json
 *.yml
 /.next/
+prismicio-types.d.ts
