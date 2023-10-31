@@ -1,43 +1,99 @@
 [
-	{
-		"__TYPE__": "SharedSliceContent",
-		"variation": "default",
-		"primary": {
-			"title": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading2",
-						"content": {
-							"text": "Yellow"
-						}
-					}
-				]
-			},
-			"description": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Culpa commodo ut irure anim nulla magna nisi nisi quis excepteur officia non sunt consequat."
-						}
-					}
-				]
-			},
-			"button": {
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "ExternalLink",
-					"url": "https://slicemachine.dev"
-				}
-			},
-			"button_label": {
-				"__TYPE__": "FieldContent",
-				"value": "running",
-				"type": "Text"
-			}
-		},
-		"items": []
-	}
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "title": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "heading2",
+            "content": {
+              "text": "Yellow"
+            }
+          }
+        ]
+      },
+      "description": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Culpa commodo ut irure anim nulla magna nisi nisi quis excepteur officia non sunt consequat."
+            }
+          }
+        ]
+      },
+      "button": {
+        "__TYPE__": "LinkContent",
+        "value": {
+          "__TYPE__": "ExternalLink",
+          "url": "https://slicemachine.dev"
+        }
+      },
+      "button_label": {
+        "__TYPE__": "FieldContent",
+        "value": "running",
+        "type": "Text"
+      }
+    },
+    "items": []
+  },
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "withoutButton",
+    "primary": {
+      "title": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "heading2",
+            "content": {
+              "text": "Seems"
+            }
+          }
+        ]
+      },
+      "description_1": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Irure eu dolor laboris. Sunt veniam Lorem adipisicing minim cillum. Ipsum quis ad nulla."
+            }
+          }
+        ]
+      },
+      "description_2": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Reprehenderit ea id est laboris nisi tempor nostrud irure tempor ex ex ipsum eu. Eu ullamco commodo proident. Commodo ut reprehenderit ut laboris."
+            }
+          }
+        ]
+      },
+      "description_3": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Sint enim eu et veniam elit eiusmod voluptate voluptate anim id reprehenderit. Elit id enim do. Enim cillum ea exercitation adipisicing aliquip quis do tempor ullamco nulla dolore duis."
+            }
+          }
+        ]
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": []
+      }
+    ]
+  }
 ]

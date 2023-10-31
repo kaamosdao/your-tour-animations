@@ -47,6 +47,53 @@
         }
       },
       "items": {}
+    },
+    {
+      "id": "withoutButton",
+      "name": "Without button",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading2"
+          }
+        },
+        "description_1": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description 1",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph"
+          }
+        },
+        "description_2": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description 2",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph"
+          }
+        },
+        "description_3": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description 3",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph"
+          }
+        }
+      },
+      "items": {}
     }
   ]
 }

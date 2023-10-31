@@ -4,8 +4,14 @@
  * @param {DescriptionProps}
  */
 
+import DescriptionSecondary from '@/components/DescriptionSecondary';
 import SectionDescription from '@/components/SectionDescription';
 
-const Description = ({ slice }) => <SectionDescription slice={slice} />;
+const Description = ({ slice }) =>
+  slice.variation === 'withoutButton' ? (
+    <DescriptionSecondary slice={slice} />
+  ) : (
+    <SectionDescription slice={slice} />
+  );
 
 export default Description;
