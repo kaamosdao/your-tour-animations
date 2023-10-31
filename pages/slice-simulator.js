@@ -1,14 +1,16 @@
-// 'use client';
+'use client';
 
-// import { SliceSimulator } from '@slicemachine/adapter-next/simulator';
-// import { SliceZone } from '@prismicio/react';
+/* eslint-disable react/no-unstable-nested-components */
 
-// import { components } from '../slices';
+import { SliceSimulator } from '@slicemachine/adapter-next/simulator';
+import { SliceZone } from '@prismicio/react';
 
-// export default function SliceSimulatorPage() {
-//   return (
-//     <SliceSimulator
-//       sliceZone={(props) => <SliceZone {...props} components={components} />}
-//     />
-//   );
-// }
+import { components } from '../slices';
+
+export default function SliceSimulatorPage() {
+  return (
+    <SliceSimulator
+      sliceZone={(props) => <SliceZone {...props} components={components} />}
+    />
+  );
+}
