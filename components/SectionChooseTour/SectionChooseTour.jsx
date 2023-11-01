@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-
-import { tours } from '@/utils/types';
+import { useEffect, useState } from 'react';
+import { isFilled } from '@prismicio/client';
+import { createClient } from '@/prismicio';
 
 import TourNavigation from './TourNavigation/index';
 import TourLinks from './TourLinks/index';
@@ -10,19 +10,52 @@ import { ReactSwitchTransition } from '../TransitionGroup';
 
 import s from './SectionChooseTour.module.scss';
 
-const SectionChooseTour = () => {
-  const [activeNav, setActiveNav] = useState(tours.popular);
+const SectionChooseTour = ({ slice }) => {
+  const [activeNav, setActiveNav] = useState(null);
+  const [tours, setTours] = useState(null);
+
+  useEffect(() => {
+    const client = createClient();
+    const getTours = async () => {
+      const siteTours = await Promise.all(
+        slice.items.map((item) => {
+          if (isFilled.contentRelationship(item.tours) && item.tours.uid) {
+            return client.getByUID('tours', item.tours.uid);
+          }
+          return null;
+        })
+      );
+      setTours(siteTours);
+
+      const { uid } = siteTours.filter(({ data }) => data.iscurrent)[0];
+      setActiveNav(uid);
+    };
+
+    getTours();
+  }, [slice.items]);
 
   return (
-    <section className={s.chooseTour}>
+    <section
+      className={s.chooseTour}
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+    >
       <h2 className={s.title}>Выбери свой тур</h2>
-      <TourNavigation activeNav={activeNav} setActiveNav={setActiveNav} />
+      <TourNavigation
+        tours={tours}
+        activeNav={activeNav}
+        setActiveNav={setActiveNav}
+      />
       <ReactSwitchTransition
         transitionKey={activeNav}
         timeout={{ exit: 500 }}
         mode="out-in"
       >
-        <TourLinks type={activeNav} />
+        <TourLinks
+          cards={
+            tours && tours.filter(({ uid }) => uid === activeNav)[0].data.cards
+          }
+        />
       </ReactSwitchTransition>
     </section>
   );

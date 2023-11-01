@@ -1,0 +1,37 @@
+{
+  "id": "choose_tour",
+  "type": "SharedSlice",
+  "name": "ChooseTour",
+  "description": "ChooseTour",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading2"
+          }
+        }
+      },
+      "items": {
+        "tours": {
+          "type": "Link",
+          "config": {
+            "label": "Tours",
+            "select": "document",
+            "customtypes": ["tours"]
+          }
+        }
+      }
+    }
+  ]
+}

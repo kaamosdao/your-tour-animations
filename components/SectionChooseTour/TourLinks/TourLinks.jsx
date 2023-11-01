@@ -1,27 +1,34 @@
 'use client';
 
-import { useCallback, useEffect, useRef } from 'react';
+/* eslint-disable react/no-array-index-key */
+
+import { useCallback, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
-import { tours } from '@/data';
 import useTransition from '@/hooks';
 
 import TourCard from '../TourCard/TourCard';
 
 import s from './TourLinks.module.scss';
 
-const TourLinks = ({ type }) => {
+const TourLinks = ({ cards }) => {
   const cardsRef = useRef(null);
   const q = gsap.utils.selector(cardsRef);
   const isVisible = useTransition();
 
+  const [devicePixelRatio, setDevicePixelRatio] = useState(1);
+
+  useEffect(() => {
+    setDevicePixelRatio(window.devicePixelRatio);
+  }, []);
+
   const handleExit = useCallback(() => {
-    const cards = q('a');
+    const cardItems = q('a');
     const width = window.innerWidth;
     const tl = gsap.timeline();
 
     if (width < 800) {
-      return tl.to(cards, {
+      return tl.to(cardItems, {
         x: -2000,
         ease: 'power1.inOut',
         duration: 0.5,
@@ -30,8 +37,8 @@ const TourLinks = ({ type }) => {
     }
 
     if (width >= 800 && width < 1400) {
-      const leftCards = cards.filter((_, i) => !(i % 2));
-      const rightCards = cards.filter((_, i) => i % 2);
+      const leftCards = cardItems.filter((_, i) => !(i % 2));
+      const rightCards = cardItems.filter((_, i) => i % 2);
 
       return tl
         .to(leftCards, {
@@ -52,8 +59,8 @@ const TourLinks = ({ type }) => {
         );
     }
 
-    const topCards = cards.filter((_, i) => i < 3);
-    const bottomCards = cards.filter((_, i) => i > 2);
+    const topCards = cardItems.filter((_, i) => i < 3);
+    const bottomCards = cardItems.filter((_, i) => i > 2);
 
     return tl
       .to(topCards, {
@@ -75,12 +82,12 @@ const TourLinks = ({ type }) => {
   }, [q]);
 
   const handleEnter = useCallback(() => {
-    const cards = q('a');
+    const cardItems = q('a');
     const width = window.innerWidth;
     const tl = gsap.timeline();
 
     if (width < 800) {
-      return tl.to(cards, {
+      return tl.to(cardItems, {
         x: 0,
         ease: 'power1.inOut',
         duration: 0.5,
@@ -89,8 +96,8 @@ const TourLinks = ({ type }) => {
     }
 
     if (width >= 800 && width < 1400) {
-      const leftCards = cards.filter((_, i) => !(i % 2));
-      const rightCards = cards.filter((_, i) => i % 2);
+      const leftCards = cardItems.filter((_, i) => !(i % 2));
+      const rightCards = cardItems.filter((_, i) => i % 2);
 
       return tl
         .to(leftCards, {
@@ -111,8 +118,8 @@ const TourLinks = ({ type }) => {
         );
     }
 
-    const topCards = cards.filter((_, i) => i < 3);
-    const bottomCards = cards.filter((_, i) => i > 2);
+    const topCards = cardItems.filter((_, i) => i < 3);
+    const bottomCards = cardItems.filter((_, i) => i > 2);
 
     return tl
       .to(topCards, {
@@ -149,11 +156,12 @@ const TourLinks = ({ type }) => {
 
   return (
     <ul ref={cardsRef} className={s.links}>
-      {tours[type].map(({ name, title, price }) => (
-        <li key={name} className={s.linksItem}>
-          <TourCard name={name} title={title} price={price} />
-        </li>
-      ))}
+      {cards &&
+        cards.map((card, i) => (
+          <li key={i} className={s.linksItem}>
+            <TourCard card={card} devicePixelRatio={devicePixelRatio} />
+          </li>
+        ))}
     </ul>
   );
 };

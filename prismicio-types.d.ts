@@ -4,7 +4,7 @@ import type * as prismic from '@prismicio/client';
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type HomepageDocumentDataSlicesSlice = DescriptionSlice;
+type HomepageDocumentDataSlicesSlice = ChooseTourSlice | DescriptionSlice;
 
 /**
  * Content for HomePage documents
@@ -277,10 +277,177 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *Tours → Cards*
+ */
+export interface ToursDocumentDataCardsItem {
+  /**
+   * Image field in *Tours → Cards*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tours.cards[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Image2x field in *Tours → Cards*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tours.cards[].image2x
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image2x: prismic.ImageField<never>;
+
+  /**
+   * Title field in *Tours → Cards*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tours.cards[].title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+
+  /**
+   * Price field in *Tours → Cards*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tours.cards[].price
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  price: prismic.RichTextField;
+
+  /**
+   * Link field in *Tours → Cards*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tours.cards[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+/**
+ * Content for Tours documents
+ */
+interface ToursDocumentData {
+  /**
+   * Name field in *Tours*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tours.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * IsCurrent field in *Tours*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: tours.iscurrent
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  iscurrent: prismic.BooleanField;
+
+  /**
+   * Cards field in *Tours*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tours.cards[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  cards: prismic.GroupField<Simplify<ToursDocumentDataCardsItem>>;
+}
+
+/**
+ * Tours document from Prismic
+ *
+ * - **API ID**: `tours`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ToursDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<ToursDocumentData>, 'tours', Lang>;
+
 export type AllDocumentTypes =
   | HomepageDocument
   | PageDocument
-  | SettingsDocument;
+  | SettingsDocument
+  | ToursDocument;
+
+/**
+ * Primary content in *ChooseTour → Primary*
+ */
+export interface ChooseTourSliceDefaultPrimary {
+  /**
+   * Title field in *ChooseTour → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: choose_tour.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+}
+
+/**
+ * Primary content in *ChooseTour → Items*
+ */
+export interface ChooseTourSliceDefaultItem {
+  /**
+   * Tours field in *ChooseTour → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: choose_tour.items[].tours
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  tours: prismic.ContentRelationshipField<'tours'>;
+}
+
+/**
+ * Default variation for ChooseTour Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ChooseTourSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<ChooseTourSliceDefaultPrimary>,
+  Simplify<ChooseTourSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *ChooseTour*
+ */
+type ChooseTourSliceVariation = ChooseTourSliceDefault;
+
+/**
+ * ChooseTour Shared Slice
+ *
+ * - **API ID**: `choose_tour`
+ * - **Description**: ChooseTour
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ChooseTourSlice = prismic.SharedSlice<
+  'choose_tour',
+  ChooseTourSliceVariation
+>;
 
 /**
  * Primary content in *Description → Primary*
@@ -436,7 +603,15 @@ declare module '@prismicio/client' {
       SettingsDocument,
       SettingsDocumentData,
       SettingsDocumentDataNavigationItem,
+      ToursDocument,
+      ToursDocumentData,
+      ToursDocumentDataCardsItem,
       AllDocumentTypes,
+      ChooseTourSlice,
+      ChooseTourSliceDefaultPrimary,
+      ChooseTourSliceDefaultItem,
+      ChooseTourSliceVariation,
+      ChooseTourSliceDefault,
       DescriptionSlice,
       DescriptionSliceDefaultPrimary,
       DescriptionSliceWithoutButtonPrimary,

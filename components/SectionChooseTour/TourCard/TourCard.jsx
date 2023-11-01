@@ -1,15 +1,22 @@
 'use client';
 
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import cn from 'classnames';
+import { PrismicRichText } from '@prismicio/react';
+import { PrismicNextLink } from '@prismicio/next';
 
 import ButtonMore from '../../ButtonMore/index';
 import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './TourCard.module.scss';
 
-const TourCard = ({ name, title, price }) => {
+const components = {
+  heading3: ({ children }) => <h3 className={s.title}>{children}</h3>,
+  paragraph: ({ children }) => <p className={s.price}>{children}</p>,
+};
+
+const TourCard = ({ card, devicePixelRatio }) => {
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
 
@@ -28,26 +35,36 @@ const TourCard = ({ name, title, price }) => {
       fnsOnEnter={[() => setHovered(true)]}
       fnsOnLeave={[() => setHovered(false), () => setClicked(false)]}
     >
-      <a
-        className={cn(s.tourCard, s[name])}
-        href="/tour"
+      <PrismicNextLink
+        field={card.link}
+        className={s.tourCard}
+        style={{
+          backgroundImage: `linear-gradient(
+            360deg,
+            rgba(0, 0, 0, 0.4) 0%,
+            rgba(0, 0, 0, 0.06) 48.44%,
+            rgba(0, 0, 0, 0.5) 100%
+          ),
+          url(${devicePixelRatio === 1 ? card.image.url : card.image2x.url})`,
+          backgroundRepeat: 'no-repeat',
+        }}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}
       >
-        <h3 className={s.title}>{title}</h3>
-        <p className={s.price}>{price}</p>
+        <PrismicRichText field={card.title} components={components} />
+        <PrismicRichText field={card.price} components={components} />
         <div className={cn(s.button)}>
           <ButtonMore isHovered={hovered} isClicked={clicked} />
         </div>
-      </a>
+      </PrismicNextLink>
     </HoverCursor>
   );
 };
 
-TourCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-};
+// TourCard.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   title: PropTypes.string.isRequired,
+//   price: PropTypes.string.isRequired,
+// };
 
 export default TourCard;
