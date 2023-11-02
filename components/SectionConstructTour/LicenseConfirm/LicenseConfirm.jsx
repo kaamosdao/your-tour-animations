@@ -1,29 +1,33 @@
 import cn from 'classnames';
+import { PrismicNextLink } from '@prismicio/next';
 
 import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './LicenseConfirm.module.scss';
 
-const LicenseConfirm = () => (
+const LicenseConfirm = ({ slice }) => (
   <fieldset className={s.licenseConfirm}>
     <legend className="visually-hidden">
-      Принятие условий Лицензионного договора.
+      {slice.primary.checkbox_hidden_legend[0].text}
     </legend>
     <HoverCursor cursorType="growDot">
-      <label className={s.checkbox} htmlFor="yep">
+      <label className={s.checkbox} htmlFor={slice.primary.checkbox_id}>
         <input
           className={cn('visually-hidden', s.checkboxInput)}
           type="checkbox"
-          id="yep"
-          name="yep"
+          id={slice.primary.checkbox_id}
+          name={slice.primary.checkbox_name}
           required
         />
         <span className={s.checkboxMark} />
         <span className={s.checkboxLabel}>
-          Нажимая кнопку, я принимаю условия&nbsp;
-          <a className={s.checkboxLink} href="/license">
-            Лицензионного договора
-          </a>
+          {slice.primary.checkbox_label}
+          <PrismicNextLink
+            field={slice.primary.checkbox_link}
+            className={s.checkboxLink}
+          >
+            {slice.primary.checkbox_link_label}
+          </PrismicNextLink>
         </span>
       </label>
     </HoverCursor>

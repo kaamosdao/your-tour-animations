@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { isFilled } from '@prismicio/client';
+import { PrismicRichText } from '@prismicio/react';
 import { createClient } from '@/prismicio';
 
 import TourNavigation from './TourNavigation/index';
@@ -40,7 +41,12 @@ const SectionChooseTour = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <h2 className={s.title}>Выбери свой тур</h2>
+      <PrismicRichText
+        field={slice.primary.title}
+        components={{
+          heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
+        }}
+      />
       <TourNavigation
         tours={tours}
         activeNav={activeNav}

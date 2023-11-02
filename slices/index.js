@@ -4,5 +4,6 @@ import dynamic from 'next/dynamic';
 
 export const components = {
   choose_tour: dynamic(() => import('./ChooseTour')),
+  construct_tour: dynamic(() => import('./ConstructTour')),
   description: dynamic(() => import('./Description')),
 };

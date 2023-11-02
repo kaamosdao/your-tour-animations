@@ -4,7 +4,10 @@ import type * as prismic from '@prismicio/client';
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type HomepageDocumentDataSlicesSlice = ChooseTourSlice | DescriptionSlice;
+type HomepageDocumentDataSlicesSlice =
+  | ConstructTourSlice
+  | ChooseTourSlice
+  | DescriptionSlice;
 
 /**
  * Content for HomePage documents
@@ -81,6 +84,78 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Content for Input documents
+ */
+interface InputDocumentData {
+  /**
+   * Label field in *Input*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: input.label
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Name field in *Input*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: input.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Placeholder field in *Input*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: input.placeholder
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  placeholder: prismic.KeyTextField;
+
+  /**
+   * Pattern field in *Input*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: input.pattern
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  pattern: prismic.KeyTextField;
+
+  /**
+   * Type field in *Input*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: input.type
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  type: prismic.SelectField<'email' | 'password' | 'text' | 'tel'>;
+}
+
+/**
+ * Input document from Prismic
+ *
+ * - **API ID**: `input`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type InputDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<InputDocumentData>, 'input', Lang>;
+
 type PageDocumentDataSlicesSlice = DescriptionSlice;
 
 /**
@@ -142,6 +217,92 @@ interface PageDocumentData {
  */
 export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, 'page', Lang>;
+
+/**
+ * Item in *Select → Options*
+ */
+export interface SelectDocumentDataOptionsItem {
+  /**
+   * Value field in *Select → Options*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: select.options[].value
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  value: prismic.KeyTextField;
+
+  /**
+   * Value label field in *Select → Options*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: select.options[].value_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  value_label: prismic.KeyTextField;
+}
+
+/**
+ * Content for Select documents
+ */
+interface SelectDocumentData {
+  /**
+   * Label field in *Select*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: select.label
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Name field in *Select*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: select.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Default option field in *Select*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: select.default_option
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  default_option: prismic.KeyTextField;
+
+  /**
+   * Options field in *Select*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: select.options[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  options: prismic.GroupField<Simplify<SelectDocumentDataOptionsItem>>;
+}
+
+/**
+ * Select document from Prismic
+ *
+ * - **API ID**: `select`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SelectDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<SelectDocumentData>, 'select', Lang>;
 
 /**
  * Item in *Settings → Navigation*
@@ -385,7 +546,9 @@ export type ToursDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | HomepageDocument
+  | InputDocument
   | PageDocument
+  | SelectDocument
   | SettingsDocument
   | ToursDocument;
 
@@ -447,6 +610,466 @@ type ChooseTourSliceVariation = ChooseTourSliceDefault;
 export type ChooseTourSlice = prismic.SharedSlice<
   'choose_tour',
   ChooseTourSliceVariation
+>;
+
+/**
+ * Primary content in *ConstructTour → Primary*
+ */
+export interface ConstructTourSliceDefaultPrimary {
+  /**
+   * Title field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+
+  /**
+   * Description field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Input_name label field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_name_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_name_label: prismic.KeyTextField;
+
+  /**
+   * Input_name id field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_name_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_name_id: prismic.KeyTextField;
+
+  /**
+   * Input_name placeholder field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_name_placeholder
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_name_placeholder: prismic.KeyTextField;
+
+  /**
+   * Select label field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.select_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  select_label: prismic.KeyTextField;
+
+  /**
+   * Select id field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.select_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  select_id: prismic.KeyTextField;
+
+  /**
+   * Select default_option field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.select_default_option
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  select_default_option: prismic.KeyTextField;
+
+  /**
+   * Input_email label field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_email_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_email_label: prismic.KeyTextField;
+
+  /**
+   * Input_email id field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_email_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_email_id: prismic.KeyTextField;
+
+  /**
+   * Input_email placeholder field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_email_placeholder
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_email_placeholder: prismic.KeyTextField;
+
+  /**
+   * Input_phone label field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_phone_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_phone_label: prismic.KeyTextField;
+
+  /**
+   * Input_phone id field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_phone_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_phone_id: prismic.KeyTextField;
+
+  /**
+   * Input_phone placeholder field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_phone_placeholder
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_phone_placeholder: prismic.KeyTextField;
+
+  /**
+   * Input_datefrom label field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_datefrom_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_datefrom_label: prismic.KeyTextField;
+
+  /**
+   * Input_datefrom id field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_datefrom_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_datefrom_id: prismic.KeyTextField;
+
+  /**
+   * Input_datefrom placeholder field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_datefrom_placeholder
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_datefrom_placeholder: prismic.KeyTextField;
+
+  /**
+   * Input_dateto label field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_dateto_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_dateto_label: prismic.KeyTextField;
+
+  /**
+   * Input_dateto id field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_dateto_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_dateto_id: prismic.KeyTextField;
+
+  /**
+   * Input_dateto placeholder field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.input_dateto_placeholder
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  input_dateto_placeholder: prismic.KeyTextField;
+
+  /**
+   * Textarea label field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.textarea_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  textarea_label: prismic.KeyTextField;
+
+  /**
+   * Textarea id field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.textarea_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  textarea_id: prismic.KeyTextField;
+
+  /**
+   * Radio name field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.radio_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  radio_name: prismic.KeyTextField;
+
+  /**
+   * Radio legend field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.radio_legend
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  radio_legend: prismic.KeyTextField;
+
+  /**
+   * Radio id 1 field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.radio_id_1
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  radio_id_1: prismic.KeyTextField;
+
+  /**
+   * Radio value 1 field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.radio_value_1
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  radio_value_1: prismic.KeyTextField;
+
+  /**
+   * Radio label 1 field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.radio_label_1
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  radio_label_1: prismic.KeyTextField;
+
+  /**
+   * Radio id 2 field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.radio_id_2
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  radio_id_2: prismic.KeyTextField;
+
+  /**
+   * Radio value 2 field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.radio_value_2
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  radio_value_2: prismic.KeyTextField;
+
+  /**
+   * Radio label 2 field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.radio_label_2
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  radio_label_2: prismic.KeyTextField;
+
+  /**
+   * Checkbox hidden legend field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.checkbox_hidden_legend
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  checkbox_hidden_legend: prismic.KeyTextField;
+
+  /**
+   * Checkbox id field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.checkbox_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  checkbox_id: prismic.KeyTextField;
+
+  /**
+   * Checkbox name field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.checkbox_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  checkbox_name: prismic.KeyTextField;
+
+  /**
+   * Checkbox label field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.checkbox_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  checkbox_label: prismic.KeyTextField;
+
+  /**
+   * Checkbox link field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.checkbox_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  checkbox_link: prismic.LinkField;
+
+  /**
+   * Checkbox link label field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.checkbox_link_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  checkbox_link_label: prismic.KeyTextField;
+
+  /**
+   * Submit button label field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.submit_button_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  submit_button_label: prismic.KeyTextField;
+
+  /**
+   * Reset button label field in *ConstructTour → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.primary.reset_button_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  reset_button_label: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *ConstructTour → Items*
+ */
+export interface ConstructTourSliceDefaultItem {
+  /**
+   * Select_option_name field in *ConstructTour → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.items[].select_option_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  select_option_name: prismic.KeyTextField;
+
+  /**
+   * Select_option_value field in *ConstructTour → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.items[].select_option_value
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  select_option_value: prismic.KeyTextField;
+
+  /**
+   * Select field in *ConstructTour → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.items[].select
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  select: prismic.ContentRelationshipField<'select'>;
+
+  /**
+   * Input field in *ConstructTour → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: construct_tour.items[].input
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  input: prismic.ContentRelationshipField<'input'>;
+}
+
+/**
+ * Default variation for ConstructTour Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ConstructTourSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<ConstructTourSliceDefaultPrimary>,
+  Simplify<ConstructTourSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *ConstructTour*
+ */
+type ConstructTourSliceVariation = ConstructTourSliceDefault;
+
+/**
+ * ConstructTour Shared Slice
+ *
+ * - **API ID**: `construct_tour`
+ * - **Description**: ConstructTour
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ConstructTourSlice = prismic.SharedSlice<
+  'construct_tour',
+  ConstructTourSliceVariation
 >;
 
 /**
@@ -597,9 +1220,14 @@ declare module '@prismicio/client' {
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
+      InputDocument,
+      InputDocumentData,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
+      SelectDocument,
+      SelectDocumentData,
+      SelectDocumentDataOptionsItem,
       SettingsDocument,
       SettingsDocumentData,
       SettingsDocumentDataNavigationItem,
@@ -612,6 +1240,11 @@ declare module '@prismicio/client' {
       ChooseTourSliceDefaultItem,
       ChooseTourSliceVariation,
       ChooseTourSliceDefault,
+      ConstructTourSlice,
+      ConstructTourSliceDefaultPrimary,
+      ConstructTourSliceDefaultItem,
+      ConstructTourSliceVariation,
+      ConstructTourSliceDefault,
       DescriptionSlice,
       DescriptionSliceDefaultPrimary,
       DescriptionSliceWithoutButtonPrimary,

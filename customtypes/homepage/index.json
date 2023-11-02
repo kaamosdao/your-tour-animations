@@ -18,6 +18,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "construct_tour": {
+              "type": "SharedSlice"
+            },
             "choose_tour": {
               "type": "SharedSlice"
             },

@@ -1,5 +1,7 @@
 'use client';
 
+import { PrismicRichText } from '@prismicio/react';
+
 import AgeConfirm from './AgeConfirm/index';
 import InputFields from './InputFields/index';
 import LicenseConfirm from './LicenseConfirm/index';
@@ -8,26 +10,35 @@ import HoverCursor from '../CustomCursor/HoverCursor';
 
 import s from './SectionConstructTour.module.scss';
 
-const SectionConstructTour = () => (
-  <section className={s.constructTour}>
-    <h2 className={s.title}>Собери свой тур</h2>
-    <p className={s.description}>
-      Идейные соображения высшего порядка,&nbsp;
-      <br />а также рамки и место обучения кадров
-    </p>
+const components = {
+  heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
+  paragraph: ({ children }) => <p className={s.description}>{children}</p>,
+};
+
+const SectionConstructTour = ({ slice }) => (
+  <section
+    className={s.constructTour}
+    data-slice-type={slice.slice_type}
+    data-slice-variation={slice.variation}
+  >
+    <PrismicRichText field={slice.primary.title} components={components} />
+    <PrismicRichText
+      field={slice.primary.description}
+      components={components}
+    />
     <form className={s.form}>
-      <InputFields />
-      <AgeConfirm />
-      <LicenseConfirm />
+      <InputFields slice={slice} />
+      <AgeConfirm slice={slice} />
+      <LicenseConfirm slice={slice} />
       <div className={s.buttons}>
         <HoverCursor cursorType="pulse">
           <button className={s.buttonFind} type="submit">
-            Найти тур
+            {slice.primary.submit_button_label}
           </button>
         </HoverCursor>
         <HoverCursor cursorType="pulse">
           <button className={s.buttonClear} type="button">
-            Сбросить
+            {slice.primary.reset_button_label}
           </button>
         </HoverCursor>
       </div>

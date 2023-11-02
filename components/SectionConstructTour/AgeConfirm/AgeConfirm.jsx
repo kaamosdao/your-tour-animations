@@ -4,33 +4,42 @@ import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './AgeConfirm.module.scss';
 
-const radios = [
-  { value: 'yes', label: 'Да' },
-  { value: 'nope', label: 'Нет' },
-];
-
-const AgeConfirm = () => (
+const AgeConfirm = ({ slice }) => (
   <fieldset className={s.ageConfirm}>
-    <legend className={s.title}>Вам есть 18 лет?</legend>
+    <legend className={s.title}>{slice.primary.radio_legend}</legend>
     <ul className={s.list}>
-      {radios.map(({ value, label }) => (
-        <li key={value} className={s.item}>
-          <HoverCursor cursorType="growDot">
-            <label className={s.radio} htmlFor={value}>
-              <input
-                className={cn('visually-hidden', s.radioInput)}
-                type="radio"
-                name="age-confirmation"
-                id={value}
-                value={value}
-                required
-              />
-              <span className={s.radioMark} />
-              <span className={s.radioLabel}>{label}</span>
-            </label>
-          </HoverCursor>
-        </li>
-      ))}
+      <li className={s.item}>
+        <HoverCursor cursorType="growDot">
+          <label className={s.radio} htmlFor={slice.primary.radio_id_1}>
+            <input
+              className={cn('visually-hidden', s.radioInput)}
+              type="radio"
+              name={slice.primary.radio_name}
+              id={slice.primary.radio_id_1}
+              value={slice.primary.radio_value_1}
+              required
+            />
+            <span className={s.radioMark} />
+            <span className={s.radioLabel}>{slice.primary.radio_label_1}</span>
+          </label>
+        </HoverCursor>
+      </li>
+      <li className={s.item}>
+        <HoverCursor cursorType="growDot">
+          <label className={s.radio} htmlFor={slice.primary.radio_id_2}>
+            <input
+              className={cn('visually-hidden', s.radioInput)}
+              type="radio"
+              name={slice.primary.radio_name}
+              id={slice.primary.radio_id_2}
+              value={slice.primary.radio_value_2}
+              required
+            />
+            <span className={s.radioMark} />
+            <span className={s.radioLabel}>{slice.primary.radio_label_2}</span>
+          </label>
+        </HoverCursor>
+      </li>
     </ul>
   </fieldset>
 );
