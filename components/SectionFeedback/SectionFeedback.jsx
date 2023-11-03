@@ -1,17 +1,43 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-
-import { feedbacks } from '@/data';
+import { PrismicRichText } from '@prismicio/react';
+import { isFilled } from '@prismicio/client';
+import { createClient } from '@/prismicio';
 
 import FeedbackContainer from './FeedbackContainer';
 
 import s from './SectionFeedback.module.scss';
 
-const SectionFeedback = () => {
+const components = {
+  heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
+  paragraph: ({ children }) => <p className={s.description}>{children}</p>,
+};
+
+const SectionFeedback = ({ slice }) => {
   const feedbackRef = useRef(null);
   const q = gsap.utils.selector(feedbackRef);
+
+  const [feedbacks, setFeedbacks] = useState(null);
+
+  useEffect(() => {
+    const client = createClient();
+
+    const getData = async () => {
+      const data = await Promise.all(
+        slice.items.map((item) => {
+          if (isFilled.contentRelationship(item.card) && item.card.uid) {
+            return client.getByUID('feedback_card', item.card.uid);
+          }
+          return null;
+        })
+      );
+
+      setFeedbacks(data);
+    };
+    getData();
+  }, [slice.items]);
 
   useEffect(() => {
     const feedbackItems = q('li');
@@ -40,26 +66,19 @@ const SectionFeedback = () => {
   }, [q]);
 
   return (
-    <section className={s.feedback}>
-      <h2 className={s.title}>
-        Отзывы наших
-        <br />
-        путешественников
-      </h2>
-      <p className={s.description}>
-        Идейные соображения высшего порядка, а&nbsp;
-        <br />
-        также рамки и место обучения кадров
-      </p>
+    <section
+      className={s.feedback}
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+    >
+      <PrismicRichText field={slice.primary.title} components={components} />
+      <PrismicRichText
+        field={slice.primary.description}
+        components={components}
+      />
       <ul ref={feedbackRef} className={s.list}>
-        {feedbacks.map(({ name, user, tour, text }) => (
-          <FeedbackContainer
-            name={name}
-            user={user}
-            tour={tour}
-            text={text}
-            key={user}
-          />
+        {feedbacks?.map(({ data, uid }) => (
+          <FeedbackContainer key={uid} data={data} />
         ))}
       </ul>
     </section>

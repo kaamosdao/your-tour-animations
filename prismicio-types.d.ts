@@ -4,7 +4,99 @@ import type * as prismic from '@prismicio/client';
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
+/**
+ * Item in *Feedback Card → Feedback*
+ */
+export interface FeedbackCardDocumentDataFeedbackItem {
+  /**
+   * Paragraph field in *Feedback Card → Feedback*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feedback_card.feedback[].paragraph
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  paragraph: prismic.RichTextField;
+}
+
+/**
+ * Content for Feedback Card documents
+ */
+interface FeedbackCardDocumentData {
+  /**
+   * User name field in *Feedback Card*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feedback_card.user_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  user_name: prismic.RichTextField;
+
+  /**
+   * User tour field in *Feedback Card*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feedback_card.user_tour
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  user_tour: prismic.RichTextField;
+
+  /**
+   * User image field in *Feedback Card*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feedback_card.user_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  user_image: prismic.ImageField<never>;
+
+  /**
+   * User image retina field in *Feedback Card*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feedback_card.user_image_retina
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  user_image_retina: prismic.ImageField<never>;
+
+  /**
+   * Feedback field in *Feedback Card*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feedback_card.feedback[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  feedback: prismic.GroupField<Simplify<FeedbackCardDocumentDataFeedbackItem>>;
+}
+
+/**
+ * Feedback Card document from Prismic
+ *
+ * - **API ID**: `feedback_card`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type FeedbackCardDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<FeedbackCardDocumentData>,
+    'feedback_card',
+    Lang
+  >;
+
 type HomepageDocumentDataSlicesSlice =
+  | FeedbackSlice
   | ConstructTourSlice
   | ChooseTourSlice
   | DescriptionSlice;
@@ -545,6 +637,7 @@ export type ToursDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<ToursDocumentData>, 'tours', Lang>;
 
 export type AllDocumentTypes =
+  | FeedbackCardDocument
   | HomepageDocument
   | InputDocument
   | PageDocument
@@ -1207,6 +1300,76 @@ export type DescriptionSlice = prismic.SharedSlice<
   DescriptionSliceVariation
 >;
 
+/**
+ * Primary content in *Feedback → Primary*
+ */
+export interface FeedbackSliceDefaultPrimary {
+  /**
+   * Title field in *Feedback → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feedback.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+
+  /**
+   * Description field in *Feedback → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feedback.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *Feedback → Items*
+ */
+export interface FeedbackSliceDefaultItem {
+  /**
+   * Card field in *Feedback → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feedback.items[].card
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  card: prismic.ContentRelationshipField<'feedback_card'>;
+}
+
+/**
+ * Default variation for Feedback Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FeedbackSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<FeedbackSliceDefaultPrimary>,
+  Simplify<FeedbackSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Feedback*
+ */
+type FeedbackSliceVariation = FeedbackSliceDefault;
+
+/**
+ * Feedback Shared Slice
+ *
+ * - **API ID**: `feedback`
+ * - **Description**: Feedback
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FeedbackSlice = prismic.SharedSlice<
+  'feedback',
+  FeedbackSliceVariation
+>;
+
 declare module '@prismicio/client' {
   interface CreateClient {
     (
@@ -1217,6 +1380,9 @@ declare module '@prismicio/client' {
 
   namespace Content {
     export type {
+      FeedbackCardDocument,
+      FeedbackCardDocumentData,
+      FeedbackCardDocumentDataFeedbackItem,
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
@@ -1251,6 +1417,11 @@ declare module '@prismicio/client' {
       DescriptionSliceVariation,
       DescriptionSliceDefault,
       DescriptionSliceWithoutButton,
+      FeedbackSlice,
+      FeedbackSliceDefaultPrimary,
+      FeedbackSliceDefaultItem,
+      FeedbackSliceVariation,
+      FeedbackSliceDefault,
     };
   }
 }

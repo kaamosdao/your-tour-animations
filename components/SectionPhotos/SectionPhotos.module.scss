@@ -7,23 +7,24 @@
   justify-content: center;
   align-items: center;
   min-width: 360px;
+  padding-bottom: 37.5px;
   text-align: center;
+
+  @media (min-width: $desktop-md-width) {
+    padding-bottom: 67.5px;
+  }
 }
 
 .title {
   @include font(bold, 34px, 112%, 0.02em);
 
-  margin: 75px 0 0 0;
+  margin: 37.5px 0 0 0;
   color: var(--main-text-color);
 
   @media (min-width: $desktop-md-width) {
     @include font(bold, 59px, 124%);
 
-    margin-top: 134px;
-  }
-
-  @media (min-width: $desktop-lg-width) {
-    margin-top: 135px;
+    margin-top: 67.5px;
   }
 }
 

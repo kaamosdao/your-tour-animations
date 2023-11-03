@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import gsap from 'gsap';
 
 import { modals } from '@/utils/types';
@@ -10,9 +9,17 @@ import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './FeedbackContainer.module.scss';
 
-const FeedbackContainer = ({ name, user, tour, text }) => {
+const FeedbackContainer = ({ data }) => {
   const [show, setShow] = useState(false);
   const modalRef = useRef(null);
+
+  const {
+    feedback,
+    user_image: userImage,
+    user_image_retina: userImageRetina,
+    user_name: userName,
+    user_tour: userTour,
+  } = data;
 
   return (
     <>
@@ -23,10 +30,11 @@ const FeedbackContainer = ({ name, user, tour, text }) => {
           onClick={() => setShow(true)}
         >
           <FeedbackCard
-            name={name}
-            user={user}
-            tour={tour}
-            text={text}
+            name={userName}
+            image={userImage}
+            imageRetina={userImageRetina}
+            tour={userTour}
+            feedback={feedback}
             isModal={false}
           />
         </button>
@@ -46,24 +54,18 @@ const FeedbackContainer = ({ name, user, tour, text }) => {
             });
           }}
           type={modals.feedback}
-          data={{ name, user, tour, text }}
+          data={{
+            name: userName,
+            image: userImage,
+            imageRetina: userImageRetina,
+            tour: userTour,
+            feedback,
+          }}
           modalRef={modalRef}
         />
       )}
     </>
   );
-};
-
-FeedbackContainer.propTypes = {
-  name: PropTypes.string.isRequired,
-  user: PropTypes.string.isRequired,
-  tour: PropTypes.string.isRequired,
-  text: PropTypes.arrayOf(
-    PropTypes.shape({
-      paragraph: PropTypes.string,
-      id: PropTypes.number,
-    })
-  ).isRequired,
 };
 
 export default FeedbackContainer;

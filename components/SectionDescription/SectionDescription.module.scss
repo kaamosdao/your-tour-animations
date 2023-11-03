@@ -5,6 +5,7 @@
   min-width: 360px;
   width: auto;
   min-height: 488px;
+  margin-bottom: 37.5px;
   background-image: url('/img/backgound-village/background-village-desktop-md.jpg');
   background-repeat: no-repeat;
   background-position: bottom;
@@ -50,6 +51,10 @@
       background-image: url('/img/backgound-village/background-village-desktop-lg@2x.jpg');
       background-size: 1920px auto;
     }
+  }
+
+  @media (min-width: $desktop-md-width) {
+    margin-bottom: 67.5px;
   }
 
   @media (min-width: $desktop-lg-width) {

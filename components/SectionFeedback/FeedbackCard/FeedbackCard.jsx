@@ -1,51 +1,63 @@
-import PropTypes from 'prop-types';
+/* eslint-disable react/no-array-index-key */
+import { useEffect, useState } from 'react';
+import { PrismicRichText } from '@prismicio/react';
 
-import Picture from '../../Picture';
+import CustomImage from '@/components/CustomImage';
 
 import s from './FeedbackCard.module.scss';
 
-const FeedbackCard = ({ name, user, tour, text, isModal }) => (
-  <li className={isModal ? s.cardModal : s.card}>
-    <div className={isModal ? s.textContainerModal : s.textContainer}>
-      {text.map(({ paragraph, id }) => (
-        <p key={id} className={s.text}>
-          {paragraph}
-        </p>
-      ))}
-    </div>
-    <div className={s.user}>
-      <p className={s.name}>{name}</p>
-      <p className={s.tour}>
-        Тур:&nbsp;
-        {tour}
-      </p>
-      <div className={s.avatarContainer}>
-        <div className={s.avatarPicture}>
-          <Picture
-            defaultImg={{
-              width: 75,
-              height: 75,
-              url: `/img/avatars/${user}`,
+const FeedbackCard = ({
+  name,
+  image,
+  imageRetina,
+  tour,
+  feedback,
+  isModal,
+}) => {
+  const [devicePixelRatio, setDevicePixelRatio] = useState(1);
+
+  useEffect(() => {
+    setDevicePixelRatio(window.devicePixelRatio);
+  }, []);
+
+  return (
+    <li className={isModal ? s.cardModal : s.card}>
+      <div className={isModal ? s.textContainerModal : s.textContainer}>
+        {feedback.map(({ paragraph }, i) => (
+          <PrismicRichText
+            key={i}
+            field={paragraph}
+            components={{
+              paragraph: ({ children }) => <p className={s.text}>{children}</p>,
             }}
-            alt="Аватар"
-            format="jpg"
           />
+        ))}
+      </div>
+      <div className={s.user}>
+        <PrismicRichText
+          field={name}
+          components={{
+            paragraph: ({ children }) => <p className={s.name}>{children}</p>,
+          }}
+        />
+        <PrismicRichText
+          field={tour}
+          components={{
+            paragraph: ({ children }) => <p className={s.tour}>{children}</p>,
+          }}
+        />
+        <div className={s.avatarContainer}>
+          <div className={s.avatarPicture}>
+            <CustomImage
+              devicePixelRatio={devicePixelRatio}
+              image={image}
+              imageRetina={imageRetina}
+            />
+          </div>
         </div>
       </div>
-    </div>
-  </li>
-);
-
-FeedbackCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  user: PropTypes.string.isRequired,
-  tour: PropTypes.string.isRequired,
-  text: PropTypes.arrayOf(
-    PropTypes.shape({
-      paragraph: PropTypes.string,
-      id: PropTypes.number,
-    })
-  ).isRequired,
+    </li>
+  );
 };
 
 export default FeedbackCard;

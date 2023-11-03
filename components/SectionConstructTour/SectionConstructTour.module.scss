@@ -24,11 +24,7 @@
   @media (min-width: $desktop-md-width) {
     @include font(bold, 59px, 124%);
 
-    margin-top: 170px;
-  }
-
-  @media (min-width: $desktop-lg-width) {
-    margin-top: 105px;
+    margin-top: 67.5px;
   }
 }
 
