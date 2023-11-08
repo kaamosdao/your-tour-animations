@@ -1,3 +1,3 @@
-import Picture from './Picture';
+import ItemPicture from './ItemPicture';
 
-export default Picture;
+export default ItemPicture;

@@ -18,6 +18,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "photos": {
+              "type": "SharedSlice"
+            },
             "feedback": {
               "type": "SharedSlice"
             },

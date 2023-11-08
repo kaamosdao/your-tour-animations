@@ -1,34 +1,60 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+/* eslint-disable no-param-reassign */
+/* eslint-disable react/no-array-index-key */
+
+import { createRef, useEffect, useMemo, useState } from 'react';
 import gsap from 'gsap/dist/gsap';
 import { Draggable } from 'gsap/dist/Draggable';
-import cn from 'classnames';
+import { PrismicRichText } from '@prismicio/react';
+import { createClient } from '@/prismicio';
 
-import Picture from './Picture';
+import ItemPicture from './Picture';
 
-import { pictures } from '@/data/index';
 import HorizontalLoop from '@/utils/HorizontalLoop';
 import getDeviceSize from '@/utils/getDeviceSize';
-import { sizeType } from '@/utils/types';
+import { carouselType, directionType, sizeType } from '@/utils/types';
 
 import s from './SectionPhotos.module.scss';
 
-const SectionPhotos = () => {
-  const topCarousel = useRef(null);
-  const midCarousel = useRef(null);
-  const botCarousel = useRef(null);
+const components = {
+  heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
+  paragraph: ({ children }) => <p className={s.description}>{children}</p>,
+};
 
-  const topLoop = useRef(null);
-  const midLoop = useRef(null);
-  const botLoop = useRef(null);
+const SectionPhotos = ({ slice }) => {
+  const carouselUIDs = useMemo(
+    () => slice.items.map(({ photos }) => photos.uid),
+    [slice]
+  );
 
   const [deviceSize, setDeviceSize] = useState(null);
   const [devicePixelRatio, setDevicePixelRatio] = useState(1);
+  const [carousels, setCarousels] = useState(null);
 
   useEffect(() => {
     gsap.registerPlugin(Draggable);
   }, []);
+
+  useEffect(() => {
+    const client = createClient();
+    const getData = async () => {
+      const carouselsData = await client.getAllByUIDs(
+        'photos_carousel',
+        carouselUIDs
+      );
+
+      const dataWithRefs = carouselsData.map(({ data }) => ({
+        ...data,
+        loopRef: createRef(null),
+        carouselRef: createRef(null),
+      }));
+
+      setCarousels(dataWithRefs);
+    };
+
+    getData();
+  }, [carouselUIDs]);
 
   useEffect(() => {
     setDeviceSize(getDeviceSize(window.innerWidth));
@@ -49,146 +75,78 @@ const SectionPhotos = () => {
   }, [deviceSize]);
 
   useEffect(() => {
-    const top = gsap.utils.selector(topCarousel);
-    const mid = gsap.utils.selector(midCarousel);
-    const bot = gsap.utils.selector(botCarousel);
+    carousels?.forEach(
+      ({ carouselRef, loopRef, move_direction: direction }) => {
+        const selector = gsap.utils.selector(carouselRef);
+        const pictures = gsap.utils.toArray(selector('li'));
 
-    const topPictures = gsap.utils.toArray(top('li'));
-    const midPictures = gsap.utils.toArray(mid('li'));
-    const botPictures = gsap.utils.toArray(bot('li'));
+        if (deviceSize === sizeType.mobile) {
+          gsap.set(pictures, {
+            x: (i) => i * pictures[0].clientWidth + (i + 1) * 18,
+          });
+        }
 
-    if (deviceSize === sizeType.mobile) {
-      gsap.set(topPictures, {
-        x: (i) => i * topPictures[0].clientWidth + (i + 1) * 18,
-      });
+        if (deviceSize === sizeType.tabletMd) {
+          gsap.set(pictures, {
+            x: (i) => i * pictures[0].clientWidth + (i + 1) * 20,
+          });
+        }
 
-      gsap.set(midPictures, {
-        x: (i) => i * midPictures[0].clientWidth + (i + 1) * 18,
-      });
+        if (deviceSize === sizeType.desktopLg) {
+          gsap.set(pictures, {
+            x: (i) => i * pictures[0].clientWidth + (i + 1) * 30,
+          });
+        }
 
-      gsap.set(botPictures, {
-        x: (i) => i * botPictures[0].clientWidth + (i + 1) * 18,
-      });
-    }
-
-    if (deviceSize === sizeType.tabletMd) {
-      gsap.set(topPictures, {
-        x: (i) => i * topPictures[0].clientWidth + (i + 1) * 20,
-      });
-
-      gsap.set(midPictures, {
-        x: (i) => i * midPictures[0].clientWidth + (i + 1) * 20,
-      });
-
-      gsap.set(botPictures, {
-        x: (i) => i * botPictures[0].clientWidth + (i + 1) * 20,
-      });
-    }
-
-    if (deviceSize === sizeType.desktopLg) {
-      gsap.set(topPictures, {
-        x: (i) => i * topPictures[0].clientWidth + (i + 1) * 30,
-      });
-
-      gsap.set(midPictures, {
-        x: (i) => i * midPictures[0].clientWidth + (i + 1) * 30,
-      });
-
-      gsap.set(botPictures, {
-        x: (i) => i * botPictures[0].clientWidth + (i + 1) * 30,
-      });
-    }
-
-    if (deviceSize) {
-      topLoop.current = new HorizontalLoop(topPictures, {
-        paused: false,
-        reversed: true,
-        repeat: -1,
-        speed: 0.7,
-      });
-
-      midLoop.current = new HorizontalLoop(midPictures, {
-        paused: false,
-        repeat: -1,
-        speed: 0.9,
-      });
-
-      botLoop.current = new HorizontalLoop(botPictures, {
-        paused: false,
-        reversed: true,
-        repeat: -1,
-        speed: 0.6,
-      });
-    }
+        if (deviceSize) {
+          loopRef.current = new HorizontalLoop(pictures, {
+            paused: false,
+            reversed: direction === directionType.right,
+            repeat: -1,
+            speed: 0.7,
+          });
+        }
+      }
+    );
 
     return () => {
-      topLoop.current?.reset();
-      midLoop.current?.reset();
-      botLoop.current?.reset();
+      carousels?.forEach(({ loopRef }) => {
+        loopRef.current?.reset();
+      });
     };
-  }, [deviceSize]);
+  }, [carousels, deviceSize]);
 
   return (
-    <section className={s.photos}>
-      <h2 className={s.title}>Фотографии путешествий</h2>
-      <p className={s.description}>
-        Идейные соображения высшего порядка, а&nbsp;
-        <br />
-        также рамки и место обучения кадров
-      </p>
+    <section
+      className={s.photos}
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+    >
+      <PrismicRichText field={slice.primary.title} components={components} />
+      <PrismicRichText
+        field={slice.primary.description}
+        components={components}
+      />
       <div className={s.list}>
-        <ul ref={topCarousel} className={s.top}>
-          {pictures
-            .filter(
-              ({ position, variants }) =>
-                position.includes('top') && variants[deviceSize]
-            )
-            .map(({ name, variants, alt, format }) => (
-              <li key={name} className={cn(s.item, s[name])}>
-                <Picture
-                  img={variants[deviceSize]}
-                  devicePixelRatio={devicePixelRatio}
-                  alt={alt}
-                  format={format}
-                />
-              </li>
+        {carousels?.map(({ picture_type: type, photos, carouselRef }, i) => (
+          <ul
+            key={i}
+            ref={carouselRef}
+            className={
+              type === carouselType.large ? s.largeCarousel : s.smallCarousel
+            }
+          >
+            {photos.map((data, index) => (
+              <ItemPicture
+                key={index}
+                image={data}
+                devicePixelRatio={devicePixelRatio}
+                deviceSize={deviceSize}
+                type={type}
+              />
             ))}
-        </ul>
-        <ul ref={midCarousel} className={s.mid}>
-          {pictures
-            .filter(
-              ({ position, variants }) =>
-                position.includes('mid') && variants[deviceSize]
-            )
-            .map(({ name, variants, alt, format }) => (
-              <li key={name} className={cn(s.item, s[name])}>
-                <Picture
-                  img={variants[deviceSize]}
-                  devicePixelRatio={devicePixelRatio}
-                  alt={alt}
-                  format={format}
-                />
-              </li>
-            ))}
-        </ul>
-        <ul ref={botCarousel} className={s.bot}>
-          {pictures
-            .reverse()
-            .filter(
-              ({ position, variants }) =>
-                position.includes('bot') && variants[deviceSize]
-            )
-            .map(({ name, variants, alt, format }) => (
-              <li key={name} className={cn(s.item, s[name])}>
-                <Picture
-                  img={variants[deviceSize]}
-                  devicePixelRatio={devicePixelRatio}
-                  alt={alt}
-                  format={format}
-                />
-              </li>
-            ))}
-        </ul>
+          </ul>
+        ))}
       </div>
     </section>
   );

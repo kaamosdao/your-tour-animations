@@ -7,4 +7,5 @@ export const components = {
   construct_tour: dynamic(() => import('./ConstructTour')),
   description: dynamic(() => import('./Description')),
   feedback: dynamic(() => import('./Feedback')),
+  photos: dynamic(() => import('./Photos')),
 };

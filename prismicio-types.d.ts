@@ -96,6 +96,7 @@ export type FeedbackCardDocument<Lang extends string = string> =
   >;
 
 type HomepageDocumentDataSlicesSlice =
+  | PhotosSlice
   | FeedbackSlice
   | ConstructTourSlice
   | ChooseTourSlice
@@ -309,6 +310,125 @@ interface PageDocumentData {
  */
 export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, 'page', Lang>;
+
+/**
+ * Item in *Photos carousel → Photos*
+ */
+export interface PhotosCarouselDocumentDataPhotosItem {
+  /**
+   * Desktop field in *Photos carousel → Photos*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: photos_carousel.photos[].desktop
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  desktop: prismic.ImageField<never>;
+
+  /**
+   * Desktop retina field in *Photos carousel → Photos*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: photos_carousel.photos[].desktop_retina
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  desktop_retina: prismic.ImageField<never>;
+
+  /**
+   * Tablet field in *Photos carousel → Photos*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: photos_carousel.photos[].tablet
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  tablet: prismic.ImageField<never>;
+
+  /**
+   * Tablet retina field in *Photos carousel → Photos*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: photos_carousel.photos[].tablet_retina
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  tablet_retina: prismic.ImageField<never>;
+
+  /**
+   * Mobile field in *Photos carousel → Photos*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: photos_carousel.photos[].mobile
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  mobile: prismic.ImageField<never>;
+
+  /**
+   * Mobile retina field in *Photos carousel → Photos*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: photos_carousel.photos[].mobile_retina
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  mobile_retina: prismic.ImageField<never>;
+}
+
+/**
+ * Content for Photos carousel documents
+ */
+interface PhotosCarouselDocumentData {
+  /**
+   * Picture type field in *Photos carousel*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: photos_carousel.picture_type
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  picture_type: prismic.SelectField<'large-pictures' | 'small-pictures'>;
+
+  /**
+   * Move direction field in *Photos carousel*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: photos_carousel.move_direction
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  move_direction: prismic.SelectField<'left' | 'right'>;
+
+  /**
+   * Photos field in *Photos carousel*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: photos_carousel.photos[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  photos: prismic.GroupField<Simplify<PhotosCarouselDocumentDataPhotosItem>>;
+}
+
+/**
+ * Photos carousel document from Prismic
+ *
+ * - **API ID**: `photos_carousel`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PhotosCarouselDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<PhotosCarouselDocumentData>,
+    'photos_carousel',
+    Lang
+  >;
 
 /**
  * Item in *Select → Options*
@@ -641,6 +761,7 @@ export type AllDocumentTypes =
   | HomepageDocument
   | InputDocument
   | PageDocument
+  | PhotosCarouselDocument
   | SelectDocument
   | SettingsDocument
   | ToursDocument;
@@ -1370,6 +1491,73 @@ export type FeedbackSlice = prismic.SharedSlice<
   FeedbackSliceVariation
 >;
 
+/**
+ * Primary content in *Photos → Primary*
+ */
+export interface PhotosSliceDefaultPrimary {
+  /**
+   * Title field in *Photos → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: photos.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+
+  /**
+   * Description field in *Photos → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: photos.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *Photos → Items*
+ */
+export interface PhotosSliceDefaultItem {
+  /**
+   * Photos field in *Photos → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: photos.items[].photos
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  photos: prismic.ContentRelationshipField<'photos_carousel'>;
+}
+
+/**
+ * Default variation for Photos Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type PhotosSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<PhotosSliceDefaultPrimary>,
+  Simplify<PhotosSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Photos*
+ */
+type PhotosSliceVariation = PhotosSliceDefault;
+
+/**
+ * Photos Shared Slice
+ *
+ * - **API ID**: `photos`
+ * - **Description**: Photos
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type PhotosSlice = prismic.SharedSlice<'photos', PhotosSliceVariation>;
+
 declare module '@prismicio/client' {
   interface CreateClient {
     (
@@ -1391,6 +1579,9 @@ declare module '@prismicio/client' {
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
+      PhotosCarouselDocument,
+      PhotosCarouselDocumentData,
+      PhotosCarouselDocumentDataPhotosItem,
       SelectDocument,
       SelectDocumentData,
       SelectDocumentDataOptionsItem,
@@ -1422,6 +1613,11 @@ declare module '@prismicio/client' {
       FeedbackSliceDefaultItem,
       FeedbackSliceVariation,
       FeedbackSliceDefault,
+      PhotosSlice,
+      PhotosSliceDefaultPrimary,
+      PhotosSliceDefaultItem,
+      PhotosSliceVariation,
+      PhotosSliceDefault,
     };
   }
 }

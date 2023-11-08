@@ -43,4 +43,14 @@ export const modals = {
   feedback: 'feedback',
 };
 
+export const carouselType = {
+  large: 'large-pictures',
+  small: 'small-pictures',
+};
+
+export const directionType = {
+  left: 'left',
+  right: 'right',
+};
+
 export default cursorState;
