@@ -57,6 +57,7 @@ const ItemPicture = ({ image, devicePixelRatio, deviceSize, type }) => {
       </li>
     ) : null;
   }
+
   if (deviceSize === sizeType.tabletMd) {
     return image.table_retina.url ? (
       <li
@@ -69,6 +70,7 @@ const ItemPicture = ({ image, devicePixelRatio, deviceSize, type }) => {
       </li>
     ) : null;
   }
+
   return image.mobile_retina.url ? (
     <li
       className={cn(
