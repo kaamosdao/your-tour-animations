@@ -1,14 +1,14 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
 import cn from 'classnames';
 import { useSwipeable } from 'react-swipeable';
 import { clamp } from 'three/src/math/MathUtils';
+import { PrismicRichText } from '@prismicio/react';
+import { PrismicNextLink } from '@prismicio/next';
 
 import Scene from '@/utils/Scene';
 import getLoopedNumber from '@/utils/getLoopedNumber';
-import { histories } from '@/data';
 import { sliderEvent } from '@/utils/types';
 
 import CardList from './CardList';
@@ -20,7 +20,14 @@ import Right from '@/public/img/svg-icons/arrow-right.svg';
 
 import s from './HistorySlider.module.scss';
 
-const HistorySlider = () => {
+const components = {
+  heading3: ({ children }) => (
+    <h3 className={s.historyCardTitle}>{children}</h3>
+  ),
+  paragraph: ({ children }) => <p className={s.historyCardText}>{children}</p>,
+};
+
+const HistorySlider = ({ histories }) => {
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -83,7 +90,21 @@ const HistorySlider = () => {
   }, [hovered]);
 
   useEffect(() => {
-    scene.current = new Scene(canvas.current, canvasHolder.current, setPlaying);
+    const deviceRatio = window.devicePixelRatio;
+
+    const images = histories.map(({ data }) => {
+      if (deviceRatio === 1) {
+        return data.image;
+      }
+      return data.image_retina;
+    });
+
+    scene.current = new Scene(
+      canvas.current,
+      canvasHolder.current,
+      setPlaying,
+      images
+    );
 
     window.addEventListener('resize', scene.current.resize);
 
@@ -91,7 +112,7 @@ const HistorySlider = () => {
       window.removeEventListener('resize', scene.current.resize);
       scene.current.dismiss();
     };
-  }, []);
+  }, [histories]);
 
   const onMouseDown = () => {
     setClicked(true);
@@ -136,10 +157,16 @@ const HistorySlider = () => {
             />
           </div>
         </HoverCursor>
-        <h3 className={s.historyCardTitle}>{histories[slide.number].title}</h3>
-        <p className={s.historyCardText}>{histories[slide.number].text}</p>
-        {histories[slide.number].list && (
-          <CardList items={histories[slide.number].list} />
+        <PrismicRichText
+          field={histories[slide.number].data.title}
+          components={components}
+        />
+        <PrismicRichText
+          field={histories[slide.number].data.description}
+          components={components}
+        />
+        {histories[slide.number].data.advantages[0].text && (
+          <CardList items={histories[slide.number].data.advantages} />
         )}
         <footer className={s.historyCardFooter}>
           <div className={cn(s.historyCardButton)}>
@@ -147,11 +174,11 @@ const HistorySlider = () => {
           </div>
         </footer>
         <div className={s.socials}>
-          {histories[slide.number].socials.map((social) => (
-            <HoverCursor key={social} cursorType="stuck">
-              <Link className={s.socialLink} href="/">
-                {social}
-              </Link>
+          {histories[slide.number].data.socials.map(({ text, link }) => (
+            <HoverCursor key={text} cursorType="stuck">
+              <PrismicNextLink field={link} className={s.socialLink}>
+                {text}
+              </PrismicNextLink>
             </HoverCursor>
           ))}
         </div>

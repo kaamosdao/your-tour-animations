@@ -1,15 +1,40 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { PrismicRichText } from '@prismicio/react';
+import { createClient } from '@/prismicio';
 
 import HistorySlider from './HistorySlider/index';
 
 import s from './SectionHistories.module.scss';
 
-const SectionHistories = () => {
+const components = {
+  heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
+  paragraph: ({ children }) => <p className={s.description}>{children}</p>,
+};
+
+const SectionHistories = ({ slice }) => {
   const sliderRef = useRef(null);
+
   const q = gsap.utils.selector(sliderRef);
+
+  const historyUIDs = useMemo(
+    () => slice.items.map(({ history }) => history.uid),
+    [slice]
+  );
+  const [histories, setHistories] = useState(null);
+
+  useEffect(() => {
+    const client = createClient();
+    const getData = async () => {
+      const data = await client.getAllByUIDs('history', historyUIDs);
+
+      setHistories(data);
+    };
+
+    getData();
+  }, [historyUIDs]);
 
   useEffect(() => {
     const description = q('div[class*="item"]');
@@ -38,15 +63,18 @@ const SectionHistories = () => {
   }, [q]);
 
   return (
-    <section className={s.histories}>
-      <h2 className={s.title}>Истории путешествий</h2>
-      <p className={s.description}>
-        Идейные соображения высшего порядка, а&nbsp;
-        <br />
-        также рамки и место обучения кадров
-      </p>
+    <section
+      className={s.histories}
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+    >
+      <PrismicRichText field={slice.primary.title} components={components} />
+      <PrismicRichText
+        field={slice.primary.description}
+        components={components}
+      />
       <div ref={sliderRef} className={s.list}>
-        <HistorySlider />
+        {histories && <HistorySlider histories={histories} />}
       </div>
     </section>
   );

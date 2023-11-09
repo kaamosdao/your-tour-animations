@@ -6,16 +6,17 @@ import s from './CardList.module.scss';
 
 const CardList = ({ items }) => (
   <ul className={s.historyCardList}>
-    {items.map((name) => (
-      <li className={s.historyCardItem} key={name}>
-        {name}
+    {items.map(({ text }) => (
+      <li className={s.historyCardItem} key={text}>
+        {text}
       </li>
     ))}
   </ul>
 );
 
 CardList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({ text: PropTypes.string }))
+    .isRequired,
 };
 
 export default CardList;

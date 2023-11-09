@@ -95,7 +95,135 @@ export type FeedbackCardDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *History → Advantages*
+ */
+export interface HistoryDocumentDataAdvantagesItem {
+  /**
+   * Text field in *History → Advantages*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: history.advantages[].text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text: prismic.KeyTextField;
+}
+
+/**
+ * Item in *History → Socials*
+ */
+export interface HistoryDocumentDataSocialsItem {
+  /**
+   * Text field in *History → Socials*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: history.socials[].text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text: prismic.KeyTextField;
+
+  /**
+   * Link field in *History → Socials*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: history.socials[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+/**
+ * Content for History documents
+ */
+interface HistoryDocumentData {
+  /**
+   * Title field in *History*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: history.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+
+  /**
+   * Description field in *History*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: history.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Advantages field in *History*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: history.advantages[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  advantages: prismic.GroupField<Simplify<HistoryDocumentDataAdvantagesItem>>;
+
+  /**
+   * Socials field in *History*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: history.socials[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  socials: prismic.GroupField<Simplify<HistoryDocumentDataSocialsItem>>;
+
+  /**
+   * Image field in *History*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: history.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Image retina field in *History*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: history.image_retina
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image_retina: prismic.ImageField<never>;
+}
+
+/**
+ * History document from Prismic
+ *
+ * - **API ID**: `history`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type HistoryDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<HistoryDocumentData>,
+    'history',
+    Lang
+  >;
+
 type HomepageDocumentDataSlicesSlice =
+  | HistoriesSlice
   | PhotosSlice
   | FeedbackSlice
   | ConstructTourSlice
@@ -758,6 +886,7 @@ export type ToursDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | FeedbackCardDocument
+  | HistoryDocument
   | HomepageDocument
   | InputDocument
   | PageDocument
@@ -1492,6 +1621,76 @@ export type FeedbackSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Histories → Primary*
+ */
+export interface HistoriesSliceDefaultPrimary {
+  /**
+   * Title field in *Histories → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: histories.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+
+  /**
+   * Description field in *Histories → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: histories.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *Histories → Items*
+ */
+export interface HistoriesSliceDefaultItem {
+  /**
+   * History field in *Histories → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: histories.items[].history
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  history: prismic.ContentRelationshipField<'history'>;
+}
+
+/**
+ * Default variation for Histories Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HistoriesSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<HistoriesSliceDefaultPrimary>,
+  Simplify<HistoriesSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Histories*
+ */
+type HistoriesSliceVariation = HistoriesSliceDefault;
+
+/**
+ * Histories Shared Slice
+ *
+ * - **API ID**: `histories`
+ * - **Description**: Histories
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HistoriesSlice = prismic.SharedSlice<
+  'histories',
+  HistoriesSliceVariation
+>;
+
+/**
  * Primary content in *Photos → Primary*
  */
 export interface PhotosSliceDefaultPrimary {
@@ -1571,6 +1770,10 @@ declare module '@prismicio/client' {
       FeedbackCardDocument,
       FeedbackCardDocumentData,
       FeedbackCardDocumentDataFeedbackItem,
+      HistoryDocument,
+      HistoryDocumentData,
+      HistoryDocumentDataAdvantagesItem,
+      HistoryDocumentDataSocialsItem,
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
@@ -1613,6 +1816,11 @@ declare module '@prismicio/client' {
       FeedbackSliceDefaultItem,
       FeedbackSliceVariation,
       FeedbackSliceDefault,
+      HistoriesSlice,
+      HistoriesSliceDefaultPrimary,
+      HistoriesSliceDefaultItem,
+      HistoriesSliceVariation,
+      HistoriesSliceDefault,
       PhotosSlice,
       PhotosSliceDefaultPrimary,
       PhotosSliceDefaultItem,
