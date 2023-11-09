@@ -1,0 +1,99 @@
+{
+  "id": "contact",
+  "type": "SharedSlice",
+  "name": "Contact",
+  "description": "Contact",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading2"
+          }
+        },
+        "text": {
+          "type": "Text",
+          "config": {
+            "label": "Text",
+            "placeholder": ""
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph"
+          }
+        },
+        "email": {
+          "type": "Text",
+          "config": {
+            "label": "Email",
+            "placeholder": ""
+          }
+        },
+        "image_desktop": {
+          "type": "Image",
+          "config": {
+            "label": "Image desktop",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "image_tablet": {
+          "type": "Image",
+          "config": {
+            "label": "Image tablet",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "image_mobile": {
+          "type": "Image",
+          "config": {
+            "label": "Image mobile",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "image_desktop_retina": {
+          "type": "Image",
+          "config": {
+            "label": "Image desktop retina",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "image_tablet_retina": {
+          "type": "Image",
+          "config": {
+            "label": "Image tablet retina",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "image_mobile_retina": {
+          "type": "Image",
+          "config": {
+            "label": "Image mobile retina",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

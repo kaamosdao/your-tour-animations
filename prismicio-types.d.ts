@@ -223,6 +223,7 @@ export type HistoryDocument<Lang extends string = string> =
   >;
 
 type HomepageDocumentDataSlicesSlice =
+  | ContactSlice
   | HistoriesSlice
   | PhotosSlice
   | FeedbackSlice
@@ -1416,6 +1417,141 @@ export type ConstructTourSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Contact → Primary*
+ */
+export interface ContactSliceDefaultPrimary {
+  /**
+   * Title field in *Contact → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+
+  /**
+   * Text field in *Contact → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.primary.text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text: prismic.KeyTextField;
+
+  /**
+   * Description field in *Contact → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Email field in *Contact → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.primary.email
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  email: prismic.KeyTextField;
+
+  /**
+   * Image desktop field in *Contact → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.primary.image_desktop
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image_desktop: prismic.ImageField<never>;
+
+  /**
+   * Image tablet field in *Contact → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.primary.image_tablet
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image_tablet: prismic.ImageField<never>;
+
+  /**
+   * Image mobile field in *Contact → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.primary.image_mobile
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image_mobile: prismic.ImageField<never>;
+
+  /**
+   * Image desktop retina field in *Contact → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.primary.image_desktop_retina
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image_desktop_retina: prismic.ImageField<never>;
+
+  /**
+   * Image tablet retina field in *Contact → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.primary.image_tablet_retina
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image_tablet_retina: prismic.ImageField<never>;
+
+  /**
+   * Image mobile retina field in *Contact → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.primary.image_mobile_retina
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image_mobile_retina: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for Contact Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<ContactSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Contact*
+ */
+type ContactSliceVariation = ContactSliceDefault;
+
+/**
+ * Contact Shared Slice
+ *
+ * - **API ID**: `contact`
+ * - **Description**: Contact
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactSlice = prismic.SharedSlice<
+  'contact',
+  ContactSliceVariation
+>;
+
+/**
  * Primary content in *Description → Primary*
  */
 export interface DescriptionSliceDefaultPrimary {
@@ -1805,6 +1941,10 @@ declare module '@prismicio/client' {
       ConstructTourSliceDefaultItem,
       ConstructTourSliceVariation,
       ConstructTourSliceDefault,
+      ContactSlice,
+      ContactSliceDefaultPrimary,
+      ContactSliceVariation,
+      ContactSliceDefault,
       DescriptionSlice,
       DescriptionSliceDefaultPrimary,
       DescriptionSliceWithoutButtonPrimary,

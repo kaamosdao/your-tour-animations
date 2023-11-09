@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 export const components = {
   choose_tour: dynamic(() => import('./ChooseTour')),
   construct_tour: dynamic(() => import('./ConstructTour')),
+  contact: dynamic(() => import('./Contact')),
   description: dynamic(() => import('./Description')),
   feedback: dynamic(() => import('./Feedback')),
   histories: dynamic(() => import('./Histories')),

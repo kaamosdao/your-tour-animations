@@ -2,13 +2,18 @@
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { PrismicRichText } from '@prismicio/react';
 
 import Picture from '../Picture';
 import HoverCursor from '../CustomCursor/HoverCursor';
 
 import s from './SectionContact.module.scss';
 
-const SectionContact = () => {
+const components = {
+  heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
+};
+
+const SectionContact = ({ slice }) => {
   const sectionRef = useRef(null);
   const q = gsap.utils.selector(sectionRef);
 
@@ -63,19 +68,18 @@ const SectionContact = () => {
   }, [q]);
 
   return (
-    <section ref={sectionRef} className={s.contact}>
-      <h2 className={s.title}>
-        Пора в путешествие
-        <br />
-        вместе с нами!
-      </h2>
+    <section
+      ref={sectionRef}
+      className={s.contact}
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+    >
+      <PrismicRichText field={slice.primary.title} components={components} />
       <p className={s.text}>
-        Напиши на почту и узнай подробности
-        <br />
-        на&nbsp;
+        {slice.primary.description[0].text}
         <HoverCursor cursorType="pulse">
-          <a className={s.link} href="mailto:yourtour@gmail.com">
-            yourtour@gmail.com
+          <a className={s.link} href={`mailto:${slice.primary.email}`}>
+            {slice.primary.email}
           </a>
         </HoverCursor>
       </p>

@@ -44,7 +44,7 @@
     grid-column: 2 / 3;
     grid-row: 1 / 2;
     align-self: flex-end;
-    width: 100%;
+    width: 300px;
     margin: -7px 0 0 20px;
   }
 
@@ -69,14 +69,14 @@
     display: block;
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    width: 100%;
+    width: 294px;
     margin: 20px 0 0 20px;
   }
 
   @media (min-width: $desktop-md-width) {
     @include font(normal, 20px, 142%);
 
-    width: 365px;
+    width: 370px;
     margin: 20px 0 0 29px;
   }
 }
