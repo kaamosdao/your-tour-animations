@@ -15,14 +15,14 @@
     display: grid;
     grid-template-columns: max-content max-content;
     grid-template-rows: max-content max-content;
-    width: 670px;
+    width: fit-content;
     min-height: 370px;
     margin-top: 77px;
     text-align: start;
   }
 
   @media (min-width: $desktop-md-width) {
-    width: 770px;
+    // width: 770px;
     min-height: 370px;
     margin-top: 135px;
     margin-bottom: 127px;
@@ -34,7 +34,8 @@
 
   order: 2;
   align-self: center;
-  margin: 24px 0 0 0;
+  width: 81%;
+  margin: 24px auto 0;
   color: var(--main-text-color);
 
   @media (min-width: $tablet-lg-width) {
@@ -60,7 +61,8 @@
   @include font(normal, 16px, 142%);
 
   order: 3;
-  margin: 20px 0 0 0;
+  width: 81%;
+  margin: 20px auto 0;
   color: var(--sec-text-color);
 
   @media (min-width: $tablet-lg-width) {
@@ -69,7 +71,7 @@
     display: block;
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    width: 294px;
+    width: 300px;
     margin: 20px 0 0 20px;
   }
 

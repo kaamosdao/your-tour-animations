@@ -1461,64 +1461,24 @@ export interface ContactSliceDefaultPrimary {
   email: prismic.KeyTextField;
 
   /**
-   * Image desktop field in *Contact → Primary*
+   * Image field in *Contact → Primary*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: contact.primary.image_desktop
+   * - **API ID Path**: contact.primary.image
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-  image_desktop: prismic.ImageField<never>;
+  image: prismic.ImageField<never>;
 
   /**
-   * Image tablet field in *Contact → Primary*
+   * Image retina field in *Contact → Primary*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: contact.primary.image_tablet
+   * - **API ID Path**: contact.primary.image_retina
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-  image_tablet: prismic.ImageField<never>;
-
-  /**
-   * Image mobile field in *Contact → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.primary.image_mobile
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image_mobile: prismic.ImageField<never>;
-
-  /**
-   * Image desktop retina field in *Contact → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.primary.image_desktop_retina
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image_desktop_retina: prismic.ImageField<never>;
-
-  /**
-   * Image tablet retina field in *Contact → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.primary.image_tablet_retina
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image_tablet_retina: prismic.ImageField<never>;
-
-  /**
-   * Image mobile retina field in *Contact → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.primary.image_mobile_retina
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image_mobile_retina: prismic.ImageField<never>;
+  image_retina: prismic.ImageField<never>;
 }
 
 /**

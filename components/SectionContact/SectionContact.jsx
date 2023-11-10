@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { PrismicRichText } from '@prismicio/react';
 
-import Picture from '../Picture';
 import HoverCursor from '../CustomCursor/HoverCursor';
 
 import s from './SectionContact.module.scss';
+import CustomImage from '../CustomImage';
 
 const components = {
   heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
@@ -16,6 +16,12 @@ const components = {
 const SectionContact = ({ slice }) => {
   const sectionRef = useRef(null);
   const q = gsap.utils.selector(sectionRef);
+
+  const [devicePixelRatio, setDevicePixelRatio] = useState(1);
+
+  useEffect(() => {
+    setDevicePixelRatio(window.devicePixelRatio);
+  }, []);
 
   useEffect(() => {
     const picture = q('div[class*="picture"]');
@@ -84,24 +90,10 @@ const SectionContact = ({ slice }) => {
         </HoverCursor>
       </p>
       <div className={s.picture}>
-        <Picture
-          desktopImg={{
-            width: 370,
-            height: 370,
-            url: '/img/histories/icon-village-desktop-lg',
-          }}
-          tabletImg={{
-            width: 370,
-            height: 370,
-            url: '/img/histories/icon-village-desktop-md',
-          }}
-          defaultImg={{
-            width: 133,
-            height: 130,
-            url: '/img/histories/icon-village-mobile',
-          }}
-          alt="Деревня у озера в горах"
-          format="png"
+        <CustomImage
+          image={slice.primary.image}
+          imageRetina={slice.primary.image_retina}
+          devicePixelRatio={devicePixelRatio}
         />
       </div>
     </section>

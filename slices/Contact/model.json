@@ -44,50 +44,18 @@
             "placeholder": ""
           }
         },
-        "image_desktop": {
+        "image": {
           "type": "Image",
           "config": {
-            "label": "Image desktop",
+            "label": "Image",
             "constraint": {},
             "thumbnails": []
           }
         },
-        "image_tablet": {
+        "image_retina": {
           "type": "Image",
           "config": {
-            "label": "Image tablet",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
-        "image_mobile": {
-          "type": "Image",
-          "config": {
-            "label": "Image mobile",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
-        "image_desktop_retina": {
-          "type": "Image",
-          "config": {
-            "label": "Image desktop retina",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
-        "image_tablet_retina": {
-          "type": "Image",
-          "config": {
-            "label": "Image tablet retina",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
-        "image_mobile_retina": {
-          "type": "Image",
-          "config": {
-            "label": "Image mobile retina",
+            "label": "Image retina",
             "constraint": {},
             "thumbnails": []
           }
