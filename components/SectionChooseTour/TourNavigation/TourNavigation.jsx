@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { Transition, TransitionGroup } from 'react-transition-group';
-import gsap from 'gsap';
+import gsap from 'gsap/dist/gsap';
 
 import NavItem from './NavItem';
 
@@ -16,7 +16,7 @@ const TourNavigation = ({ tours, activeNav, setActiveNav }) => {
   useEffect(() => {
     const links = q('li');
 
-    gsap
+    const tl = gsap
       .timeline({
         scrollTrigger: {
           trigger: navRef?.current,
@@ -37,6 +37,10 @@ const TourNavigation = ({ tours, activeNav, setActiveNav }) => {
           stagger: 0.2,
         }
       );
+
+    return () => {
+      tl.kill();
+    };
   }, [q]);
 
   const onClick = (e) => {

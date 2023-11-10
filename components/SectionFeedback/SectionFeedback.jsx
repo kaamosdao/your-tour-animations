@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { PrismicRichText } from '@prismicio/react';
 import { isFilled } from '@prismicio/client';
 import { createClient } from '@/prismicio';
@@ -22,6 +23,10 @@ const SectionFeedback = ({ slice }) => {
   const [feedbacks, setFeedbacks] = useState(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+  }, []);
+
+  useEffect(() => {
     const client = createClient();
 
     const getData = async () => {
@@ -40,9 +45,9 @@ const SectionFeedback = ({ slice }) => {
   }, [slice.items]);
 
   useEffect(() => {
-    const feedbackItems = q('li');
+    const feedbackItems = q('button');
 
-    gsap
+    const tl = gsap
       .timeline({
         scrollTrigger: {
           trigger: feedbackRef?.current,
@@ -63,6 +68,10 @@ const SectionFeedback = ({ slice }) => {
           stagger: 0.2,
         }
       );
+
+    return () => {
+      tl.kill();
+    };
   }, [q]);
 
   return (

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import gsap from 'gsap/dist/gsap';
 import classnames from 'classnames/bind';
 
 import { transitionState } from '@/utils/types';

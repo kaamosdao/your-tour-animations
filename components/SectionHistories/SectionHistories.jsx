@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import gsap from 'gsap';
+import gsap from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { PrismicRichText } from '@prismicio/react';
 import { createClient } from '@/prismicio';
 
@@ -26,6 +27,10 @@ const SectionHistories = ({ slice }) => {
   const [histories, setHistories] = useState(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+  }, []);
+
+  useEffect(() => {
     const client = createClient();
     const getData = async () => {
       const data = await client.getAllByUIDs('history', historyUIDs);
@@ -40,7 +45,7 @@ const SectionHistories = ({ slice }) => {
     const description = q('div[class*="item"]');
     const button = q('div[class*="controls"]');
 
-    gsap
+    const tl = gsap
       .timeline({
         scrollTrigger: {
           trigger: sliderRef?.current,
@@ -60,6 +65,10 @@ const SectionHistories = ({ slice }) => {
           stagger: 0.2,
         }
       );
+
+    return () => {
+      tl.kill();
+    };
   }, [q]);
 
   return (

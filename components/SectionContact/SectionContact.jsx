@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import gsap from 'gsap/dist/gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { PrismicRichText } from '@prismicio/react';
 
@@ -31,7 +31,7 @@ const SectionContact = ({ slice }) => {
     const title = q('h2[class*="title"]');
     const text = q('p[class*="text"]');
 
-    gsap
+    const tl = gsap
       .timeline({
         scrollTrigger: {
           trigger: sectionRef?.current,
@@ -74,6 +74,10 @@ const SectionContact = ({ slice }) => {
         },
         0.3
       );
+
+    return () => {
+      tl.kill();
+    };
   }, [q]);
 
   return (

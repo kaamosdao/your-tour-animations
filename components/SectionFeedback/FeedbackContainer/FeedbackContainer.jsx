@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import gsap from 'gsap';
+import gsap from 'gsap/dist/gsap';
 
 import { modals } from '@/utils/types';
 

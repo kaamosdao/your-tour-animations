@@ -3,7 +3,7 @@
 /* eslint-disable react/no-array-index-key */
 
 import { useCallback, useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import gsap from 'gsap/dist/gsap';
 
 import useTransition from '@/hooks';
 import useDevicePixelRatio from '@/hooks/useDevicePixelRatio';
