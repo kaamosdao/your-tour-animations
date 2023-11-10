@@ -1,6 +1,8 @@
 /* eslint-disable react/no-array-index-key */
-import { useEffect, useState } from 'react';
+
 import { PrismicRichText } from '@prismicio/react';
+
+import useDevicePixelRatio from '@/hooks/useDevicePixelRatio';
 
 import CustomImage from '@/components/CustomImage';
 
@@ -14,11 +16,7 @@ const FeedbackCard = ({
   feedback,
   isModal,
 }) => {
-  const [devicePixelRatio, setDevicePixelRatio] = useState(1);
-
-  useEffect(() => {
-    setDevicePixelRatio(window.devicePixelRatio);
-  }, []);
+  const devicePixelRatio = useDevicePixelRatio();
 
   return (
     <li className={isModal ? s.cardModal : s.card}>

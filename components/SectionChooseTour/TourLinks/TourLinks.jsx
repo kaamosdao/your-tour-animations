@@ -2,10 +2,11 @@
 
 /* eslint-disable react/no-array-index-key */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 import useTransition from '@/hooks';
+import useDevicePixelRatio from '@/hooks/useDevicePixelRatio';
 
 import TourCard from '../TourCard/TourCard';
 
@@ -16,11 +17,7 @@ const TourLinks = ({ cards }) => {
   const q = gsap.utils.selector(cardsRef);
   const isVisible = useTransition();
 
-  const [devicePixelRatio, setDevicePixelRatio] = useState(1);
-
-  useEffect(() => {
-    setDevicePixelRatio(window.devicePixelRatio);
-  }, []);
+  const devicePixelRatio = useDevicePixelRatio();
 
   const handleExit = useCallback(() => {
     const cardItems = q('a');

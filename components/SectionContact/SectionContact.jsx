@@ -1,13 +1,16 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { PrismicRichText } from '@prismicio/react';
 
+import useDevicePixelRatio from '@/hooks/useDevicePixelRatio';
+
 import HoverCursor from '../CustomCursor/HoverCursor';
+import CustomImage from '../CustomImage';
 
 import s from './SectionContact.module.scss';
-import CustomImage from '../CustomImage';
 
 const components = {
   heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
@@ -17,10 +20,10 @@ const SectionContact = ({ slice }) => {
   const sectionRef = useRef(null);
   const q = gsap.utils.selector(sectionRef);
 
-  const [devicePixelRatio, setDevicePixelRatio] = useState(1);
+  const devicePixelRatio = useDevicePixelRatio();
 
   useEffect(() => {
-    setDevicePixelRatio(window.devicePixelRatio);
+    gsap.registerPlugin(ScrollTrigger);
   }, []);
 
   useEffect(() => {
