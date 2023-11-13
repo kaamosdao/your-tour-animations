@@ -73,13 +73,14 @@
 
 .tagline {
   margin: 0 auto;
-  width: 250px;
+  max-width: 300px;
   text-align: center;
   color: var(--third-text-color);
   overflow: hidden;
 
   @media (min-width: $tablet-lg-width) {
-    width: 610px;
+    min-width: 610px;
+    max-width: 800px;
   }
 
   @media (min-width: $desktop-lg-width) {
