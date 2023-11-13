@@ -34,7 +34,7 @@ const SectionContact = ({ slice }) => {
     const tl = gsap
       .timeline({
         scrollTrigger: {
-          trigger: sectionRef?.current,
+          trigger: sectionRef.current,
           start: '80% bottom',
           toggleActions: 'restart play reverse reverse',
         },

@@ -48,7 +48,7 @@ const SectionHistories = ({ slice }) => {
     const tl = gsap
       .timeline({
         scrollTrigger: {
-          trigger: sliderRef?.current,
+          trigger: sliderRef.current,
           start: '80% bottom',
           toggleActions: 'restart play reverse reverse',
         },

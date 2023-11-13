@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
+import { gsap } from 'gsap/dist/gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { PrismicRichText } from '@prismicio/react';
 import { isFilled } from '@prismicio/client';
@@ -50,7 +50,7 @@ const SectionFeedback = ({ slice }) => {
     const tl = gsap
       .timeline({
         scrollTrigger: {
-          trigger: feedbackRef?.current,
+          trigger: feedbackRef.current,
           start: '20% bottom',
           end: '20% 80%',
           toggleActions: 'restart play reverse reverse',

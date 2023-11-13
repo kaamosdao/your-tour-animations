@@ -18,7 +18,7 @@ const TourNavigation = ({ tours, activeNav, setActiveNav }) => {
     const tl = gsap
       .timeline({
         scrollTrigger: {
-          trigger: navRef?.current,
+          trigger: navRef.current,
           start: 'top bottom',
           end: '+=500',
           toggleActions: 'restart complete none reverse',
