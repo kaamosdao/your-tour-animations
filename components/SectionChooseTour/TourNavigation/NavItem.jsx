@@ -1,10 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap/dist/gsap';
 import classnames from 'classnames/bind';
-
-import { transitionState } from '@/utils/types';
 
 import HoverCursor from '../../CustomCursor/HoverCursor';
 
@@ -12,9 +10,15 @@ import s from './NavItem.module.scss';
 
 const cn = classnames.bind(s);
 
-const NavItem = ({ onClick, activeNav, name, id, transitionStatus }) => {
+const NavItem = ({ onClick, activeNav, name, id }) => {
   const button = useRef(null);
   const line = useRef(null);
+
+  const [isActive, setIsActive] = useState(null);
+
+  useEffect(() => {
+    setIsActive(id === activeNav);
+  }, [activeNav, id]);
 
   useEffect(() => {
     if (id === activeNav) {
@@ -42,7 +46,7 @@ const NavItem = ({ onClick, activeNav, name, id, transitionStatus }) => {
           0
         );
     }
-    if (id !== activeNav && transitionStatus === transitionState.exited) {
+    if (id !== activeNav && isActive) {
       gsap
         .timeline()
         .fromTo(
@@ -67,7 +71,7 @@ const NavItem = ({ onClick, activeNav, name, id, transitionStatus }) => {
           0
         );
     }
-  }, [activeNav, id, transitionStatus]);
+  }, [activeNav, id, isActive]);
 
   return (
     <li className={s.navItem} key={name}>

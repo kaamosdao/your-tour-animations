@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { Transition, TransitionGroup } from 'react-transition-group';
 import gsap from 'gsap/dist/gsap';
 
 import NavItem from './NavItem';
@@ -49,25 +48,15 @@ const TourNavigation = ({ tours, activeNav, setActiveNav }) => {
 
   return (
     <ul ref={navRef} className={s.nav}>
-      <TransitionGroup component={null}>
-        {tours?.map(({ data, uid }) => (
-          <Transition
-            key={`${uid}${uid === activeNav ? '-active' : ''}`}
-            timeout={0}
-            exit={false}
-          >
-            {(status) => (
-              <NavItem
-                onClick={onClick}
-                activeNav={activeNav}
-                name={data.name}
-                id={uid}
-                transitionStatus={status}
-              />
-            )}
-          </Transition>
-        ))}
-      </TransitionGroup>
+      {tours?.map(({ data, uid }) => (
+        <NavItem
+          key={uid}
+          onClick={onClick}
+          activeNav={activeNav}
+          name={data.name}
+          id={uid}
+        />
+      ))}
     </ul>
   );
 };
