@@ -24,9 +24,11 @@ const TourLinks = ({ cards }) => {
     const width = window.innerWidth;
     const tl = gsap.timeline();
 
+    const shift = '100%';
+
     if (width < 800) {
       return tl.to(cardItems, {
-        x: -2000,
+        x: `-${shift}`,
         ease: 'power1.inOut',
         duration: 0.5,
         stagger: 0.1,
@@ -39,7 +41,7 @@ const TourLinks = ({ cards }) => {
 
       return tl
         .to(leftCards, {
-          x: -2000,
+          x: `-${shift}`,
           ease: 'power1.inOut',
           duration: 0.5,
           stagger: 0.1,
@@ -47,7 +49,7 @@ const TourLinks = ({ cards }) => {
         .to(
           rightCards,
           {
-            x: 2000,
+            x: shift,
             ease: 'power1.inOut',
             duration: 0.5,
             stagger: 0.1,
@@ -61,7 +63,7 @@ const TourLinks = ({ cards }) => {
 
     return tl
       .to(topCards, {
-        y: -2000,
+        y: `-${shift}`,
         ease: 'power1.inOut',
         duration: 0.5,
         stagger: 0.1,
@@ -69,7 +71,7 @@ const TourLinks = ({ cards }) => {
       .to(
         bottomCards,
         {
-          y: 2000,
+          y: shift,
           ease: 'power1.inOut',
           duration: 0.5,
           stagger: 0.1,
@@ -153,12 +155,11 @@ const TourLinks = ({ cards }) => {
 
   return (
     <ul ref={cardsRef} className={s.links}>
-      {cards &&
-        cards.map((card, i) => (
-          <li key={i} className={s.linksItem}>
-            <TourCard card={card} devicePixelRatio={devicePixelRatio} />
-          </li>
-        ))}
+      {cards?.map((card, i) => (
+        <li key={i} className={s.linksItem}>
+          <TourCard card={card} devicePixelRatio={devicePixelRatio} />
+        </li>
+      ))}
     </ul>
   );
 };
