@@ -1,5 +1,7 @@
 import { usePathname } from 'next/navigation';
 import { PrismicPreview } from '@prismicio/next';
+import gsap from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 import { repositoryName } from '@/prismicio';
 
@@ -10,6 +12,8 @@ import '@/styles/style.scss';
 
 export default function App({ Component, pageProps }) {
   const pathName = usePathname();
+
+  gsap.registerPlugin(ScrollTrigger);
 
   return (
     <>

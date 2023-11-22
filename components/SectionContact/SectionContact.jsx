@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap/dist/gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { PrismicRichText } from '@prismicio/react';
 
 import useDevicePixelRatio from '@/hooks/useDevicePixelRatio';
@@ -21,10 +20,6 @@ const SectionContact = ({ slice }) => {
   const q = gsap.utils.selector(sectionRef);
 
   const devicePixelRatio = useDevicePixelRatio();
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-  }, []);
 
   useEffect(() => {
     const picture = q('div[class*="picture"]');

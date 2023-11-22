@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap/dist/gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 import Navigation from '../Navigation';
 
@@ -10,10 +9,6 @@ import s from './Header.module.scss';
 
 const Header = () => {
   const headerRef = useRef();
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-  }, []);
 
   useEffect(() => {
     gsap

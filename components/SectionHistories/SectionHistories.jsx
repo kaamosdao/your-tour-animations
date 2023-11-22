@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import gsap from 'gsap/dist/gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { PrismicRichText } from '@prismicio/react';
 import { createClient } from '@/prismicio';
 
@@ -25,10 +24,6 @@ const SectionHistories = ({ slice }) => {
     [slice]
   );
   const [histories, setHistories] = useState(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-  }, []);
 
   useEffect(() => {
     const client = createClient();

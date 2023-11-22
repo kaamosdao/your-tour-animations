@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap/dist/gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { PrismicRichText } from '@prismicio/react';
 import { isFilled } from '@prismicio/client';
 import { createClient } from '@/prismicio';
@@ -21,10 +20,6 @@ const SectionFeedback = ({ slice }) => {
   const q = gsap.utils.selector(feedbackRef);
 
   const [feedbacks, setFeedbacks] = useState(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-  }, []);
 
   useEffect(() => {
     const client = createClient();
