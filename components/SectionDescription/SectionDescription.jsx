@@ -23,13 +23,16 @@ const SectionDescription = ({ slice }) => {
     const description = q('p[class*="description"]');
     const button = q('a[class*="button"]');
 
+    const shift = '-105%';
+    const initialPosition = 0;
+
     gsap.timeline().fromTo(
       [title, description, button],
       {
-        x: -1000,
+        x: shift,
       },
       {
-        x: 0,
+        x: initialPosition,
         ease: 'power3.out',
         duration: 1,
         delay: 0.2,

@@ -26,13 +26,16 @@ const DescriptionSecondary = ({ slice }) => {
     const title = q('h2[class*="title"]');
     const description = q('p[class*="description"]');
 
+    const shift = '-100%';
+    const initialPosition = 0;
+
     if (isVisible) {
       gsap.set([title, description], {
-        x: -2000,
+        x: shift,
       });
     } else {
       gsap.set([title, description], {
-        x: 0,
+        x: initialPosition,
       });
     }
   }, [q, isVisible]);
@@ -41,16 +44,19 @@ const DescriptionSecondary = ({ slice }) => {
     const title = q('h2[class*="title"]');
     const description = q('p[class*="description"]');
 
+    const shift = '-105%';
+    const initialPosition = 0;
+
     const animation = gsap.timeline();
 
     if (isVisible) {
       animation.fromTo(
         [title, description],
         {
-          x: -1000,
+          x: shift,
         },
         {
-          x: 0,
+          x: initialPosition,
           ease: 'power3.out',
           duration: 1,
           delay: 0.2,

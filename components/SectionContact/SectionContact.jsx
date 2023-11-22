@@ -26,6 +26,9 @@ const SectionContact = ({ slice }) => {
     const title = q('h2[class*="title"]');
     const text = q('p[class*="text"]');
 
+    const shift = '105%';
+    const initialPosition = 0;
+
     const tl = gsap
       .timeline({
         scrollTrigger: {
@@ -37,10 +40,10 @@ const SectionContact = ({ slice }) => {
       .fromTo(
         picture,
         {
-          x: -2000,
+          x: `-${shift}`,
         },
         {
-          x: 0,
+          x: initialPosition,
           ease: 'power3.out',
           duration: 0.7,
         }
@@ -48,7 +51,7 @@ const SectionContact = ({ slice }) => {
       .fromTo(
         title,
         {
-          y: -2000,
+          y: `-${shift}`,
         },
         {
           y: 0,
@@ -60,10 +63,10 @@ const SectionContact = ({ slice }) => {
       .fromTo(
         text,
         {
-          y: 2000,
+          y: shift,
         },
         {
-          y: 0,
+          y: initialPosition,
           ease: 'power3.out',
           duration: 0.7,
         },

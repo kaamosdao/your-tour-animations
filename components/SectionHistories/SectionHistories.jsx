@@ -40,6 +40,9 @@ const SectionHistories = ({ slice }) => {
     const description = q('div[class*="item"]');
     const button = q('div[class*="controls"]');
 
+    const shift = '-105%';
+    const initialPosition = 0;
+
     const tl = gsap
       .timeline({
         scrollTrigger: {
@@ -51,10 +54,10 @@ const SectionHistories = ({ slice }) => {
       .fromTo(
         [description, button],
         {
-          x: -2000,
+          x: shift,
         },
         {
-          x: 0,
+          x: initialPosition,
           ease: 'power3.out',
           duration: 0.7,
           stagger: 0.2,
