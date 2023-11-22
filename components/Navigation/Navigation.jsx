@@ -39,7 +39,7 @@ const Navigation = () => {
     getSettings();
   }, []);
 
-  const onClick = (path) => (e) => {
+  const moveToRoute = (path) => (e) => {
     e.preventDefault();
 
     if (playing) {
@@ -64,7 +64,7 @@ const Navigation = () => {
   return (
     <nav className={s.navigation}>
       <HoverCursor cursorType="pulse">
-        <Link className={s.logo} href="/" onClick={onClick('/')}>
+        <Link className={s.logo} href="/" onClick={moveToRoute('/')}>
           <YourTourIcon className={s.icon} />
         </Link>
       </HoverCursor>
@@ -80,7 +80,7 @@ const Navigation = () => {
                     : s.link
                 }
                 field={link}
-                onClick={onClick(link.url)}
+                onClick={moveToRoute(link.url)}
               >
                 {label}
               </PrismicNextLink>
