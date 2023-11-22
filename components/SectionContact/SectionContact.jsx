@@ -11,22 +11,25 @@ import CustomImage from '../CustomImage';
 
 import s from './SectionContact.module.scss';
 
-const components = {
-  heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
-};
+const components = (titleRef) => ({
+  heading2: ({ children }) => (
+    <h2 ref={titleRef} className={s.title}>
+      {children}
+    </h2>
+  ),
+});
 
 const SectionContact = ({ slice }) => {
   const sectionRef = useRef(null);
-  const q = gsap.utils.selector(sectionRef);
+  const pictureRef = useRef(null);
+  const titleRef = useRef(null);
+  const textRef = useRef(null);
 
   const devicePixelRatio = useDevicePixelRatio();
 
   useEffect(() => {
-    const picture = q('div[class*="picture"]');
-    const title = q('h2[class*="title"]');
-    const text = q('p[class*="text"]');
-
     const shift = '105%';
+    const shiftTitle = '220%';
     const initialPosition = 0;
 
     const tl = gsap
@@ -38,7 +41,7 @@ const SectionContact = ({ slice }) => {
         },
       })
       .fromTo(
-        picture,
+        pictureRef.current,
         {
           x: `-${shift}`,
         },
@@ -49,9 +52,9 @@ const SectionContact = ({ slice }) => {
         }
       )
       .fromTo(
-        title,
+        titleRef.current,
         {
-          y: `-${shift}`,
+          y: `-${shiftTitle}`,
         },
         {
           y: 0,
@@ -61,7 +64,7 @@ const SectionContact = ({ slice }) => {
         0.2
       )
       .fromTo(
-        text,
+        textRef.current,
         {
           y: shift,
         },
@@ -76,7 +79,7 @@ const SectionContact = ({ slice }) => {
     return () => {
       tl.kill();
     };
-  }, [q]);
+  }, []);
 
   return (
     <section
@@ -85,8 +88,12 @@ const SectionContact = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <PrismicRichText field={slice.primary.title} components={components} />
-      <p className={s.text}>
+      <PrismicRichText
+        ref={titleRef}
+        field={slice.primary.title}
+        components={components(titleRef)}
+      />
+      <p ref={textRef} className={s.text}>
         {slice.primary.description[0].text}
         <HoverCursor cursorType="pulse">
           <a className={s.link} href={`mailto:${slice.primary.email}`}>
@@ -94,7 +101,7 @@ const SectionContact = ({ slice }) => {
           </a>
         </HoverCursor>
       </p>
-      <div className={s.picture}>
+      <div ref={pictureRef} className={s.picture}>
         <CustomImage
           image={slice.primary.image}
           imageRetina={slice.primary.image_retina}

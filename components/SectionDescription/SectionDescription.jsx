@@ -9,25 +9,31 @@ import HoverCursor from '../CustomCursor/HoverCursor';
 
 import s from './SectionDescription.module.scss';
 
-const components = {
-  heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
-  paragraph: ({ children }) => <p className={s.description}>{children}</p>,
-};
+const components = (titleRef, descriptionRef) => ({
+  heading2: ({ children }) => (
+    <h2 ref={titleRef} className={s.title}>
+      {children}
+    </h2>
+  ),
+  paragraph: ({ children }) => (
+    <p ref={descriptionRef} className={s.description}>
+      {children}
+    </p>
+  ),
+});
 
 const SectionDescription = ({ slice }) => {
   const tagline = useRef(null);
-  const q = gsap.utils.selector(tagline);
+  const titleRef = useRef(null);
+  const descriptionRef = useRef(null);
+  const buttonRef = useRef(null);
 
   useEffect(() => {
-    const title = q('h2[class*="title"]');
-    const description = q('p[class*="description"]');
-    const button = q('a[class*="button"]');
-
     const shift = '-105%';
     const initialPosition = 0;
 
     gsap.timeline().fromTo(
-      [title, description, button],
+      [titleRef.current, descriptionRef.current, buttonRef.current],
       {
         x: shift,
       },
@@ -39,7 +45,7 @@ const SectionDescription = ({ slice }) => {
         stagger: 0.2,
       }
     );
-  }, [q]);
+  }, []);
 
   return (
     <section
@@ -48,13 +54,20 @@ const SectionDescription = ({ slice }) => {
       data-slice-variation={slice.variation}
     >
       <div ref={tagline} className={s.tagline}>
-        <PrismicRichText field={slice.primary.title} components={components} />
+        <PrismicRichText
+          field={slice.primary.title}
+          components={components(titleRef, descriptionRef)}
+        />
         <PrismicRichText
           field={slice.primary.description}
-          components={components}
+          components={components(titleRef, descriptionRef)}
         />
         <HoverCursor cursorType="pulse">
-          <PrismicNextLink field={slice.primary.button} className={s.button}>
+          <PrismicNextLink
+            ref={buttonRef}
+            field={slice.primary.button}
+            className={s.button}
+          >
             {slice.primary.button_label}
           </PrismicNextLink>
         </HoverCursor>

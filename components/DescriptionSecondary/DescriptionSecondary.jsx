@@ -5,6 +5,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { PrismicRichText } from '@prismicio/react';
+import cn from 'classnames';
 
 import useTransition from '@/hooks';
 
@@ -13,8 +14,12 @@ import OverflowWrapper from '../OverflowWrapper';
 import s from './DescriptionSecondary.module.scss';
 
 const components = {
-  heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
-  paragraph: ({ children }) => <p className={s.description}>{children}</p>,
+  heading2: ({ children }) => (
+    <h2 className={cn('title', s.title)}>{children}</h2>
+  ),
+  paragraph: ({ children }) => (
+    <p className={cn('description', s.description)}>{children}</p>
+  ),
 };
 
 const DescriptionSecondary = ({ slice }) => {
@@ -23,8 +28,8 @@ const DescriptionSecondary = ({ slice }) => {
   const isVisible = useTransition();
 
   useEffect(() => {
-    const title = q('h2[class*="title"]');
-    const description = q('p[class*="description"]');
+    const title = q('.title');
+    const description = q('.description');
 
     const shift = '-100%';
     const initialPosition = 0;

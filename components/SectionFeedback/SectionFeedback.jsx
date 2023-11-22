@@ -42,6 +42,9 @@ const SectionFeedback = ({ slice }) => {
   useEffect(() => {
     const feedbackItems = q('button');
 
+    const shift = '-105%';
+    const initialPosition = 0;
+
     const tl = gsap
       .timeline({
         scrollTrigger: {
@@ -54,10 +57,10 @@ const SectionFeedback = ({ slice }) => {
       .fromTo(
         feedbackItems,
         {
-          y: -1000,
+          y: shift,
         },
         {
-          y: 0,
+          y: initialPosition,
           ease: 'power3.out',
           duration: 0.7,
           stagger: 0.2,
