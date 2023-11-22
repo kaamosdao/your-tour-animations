@@ -37,17 +37,6 @@
   border: none;
 }
 
-// .navLink:not(.navLinkCurrent):hover::after {
-//   z-index: 1;
-//   position: absolute;
-//   right: 0;
-//   bottom: -5px;
-//   left: 0;
-//   height: 2px;
-//   background-color: var(--main-text-color);
-//   content: '';
-// }
-
 .navLinkCurrent:hover {
   cursor: none;
 }
@@ -55,25 +44,6 @@
 .navLinkCurrent {
   color: var(--active-link-color);
 }
-
-// .navLinkCurrent::after {
-//   z-index: 1;
-//   position: absolute;
-//   right: 0;
-//   bottom: -2px;
-//   left: 0;
-//   height: 2px;
-//   background-color: var(--active-link-color);
-//   content: '';
-
-//   @media (min-width: $desktop-md-width) {
-//     bottom: -5px;
-//   }
-
-//   @media (min-width: $desktop-lg-width) {
-//     bottom: -6px;
-//   }
-// }
 
 .navItem {
   position: relative;

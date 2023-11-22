@@ -21,6 +21,9 @@ const NavItem = ({ onClick, activeNav, name, id }) => {
   }, [activeNav, id]);
 
   useEffect(() => {
+    const shift = '100%';
+    const initialPosition = 0;
+
     if (id === activeNav) {
       gsap
         .timeline()
@@ -37,10 +40,10 @@ const NavItem = ({ onClick, activeNav, name, id }) => {
         .fromTo(
           line.current,
           {
-            right: 200,
+            right: shift,
           },
           {
-            right: 0,
+            right: initialPosition,
             duration: 0.5,
           },
           0
@@ -62,10 +65,10 @@ const NavItem = ({ onClick, activeNav, name, id }) => {
         .fromTo(
           line.current,
           {
-            right: 0,
+            right: initialPosition,
           },
           {
-            right: 200,
+            right: shift,
             duration: 0.5,
           },
           0

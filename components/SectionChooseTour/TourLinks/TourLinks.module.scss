@@ -60,32 +60,32 @@
 
 .linksItem:nth-child(odd) a {
   @media (max-width: 799px) {
-    transform: translateX(-2000px);
+    transform: translateX(-105%);
   }
 
   @media (min-width: 800px) and (max-width: 1399px) {
-    transform: translateX(-2000px);
+    transform: translateX(-105%);
   }
 }
 
 .linksItem:nth-child(even) a {
   @media (max-width: 799px) {
-    transform: translateX(-2000px);
+    transform: translateX(-105%);
   }
 
   @media (min-width: 800px) and (max-width: 1399px) {
-    transform: translateX(2000px);
+    transform: translateX(105%);
   }
 }
 
 .linksItem:nth-child(-n + 3) a {
   @media (min-width: 1400px) {
-    transform: translateY(-2000px);
+    transform: translateY(-105%);
   }
 }
 
 .linksItem:nth-child(n + 4) a {
   @media (min-width: 1400px) {
-    transform: translateY(2000px);
+    transform: translateY(105%);
   }
 }

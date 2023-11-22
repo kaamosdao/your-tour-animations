@@ -15,6 +15,9 @@ const TourNavigation = ({ tours, activeNav, setActiveNav }) => {
   useEffect(() => {
     const links = q('li');
 
+    const shift = '-100%';
+    const initialPosition = 0;
+
     const tl = gsap
       .timeline({
         scrollTrigger: {
@@ -27,10 +30,10 @@ const TourNavigation = ({ tours, activeNav, setActiveNav }) => {
       .fromTo(
         links,
         {
-          y: -1000,
+          y: shift,
         },
         {
-          y: 0,
+          y: initialPosition,
           ease: 'power3.out',
           duration: 0.5,
           stagger: 0.2,

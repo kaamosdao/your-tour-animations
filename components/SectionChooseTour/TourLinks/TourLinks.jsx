@@ -24,7 +24,7 @@ const TourLinks = ({ cards }) => {
     const width = window.innerWidth;
     const tl = gsap.timeline();
 
-    const shift = '100%';
+    const shift = '105%';
 
     if (width < 800) {
       return tl.to(cardItems, {
@@ -85,9 +85,11 @@ const TourLinks = ({ cards }) => {
     const width = window.innerWidth;
     const tl = gsap.timeline();
 
+    const shift = 0;
+
     if (width < 800) {
       return tl.to(cardItems, {
-        x: 0,
+        x: shift,
         ease: 'power1.inOut',
         duration: 0.5,
         stagger: 0.1,
@@ -100,7 +102,7 @@ const TourLinks = ({ cards }) => {
 
       return tl
         .to(leftCards, {
-          x: 0,
+          x: shift,
           ease: 'power1.inOut',
           duration: 0.5,
           stagger: 0.1,
@@ -108,7 +110,7 @@ const TourLinks = ({ cards }) => {
         .to(
           rightCards,
           {
-            x: 0,
+            x: shift,
             ease: 'power1.inOut',
             duration: 0.5,
             stagger: 0.1,
@@ -122,7 +124,7 @@ const TourLinks = ({ cards }) => {
 
     return tl
       .to(topCards, {
-        y: 0,
+        y: shift,
         ease: 'power1.inOut',
         duration: 0.5,
         stagger: 0.1,
@@ -130,7 +132,7 @@ const TourLinks = ({ cards }) => {
       .to(
         bottomCards,
         {
-          y: 0,
+          y: shift,
           ease: 'power1.inOut',
           duration: 0.5,
           stagger: 0.1,
