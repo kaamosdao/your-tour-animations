@@ -1,10 +1,15 @@
 import { PrismicNextImage } from '@prismicio/next';
 
-const CustomImage = ({ image, imageRetina, devicePixelRatio }) =>
-  devicePixelRatio === 1 ? (
+import useDevicePixelRatio from '@/hooks/useDevicePixelRatio';
+
+const CustomImage = ({ image, imageRetina }) => {
+  const devicePixelRatio = useDevicePixelRatio();
+
+  return devicePixelRatio === 1 ? (
     <PrismicNextImage field={image} />
   ) : (
     <PrismicNextImage field={imageRetina} />
   );
+};
 
 export default CustomImage;

@@ -4,8 +4,6 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap/dist/gsap';
 import { PrismicRichText } from '@prismicio/react';
 
-import useDevicePixelRatio from '@/hooks/useDevicePixelRatio';
-
 import HoverCursor from '../CustomCursor/HoverCursor';
 import CustomImage from '../CustomImage';
 
@@ -24,8 +22,6 @@ const SectionContact = ({ slice }) => {
   const pictureRef = useRef(null);
   const titleRef = useRef(null);
   const textRef = useRef(null);
-
-  const devicePixelRatio = useDevicePixelRatio();
 
   useEffect(() => {
     const shift = '105%';
@@ -105,7 +101,6 @@ const SectionContact = ({ slice }) => {
         <CustomImage
           image={slice.primary.image}
           imageRetina={slice.primary.image_retina}
-          devicePixelRatio={devicePixelRatio}
         />
       </div>
     </section>

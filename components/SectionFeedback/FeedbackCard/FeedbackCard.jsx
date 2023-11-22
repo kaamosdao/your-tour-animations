@@ -2,8 +2,6 @@
 
 import { PrismicRichText } from '@prismicio/react';
 
-import useDevicePixelRatio from '@/hooks/useDevicePixelRatio';
-
 import CustomImage from '@/components/CustomImage';
 
 import s from './FeedbackCard.module.scss';
@@ -15,47 +13,39 @@ const FeedbackCard = ({
   tour,
   feedback,
   isModal,
-}) => {
-  const devicePixelRatio = useDevicePixelRatio();
-
-  return (
-    <li className={isModal ? s.cardModal : s.card}>
-      <div className={isModal ? s.textContainerModal : s.textContainer}>
-        {feedback.map(({ paragraph }, i) => (
-          <PrismicRichText
-            key={i}
-            field={paragraph}
-            components={{
-              paragraph: ({ children }) => <p className={s.text}>{children}</p>,
-            }}
-          />
-        ))}
-      </div>
-      <div className={s.user}>
+}) => (
+  <li className={isModal ? s.cardModal : s.card}>
+    <div className={isModal ? s.textContainerModal : s.textContainer}>
+      {feedback.map(({ paragraph }, i) => (
         <PrismicRichText
-          field={name}
+          key={i}
+          field={paragraph}
           components={{
-            paragraph: ({ children }) => <p className={s.name}>{children}</p>,
+            paragraph: ({ children }) => <p className={s.text}>{children}</p>,
           }}
         />
-        <PrismicRichText
-          field={tour}
-          components={{
-            paragraph: ({ children }) => <p className={s.tour}>{children}</p>,
-          }}
-        />
-        <div className={s.avatarContainer}>
-          <div className={s.avatarPicture}>
-            <CustomImage
-              devicePixelRatio={devicePixelRatio}
-              image={image}
-              imageRetina={imageRetina}
-            />
-          </div>
+      ))}
+    </div>
+    <div className={s.user}>
+      <PrismicRichText
+        field={name}
+        components={{
+          paragraph: ({ children }) => <p className={s.name}>{children}</p>,
+        }}
+      />
+      <PrismicRichText
+        field={tour}
+        components={{
+          paragraph: ({ children }) => <p className={s.tour}>{children}</p>,
+        }}
+      />
+      <div className={s.avatarContainer}>
+        <div className={s.avatarPicture}>
+          <CustomImage image={image} imageRetina={imageRetina} />
         </div>
       </div>
-    </li>
-  );
-};
+    </div>
+  </li>
+);
 
 export default FeedbackCard;
