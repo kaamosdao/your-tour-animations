@@ -3,10 +3,11 @@
 import { PrismicRichText } from '@prismicio/react';
 import { useFormik } from 'formik';
 
+import tourSchema from '@/utils/validationSchema';
+
 import AgeConfirm from './AgeConfirm/index';
 import InputFields from './InputFields/index';
 import LicenseConfirm from './LicenseConfirm/index';
-
 import HoverCursor from '../CustomCursor/HoverCursor';
 
 import s from './SectionConstructTour.module.scss';
@@ -29,7 +30,7 @@ const SectionConstructTour = ({ slice }) => {
       licenseConfirmed: false,
       comment: '',
     },
-    // validationSchema: schema,
+    validationSchema: tourSchema(slice.items),
     // onSubmit: async (values) => {
     //   alert(JSON.stringify(values, null, 2));
     // },

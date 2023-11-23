@@ -71,7 +71,7 @@ const InputFields = ({ slice, formik }) => {
                 className={s.select}
                 id={slice.primary.select_id}
                 name={slice.primary.select_id}
-                defaultValue=""
+                // defaultValue=""
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.direction}
@@ -124,7 +124,6 @@ const InputFields = ({ slice, formik }) => {
                 name={slice.primary.input_phone_id}
                 id={slice.primary.input_phone_id}
                 placeholder={slice.primary.input_phone_placeholder}
-                pattern="^([+]7)\s(\([0-9]{3})\)([0-9]{3})([-])([0-9]{2})([-])([0-9]{2})"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
@@ -147,7 +146,6 @@ const InputFields = ({ slice, formik }) => {
                 name={slice.primary.input_datefrom_id}
                 id={slice.primary.input_datefrom_id}
                 placeholder={slice.primary.input_datefrom_placeholder}
-                pattern="^(?:(?:31(\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.dateFrom}
@@ -167,7 +165,6 @@ const InputFields = ({ slice, formik }) => {
                 name={slice.primary.input_dateto_id}
                 id={slice.primary.input_dateto_id}
                 placeholder={slice.primary.input_dateto_placeholder}
-                pattern="^(?:(?:31(\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.dateTo}
