@@ -9,7 +9,7 @@ import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './InputFields.module.scss';
 
-const InputFields = ({ slice }) => {
+const InputFields = ({ slice, formik }) => {
   const inputUIDs = useMemo(
     () =>
       slice.items
@@ -54,6 +54,10 @@ const InputFields = ({ slice }) => {
                 name={slice.primary.input_name_id}
                 id={slice.primary.input_name_id}
                 placeholder={slice.primary.input_name_placeholder}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.name}
+                disabled={formik.isSubmitting}
                 required
               />
             </label>
@@ -68,6 +72,10 @@ const InputFields = ({ slice }) => {
                 id={slice.primary.select_id}
                 name={slice.primary.select_id}
                 defaultValue=""
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.direction}
+                disabled={formik.isSubmitting}
                 required
               >
                 <option value="" disabled hidden>
@@ -97,6 +105,10 @@ const InputFields = ({ slice }) => {
                 name={slice.primary.input_email_id}
                 id={slice.primary.input_email_id}
                 placeholder={slice.primary.input_email_placeholder}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+                disabled={formik.isSubmitting}
                 required
               />
             </label>
@@ -113,6 +125,10 @@ const InputFields = ({ slice }) => {
                 id={slice.primary.input_phone_id}
                 placeholder={slice.primary.input_phone_placeholder}
                 pattern="^([+]7)\s(\([0-9]{3})\)([0-9]{3})([-])([0-9]{2})([-])([0-9]{2})"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.phone}
+                disabled={formik.isSubmitting}
                 required
               />
             </label>
@@ -132,6 +148,10 @@ const InputFields = ({ slice }) => {
                 id={slice.primary.input_datefrom_id}
                 placeholder={slice.primary.input_datefrom_placeholder}
                 pattern="^(?:(?:31(\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.dateFrom}
+                disabled={formik.isSubmitting}
                 required
               />
             </label>
@@ -148,6 +168,10 @@ const InputFields = ({ slice }) => {
                 id={slice.primary.input_dateto_id}
                 placeholder={slice.primary.input_dateto_placeholder}
                 pattern="^(?:(?:31(\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.dateTo}
+                disabled={formik.isSubmitting}
                 required
               />
             </label>
@@ -204,6 +228,10 @@ const InputFields = ({ slice }) => {
                 className={s.textarea}
                 name={slice.primary.textarea_id}
                 id={slice.primary.textarea_id}
+                value={formik.values.comment}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                disabled={formik.isSubmitting}
               />
             </label>
           </HoverCursor>

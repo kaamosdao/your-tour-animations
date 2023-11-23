@@ -4,7 +4,7 @@ import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './AgeConfirm.module.scss';
 
-const AgeConfirm = ({ slice }) => (
+const AgeConfirm = ({ slice, ...props }) => (
   <fieldset className={s.ageConfirm}>
     <legend className={s.title}>{slice.primary.radio_legend}</legend>
     <ul className={s.list}>
@@ -14,9 +14,9 @@ const AgeConfirm = ({ slice }) => (
             <input
               className={cn('visually-hidden', s.radioInput)}
               type="radio"
-              name={slice.primary.radio_name}
               id={slice.primary.radio_id_1}
               value={slice.primary.radio_value_1}
+              {...props}
               required
             />
             <span className={s.radioMark} />
@@ -30,9 +30,9 @@ const AgeConfirm = ({ slice }) => (
             <input
               className={cn('visually-hidden', s.radioInput)}
               type="radio"
-              name={slice.primary.radio_name}
               id={slice.primary.radio_id_2}
               value={slice.primary.radio_value_2}
+              {...props}
               required
             />
             <span className={s.radioMark} />

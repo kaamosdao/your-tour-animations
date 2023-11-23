@@ -5,7 +5,7 @@ import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './LicenseConfirm.module.scss';
 
-const LicenseConfirm = ({ slice }) => (
+const LicenseConfirm = ({ slice, ...props }) => (
   <fieldset className={s.licenseConfirm}>
     <legend className="visually-hidden">
       {slice.primary.checkbox_hidden_legend[0].text}
@@ -16,7 +16,7 @@ const LicenseConfirm = ({ slice }) => (
           className={cn('visually-hidden', s.checkboxInput)}
           type="checkbox"
           id={slice.primary.checkbox_id}
-          name={slice.primary.checkbox_name}
+          {...props}
           required
         />
         <span className={s.checkboxMark} />
