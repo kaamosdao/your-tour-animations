@@ -34,6 +34,7 @@
 }
 
 .item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -168,4 +169,24 @@
   @media (min-width: $desktop-md-width) {
     @include font(normal, 20px, 142%);
   }
+}
+
+.invalidTooltip {
+  @include font(normal, 12px, 24px);
+
+  position: absolute;
+  bottom: -27px;
+  color: var(--invalid);
+
+  @media (min-width: $tablet-lg-width) {
+    @include font(normal, 14px, 24px);
+  }
+}
+
+.invalid {
+  border: 1px solid var(--invalid);
+}
+
+.invalid:hover {
+  border: 1px solid var(--invalid);
 }

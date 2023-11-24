@@ -54,12 +54,16 @@ const SectionConstructTour = ({ slice }) => {
           name="ageConfirmed"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          touched={formik.touched}
+          error={formik.errors.ageConfirmed}
         />
         <LicenseConfirm
           slice={slice}
           name="licenseConfirmed"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          touched={formik.touched}
+          error={formik.errors.licenseConfirmed}
         />
         <div className={s.buttons}>
           <HoverCursor cursorType="pulse">

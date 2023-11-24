@@ -49,7 +49,11 @@ const InputFields = ({ slice, formik }) => {
             <label className={s.label} htmlFor={slice.primary.input_name_id}>
               {slice.primary.input_name_label}
               <input
-                className={s.input}
+                className={
+                  formik.touched && formik.errors.name
+                    ? cn(s.input, s.invalid)
+                    : s.input
+                }
                 type="text"
                 name={slice.primary.input_name_id}
                 id={slice.primary.input_name_id}
@@ -58,20 +62,26 @@ const InputFields = ({ slice, formik }) => {
                 onBlur={formik.handleBlur}
                 value={formik.values.name}
                 disabled={formik.isSubmitting}
-                required
               />
             </label>
           </HoverCursor>
+          <div className={s.invalidTooltip}>
+            {formik.touched && formik.errors.name}
+          </div>
         </li>
         <li className={cn(s.item, s.itemSelect)}>
           <HoverCursor cursorType="growDot">
             <label className={s.label} htmlFor={slice.primary.select_id}>
               {slice.primary.select_label}
               <select
-                className={s.select}
+                className={
+                  formik.touched && formik.errors.direction
+                    ? cn(s.select, s.invalid)
+                    : s.select
+                }
                 id={slice.primary.select_id}
                 name={slice.primary.select_id}
-                // defaultValue=""
+                defaultValue=""
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.direction}
@@ -94,13 +104,20 @@ const InputFields = ({ slice, formik }) => {
               </select>
             </label>
           </HoverCursor>
+          <div className={s.invalidTooltip}>
+            {formik.touched && formik.errors.direction}
+          </div>
         </li>
         <li className={s.item}>
           <HoverCursor cursorType="growDot">
             <label className={s.label} htmlFor={slice.primary.input_email_id}>
               {slice.primary.input_email_label}
               <input
-                className={s.input}
+                className={
+                  formik.touched && formik.errors.email
+                    ? cn(s.input, s.invalid)
+                    : s.input
+                }
                 type="email"
                 name={slice.primary.input_email_id}
                 id={slice.primary.input_email_id}
@@ -109,17 +126,23 @@ const InputFields = ({ slice, formik }) => {
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
                 disabled={formik.isSubmitting}
-                required
               />
             </label>
           </HoverCursor>
+          <div className={s.invalidTooltip}>
+            {formik.touched && formik.errors.email}
+          </div>
         </li>
         <li className={s.item}>
           <HoverCursor cursorType="growDot">
             <label className={s.label} htmlFor={slice.primary.input_phone_id}>
               {slice.primary.input_phone_label}
               <input
-                className={s.input}
+                className={
+                  formik.touched && formik.errors.phone
+                    ? cn(s.input, s.invalid)
+                    : s.input
+                }
                 type="tel"
                 name={slice.primary.input_phone_id}
                 id={slice.primary.input_phone_id}
@@ -128,10 +151,12 @@ const InputFields = ({ slice, formik }) => {
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
                 disabled={formik.isSubmitting}
-                required
               />
             </label>
           </HoverCursor>
+          <div className={s.invalidTooltip}>
+            {formik.touched && formik.errors.phone}
+          </div>
         </li>
         <li className={s.item}>
           <HoverCursor cursorType="growDot">
@@ -141,7 +166,11 @@ const InputFields = ({ slice, formik }) => {
             >
               {slice.primary.input_datefrom_label}
               <input
-                className={s.input}
+                className={
+                  formik.touched && formik.errors.dateFrom
+                    ? cn(s.input, s.invalid)
+                    : s.input
+                }
                 type="text"
                 name={slice.primary.input_datefrom_id}
                 id={slice.primary.input_datefrom_id}
@@ -150,17 +179,23 @@ const InputFields = ({ slice, formik }) => {
                 onBlur={formik.handleBlur}
                 value={formik.values.dateFrom}
                 disabled={formik.isSubmitting}
-                required
               />
             </label>
           </HoverCursor>
+          <div className={s.invalidTooltip}>
+            {formik.touched && formik.errors.dateFrom}
+          </div>
         </li>
         <li className={s.item}>
           <HoverCursor cursorType="growDot">
             <label className={s.label} htmlFor={slice.primary.input_dateto_id}>
               {slice.primary.input_dateto_label}
               <input
-                className={s.input}
+                className={
+                  formik.touched && formik.errors.dateTo
+                    ? cn(s.input, s.invalid)
+                    : s.input
+                }
                 type="text"
                 name={slice.primary.input_dateto_id}
                 id={slice.primary.input_dateto_id}
@@ -169,10 +204,12 @@ const InputFields = ({ slice, formik }) => {
                 onBlur={formik.handleBlur}
                 value={formik.values.dateTo}
                 disabled={formik.isSubmitting}
-                required
               />
             </label>
           </HoverCursor>
+          <div className={s.invalidTooltip}>
+            {formik.touched && formik.errors.dateTo}
+          </div>
         </li>
         {inputs?.map(({ data, uid }) => (
           <li key={uid} className={s.item}>
@@ -186,7 +223,6 @@ const InputFields = ({ slice, formik }) => {
                   id={data.name}
                   placeholder={data.placeholder}
                   pattern={data.pattern}
-                  required
                 />
               </label>
             </HoverCursor>
@@ -202,7 +238,6 @@ const InputFields = ({ slice, formik }) => {
                   id={data.name}
                   name={data.name}
                   defaultValue=""
-                  required
                 >
                   <option value="" disabled hidden>
                     {data.default_option}

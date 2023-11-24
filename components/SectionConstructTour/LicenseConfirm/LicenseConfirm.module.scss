@@ -94,3 +94,14 @@
 .checkboxLink:active {
   color: var(--active-link-sec-color);
 }
+
+.invalidTooltip {
+  @include font(normal, 12px, 24px);
+
+  position: absolute;
+  color: var(--invalid);
+
+  @media (min-width: $tablet-lg-width) {
+    @include font(normal, 14px, 24px);
+  }
+}
