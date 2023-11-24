@@ -31,9 +31,9 @@ const SectionConstructTour = ({ slice }) => {
       comment: '',
     },
     validationSchema: tourSchema(slice.items),
-    // onSubmit: async (values) => {
-    //   alert(JSON.stringify(values, null, 2));
-    // },
+    onSubmit: (values, actions) => {
+      actions.setSubmitting(false);
+    },
   });
 
   return (
