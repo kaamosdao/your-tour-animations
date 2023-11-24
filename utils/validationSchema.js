@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import formatDate from './formatDate';
 
 const phoneRegExp =
   /^([+]7)\s?(\([0-9]{3})\)([-\s])?([0-9]{3})([-])([0-9]{2})([-])([0-9]{2})/;
@@ -32,13 +33,51 @@ export const tourSchema = (directions) => {
     dateFrom: yup
       .string()
       .matches(dateRegExp, 'Неверный формат даты')
-      .required('Обязательно для заполнения'),
+      .required('Обязательно для заполнения')
+      .test({
+        name: 'dateFrom more than today',
+        message: 'Выберите будущую дату',
+        test: (value) => formatDate(value).getTime() > new Date().getTime(),
+      })
+      .test({
+        name: 'dateTo more than dateFrom',
+        message: 'Должна быть меньше даты до',
+        test: (value, context) => {
+          const formattedDateFrom = formatDate(value);
+          const formattedDateTo = formatDate(context.parent.dateTo);
+
+          if (formattedDateTo) {
+            return formattedDateTo.getTime() > formattedDateFrom.getTime();
+          }
+
+          return true;
+        },
+      }),
     dateTo: yup
       .string()
       .matches(dateRegExp, 'Неверный формат даты')
-      .required('Обязательно для заполнения'),
+      .required('Обязательно для заполнения')
+      .test({
+        name: 'dateFrom more than today',
+        message: 'Выберите будущую дату',
+        test: (value) => formatDate(value).getTime() > new Date().getTime(),
+      })
+      .test({
+        name: 'dateTo more than dateFrom',
+        message: 'Должна быть больше даты от',
+        test: (value, context) => {
+          const formattedDateTo = formatDate(value);
+          const formattedDateFrom = formatDate(context.parent.dateFrom);
+
+          if (formattedDateFrom) {
+            return formattedDateTo.getTime() > formattedDateFrom.getTime();
+          }
+
+          return true;
+        },
+      }),
     ageConfirmed: yup.string().required('Обязательно для заполнения'),
-    licenseConfirmed: yup.boolean().required('Обязательно для заполнения'),
+    licenseConfirmed: yup.boolean().oneOf([true], 'Примите условия договора'),
     comment: yup.string(),
   });
 };
