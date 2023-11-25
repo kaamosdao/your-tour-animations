@@ -4,7 +4,9 @@ export default function useDevicePixelRatio() {
   const [devicePixelRatio, setDevicePixelRatio] = useState(1);
 
   useEffect(() => {
-    setDevicePixelRatio(window.devicePixelRatio);
+    setDevicePixelRatio(
+      typeof window !== 'undefined' ? window.devicePixelRatio : 1
+    );
   }, []);
 
   return devicePixelRatio;
