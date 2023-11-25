@@ -85,7 +85,6 @@ const SectionContact = ({ slice }) => {
       data-slice-variation={slice.variation}
     >
       <PrismicRichText
-        ref={titleRef}
         field={slice.primary.title}
         components={components(titleRef)}
       />

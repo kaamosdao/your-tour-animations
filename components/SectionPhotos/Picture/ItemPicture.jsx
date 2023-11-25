@@ -59,14 +59,14 @@ const ItemPicture = ({ image, devicePixelRatio, deviceSize, type }) => {
   }
 
   if (deviceSize === sizeType.tabletMd) {
-    return image.table_retina.url ? (
+    return image.tablet_retina.url ? (
       <li
         className={cn(
           s.item,
           type === carouselType.large ? s.largeItem : s.smallItem
         )}
       >
-        <PrismicNextImage field={image.table_retina} />
+        <PrismicNextImage field={image.tablet_retina} />
       </li>
     ) : null;
   }
