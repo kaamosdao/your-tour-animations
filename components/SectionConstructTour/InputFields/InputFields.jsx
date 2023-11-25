@@ -81,7 +81,6 @@ const InputFields = ({ slice, formik }) => {
                 }
                 id={slice.primary.select_id}
                 name={slice.primary.select_id}
-                defaultValue=""
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.direction}
