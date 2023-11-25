@@ -12,11 +12,12 @@ import { createClient } from '@/prismicio';
 import useDevicePixelRatio from '@/hooks/useDevicePixelRatio';
 import HorizontalLoop from '@/utils/HorizontalLoop';
 import getDeviceSize from '@/utils/getDeviceSize';
-import { carouselType, directionType, sizeType } from '@/utils/types';
+import { carouselType, directionType } from '@/utils/types';
 
 import ItemPicture from './Picture';
 
 import s from './SectionPhotos.module.scss';
+import getPictureShift from '@/utils/getPictureShift';
 
 const components = {
   heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
@@ -81,23 +82,11 @@ const SectionPhotos = ({ slice }) => {
         const selector = gsap.utils.selector(carouselRef);
         const pictures = gsap.utils.toArray(selector('li'));
 
-        if (deviceSize === sizeType.mobile) {
-          gsap.set(pictures, {
-            x: (i) => i * pictures[0].clientWidth + (i + 1) * 18,
-          });
-        }
+        const shift = getPictureShift(deviceSize);
 
-        if (deviceSize === sizeType.tabletMd) {
-          gsap.set(pictures, {
-            x: (i) => i * pictures[0].clientWidth + (i + 1) * 20,
-          });
-        }
-
-        if (deviceSize === sizeType.desktopLg) {
-          gsap.set(pictures, {
-            x: (i) => i * pictures[0].clientWidth + (i + 1) * 30,
-          });
-        }
+        gsap.set(pictures, {
+          x: (i) => i * pictures[0].clientWidth + (i + 1) * shift,
+        });
 
         if (deviceSize) {
           loopRef.current = new HorizontalLoop(pictures, {
