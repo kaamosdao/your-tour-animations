@@ -124,13 +124,13 @@ class HorizontalLoop {
       trigger: this.items[0].parentNode,
       type: 'x',
       onPress: () => {
+        timeline.pause();
         startProgress = timeline.progress();
         timeline.progress(0);
 
         this.populateWidths();
         this.totalWidth = this.getTotalWidth();
         ratio = 1 / this.totalWidth;
-
         timeline.progress(startProgress);
       },
       onDrag() {
@@ -138,6 +138,8 @@ class HorizontalLoop {
       },
       inertia: false,
       onThrowComplete: () => gsap.set(proxy, { x: 0 }),
+      onRelease: () =>
+        this.config.reversed ? timeline.reverse() : timeline.play(),
     });
   }
 
