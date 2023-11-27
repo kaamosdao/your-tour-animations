@@ -133,6 +133,7 @@
   border: none;
   border-radius: 10px;
   text-decoration: none;
+  transform: translateX(-400%);
 
   @media (min-width: $tablet-lg-width) {
     @include font(normal, 17px, 195%);

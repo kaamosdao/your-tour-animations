@@ -1,51 +1,32 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
 import { PrismicRichText } from '@prismicio/react';
 import { PrismicNextLink } from '@prismicio/next';
 
+import { useArrayRef, useTransition } from '@/hooks';
+
 import HoverCursor from '../CustomCursor/HoverCursor';
+import AnimationAppearOnMount from '../AnimationAppearOnMount';
 
 import s from './SectionDescription.module.scss';
 
-const components = (titleRef, descriptionRef) => ({
+const components = (addRef) => ({
   heading2: ({ children }) => (
-    <h2 ref={titleRef} className={s.title}>
+    <h2 ref={addRef} className={s.title}>
       {children}
     </h2>
   ),
   paragraph: ({ children }) => (
-    <p ref={descriptionRef} className={s.description}>
+    <p ref={addRef} className={s.description}>
       {children}
     </p>
   ),
 });
 
 const SectionDescription = ({ slice }) => {
-  const tagline = useRef(null);
-  const titleRef = useRef(null);
-  const descriptionRef = useRef(null);
-  const buttonRef = useRef(null);
+  const isVisible = useTransition();
 
-  useEffect(() => {
-    const shift = '-105%';
-    const initialPosition = 0;
-
-    gsap.timeline().fromTo(
-      [titleRef.current, descriptionRef.current, buttonRef.current],
-      {
-        x: shift,
-      },
-      {
-        x: initialPosition,
-        ease: 'power3.out',
-        duration: 1,
-        delay: 0.2,
-        stagger: 0.2,
-      }
-    );
-  }, []);
+  const [refs, addRef] = useArrayRef();
 
   return (
     <section
@@ -53,24 +34,26 @@ const SectionDescription = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <div ref={tagline} className={s.tagline}>
-        <PrismicRichText
-          field={slice.primary.title}
-          components={components(titleRef, descriptionRef)}
-        />
-        <PrismicRichText
-          field={slice.primary.description}
-          components={components(titleRef, descriptionRef)}
-        />
-        <HoverCursor cursorType="pulse">
-          <PrismicNextLink
-            ref={buttonRef}
-            field={slice.primary.button}
-            className={s.button}
-          >
-            {slice.primary.button_label}
-          </PrismicNextLink>
-        </HoverCursor>
+      <div className={s.tagline}>
+        <AnimationAppearOnMount shift="-400%" isVisible={isVisible} refs={refs}>
+          <PrismicRichText
+            field={slice.primary.title}
+            components={components(addRef)}
+          />
+          <PrismicRichText
+            field={slice.primary.description}
+            components={components(addRef)}
+          />
+          <HoverCursor cursorType="pulse">
+            <PrismicNextLink
+              ref={addRef}
+              field={slice.primary.button}
+              className={s.button}
+            >
+              {slice.primary.button_label}
+            </PrismicNextLink>
+          </HoverCursor>
+        </AnimationAppearOnMount>
       </div>
     </section>
   );
