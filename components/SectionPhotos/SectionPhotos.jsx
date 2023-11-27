@@ -9,7 +9,7 @@ import { Draggable } from 'gsap/dist/Draggable';
 import { PrismicRichText } from '@prismicio/react';
 import { createClient } from '@/prismicio';
 
-import useDevicePixelRatio from '@/hooks/useDevicePixelRatio';
+import { useDevicePixelRatio } from '@/hooks';
 import HorizontalLoop from '@/utils/HorizontalLoop';
 import getDeviceSize from '@/utils/getDeviceSize';
 import { carouselType, directionType } from '@/utils/types';

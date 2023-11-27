@@ -5,8 +5,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import gsap from 'gsap/dist/gsap';
 
-import useTransition from '@/hooks';
-import useDevicePixelRatio from '@/hooks/useDevicePixelRatio';
+import { useTransition, useDevicePixelRatio } from '@/hooks';
 
 import TourCard from '../TourCard/TourCard';
 
