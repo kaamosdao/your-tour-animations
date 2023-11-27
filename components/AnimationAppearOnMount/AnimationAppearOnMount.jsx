@@ -24,19 +24,13 @@ const AnimationAppearOnMount = ({ children, shift, isVisible, refs }) => {
     const animation = gsap.timeline();
 
     if (isVisible) {
-      animation.fromTo(
-        refs.current,
-        {
-          x: shift,
-        },
-        {
-          x: initialPosition,
-          ease: 'power3.out',
-          duration: 1,
-          delay: 0.2,
-          stagger: 0.2,
-        }
-      );
+      animation.to(refs.current, {
+        x: initialPosition,
+        ease: 'power3.out',
+        duration: 1,
+        delay: 0.2,
+        stagger: 0.2,
+      });
     }
     return () => {
       animation?.kill();
