@@ -6,7 +6,7 @@ import { PrismicNextLink } from '@prismicio/next';
 import { useArrayRef, useTransition } from '@/hooks';
 
 import HoverCursor from '../CustomCursor/HoverCursor';
-import AnimationAppearOnMount from '../AnimationAppearOnMount';
+import { AppearOnMount } from '../Animation';
 
 import s from './SectionDescription.module.scss';
 
@@ -35,7 +35,7 @@ const SectionDescription = ({ slice }) => {
       data-slice-variation={slice.variation}
     >
       <div className={s.tagline}>
-        <AnimationAppearOnMount shift="-400%" isVisible={isVisible} refs={refs}>
+        <AppearOnMount shift="-400%" isVisible={isVisible} refs={refs}>
           <PrismicRichText
             field={slice.primary.title}
             components={components(addRef)}
@@ -53,7 +53,7 @@ const SectionDescription = ({ slice }) => {
               {slice.primary.button_label}
             </PrismicNextLink>
           </HoverCursor>
-        </AnimationAppearOnMount>
+        </AppearOnMount>
       </div>
     </section>
   );

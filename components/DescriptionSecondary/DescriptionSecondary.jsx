@@ -8,9 +8,9 @@ import cn from 'classnames';
 import { useTransition, useArrayRef } from '@/hooks';
 
 import OverflowWrapper from '../OverflowWrapper';
+import { AppearOnMount } from '../Animation';
 
 import s from './DescriptionSecondary.module.scss';
-import AnimationAppearOnMount from '../AnimationAppearOnMount';
 
 const components = (addRef) => ({
   heading2: ({ children }) => (
@@ -38,11 +38,7 @@ const DescriptionSecondary = ({ slice }) => {
     >
       <div className={s.tagline}>
         <OverflowWrapper>
-          <AnimationAppearOnMount
-            shift="-105%"
-            isVisible={isVisible}
-            refs={refs}
-          >
+          <AppearOnMount shift="-105%" isVisible={isVisible} refs={refs}>
             <PrismicRichText
               field={slice.primary.title}
               components={components(addRef)}
@@ -59,7 +55,7 @@ const DescriptionSecondary = ({ slice }) => {
               field={slice.primary.description_3}
               components={components(addRef)}
             />
-          </AnimationAppearOnMount>
+          </AppearOnMount>
         </OverflowWrapper>
       </div>
     </section>
