@@ -53,4 +53,9 @@ export const directionType = {
   right: 'right',
 };
 
+export const axisType = {
+  vertical: 'vertical',
+  horizontal: 'horizontal',
+};
+
 export default cursorState;
