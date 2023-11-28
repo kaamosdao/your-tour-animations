@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { gsap } from 'gsap/dist/gsap';
 
-const AnimationAppearOnMount = ({ children, shift, isVisible, refs }) => {
+const AppearOnMount = ({ children, shift, isVisible, refs }) => {
   useEffect(() => {
     const initialPosition = 0;
 
@@ -40,4 +40,4 @@ const AnimationAppearOnMount = ({ children, shift, isVisible, refs }) => {
   return children;
 };
 
-export default AnimationAppearOnMount;
+export default AppearOnMount;
