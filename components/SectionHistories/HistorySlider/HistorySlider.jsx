@@ -27,7 +27,7 @@ const components = {
   paragraph: ({ children }) => <p className={s.historyCardText}>{children}</p>,
 };
 
-const HistorySlider = ({ histories }) => {
+const HistorySlider = ({ histories, addRef }) => {
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -140,7 +140,13 @@ const HistorySlider = ({ histories }) => {
 
   return (
     <>
-      <div ref={canvasHolder} className={s.item}>
+      <div
+        ref={(el) => {
+          canvasHolder.current = el;
+          addRef(el);
+        }}
+        className={s.item}
+      >
         <HoverCursor
           cursorType="text"
           data="Подробнее"
@@ -183,7 +189,7 @@ const HistorySlider = ({ histories }) => {
           ))}
         </div>
       </div>
-      <div className={s.controls}>
+      <div ref={addRef} className={s.controls}>
         <HoverCursor cursorType="pulse">
           <button
             onClick={onLeftClick}

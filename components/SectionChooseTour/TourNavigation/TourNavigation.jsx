@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap/dist/gsap';
+import { useRef } from 'react';
 
+import { axisType } from '@/utils/types';
+
+import { ScrollTrigger } from '@/components/Animation';
 import NavItem from './NavItem';
 
 import s from './TourNavigation.module.scss';
@@ -10,56 +12,32 @@ import s from './TourNavigation.module.scss';
 const TourNavigation = ({ tours, activeNav, setActiveNav }) => {
   const navRef = useRef(null);
 
-  const q = gsap.utils.selector(navRef);
-
-  useEffect(() => {
-    const links = q('li');
-
-    const shift = '-100%';
-    const initialPosition = 0;
-
-    const tl = gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: navRef.current,
-          start: 'top bottom',
-          end: '+=500',
-          toggleActions: 'restart complete none reverse',
-        },
-      })
-      .fromTo(
-        links,
-        {
-          y: shift,
-        },
-        {
-          y: initialPosition,
-          ease: 'power3.out',
-          duration: 0.5,
-          stagger: 0.2,
-        }
-      );
-
-    return () => {
-      tl.kill();
-    };
-  }, [q]);
-
   const onClick = (e) => {
     setActiveNav(e.target.name);
   };
 
   return (
     <ul ref={navRef} className={s.nav}>
-      {tours?.map(({ data, uid }) => (
-        <NavItem
-          key={uid}
-          onClick={onClick}
-          activeNav={activeNav}
-          name={data.name}
-          id={uid}
-        />
-      ))}
+      <ScrollTrigger
+        shift="-105%"
+        trigger={navRef.current}
+        scrollTriggerOptions={{
+          start: 'top bottom',
+          end: '+=500',
+          toggleActions: 'restart complete none reverse',
+        }}
+        axis={axisType.vertical}
+      >
+        {tours?.map(({ data, uid }) => (
+          <NavItem
+            key={uid}
+            onClick={onClick}
+            activeNav={activeNav}
+            name={data.name}
+            id={uid}
+          />
+        ))}
+      </ScrollTrigger>
     </ul>
   );
 };

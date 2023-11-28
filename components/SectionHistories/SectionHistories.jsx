@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import gsap from 'gsap/dist/gsap';
 import { PrismicRichText } from '@prismicio/react';
 import { createClient } from '@/prismicio';
 
+import { axisType } from '@/utils/types';
+
 import HistorySlider from './HistorySlider/index';
+import { ScrollTrigger } from '../Animation';
 
 import s from './SectionHistories.module.scss';
 
@@ -16,8 +18,6 @@ const components = {
 
 const SectionHistories = ({ slice }) => {
   const sliderRef = useRef(null);
-
-  const q = gsap.utils.selector(sliderRef);
 
   const historyUIDs = useMemo(
     () => slice.items.map(({ history }) => history.uid),
@@ -32,42 +32,8 @@ const SectionHistories = ({ slice }) => {
 
       setHistories(data);
     };
-
     getData();
   }, [historyUIDs]);
-
-  useEffect(() => {
-    const description = q('div[class*="item"]');
-    const button = q('div[class*="controls"]');
-
-    const shift = '-105%';
-    const initialPosition = 0;
-
-    const tl = gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: sliderRef.current,
-          start: '80% bottom',
-          toggleActions: 'restart play reverse reverse',
-        },
-      })
-      .fromTo(
-        [description, button],
-        {
-          x: shift,
-        },
-        {
-          x: initialPosition,
-          ease: 'power3.out',
-          duration: 0.7,
-          stagger: 0.2,
-        }
-      );
-
-    return () => {
-      tl.kill();
-    };
-  }, [q]);
 
   return (
     <section
@@ -81,7 +47,17 @@ const SectionHistories = ({ slice }) => {
         components={components}
       />
       <div ref={sliderRef} className={s.list}>
-        {histories && <HistorySlider histories={histories} />}
+        <ScrollTrigger
+          shift="-105%"
+          trigger={sliderRef.current}
+          scrollTriggerOptions={{
+            start: '80% bottom',
+            toggleActions: 'restart play reverse reverse',
+          }}
+          axis={axisType.horizontal}
+        >
+          {histories && <HistorySlider histories={histories} />}
+        </ScrollTrigger>
       </div>
     </section>
   );

@@ -9,7 +9,7 @@ import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './FeedbackContainer.module.scss';
 
-const FeedbackContainer = ({ data }) => {
+const FeedbackContainer = ({ data, addRef }) => {
   const [show, setShow] = useState(false);
   const modalRef = useRef(null);
 
@@ -28,6 +28,7 @@ const FeedbackContainer = ({ data }) => {
           className={s.button}
           type="button"
           onClick={() => setShow(true)}
+          ref={addRef}
         >
           <FeedbackCard
             name={userName}

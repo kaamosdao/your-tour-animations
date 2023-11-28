@@ -1,12 +1,14 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap/dist/gsap';
 import { PrismicRichText } from '@prismicio/react';
 import { isFilled } from '@prismicio/client';
 import { createClient } from '@/prismicio';
 
+import { axisType } from '@/utils/types';
+
 import FeedbackContainer from './FeedbackContainer';
+import { ScrollTrigger } from '../Animation';
 
 import s from './SectionFeedback.module.scss';
 
@@ -17,7 +19,6 @@ const components = {
 
 const SectionFeedback = ({ slice }) => {
   const feedbackRef = useRef(null);
-  const q = gsap.utils.selector(feedbackRef);
 
   const [feedbacks, setFeedbacks] = useState(null);
 
@@ -36,41 +37,9 @@ const SectionFeedback = ({ slice }) => {
 
       setFeedbacks(data);
     };
+
     getData();
   }, [slice.items]);
-
-  useEffect(() => {
-    const feedbackItems = q('button');
-
-    const shift = '-105%';
-    const initialPosition = 0;
-
-    const tl = gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: feedbackRef.current,
-          start: '20% bottom',
-          end: '20% 80%',
-          toggleActions: 'restart play reverse reverse',
-        },
-      })
-      .fromTo(
-        feedbackItems,
-        {
-          y: shift,
-        },
-        {
-          y: initialPosition,
-          ease: 'power3.out',
-          duration: 0.7,
-          stagger: 0.2,
-        }
-      );
-
-    return () => {
-      tl.kill();
-    };
-  }, [q]);
 
   return (
     <section
@@ -84,9 +53,20 @@ const SectionFeedback = ({ slice }) => {
         components={components}
       />
       <ul ref={feedbackRef} className={s.list}>
-        {feedbacks?.map(({ data, uid }) => (
-          <FeedbackContainer key={uid} data={data} />
-        ))}
+        <ScrollTrigger
+          shift="-105%"
+          trigger={feedbackRef.current}
+          scrollTriggerOptions={{
+            start: '20% bottom',
+            end: '20% 80%',
+            toggleActions: 'restart play reverse reverse',
+          }}
+          axis={axisType.vertical}
+        >
+          {feedbacks?.map(({ data, uid }) => (
+            <FeedbackContainer key={uid} data={data} />
+          ))}
+        </ScrollTrigger>
       </ul>
     </section>
   );

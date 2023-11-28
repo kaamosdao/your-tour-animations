@@ -10,7 +10,7 @@ import s from './NavItem.module.scss';
 
 const cn = classnames.bind(s);
 
-const NavItem = ({ onClick, activeNav, name, id }) => {
+const NavItem = ({ onClick, activeNav, name, id, addRef }) => {
   const button = useRef(null);
   const line = useRef(null);
 
@@ -77,7 +77,7 @@ const NavItem = ({ onClick, activeNav, name, id }) => {
   }, [activeNav, id, isActive]);
 
   return (
-    <li className={s.navItem} key={name}>
+    <li ref={addRef} className={s.navItem} key={name}>
       <HoverCursor cursorType="stuck" activeLink="navLinkCurrent">
         <button
           ref={button}
