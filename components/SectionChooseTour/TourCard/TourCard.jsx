@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-// import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { PrismicRichText } from '@prismicio/react';
 import { PrismicNextLink } from '@prismicio/next';
@@ -60,11 +59,5 @@ const TourCard = ({ card, devicePixelRatio }) => {
     </HoverCursor>
   );
 };
-
-// TourCard.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   title: PropTypes.string.isRequired,
-//   price: PropTypes.string.isRequired,
-// };
 
 export default TourCard;
