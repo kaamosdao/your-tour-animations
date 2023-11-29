@@ -4,8 +4,11 @@ import cn from 'classnames';
 import { carouselType, sizeType } from '@/utils/types';
 
 import s from './ItemPicture.module.scss';
+import { useDevicePixelRatio } from '@/hooks';
 
-const ItemPicture = ({ image, devicePixelRatio, deviceSize, type }) => {
+const ItemPicture = ({ image, deviceSize, type }) => {
+  const devicePixelRatio = useDevicePixelRatio();
+
   if (devicePixelRatio === 1) {
     if (deviceSize === sizeType.desktopLg) {
       return image.desktop.url ? (

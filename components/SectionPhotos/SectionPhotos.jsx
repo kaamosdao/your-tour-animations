@@ -9,7 +9,6 @@ import { Draggable } from 'gsap/dist/Draggable';
 import { PrismicRichText } from '@prismicio/react';
 import { createClient } from '@/prismicio';
 
-import { useDevicePixelRatio } from '@/hooks';
 import HorizontalLoop from '@/utils/HorizontalLoop';
 import getDeviceSize from '@/utils/getDeviceSize';
 import { carouselType, directionType } from '@/utils/types';
@@ -29,8 +28,6 @@ const SectionPhotos = ({ slice }) => {
     () => slice.items.map(({ photos }) => photos.uid),
     [slice]
   );
-
-  const devicePixelRatio = useDevicePixelRatio();
 
   const [deviceSize, setDeviceSize] = useState(null);
   const [carousels, setCarousels] = useState(null);
@@ -130,7 +127,6 @@ const SectionPhotos = ({ slice }) => {
               <ItemPicture
                 key={index}
                 image={data}
-                devicePixelRatio={devicePixelRatio}
                 deviceSize={deviceSize}
                 type={type}
               />
