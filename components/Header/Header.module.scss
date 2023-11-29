@@ -2,6 +2,9 @@
 @import './styles/mixin.scss';
 
 .header {
+  --nav-text-color: #{$white};
+  --nav-bg-color: 'transparent';
+
   z-index: 10;
   position: fixed;
   display: flex;

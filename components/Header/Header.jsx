@@ -23,7 +23,7 @@ const Header = () => {
         backdropFilter: 'blur(27px)',
       })
       .to(
-        'html',
+        headerRef?.current,
         {
           '--nav-text-color': gsap.getProperty('html', '--main-text-color'),
           '--nav-bg-color': gsap.getProperty('html', '--header-bg-color'),
