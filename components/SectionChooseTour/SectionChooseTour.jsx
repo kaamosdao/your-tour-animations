@@ -54,7 +54,7 @@ const SectionChooseTour = ({ slice }) => {
       />
       <ReactSwitchTransition
         transitionKey={activeNav}
-        timeout={{ exit: 500 }}
+        timeout={{ exit: 800 }}
         mode="out-in"
       >
         <TourLinks
