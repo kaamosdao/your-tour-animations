@@ -1,0 +1,83 @@
+@import './styles/variables.scss';
+@import './styles/mixin.scss';
+
+.tourCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 318px;
+  min-height: 318px;
+  padding: 25px 25px 13px 25px;
+  box-sizing: border-box;
+  color: var(--third-text-color);
+  text-decoration: none;
+  border-radius: 20px;
+  background-size: 100%;
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+  @media (min-width: $tablet-md-width) {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    padding: 6.7% 7.5% 3.5%;
+  }
+
+  @media (min-width: $desktop-md-width) {
+    width: 100%;
+    height: 531px;
+    padding: 11% 11% 9.1%;
+    border-radius: 50px;
+    background-size: cover;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    width: 100%;
+    padding: 13% 14% 11%;
+  }
+}
+
+.tourCard::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+  background: inherit;
+  transition: inherit;
+  content: '';
+  overflow: hidden;
+}
+
+.tourCard:hover::before {
+  transform: scale(1.2);
+}
+
+.title {
+  @include font(bold, 23px, 120%, 0.04em);
+
+  z-index: 2;
+  margin: 1px 0 0 0;
+
+  @media (min-width: $desktop-md-width) {
+    @include font(500, 35px, 122%, 0.004em);
+  }
+}
+
+.price {
+  @include font(normal, 16px, 142%);
+
+  z-index: 2;
+  margin-top: 15px;
+
+  @media (min-width: $desktop-md-width) {
+    @include font(normal, 17px, 142%);
+  }
+}
+
+.button {
+  margin: auto 0 5px -15px;
+  @media (min-width: $desktop-md-width) {
+    margin: auto 0 0 -20px;
+  }
+}

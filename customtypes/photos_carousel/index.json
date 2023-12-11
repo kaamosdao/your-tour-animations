@@ -1,0 +1,89 @@
+{
+  "id": "photos_carousel",
+  "label": "Photos carousel",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "picture_type": {
+        "type": "Select",
+        "config": {
+          "label": "Picture type",
+          "placeholder": "",
+          "options": ["large-pictures", "small-pictures"]
+        }
+      },
+      "move_direction": {
+        "type": "Select",
+        "config": {
+          "label": "Move direction",
+          "placeholder": "",
+          "options": ["left", "right"]
+        }
+      },
+      "photos": {
+        "type": "Group",
+        "config": {
+          "label": "Photos",
+          "fields": {
+            "desktop": {
+              "type": "Image",
+              "config": {
+                "label": "Desktop",
+                "constraint": {},
+                "thumbnails": []
+              }
+            },
+            "desktop_retina": {
+              "type": "Image",
+              "config": {
+                "label": "Desktop retina",
+                "constraint": {},
+                "thumbnails": []
+              }
+            },
+            "tablet": {
+              "type": "Image",
+              "config": {
+                "label": "Tablet",
+                "constraint": {},
+                "thumbnails": []
+              }
+            },
+            "tablet_retina": {
+              "type": "Image",
+              "config": {
+                "label": "Tablet retina",
+                "constraint": {},
+                "thumbnails": []
+              }
+            },
+            "mobile": {
+              "type": "Image",
+              "config": {
+                "label": "Mobile",
+                "constraint": {},
+                "thumbnails": []
+              }
+            },
+            "mobile_retina": {
+              "type": "Image",
+              "config": {
+                "label": "Mobile retina",
+                "constraint": {},
+                "thumbnails": []
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

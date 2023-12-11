@@ -33,6 +33,12 @@
     "import/extensions": 0,
     "function-paren-newline": 0,
     "import/no-unresolved": [2, { "ignore": ["^@.*"] }],
-    "react/require-default-props": 0
+    "react/require-default-props": 0,
+    "react/no-unstable-nested-components": [
+      "off",
+      {
+        "allowAsProps": true
+      }
+    ]
   }
 }

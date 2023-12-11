@@ -1,0 +1,18 @@
+@import './styles/variables.scss';
+@import './styles/mixin.scss';
+
+.header {
+  --nav-text-color: #{$white};
+  --nav-bg-color: 'transparent';
+
+  z-index: 10;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  min-height: 88px;
+  background-color: var(--nav-bg-color);
+  backdrop-filter: blur(0px);
+  opacity: 1;
+}

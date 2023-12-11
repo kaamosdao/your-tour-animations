@@ -1,0 +1,122 @@
+@import './styles/variables.scss';
+@import './styles/mixin.scss';
+
+.photos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 360px;
+  padding-bottom: 37.5px;
+  text-align: center;
+
+  @media (min-width: $desktop-md-width) {
+    padding-bottom: 67.5px;
+  }
+}
+
+.title {
+  @include font(bold, 34px, 112%, 0.02em);
+
+  margin: 37.5px 0 0 0;
+  color: var(--main-text-color);
+
+  @media (min-width: $desktop-md-width) {
+    @include font(bold, 59px, 124%);
+
+    margin-top: 67.5px;
+  }
+}
+
+.description {
+  @include font(normal, 16px, 142%);
+
+  width: 318px;
+  margin: 20px 0 0 0;
+  padding: 0 20px;
+  color: var(--sec-text-color);
+
+  @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%);
+
+    width: 408px;
+    margin-top: 30px;
+    padding: 0;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 88.3%;
+  max-width: 350px;
+  margin: 50px 0 0 0;
+  padding: 0;
+  list-style-type: none;
+
+  @media (min-width: $tablet-md-width) {
+    max-width: 670px;
+  }
+
+  @media (min-width: $desktop-md-width) {
+    gap: 29px;
+    width: 96.1%;
+    max-width: 1165px;
+    margin-top: 99px;
+  }
+
+  @media (min-width: $desktop-xxmd-width) {
+    max-width: 1565px;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    gap: 32px;
+    width: 96.9%;
+    max-width: none;
+    margin-top: 98px;
+  }
+}
+
+.largeCarousel,
+.smallCarousel {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  list-style-type: none;
+}
+
+.largeCarousel {
+  aspect-ratio: 40 / 14;
+
+  @media (min-width: $tablet-md-width) {
+    aspect-ratio: 31 / 14;
+  }
+  @media (min-width: $desktop-md-width) {
+    aspect-ratio: 49 / 15;
+  }
+  @media (min-width: $desktop-xxmd-width) {
+    aspect-ratio: 67 / 15;
+  }
+  @media (min-width: $desktop-lg-width) {
+    aspect-ratio: 99 / 16;
+  }
+}
+
+.smallCarousel {
+  aspect-ratio: 41 / 14;
+
+  @media (min-width: $tablet-md-width) {
+    aspect-ratio: 32 / 13;
+  }
+  @media (min-width: $desktop-md-width) {
+    aspect-ratio: 49 / 15;
+  }
+  @media (min-width: $desktop-xxmd-width) {
+    aspect-ratio: 67 / 15;
+  }
+  @media (min-width: $desktop-lg-width) {
+    aspect-ratio: 99 / 16;
+  }
+}

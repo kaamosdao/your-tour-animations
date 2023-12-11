@@ -4,13 +4,11 @@ import { clamp } from 'three/src/math/MathUtils';
 
 import getLoopedNumber from './getLoopedNumber';
 
-import { histories } from '@/data';
-
 import vShader from '@/shaders/vertex.glsl';
 import fShader from '@/shaders/fragment.glsl';
 
 class Scene {
-  constructor(canvas, canvasHolder, setPlaying) {
+  constructor(canvas, canvasHolder, setPlaying, images) {
     this.canvasHolder = canvasHolder;
     this.scene = new THREE.Scene();
     this.camera = new THREE.OrthographicCamera(
@@ -24,6 +22,7 @@ class Scene {
     this.renderer = new THREE.WebGLRenderer({ canvas });
 
     this.setPlaying = setPlaying;
+    this.images = images;
 
     ({ width: this.width, height: this.height } =
       this.canvasHolder.getBoundingClientRect());
@@ -90,23 +89,16 @@ class Scene {
   }
 
   initScene() {
-    this.deviceRatio = window.devicePixelRatio;
-    const ratioString = this.deviceRatio === 1 ? '' : '@2x';
-
     const loadManager = new THREE.LoadingManager();
     const loader = new THREE.TextureLoader(loadManager);
 
-    this.textures = histories.reduce((acc, { name }) => {
-      const sizes = {};
-      const texture = loader.load(
-        `img/histories/${name}-desktop-lg${ratioString}.jpg`,
-        ({ source }) => {
-          const { naturalWidth, naturalHeight } = source.data;
-          sizes.width = naturalWidth;
-          sizes.height = naturalHeight;
-        }
-      );
+    this.textures = this.images.reduce((acc, { dimensions, url }) => {
+      const sizes = { width: dimensions.width, height: dimensions.height };
+
+      const texture = loader.load(url);
+
       acc.push({ texture, sizes });
+
       return acc;
     }, []);
 
@@ -157,7 +149,7 @@ class Scene {
     this.nextSlideNumber = nextSlideNumber;
     this.currentSlideNumber = getLoopedNumber(
       this.nextSlideNumber - directionSign,
-      histories.length
+      this.images.length
     );
 
     this.material.uniforms.imageNext.value =
@@ -201,7 +193,7 @@ class Scene {
     this.currentSlideNumber = currentSlideNumber;
     this.nextSlideNumber = getLoopedNumber(
       currentSlideNumber + directionSign,
-      histories.length
+      this.images.length
     );
 
     this.material.uniforms.imageNext.value =

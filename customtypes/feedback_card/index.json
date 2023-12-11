@@ -1,0 +1,68 @@
+{
+  "id": "feedback_card",
+  "label": "Feedback Card",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "user_name": {
+        "type": "StructuredText",
+        "config": {
+          "label": "User name",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph"
+        }
+      },
+      "user_tour": {
+        "type": "StructuredText",
+        "config": {
+          "label": "User tour",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph"
+        }
+      },
+      "user_image": {
+        "type": "Image",
+        "config": {
+          "label": "User image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "user_image_retina": {
+        "type": "Image",
+        "config": {
+          "label": "User image retina",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "feedback": {
+        "type": "Group",
+        "config": {
+          "label": "Feedback",
+          "fields": {
+            "paragraph": {
+              "type": "StructuredText",
+              "config": {
+                "label": "Paragraph",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "single": "paragraph"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

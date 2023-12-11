@@ -1,0 +1,50 @@
+@import './styles/variables.scss';
+@import './styles/mixin.scss';
+
+.vkIcon {
+  position: absolute;
+  top: 8px;
+  left: -22px;
+  width: 15px;
+  height: 9px;
+  fill: var(--sec-text-color);
+
+  @media (min-width: $desktop-md-width) {
+    top: 10px;
+    left: -31px;
+    width: 20px;
+    height: 12px;
+  }
+}
+
+.instagramIcon {
+  position: absolute;
+  top: 6px;
+  left: -18px;
+  width: 11px;
+  height: 11px;
+  fill: var(--sec-text-color);
+
+  @media (min-width: $desktop-md-width) {
+    top: 8px;
+    left: -26px;
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.facebookIcon {
+  position: absolute;
+  top: 4px;
+  left: -15px;
+  width: 7px;
+  height: 13px;
+  fill: var(--sec-text-color);
+
+  @media (min-width: $desktop-md-width) {
+    top: 5px;
+    left: -23px;
+    width: 8px;
+    height: 17px;
+  }
+}

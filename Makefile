@@ -5,7 +5,7 @@ build:
 	npm run build
 
 serve:
-	npm run dev
+	npm run dev & npm run slicemachine
 
 start:
 	npm run start

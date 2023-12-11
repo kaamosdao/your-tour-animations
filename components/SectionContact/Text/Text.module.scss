@@ -1,0 +1,43 @@
+@import './styles/variables.scss';
+@import './styles/mixin.scss';
+
+.text {
+  @include font(normal, 16px, 142%);
+
+  order: 3;
+  width: 81%;
+  margin: 20px auto 0;
+  color: var(--sec-text-color);
+
+  @media (min-width: $tablet-lg-width) {
+    @include font(normal, 16px, 142%);
+
+    display: block;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    width: 300px;
+    margin: 20px 0 0 20px;
+  }
+
+  @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%);
+
+    width: 370px;
+    margin: 20px 0 0 29px;
+  }
+}
+
+.link {
+  color: var(--main-text-color);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link:active {
+  color: var(--active-link-sec-color);
+  text-decoration: underline;
+}

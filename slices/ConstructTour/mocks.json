@@ -1,0 +1,255 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "title": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "heading2",
+            "content": {
+              "text": "Spend"
+            }
+          }
+        ]
+      },
+      "description": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Veniam culpa consectetur nostrud."
+            }
+          }
+        ]
+      },
+      "input_name_label": {
+        "__TYPE__": "FieldContent",
+        "value": "row",
+        "type": "Text"
+      },
+      "input_name_id": {
+        "__TYPE__": "FieldContent",
+        "value": "modern",
+        "type": "Text"
+      },
+      "input_name_placeholder": {
+        "__TYPE__": "FieldContent",
+        "value": "earth",
+        "type": "Text"
+      },
+      "select_label": {
+        "__TYPE__": "FieldContent",
+        "value": "substance",
+        "type": "Text"
+      },
+      "select_id": {
+        "__TYPE__": "FieldContent",
+        "value": "seems",
+        "type": "Text"
+      },
+      "select_default_option": {
+        "__TYPE__": "FieldContent",
+        "value": "instead",
+        "type": "Text"
+      },
+      "input_email_label": {
+        "__TYPE__": "FieldContent",
+        "value": "grade",
+        "type": "Text"
+      },
+      "input_email_id": {
+        "__TYPE__": "FieldContent",
+        "value": "certainly",
+        "type": "Text"
+      },
+      "input_email_placeholder": {
+        "__TYPE__": "FieldContent",
+        "value": "string",
+        "type": "Text"
+      },
+      "input_phone_label": {
+        "__TYPE__": "FieldContent",
+        "value": "river",
+        "type": "Text"
+      },
+      "input_phone_id": {
+        "__TYPE__": "FieldContent",
+        "value": "like",
+        "type": "Text"
+      },
+      "input_phone_placeholder": {
+        "__TYPE__": "FieldContent",
+        "value": "is",
+        "type": "Text"
+      },
+      "input_datefrom_label": {
+        "__TYPE__": "FieldContent",
+        "value": "inch",
+        "type": "Text"
+      },
+      "input_datefrom_id": {
+        "__TYPE__": "FieldContent",
+        "value": "train",
+        "type": "Text"
+      },
+      "input_datefrom_placeholder": {
+        "__TYPE__": "FieldContent",
+        "value": "son",
+        "type": "Text"
+      },
+      "input_dateto_label": {
+        "__TYPE__": "FieldContent",
+        "value": "broke",
+        "type": "Text"
+      },
+      "input_dateto_id": {
+        "__TYPE__": "FieldContent",
+        "value": "flag",
+        "type": "Text"
+      },
+      "input_dateto_placeholder": {
+        "__TYPE__": "FieldContent",
+        "value": "plant",
+        "type": "Text"
+      },
+      "textarea_label": {
+        "__TYPE__": "FieldContent",
+        "value": "son",
+        "type": "Text"
+      },
+      "textarea_id": {
+        "__TYPE__": "FieldContent",
+        "value": "nothing",
+        "type": "Text"
+      },
+      "radio_name": {
+        "__TYPE__": "FieldContent",
+        "value": "lips",
+        "type": "Text"
+      },
+      "radio_legend": {
+        "__TYPE__": "FieldContent",
+        "value": "seeing",
+        "type": "Text"
+      },
+      "radio_id_1": {
+        "__TYPE__": "FieldContent",
+        "value": "palace",
+        "type": "Text"
+      },
+      "radio_value_1": {
+        "__TYPE__": "FieldContent",
+        "value": "remember",
+        "type": "Text"
+      },
+      "radio_label_1": {
+        "__TYPE__": "FieldContent",
+        "value": "met",
+        "type": "Text"
+      },
+      "radio_id_2": {
+        "__TYPE__": "FieldContent",
+        "value": "many",
+        "type": "Text"
+      },
+      "radio_value_2": {
+        "__TYPE__": "FieldContent",
+        "value": "every",
+        "type": "Text"
+      },
+      "radio_label_2": {
+        "__TYPE__": "FieldContent",
+        "value": "shorter",
+        "type": "Text"
+      },
+      "checkbox_hidden_legend": {
+        "__TYPE__": "FieldContent",
+        "value": "weather",
+        "type": "Text"
+      },
+      "checkbox_id": {
+        "__TYPE__": "FieldContent",
+        "value": "finally",
+        "type": "Text"
+      },
+      "checkbox_name": {
+        "__TYPE__": "FieldContent",
+        "value": "gentle",
+        "type": "Text"
+      },
+      "checkbox_label": {
+        "__TYPE__": "FieldContent",
+        "value": "for",
+        "type": "Text"
+      },
+      "checkbox_link": {
+        "__TYPE__": "LinkContent",
+        "value": {
+          "__TYPE__": "ExternalLink",
+          "url": "https://slicemachine.dev"
+        }
+      },
+      "checkbox_link_label": {
+        "__TYPE__": "FieldContent",
+        "value": "fifth",
+        "type": "Text"
+      },
+      "submit_button_label": {
+        "__TYPE__": "FieldContent",
+        "value": "shoe",
+        "type": "Text"
+      },
+      "reset_button_label": {
+        "__TYPE__": "FieldContent",
+        "value": "purpose",
+        "type": "Text"
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": [
+          [
+            "select_option_name",
+            {
+              "__TYPE__": "FieldContent",
+              "value": "offer",
+              "type": "Text"
+            }
+          ],
+          [
+            "select_option_value",
+            {
+              "__TYPE__": "FieldContent",
+              "value": "joy",
+              "type": "Text"
+            }
+          ],
+          [
+            "select",
+            {
+              "__TYPE__": "LinkContent",
+              "value": {
+                "__TYPE__": "DocumentLink",
+                "id": "mock_document_id"
+              }
+            }
+          ],
+          [
+            "input",
+            {
+              "__TYPE__": "LinkContent",
+              "value": {
+                "__TYPE__": "DocumentLink",
+                "id": "mock_document_id"
+              }
+            }
+          ]
+        ]
+      }
+    ]
+  }
+]
