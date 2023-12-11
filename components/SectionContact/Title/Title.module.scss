@@ -1,0 +1,29 @@
+@import './styles/variables.scss';
+@import './styles/mixin.scss';
+.title {
+  @include font(bold, 23px, 120%, 0.04em);
+
+  order: 2;
+  align-self: center;
+  width: 81%;
+  margin: 24px auto 0;
+  color: var(--main-text-color);
+
+  @media (min-width: $tablet-lg-width) {
+    @include font(500, 23px, 120%, 0.04em);
+
+    display: block;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    align-self: flex-end;
+    width: 300px;
+    margin: -7px 0 0 20px;
+  }
+
+  @media (min-width: $desktop-md-width) {
+    @include font(500, 35px, 122%, 0.004em);
+
+    width: 365px;
+    margin: -7px 0 0 29px;
+  }
+}

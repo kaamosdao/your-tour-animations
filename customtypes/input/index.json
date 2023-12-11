@@ -1,0 +1,53 @@
+{
+  "id": "input",
+  "label": "Input",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "label": {
+        "type": "Text",
+        "config": {
+          "label": "Label",
+          "placeholder": ""
+        }
+      },
+      "name": {
+        "type": "Text",
+        "config": {
+          "label": "Name",
+          "placeholder": ""
+        }
+      },
+      "placeholder": {
+        "type": "Text",
+        "config": {
+          "label": "Placeholder",
+          "placeholder": ""
+        }
+      },
+      "pattern": {
+        "type": "Text",
+        "config": {
+          "label": "Pattern",
+          "placeholder": ""
+        }
+      },
+      "type": {
+        "type": "Select",
+        "config": {
+          "label": "Type",
+          "placeholder": "",
+          "options": ["email", "password", "text", "tel"]
+        }
+      }
+    }
+  }
+}

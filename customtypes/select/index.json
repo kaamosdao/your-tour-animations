@@ -1,0 +1,60 @@
+{
+  "id": "select",
+  "label": "Select",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "label": {
+        "type": "Text",
+        "config": {
+          "label": "Label",
+          "placeholder": ""
+        }
+      },
+      "name": {
+        "type": "Text",
+        "config": {
+          "label": "Name",
+          "placeholder": ""
+        }
+      },
+      "default_option": {
+        "type": "Text",
+        "config": {
+          "label": "Default option",
+          "placeholder": ""
+        }
+      },
+      "options": {
+        "type": "Group",
+        "config": {
+          "label": "Options",
+          "fields": {
+            "value": {
+              "type": "Text",
+              "config": {
+                "label": "Value",
+                "placeholder": ""
+              }
+            },
+            "value_label": {
+              "type": "Text",
+              "config": {
+                "label": "Value label",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

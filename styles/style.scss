@@ -1,0 +1,59 @@
+@import './reset.css';
+@import './variables.scss';
+@import './mixin.scss';
+
+:root {
+  --main-text-color: #{$black};
+  --sec-text-color: #{$grey300};
+  --third-text-color: #{$white};
+  --btn-text-color: #{$green400};
+  --main-bg-color: #{$beige100};
+  --sec-bg-color: #{$beige200};
+  --third-bg-color: #{$white};
+  --header-bg-color: #{$blurwhite};
+  --active-link-color: #{$orange200};
+  --active-link-sec-color: #{$green400};
+  --btn-bg-color: #{$green400};
+  --btn-bg-sec-color: #{$green100};
+  --btn-bg-third-color: #{$white};
+  --btn-hover-color: #{$green400};
+  --btn-hover-sec-color: #{$green300};
+  --btn-hover-third-color: #{$grey100};
+  --btn-hover-fourth-color: #{$orange200};
+  --btn-active-color: #{$green200};
+  --btn-active-sec-color: #{$grey200};
+  --btn-active-third-color: #{$orange100};
+  --cursor-color: #{$orange200};
+  --cursor-follower-color: #{$white};
+
+  --invalid: #{$red};
+
+  --font-family: 'Roboto', 'Arial', sans-serif;
+}
+
+body {
+  margin: 0 auto 0 auto;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 142%;
+  letter-spacing: normal;
+  background-color: var(--main-bg-color);
+  cursor: none;
+}
+
+img {
+  min-width: 100%;
+  object-fit: contain;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}

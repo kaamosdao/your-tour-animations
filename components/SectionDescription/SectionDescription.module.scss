@@ -1,0 +1,155 @@
+@import './styles/variables.scss';
+@import './styles/mixin.scss';
+
+.sectionDescription {
+  min-width: 360px;
+  width: auto;
+  min-height: 488px;
+  margin-bottom: 37.5px;
+  background-image: url('/img/backgound-village/background-village-desktop-md.jpg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 601px auto;
+
+  @media (min-resolution: 2dppx) {
+    background-image: url('/img/backgound-village/background-village-desktop-md@2x.jpg');
+    background-size: 601px auto;
+  }
+
+  @media (min-width: $tablet-md-width) {
+    background-image: url('/img/backgound-village/background-village-desktop-md.jpg');
+    background-position: top;
+    background-size: cover;
+
+    @media (min-resolution: 2dppx) {
+      background-image: url('/img/backgound-village/background-village-desktop-md@2x.jpg');
+      background-size: cover;
+    }
+  }
+
+  @media (min-width: $tablet-lg-width) {
+    min-width: 800px;
+    width: auto;
+    min-height: 831px;
+    background-image: url('/img/backgound-village/background-village-desktop-md.jpg');
+    background-position: top;
+
+    @media (min-resolution: 2dppx) {
+      background-image: url('/img/backgound-village/background-village-desktop-md@2x.jpg');
+      background-size: 1024px auto;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    min-width: 1024px;
+    width: auto;
+    min-height: 831px;
+    background-image: url('/img/backgound-village/background-village-desktop-lg.jpg');
+    background-size: 1920px auto;
+
+    @media (min-resolution: 2dppx) {
+      background-image: url('/img/backgound-village/background-village-desktop-lg@2x.jpg');
+      background-size: 1920px auto;
+    }
+  }
+
+  @media (min-width: $desktop-md-width) {
+    margin-bottom: 67.5px;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    min-width: 1920px;
+    width: auto;
+    min-height: 831px;
+    background-image: url('/img/backgound-village/background-village-desktop-lg.jpg');
+    background-size: cover;
+
+    @media (min-resolution: 2dppx) {
+      background-image: url('/img/backgound-village/background-village-desktop-lg@2x.jpg');
+      background-size: cover;
+    }
+  }
+}
+
+.tagline {
+  margin: 0 auto;
+  max-width: 300px;
+  text-align: center;
+  color: var(--third-text-color);
+  overflow: hidden;
+
+  @media (min-width: $tablet-lg-width) {
+    min-width: 610px;
+    max-width: 800px;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    width: 620px;
+  }
+}
+
+.title {
+  margin: 0;
+  padding-top: 140px;
+  @include font(bold, 34px, 112%, 0.02em);
+
+  @media (min-width: $tablet-lg-width) {
+    padding-top: 207px;
+    @include font(bold, 96px, 109%, 0.02em);
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    padding-top: 209px;
+  }
+}
+
+.description {
+  @include font(normal, 16px, 144%);
+
+  margin: 40px auto 0;
+  width: 253px;
+
+  @media (min-width: $tablet-lg-width) {
+    @include font(normal, 20px, 142%);
+
+    margin: 52px auto 0;
+    width: 450px;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    width: 562px;
+  }
+}
+
+.button {
+  @include font(normal, 16px, 195%);
+
+  display: block;
+  width: 114px;
+  min-height: 33px;
+  margin: 24px auto 0;
+  color: var(--main-text-color);
+  background-color: var(--third-bg-color);
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  transform: translateX(-400%);
+
+  @media (min-width: $tablet-lg-width) {
+    @include font(normal, 17px, 195%);
+
+    width: 118px;
+    min-height: 34px;
+    margin-top: 28px;
+  }
+}
+
+.button:hover {
+  color: var(--third-text-color);
+  background-color: var(--active-link-color);
+  cursor: pointer;
+}
+
+.button:active {
+  background-color: var(--btn-active-third-color);
+}

@@ -1,0 +1,36 @@
+@import './styles/variables.scss';
+@import './styles/mixin.scss';
+
+.historyCardList {
+  @include font(normal, 16px, 142%);
+
+  position: relative;
+  margin: 25px 0 0 24px;
+  padding: 0;
+  list-style-type: none;
+  pointer-events: none;
+
+  @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%);
+
+    margin: 26px 0 0 30px;
+  }
+}
+
+.historyCardItem {
+  position: relative;
+}
+
+.historyCardItem:before {
+  position: absolute;
+  top: 0;
+  left: -16px;
+  font-size: 30px;
+  color: var(--third-text-color);
+  content: '·';
+
+  @media (min-width: $desktop-md-width) {
+    left: -20px;
+    font-size: 38px;
+  }
+}

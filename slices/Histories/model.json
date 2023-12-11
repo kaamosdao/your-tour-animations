@@ -1,0 +1,46 @@
+{
+  "id": "histories",
+  "type": "SharedSlice",
+  "name": "Histories",
+  "description": "Histories",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading2"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph"
+          }
+        }
+      },
+      "items": {
+        "history": {
+          "type": "Link",
+          "config": {
+            "label": "History",
+            "select": "document",
+            "customtypes": ["history"]
+          }
+        }
+      }
+    }
+  ]
+}

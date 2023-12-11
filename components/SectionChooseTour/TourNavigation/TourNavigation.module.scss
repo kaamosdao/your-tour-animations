@@ -1,0 +1,50 @@
+@import './styles/variables.scss';
+@import './styles/mixin.scss';
+
+.nav {
+  @include font(bold, 16px, 142%);
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 10px;
+  width: auto;
+  margin: 31px 31px 0;
+  padding: 0 0 2px;
+  color: var(--main-text-color);
+  list-style-type: none;
+  overflow: hidden;
+
+  @media (min-width: $desktop-md-width) {
+    @include font(bold, 23px, 122%, 0.003em);
+
+    column-gap: 30px;
+    justify-content: normal;
+    min-width: 700px;
+    margin-top: 36px;
+  }
+}
+
+.navLink {
+  position: relative;
+  padding: 0;
+  font: inherit;
+  font-size: inherit;
+  color: var(--main-text-color);
+  text-decoration: none;
+  background: none;
+  border: none;
+}
+
+.navLinkCurrent:hover {
+  cursor: none;
+}
+
+.navLinkCurrent {
+  color: var(--active-link-color);
+}
+
+.navItem {
+  position: relative;
+}

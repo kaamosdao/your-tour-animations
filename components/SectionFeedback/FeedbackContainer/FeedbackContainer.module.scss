@@ -1,0 +1,9 @@
+@import './styles/variables.scss';
+@import './styles/mixin.scss';
+
+.button {
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

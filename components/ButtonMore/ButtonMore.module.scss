@@ -1,0 +1,46 @@
+@import './styles/variables.scss';
+@import './styles/mixin.scss';
+
+.button {
+  @include font(bold, 16px, 142%);
+
+  position: relative;
+  width: 149px;
+  min-height: 37px;
+  margin: 0;
+  padding: 7px 15px;
+  box-sizing: border-box;
+  border-radius: 50px;
+  color: var(--third-text-color);
+  text-decoration: none;
+
+  @media (min-width: $desktop-md-width) {
+    @include font(bold, 23px, 122%);
+
+    width: 199px;
+    padding-left: 20px;
+    padding-right: 59px;
+  }
+}
+
+.arrow {
+  position: absolute;
+  top: 9px;
+  right: 12px;
+  width: 22px;
+  height: 16px;
+  fill: var(--third-text-color);
+
+  @media (min-width: $desktop-md-width) {
+    top: 11px;
+    right: 21px;
+  }
+}
+
+.hovered {
+  background-color: var(--btn-bg-color);
+}
+
+.clicked {
+  background-color: var(--btn-hover-fourth-color);
+}

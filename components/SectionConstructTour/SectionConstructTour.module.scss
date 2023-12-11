@@ -1,0 +1,147 @@
+@import './styles/variables.scss';
+@import './styles/mixin.scss';
+
+.constructTour {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 360px;
+  padding-bottom: 37.5px;
+  align-items: center;
+  text-align: center;
+
+  @media (min-width: $desktop-md-width) {
+    padding-bottom: 67.5px;
+  }
+}
+
+.title {
+  @include font(bold, 34px, 112%, 0.02em);
+
+  margin: 75px 0 0 0;
+  color: var(--main-text-color);
+
+  @media (min-width: $desktop-md-width) {
+    @include font(bold, 59px, 124%);
+
+    margin-top: 67.5px;
+  }
+}
+
+.description {
+  @include font(normal, 16px, 142%);
+
+  width: 318px;
+  margin: 20px 0 0 0;
+  padding: 0 18px;
+  color: var(--sec-text-color);
+
+  @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%);
+
+    width: 408px;
+    margin-top: 30px;
+  }
+}
+
+.form {
+  width: 318px;
+  min-height: 1110px;
+  margin: 41px 0 0 0;
+  padding: 20px 20px 40px;
+  box-sizing: border-box;
+  background-color: var(--third-bg-color);
+  border-radius: 30px;
+
+  @media (min-width: $tablet-md-width) {
+    width: 80%;
+    padding: 4.7%;
+  }
+
+  @media (min-width: $desktop-md-width) {
+    width: 918px;
+    min-height: 966px;
+    margin-top: 100px;
+    padding: 60px;
+    border-radius: 50px;
+  }
+
+  @media (min-width: 1300px) {
+    width: 70.6%;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    width: 61%;
+    min-height: 986px;
+    padding: 3.65%;
+  }
+}
+
+.buttons {
+  margin: 30px 0 0 0;
+  text-align: start;
+
+  @media (min-width: $desktop-md-width) {
+    margin-top: 33px;
+  }
+}
+
+.buttonFind {
+  @include font(normal, 16px, 142%);
+
+  width: 134px;
+  min-height: 47px;
+  padding: 12px;
+  color: var(--third-text-color);
+  background-color: var(--btn-bg-color);
+  border: none;
+  border-radius: 10px;
+
+  @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%);
+
+    width: 235px;
+    min-height: 58px;
+    padding: 15px;
+  }
+}
+
+.buttonFind:hover {
+  background-color: var(--btn-hover-sec-color);
+  cursor: pointer;
+}
+
+.buttonFind:active {
+  background-color: var(--btn-active-color);
+}
+
+.buttonClear {
+  @include font(normal, 16px, 142%);
+
+  width: 134px;
+  min-height: 47px;
+  margin-left: 10px;
+  padding: 12px;
+  color: var(--btn-text-color);
+  background-color: var(--btn-bg-sec-color);
+  border: none;
+  border-radius: 10px;
+
+  @media (min-width: $desktop-md-width) {
+    @include font(normal, 20px, 142%);
+
+    min-width: 235px;
+    min-height: 58px;
+    margin-left: 30px;
+    padding: 15px;
+  }
+}
+
+.buttonClear:hover {
+  background-color: var(--btn-hover-third-color);
+  cursor: pointer;
+}
+
+.buttonClear:active {
+  background-color: var(--btn-active-sec-color);
+}

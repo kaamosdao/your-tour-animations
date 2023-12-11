@@ -1,0 +1,46 @@
+{
+  "id": "feedback",
+  "type": "SharedSlice",
+  "name": "Feedback",
+  "description": "Feedback",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading2"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph"
+          }
+        }
+      },
+      "items": {
+        "card": {
+          "type": "Link",
+          "config": {
+            "label": "Card",
+            "select": "document",
+            "customtypes": ["feedback_card"]
+          }
+        }
+      }
+    }
+  ]
+}

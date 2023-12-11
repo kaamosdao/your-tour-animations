@@ -1,0 +1,321 @@
+{
+  "id": "construct_tour",
+  "type": "SharedSlice",
+  "name": "ConstructTour",
+  "description": "ConstructTour",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading2"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph"
+          }
+        },
+        "input_name_label": {
+          "type": "Text",
+          "config": {
+            "label": "Input_name label",
+            "placeholder": ""
+          }
+        },
+        "input_name_id": {
+          "type": "Text",
+          "config": {
+            "label": "Input_name id",
+            "placeholder": ""
+          }
+        },
+        "input_name_placeholder": {
+          "type": "Text",
+          "config": {
+            "label": "Input_name placeholder",
+            "placeholder": ""
+          }
+        },
+        "select_label": {
+          "type": "Text",
+          "config": {
+            "label": "Select label",
+            "placeholder": ""
+          }
+        },
+        "select_id": {
+          "type": "Text",
+          "config": {
+            "label": "Select id",
+            "placeholder": ""
+          }
+        },
+        "select_default_option": {
+          "type": "Text",
+          "config": {
+            "label": "Select default_option",
+            "placeholder": ""
+          }
+        },
+        "input_email_label": {
+          "type": "Text",
+          "config": {
+            "label": "Input_email label",
+            "placeholder": ""
+          }
+        },
+        "input_email_id": {
+          "type": "Text",
+          "config": {
+            "label": "Input_email id",
+            "placeholder": ""
+          }
+        },
+        "input_email_placeholder": {
+          "type": "Text",
+          "config": {
+            "label": "Input_email placeholder",
+            "placeholder": ""
+          }
+        },
+        "input_phone_label": {
+          "type": "Text",
+          "config": {
+            "label": "Input_phone label",
+            "placeholder": ""
+          }
+        },
+        "input_phone_id": {
+          "type": "Text",
+          "config": {
+            "label": "Input_phone id",
+            "placeholder": ""
+          }
+        },
+        "input_phone_placeholder": {
+          "type": "Text",
+          "config": {
+            "label": "Input_phone placeholder",
+            "placeholder": ""
+          }
+        },
+        "input_datefrom_label": {
+          "type": "Text",
+          "config": {
+            "label": "Input_datefrom label",
+            "placeholder": ""
+          }
+        },
+        "input_datefrom_id": {
+          "type": "Text",
+          "config": {
+            "label": "Input_datefrom id",
+            "placeholder": ""
+          }
+        },
+        "input_datefrom_placeholder": {
+          "type": "Text",
+          "config": {
+            "label": "Input_datefrom placeholder",
+            "placeholder": ""
+          }
+        },
+        "input_dateto_label": {
+          "type": "Text",
+          "config": {
+            "label": "Input_dateto label",
+            "placeholder": ""
+          }
+        },
+        "input_dateto_id": {
+          "type": "Text",
+          "config": {
+            "label": "Input_dateto id",
+            "placeholder": ""
+          }
+        },
+        "input_dateto_placeholder": {
+          "type": "Text",
+          "config": {
+            "label": "Input_dateto placeholder",
+            "placeholder": ""
+          }
+        },
+        "textarea_label": {
+          "type": "Text",
+          "config": {
+            "label": "Textarea label",
+            "placeholder": ""
+          }
+        },
+        "textarea_id": {
+          "type": "Text",
+          "config": {
+            "label": "Textarea id",
+            "placeholder": ""
+          }
+        },
+        "radio_name": {
+          "type": "Text",
+          "config": {
+            "label": "Radio name",
+            "placeholder": ""
+          }
+        },
+        "radio_legend": {
+          "type": "Text",
+          "config": {
+            "label": "Radio legend",
+            "placeholder": ""
+          }
+        },
+        "radio_id_1": {
+          "type": "Text",
+          "config": {
+            "label": "Radio id 1",
+            "placeholder": ""
+          }
+        },
+        "radio_value_1": {
+          "type": "Text",
+          "config": {
+            "label": "Radio value 1",
+            "placeholder": ""
+          }
+        },
+        "radio_label_1": {
+          "type": "Text",
+          "config": {
+            "label": "Radio label 1",
+            "placeholder": ""
+          }
+        },
+        "radio_id_2": {
+          "type": "Text",
+          "config": {
+            "label": "Radio id 2",
+            "placeholder": ""
+          }
+        },
+        "radio_value_2": {
+          "type": "Text",
+          "config": {
+            "label": "Radio value 2",
+            "placeholder": ""
+          }
+        },
+        "radio_label_2": {
+          "type": "Text",
+          "config": {
+            "label": "Radio label 2",
+            "placeholder": ""
+          }
+        },
+        "checkbox_hidden_legend": {
+          "type": "Text",
+          "config": {
+            "label": "Checkbox hidden legend",
+            "placeholder": ""
+          }
+        },
+        "checkbox_id": {
+          "type": "Text",
+          "config": {
+            "label": "Checkbox id",
+            "placeholder": ""
+          }
+        },
+        "checkbox_name": {
+          "type": "Text",
+          "config": {
+            "label": "Checkbox name",
+            "placeholder": ""
+          }
+        },
+        "checkbox_label": {
+          "type": "Text",
+          "config": {
+            "label": "Checkbox label",
+            "placeholder": ""
+          }
+        },
+        "checkbox_link": {
+          "type": "Link",
+          "config": {
+            "label": "Checkbox link",
+            "placeholder": "",
+            "select": null
+          }
+        },
+        "checkbox_link_label": {
+          "type": "Text",
+          "config": {
+            "label": "Checkbox link label",
+            "placeholder": ""
+          }
+        },
+        "submit_button_label": {
+          "type": "Text",
+          "config": {
+            "label": "Submit button label",
+            "placeholder": ""
+          }
+        },
+        "reset_button_label": {
+          "type": "Text",
+          "config": {
+            "label": "Reset button label",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {
+        "select_option_name": {
+          "type": "Text",
+          "config": {
+            "label": "Select_option_name",
+            "placeholder": ""
+          }
+        },
+        "select_option_value": {
+          "type": "Text",
+          "config": {
+            "label": "Select_option_value",
+            "placeholder": ""
+          }
+        },
+        "select": {
+          "type": "Link",
+          "config": {
+            "label": "Select",
+            "select": "document",
+            "customtypes": ["select"]
+          }
+        },
+        "input": {
+          "type": "Link",
+          "config": {
+            "label": "Input",
+            "select": "document",
+            "customtypes": ["input"]
+          }
+        }
+      }
+    }
+  ]
+}
