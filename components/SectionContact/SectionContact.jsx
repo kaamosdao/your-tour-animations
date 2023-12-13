@@ -30,7 +30,7 @@ const SectionContact = ({ slice }) => {
       data-slice-variation={slice.variation}
     >
       <ScrollTrigger
-        shift="-220%"
+        shift="-380%"
         trigger={sectionRef.current}
         scrollTriggerOptions={scrollTriggerOptions}
         tweenOptions={{
@@ -43,7 +43,7 @@ const SectionContact = ({ slice }) => {
         <Title slice={slice} />
       </ScrollTrigger>
       <ScrollTrigger
-        shift="105%"
+        shift="205%"
         trigger={sectionRef.current}
         scrollTriggerOptions={scrollTriggerOptions}
         tweenOptions={{
@@ -56,7 +56,7 @@ const SectionContact = ({ slice }) => {
         <Text slice={slice} />
       </ScrollTrigger>
       <ScrollTrigger
-        shift="-105%"
+        shift="-205%"
         trigger={sectionRef.current}
         scrollTriggerOptions={scrollTriggerOptions}
         tweenOptions={{
