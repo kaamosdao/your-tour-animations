@@ -8,7 +8,7 @@ import { createClient } from '@/prismicio';
 import { axisType } from '@/utils/types';
 
 import FeedbackContainer from './FeedbackContainer';
-import { ScrollTrigger } from '../Animation';
+import { CustomScrollTrigger } from '../Animation';
 
 import s from './SectionFeedback.module.scss';
 
@@ -53,7 +53,7 @@ const SectionFeedback = ({ slice }) => {
         components={components}
       />
       <ul ref={feedbackRef} className={s.list}>
-        <ScrollTrigger
+        <CustomScrollTrigger
           shift="-105%"
           trigger={feedbackRef.current}
           scrollTriggerOptions={{
@@ -66,7 +66,7 @@ const SectionFeedback = ({ slice }) => {
           {feedbacks?.map(({ data, uid }) => (
             <FeedbackContainer key={uid} data={data} />
           ))}
-        </ScrollTrigger>
+        </CustomScrollTrigger>
       </ul>
     </section>
   );

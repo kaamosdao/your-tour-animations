@@ -4,7 +4,7 @@ import { useMemo, useRef } from 'react';
 
 import { axisType } from '@/utils/types';
 
-import { ScrollTrigger } from '../Animation';
+import { CustomScrollTrigger } from '../Animation';
 import Title from './Title';
 import Text from './Text';
 import Picture from './Picture';
@@ -29,7 +29,7 @@ const SectionContact = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <ScrollTrigger
+      <CustomScrollTrigger
         shift="-380%"
         trigger={sectionRef.current}
         scrollTriggerOptions={scrollTriggerOptions}
@@ -41,8 +41,8 @@ const SectionContact = ({ slice }) => {
         axis={axisType.vertical}
       >
         <Title slice={slice} />
-      </ScrollTrigger>
-      <ScrollTrigger
+      </CustomScrollTrigger>
+      <CustomScrollTrigger
         shift="205%"
         trigger={sectionRef.current}
         scrollTriggerOptions={scrollTriggerOptions}
@@ -54,8 +54,8 @@ const SectionContact = ({ slice }) => {
         axis={axisType.vertical}
       >
         <Text slice={slice} />
-      </ScrollTrigger>
-      <ScrollTrigger
+      </CustomScrollTrigger>
+      <CustomScrollTrigger
         shift="-205%"
         trigger={sectionRef.current}
         scrollTriggerOptions={scrollTriggerOptions}
@@ -66,7 +66,7 @@ const SectionContact = ({ slice }) => {
         axis={axisType.horizontal}
       >
         <Picture slice={slice} />
-      </ScrollTrigger>
+      </CustomScrollTrigger>
     </section>
   );
 };

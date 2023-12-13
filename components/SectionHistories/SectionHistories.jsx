@@ -7,7 +7,7 @@ import { createClient } from '@/prismicio';
 import { axisType } from '@/utils/types';
 
 import HistorySlider from './HistorySlider/index';
-import { ScrollTrigger } from '../Animation';
+import { CustomScrollTrigger } from '../Animation';
 
 import s from './SectionHistories.module.scss';
 
@@ -47,7 +47,7 @@ const SectionHistories = ({ slice }) => {
         components={components}
       />
       <div ref={sliderRef} className={s.list}>
-        <ScrollTrigger
+        <CustomScrollTrigger
           shift="-105%"
           trigger={sliderRef.current}
           scrollTriggerOptions={{
@@ -57,7 +57,7 @@ const SectionHistories = ({ slice }) => {
           axis={axisType.horizontal}
         >
           {histories && <HistorySlider histories={histories} />}
-        </ScrollTrigger>
+        </CustomScrollTrigger>
       </div>
     </section>
   );

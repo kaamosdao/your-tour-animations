@@ -4,7 +4,7 @@ import { useRef } from 'react';
 
 import { axisType } from '@/utils/types';
 
-import { ScrollTrigger } from '@/components/Animation';
+import { CustomScrollTrigger } from '@/components/Animation';
 import NavItem from './NavItem';
 
 import s from './TourNavigation.module.scss';
@@ -18,7 +18,7 @@ const TourNavigation = ({ tours, activeNav, setActiveNav }) => {
 
   return (
     <ul ref={navRef} className={s.nav}>
-      <ScrollTrigger
+      <CustomScrollTrigger
         shift="-105%"
         trigger={navRef.current}
         scrollTriggerOptions={{
@@ -37,7 +37,7 @@ const TourNavigation = ({ tours, activeNav, setActiveNav }) => {
             id={uid}
           />
         ))}
-      </ScrollTrigger>
+      </CustomScrollTrigger>
     </ul>
   );
 };

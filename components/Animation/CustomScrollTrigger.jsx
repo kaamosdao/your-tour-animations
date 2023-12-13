@@ -6,10 +6,11 @@ import { gsap } from 'gsap/dist/gsap';
 import { axisType } from '@/utils/types';
 import { useArrayRef } from '@/hooks';
 
-const ScrollTrigger = ({
+const CustomScrollTrigger = ({
   children,
   shift,
   trigger,
+  targetRef = null,
   scrollTriggerOptions = {
     start: '20% bottom',
     end: '20% 80%',
@@ -36,7 +37,7 @@ const ScrollTrigger = ({
 
     if (axis === axisType.horizontal) {
       tl.fromTo(
-        refs.current,
+        targetRef ? targetRef.current : refs.current,
         {
           x: shift,
         },
@@ -47,7 +48,7 @@ const ScrollTrigger = ({
       );
     } else if (axis === axisType.vertical) {
       tl.fromTo(
-        refs.current,
+        targetRef ? targetRef.current : refs.current,
         {
           y: shift,
         },
@@ -61,9 +62,19 @@ const ScrollTrigger = ({
     return () => {
       tl.kill();
     };
-  }, [axis, refs, scrollTriggerOptions, shift, trigger, tweenOptions]);
+  }, [
+    axis,
+    refs,
+    scrollTriggerOptions,
+    shift,
+    targetRef,
+    trigger,
+    tweenOptions,
+  ]);
 
-  return Children.map(children, (child) => cloneElement(child, { addRef }));
+  return targetRef
+    ? children
+    : Children.map(children, (child) => cloneElement(child, { addRef }));
 };
 
-export default ScrollTrigger;
+export default CustomScrollTrigger;
