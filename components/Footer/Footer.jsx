@@ -8,9 +8,12 @@ import { createClient } from '@/prismicio';
 
 import socials from '@/data/socials';
 
+import { axisType } from '@/utils/types';
+
 import YourTourIcon from '@/public/img/svg-icons/yourtour.svg';
 
 import HoverCursor from '../CustomCursor/HoverCursor';
+import { CustomScrollTrigger } from '../Animation';
 
 import s from './Footer.module.scss';
 
@@ -31,47 +34,47 @@ const Footer = () => {
     getSettings();
   }, []);
 
-  useEffect(() => {
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: footerRef.current,
+  return (
+    <footer ref={footerRef} className={s.footer}>
+      <CustomScrollTrigger
+        scrollTriggerOptions={{
           start: '15% bottom',
           end: 'bottom bottom',
           scrub: 2,
           markers: true,
-        },
-      })
-      .to(backfaceRef?.current, {
-        y: 0,
-      });
-  }, []);
-
-  return (
-    <footer ref={footerRef} className={s.footer}>
-      <div ref={backfaceRef} className={s.backface}>
-        <div className={s.iconContainer}>
-          <YourTourIcon className={s.icon} />
+        }}
+        tweenOptions={{
+          ease: 'none',
+        }}
+        axis={axisType.vertical}
+        targetRef={backfaceRef}
+        shift="-190px"
+        trigger={footerRef.current}
+      >
+        <div ref={backfaceRef} className={s.backface}>
+          <div className={s.iconContainer}>
+            <YourTourIcon className={s.icon} />
+          </div>
+          <div className={s.container}>
+            <p className={s.text}>Наши социальные сети</p>
+            <ul className={s.socials}>
+              {socials.map(({ name, icon }) => (
+                <li key={name} className={s.socialsItem}>
+                  {icon}
+                  <HoverCursor cursorType="pulse">
+                    <PrismicNextLink
+                      field={data?.[name]}
+                      className={s.socialsLink}
+                    >
+                      {name}
+                    </PrismicNextLink>
+                  </HoverCursor>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <div className={s.container}>
-          <p className={s.text}>Наши социальные сети</p>
-          <ul className={s.socials}>
-            {socials.map(({ name, icon }) => (
-              <li key={name} className={s.socialsItem}>
-                {icon}
-                <HoverCursor cursorType="pulse">
-                  <PrismicNextLink
-                    field={data?.[name]}
-                    className={s.socialsLink}
-                  >
-                    {name}
-                  </PrismicNextLink>
-                </HoverCursor>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      </CustomScrollTrigger>
     </footer>
   );
 };
