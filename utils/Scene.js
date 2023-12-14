@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { gsap } from 'gsap';
-import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import { clamp } from 'three/src/math/MathUtils';
 
 import getLoopedNumber from './getLoopedNumber';
@@ -49,8 +48,6 @@ class Scene {
     this.camera.updateProjectionMatrix();
 
     this.renderer.setSize(this.width, this.height);
-
-    ScrollTrigger.refresh();
   };
 
   resizeImg() {
@@ -141,8 +138,6 @@ class Scene {
 
       this.currentSlideNumber = 0;
       this.nextSlideNumber = 1;
-
-      ScrollTrigger.refresh();
 
       this.resize();
     };
