@@ -34,11 +34,14 @@ const Footer = () => {
     getSettings();
   }, []);
 
+  const getTrigger = () => footerRef.current;
+  const getTarget = () => backfaceRef.current;
+
   return (
     <footer ref={footerRef} className={s.footer}>
       <CustomScrollTrigger
         scrollTriggerOptions={{
-          start: '15% bottom',
+          start: 'top bottom',
           end: 'bottom bottom',
           scrub: 2,
         }}
@@ -46,9 +49,9 @@ const Footer = () => {
           ease: 'none',
         }}
         axis={axisType.vertical}
-        targetRef={backfaceRef}
+        getTarget={getTarget}
         shift="-190px"
-        trigger={footerRef.current}
+        getTrigger={getTrigger}
       >
         <div ref={backfaceRef} className={s.backface}>
           <div className={s.iconContainer}>

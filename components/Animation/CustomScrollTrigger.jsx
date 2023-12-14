@@ -9,8 +9,8 @@ import { useArrayRef } from '@/hooks';
 const CustomScrollTrigger = ({
   children,
   shift,
-  trigger,
-  targetRef = null,
+  getTrigger,
+  getTarget = null,
   scrollTriggerOptions = {
     start: '20% bottom',
     end: '20% 80%',
@@ -30,14 +30,14 @@ const CustomScrollTrigger = ({
 
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger,
+        trigger: getTrigger(),
         ...scrollTriggerOptions,
       },
     });
 
     if (axis === axisType.horizontal) {
       tl.fromTo(
-        targetRef ? targetRef.current : refs.current,
+        getTarget ? getTarget() : refs.current,
         {
           x: shift,
         },
@@ -48,7 +48,7 @@ const CustomScrollTrigger = ({
       );
     } else if (axis === axisType.vertical) {
       tl.fromTo(
-        targetRef ? targetRef.current : refs.current,
+        getTarget ? getTarget() : refs.current,
         {
           y: shift,
         },
@@ -64,15 +64,15 @@ const CustomScrollTrigger = ({
     };
   }, [
     axis,
+    getTarget,
+    getTrigger,
     refs,
     scrollTriggerOptions,
     shift,
-    targetRef,
-    trigger,
     tweenOptions,
   ]);
 
-  return targetRef
+  return getTarget
     ? children
     : Children.map(children, (child) => cloneElement(child, { addRef }));
 };

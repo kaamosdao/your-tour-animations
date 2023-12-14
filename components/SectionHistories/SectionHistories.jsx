@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import { PrismicRichText } from '@prismicio/react';
 import { createClient } from '@/prismicio';
 
@@ -32,15 +31,11 @@ const SectionHistories = ({ slice }) => {
       const data = await client.getAllByUIDs('history', historyUIDs);
 
       setHistories(data);
-
-      ScrollTrigger.refresh();
     };
     getData();
   }, [historyUIDs]);
 
-  useEffect(() => {
-    ScrollTrigger.refresh();
-  }, [histories]);
+  const getTrigger = () => sliderRef.current;
 
   return (
     <section
@@ -56,7 +51,7 @@ const SectionHistories = ({ slice }) => {
       <div ref={sliderRef} className={s.list}>
         <CustomScrollTrigger
           shift="-105%"
-          trigger={sliderRef.current}
+          getTrigger={getTrigger}
           scrollTriggerOptions={{
             start: '80% bottom',
             toggleActions: 'restart play reverse reverse',
