@@ -17,6 +17,7 @@ const SectionContact = ({ slice }) => {
   const scrollTriggerOptions = useMemo(
     () => ({
       start: '80% bottom',
+      end: 'bottom bottom',
       toggleActions: 'restart play reverse reverse',
     }),
     []
@@ -32,7 +33,7 @@ const SectionContact = ({ slice }) => {
       <CustomScrollTrigger
         shift="-380%"
         trigger={sectionRef.current}
-        scrollTriggerOptions={scrollTriggerOptions}
+        scrollTriggerOptions={{ ...scrollTriggerOptions, markers: true }}
         tweenOptions={{
           ease: 'power3.out',
           duration: 0.7,

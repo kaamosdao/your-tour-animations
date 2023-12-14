@@ -41,7 +41,6 @@ const Footer = () => {
           start: '15% bottom',
           end: 'bottom bottom',
           scrub: 2,
-          markers: true,
         }}
         tweenOptions={{
           ease: 'none',

@@ -1,3 +1,4 @@
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import { PrismicNextImage } from '@prismicio/next';
 import cn from 'classnames';
 
@@ -9,6 +10,10 @@ import { useDevicePixelRatio } from '@/hooks';
 const ItemPicture = ({ image, deviceSize, type }) => {
   const devicePixelRatio = useDevicePixelRatio();
 
+  const refreshScrollTrigger = () => {
+    ScrollTrigger.refresh();
+  };
+
   if (devicePixelRatio === 1) {
     if (deviceSize === sizeType.desktopLg) {
       return image.desktop.url ? (
@@ -18,7 +23,10 @@ const ItemPicture = ({ image, deviceSize, type }) => {
             type === carouselType.large ? s.largeItem : s.smallItem
           )}
         >
-          <PrismicNextImage field={image.desktop} />
+          <PrismicNextImage
+            onLoad={refreshScrollTrigger}
+            field={image.desktop}
+          />
         </li>
       ) : null;
     }
@@ -31,7 +39,10 @@ const ItemPicture = ({ image, deviceSize, type }) => {
             type === carouselType.large ? s.largeItem : s.smallItem
           )}
         >
-          <PrismicNextImage field={image.tablet} />
+          <PrismicNextImage
+            onLoad={refreshScrollTrigger}
+            field={image.tablet}
+          />
         </li>
       ) : null;
     }
@@ -43,7 +54,7 @@ const ItemPicture = ({ image, deviceSize, type }) => {
           type === carouselType.large ? s.largeItem : s.smallItem
         )}
       >
-        <PrismicNextImage field={image.mobile} />
+        <PrismicNextImage onLoad={refreshScrollTrigger} field={image.mobile} />
       </li>
     ) : null;
   }
@@ -56,7 +67,10 @@ const ItemPicture = ({ image, deviceSize, type }) => {
           type === carouselType.large ? s.largeItem : s.smallItem
         )}
       >
-        <PrismicNextImage field={image.desktop_retina} />
+        <PrismicNextImage
+          onLoad={refreshScrollTrigger}
+          field={image.desktop_retina}
+        />
       </li>
     ) : null;
   }
@@ -69,7 +83,10 @@ const ItemPicture = ({ image, deviceSize, type }) => {
           type === carouselType.large ? s.largeItem : s.smallItem
         )}
       >
-        <PrismicNextImage field={image.tablet_retina} />
+        <PrismicNextImage
+          onLoad={refreshScrollTrigger}
+          field={image.tablet_retina}
+        />
       </li>
     ) : null;
   }
@@ -81,7 +98,10 @@ const ItemPicture = ({ image, deviceSize, type }) => {
         type === carouselType.large ? s.largeItem : s.smallItem
       )}
     >
-      <PrismicNextImage field={image.mobile_retina} />
+      <PrismicNextImage
+        onLoad={refreshScrollTrigger}
+        field={image.mobile_retina}
+      />
     </li>
   ) : null;
 };
