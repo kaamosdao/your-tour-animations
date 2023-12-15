@@ -5,6 +5,8 @@
 Test task for Salt &amp; Pepper. Web page with adaptive web design about perfect travels.
 The goal is to migrate [Your Tour](https://github.com/kaamosdao/your-tour) to Next.js and add animations.
 
+[Here you can expolre the website!](https://your-tour-animations.vercel.app/)
+
 ## Install
 
 ```sh
