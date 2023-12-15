@@ -23,8 +23,6 @@ const SectionContact = ({ slice }) => {
     []
   );
 
-  const getTrigger = () => sectionRef.current;
-
   return (
     <section
       ref={sectionRef}
@@ -34,7 +32,7 @@ const SectionContact = ({ slice }) => {
     >
       <CustomScrollTrigger
         shift="-380%"
-        getTrigger={getTrigger}
+        trigger={sectionRef}
         scrollTriggerOptions={scrollTriggerOptions}
         tweenOptions={{
           ease: 'power3.out',
@@ -48,7 +46,7 @@ const SectionContact = ({ slice }) => {
 
       <CustomScrollTrigger
         shift="205%"
-        getTrigger={getTrigger}
+        trigger={sectionRef}
         scrollTriggerOptions={scrollTriggerOptions}
         tweenOptions={{
           ease: 'power3.out',
@@ -62,7 +60,7 @@ const SectionContact = ({ slice }) => {
 
       <CustomScrollTrigger
         shift="-205%"
-        getTrigger={getTrigger}
+        trigger={sectionRef}
         scrollTriggerOptions={scrollTriggerOptions}
         tweenOptions={{
           ease: 'power3.out',

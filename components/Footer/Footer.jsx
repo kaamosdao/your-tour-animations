@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { PrismicNextLink } from '@prismicio/next';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import { createClient } from '@/prismicio';
 
 import socials from '@/data/socials';
@@ -23,8 +21,6 @@ const Footer = () => {
 
   const [data, setData] = useState(null);
 
-  gsap.registerPlugin(ScrollTrigger);
-
   useEffect(() => {
     const client = createClient();
     const getSettings = async () => {
@@ -33,9 +29,6 @@ const Footer = () => {
     };
     getSettings();
   }, []);
-
-  const getTrigger = () => footerRef.current;
-  const getTarget = () => backfaceRef.current;
 
   return (
     <footer ref={footerRef} className={s.footer}>
@@ -49,9 +42,9 @@ const Footer = () => {
           ease: 'none',
         }}
         axis={axisType.vertical}
-        getTarget={getTarget}
-        shift="-190px"
-        getTrigger={getTrigger}
+        shift="-80%"
+        target={backfaceRef}
+        trigger={footerRef}
       >
         <div ref={backfaceRef} className={s.backface}>
           <div className={s.iconContainer}>

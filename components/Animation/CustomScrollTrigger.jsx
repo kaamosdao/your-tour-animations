@@ -9,12 +9,13 @@ import { useArrayRef } from '@/hooks';
 const CustomScrollTrigger = ({
   children,
   shift,
-  getTrigger,
-  getTarget = null,
+  trigger,
+  target = null,
   scrollTriggerOptions = {
     start: '20% bottom',
     end: '20% 80%',
     toggleActions: 'restart play reverse reverse',
+    invalidateOnRefresh: true,
   },
   tweenOptions = {
     ease: 'power3.out',
@@ -30,14 +31,14 @@ const CustomScrollTrigger = ({
 
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: getTrigger(),
+        trigger: trigger.current,
         ...scrollTriggerOptions,
       },
     });
 
     if (axis === axisType.horizontal) {
       tl.fromTo(
-        getTarget ? getTarget() : refs.current,
+        target ? target.current : refs.current,
         {
           x: shift,
         },
@@ -48,7 +49,7 @@ const CustomScrollTrigger = ({
       );
     } else if (axis === axisType.vertical) {
       tl.fromTo(
-        getTarget ? getTarget() : refs.current,
+        target ? target.current : refs.current,
         {
           y: shift,
         },
@@ -62,17 +63,9 @@ const CustomScrollTrigger = ({
     return () => {
       tl.kill();
     };
-  }, [
-    axis,
-    getTarget,
-    getTrigger,
-    refs,
-    scrollTriggerOptions,
-    shift,
-    tweenOptions,
-  ]);
+  }, [axis, target, trigger, refs, scrollTriggerOptions, shift, tweenOptions]);
 
-  return getTarget
+  return target
     ? children
     : Children.map(children, (child) => cloneElement(child, { addRef }));
 };

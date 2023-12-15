@@ -41,8 +41,6 @@ const SectionFeedback = ({ slice }) => {
     getData();
   }, [slice.items]);
 
-  const getTrigger = () => feedbackRef.current;
-
   return (
     <section
       className={s.feedback}
@@ -57,7 +55,7 @@ const SectionFeedback = ({ slice }) => {
       <ul ref={feedbackRef} className={s.list}>
         <CustomScrollTrigger
           shift="-105%"
-          getTrigger={getTrigger}
+          trigger={feedbackRef}
           scrollTriggerOptions={{
             start: '20% bottom',
             end: '20% 80%',

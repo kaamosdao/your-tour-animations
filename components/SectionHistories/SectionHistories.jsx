@@ -35,8 +35,6 @@ const SectionHistories = ({ slice }) => {
     getData();
   }, [historyUIDs]);
 
-  const getTrigger = () => sliderRef.current;
-
   return (
     <section
       className={s.histories}
@@ -51,7 +49,7 @@ const SectionHistories = ({ slice }) => {
       <div ref={sliderRef} className={s.list}>
         <CustomScrollTrigger
           shift="-105%"
-          getTrigger={getTrigger}
+          trigger={sliderRef}
           scrollTriggerOptions={{
             start: '80% bottom',
             toggleActions: 'restart play reverse reverse',

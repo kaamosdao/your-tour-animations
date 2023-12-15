@@ -16,13 +16,11 @@ const TourNavigation = ({ tours, activeNav, setActiveNav }) => {
     setActiveNav(e.target.name);
   };
 
-  const getTrigger = () => navRef.current;
-
   return (
     <ul ref={navRef} className={s.nav}>
       <CustomScrollTrigger
         shift="-105%"
-        getTrigger={getTrigger}
+        trigger={navRef}
         scrollTriggerOptions={{
           start: 'top bottom',
           end: '+=500',
