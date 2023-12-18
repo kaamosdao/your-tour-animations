@@ -19,6 +19,7 @@ const SectionContact = ({ slice }) => {
       start: '80% bottom',
       end: 'bottom bottom',
       toggleActions: 'restart play reverse reverse',
+      invalidateOnRefresh: true,
     }),
     []
   );

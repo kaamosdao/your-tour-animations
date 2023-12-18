@@ -60,6 +60,7 @@ const SectionFeedback = ({ slice }) => {
             start: '20% bottom',
             end: '20% 80%',
             toggleActions: 'restart play reverse reverse',
+            invalidateOnRefresh: true,
           }}
           axis={axisType.vertical}
         >

@@ -53,6 +53,7 @@ const SectionHistories = ({ slice }) => {
           scrollTriggerOptions={{
             start: '80% bottom',
             toggleActions: 'restart play reverse reverse',
+            invalidateOnRefresh: true,
           }}
           axis={axisType.horizontal}
         >

@@ -25,6 +25,7 @@ const TourNavigation = ({ tours, activeNav, setActiveNav }) => {
           start: 'top bottom',
           end: '+=500',
           toggleActions: 'restart complete none reverse',
+          invalidateOnRefresh: true,
         }}
         axis={axisType.vertical}
       >
