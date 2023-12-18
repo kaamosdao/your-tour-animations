@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { axisType } from '@/utils/types';
 
@@ -24,6 +24,24 @@ const SectionContact = ({ slice }) => {
     []
   );
 
+  const [moreThanTabletLg, setMoreThanTabletLg] = useState(true);
+
+  useEffect(() => {
+    const resize = () => {
+      if (window.innerWidth >= 800 && !moreThanTabletLg) {
+        setMoreThanTabletLg(true);
+      } else if (window.innerWidth < 800 && moreThanTabletLg) {
+        setMoreThanTabletLg(false);
+      }
+    };
+
+    resize();
+
+    window.addEventListener('resize', resize);
+
+    return () => window.removeEventListener('resize', resize);
+  }, [moreThanTabletLg]);
+
   return (
     <section
       ref={sectionRef}
@@ -40,7 +58,7 @@ const SectionContact = ({ slice }) => {
           duration: 0.7,
           delay: 0.2,
         }}
-        axis={axisType.vertical}
+        axis={moreThanTabletLg ? axisType.vertical : axisType.horizontal}
       >
         <Title slice={slice} />
       </CustomScrollTrigger>
@@ -54,7 +72,7 @@ const SectionContact = ({ slice }) => {
           duration: 0.7,
           delay: 0.4,
         }}
-        axis={axisType.vertical}
+        axis={moreThanTabletLg ? axisType.vertical : axisType.horizontal}
       >
         <Text slice={slice} />
       </CustomScrollTrigger>
