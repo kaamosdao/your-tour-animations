@@ -41,6 +41,7 @@ const CustomScrollTrigger = ({
         target ? target.current : refs.current,
         {
           x: shift,
+          y: initialPosition,
         },
         {
           x: initialPosition,
@@ -51,6 +52,7 @@ const CustomScrollTrigger = ({
       tl.fromTo(
         target ? target.current : refs.current,
         {
+          x: initialPosition,
           y: shift,
         },
         {
