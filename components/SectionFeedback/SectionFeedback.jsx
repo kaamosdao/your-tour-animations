@@ -6,6 +6,7 @@ import { isFilled } from '@prismicio/client';
 import { createClient } from '@/prismicio';
 
 import { axisType } from '@/utils/types';
+import { useWiderThanTabletLg } from '@/hooks';
 
 import FeedbackContainer from './FeedbackContainer';
 import { CustomScrollTrigger } from '../Animation';
@@ -21,23 +22,8 @@ const SectionFeedback = ({ slice }) => {
   const feedbackRef = useRef(null);
 
   const [feedbacks, setFeedbacks] = useState(null);
-  const [moreThanTabletLg, setMoreThanTabletLg] = useState(true);
 
-  useEffect(() => {
-    const resize = () => {
-      if (window.innerWidth >= 800 && !moreThanTabletLg) {
-        setMoreThanTabletLg(true);
-      } else if (window.innerWidth < 800 && moreThanTabletLg) {
-        setMoreThanTabletLg(false);
-      }
-    };
-
-    resize();
-
-    window.addEventListener('resize', resize);
-
-    return () => window.removeEventListener('resize', resize);
-  }, [moreThanTabletLg]);
+  const widerThanTabletLg = useWiderThanTabletLg();
 
   useEffect(() => {
     const client = createClient();
@@ -79,7 +65,7 @@ const SectionFeedback = ({ slice }) => {
             toggleActions: 'restart play reverse reverse',
             invalidateOnRefresh: true,
           }}
-          axis={moreThanTabletLg ? axisType.vertical : axisType.horizontal}
+          axis={widerThanTabletLg ? axisType.vertical : axisType.horizontal}
         >
           {feedbacks?.map(({ data, uid }) => (
             <FeedbackContainer key={uid} data={data} />

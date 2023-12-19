@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef } from 'react';
 
 import { axisType } from '@/utils/types';
+import { useWiderThanTabletLg } from '@/hooks';
 
 import { CustomScrollTrigger } from '../Animation';
 import Title from './Title';
@@ -24,23 +25,7 @@ const SectionContact = ({ slice }) => {
     []
   );
 
-  const [moreThanTabletLg, setMoreThanTabletLg] = useState(true);
-
-  useEffect(() => {
-    const resize = () => {
-      if (window.innerWidth >= 800 && !moreThanTabletLg) {
-        setMoreThanTabletLg(true);
-      } else if (window.innerWidth < 800 && moreThanTabletLg) {
-        setMoreThanTabletLg(false);
-      }
-    };
-
-    resize();
-
-    window.addEventListener('resize', resize);
-
-    return () => window.removeEventListener('resize', resize);
-  }, [moreThanTabletLg]);
+  const widerThanTabletLg = useWiderThanTabletLg();
 
   return (
     <section
@@ -58,7 +43,7 @@ const SectionContact = ({ slice }) => {
           duration: 0.7,
           delay: 0.2,
         }}
-        axis={moreThanTabletLg ? axisType.vertical : axisType.horizontal}
+        axis={widerThanTabletLg ? axisType.vertical : axisType.horizontal}
       >
         <Title slice={slice} />
       </CustomScrollTrigger>
@@ -72,7 +57,7 @@ const SectionContact = ({ slice }) => {
           duration: 0.7,
           delay: 0.4,
         }}
-        axis={moreThanTabletLg ? axisType.vertical : axisType.horizontal}
+        axis={widerThanTabletLg ? axisType.vertical : axisType.horizontal}
       >
         <Text slice={slice} />
       </CustomScrollTrigger>
