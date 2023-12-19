@@ -2,8 +2,6 @@
 
 /* eslint-disable react/no-array-index-key */
 
-import { useEffect } from 'react';
-import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import { PrismicRichText } from '@prismicio/react';
 import cn from 'classnames';
 
@@ -31,10 +29,6 @@ const DescriptionSecondary = ({ slice }) => {
   const isVisible = useTransition();
 
   const [refs, addRef] = useArrayRef();
-
-  useEffect(() => {
-    ScrollTrigger.refresh();
-  }, []);
 
   return (
     <section
