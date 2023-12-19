@@ -12,11 +12,11 @@ import { createClient } from '@/prismicio';
 import HorizontalLoop from '@/utils/HorizontalLoop';
 import getDeviceSize from '@/utils/getDeviceSize';
 import { carouselType, directionType } from '@/utils/types';
+import getPictureShift from '@/utils/getPictureShift';
 
 import ItemPicture from './Picture';
 
 import s from './SectionPhotos.module.scss';
-import getPictureShift from '@/utils/getPictureShift';
 
 const components = {
   heading2: ({ children }) => <h2 className={s.title}>{children}</h2>,
