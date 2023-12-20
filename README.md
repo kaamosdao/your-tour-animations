@@ -2,7 +2,7 @@
 
 [![Linter](https://github.com/kaamosdao/your-tour-animations/actions/workflows/linter.yml/badge.svg)](https://github.com/kaamosdao/your-tour-animations/actions/workflows/linter.yml)
 
-Test task for Salt &amp; Pepper. Web page with adaptive web design about perfect travels.
+Test task for Salt &amp; Pepper intership. Web page with adaptive web design about perfect travels.
 The goal is to migrate [Your Tour](https://github.com/kaamosdao/your-tour) to Next.js and add animations.
 
 [Here you can expolre the website!](https://your-tour-animations.vercel.app/)
@@ -29,7 +29,7 @@ $ make build
 
 ## Start app
 
-#### _(Before make sure, that you create a build)_
+#### _(Before make sure, that you've created a build)_
 
 ```
 $ make start
