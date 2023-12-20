@@ -149,7 +149,7 @@ const HistorySlider = ({ histories, addRef }) => {
       >
         <HoverCursor
           cursorType="text"
-          data="Подробнее"
+          data="Swipe"
           fnsOnEnter={[() => setHovered(true)]}
           fnsOnLeave={[() => setHovered(false), () => setClicked(false)]}
         >

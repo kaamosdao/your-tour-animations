@@ -2,9 +2,9 @@ import { PrismicNextImage } from '@prismicio/next';
 import cn from 'classnames';
 
 import { carouselType, sizeType } from '@/utils/types';
+import { useDevicePixelRatio } from '@/hooks';
 
 import s from './ItemPicture.module.scss';
-import { useDevicePixelRatio } from '@/hooks';
 
 const ItemPicture = ({ image, deviceSize, type }) => {
   const devicePixelRatio = useDevicePixelRatio();

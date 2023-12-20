@@ -3,8 +3,9 @@
 import { useMemo, useRef } from 'react';
 
 import { axisType } from '@/utils/types';
+import { useWiderThanTabletLg } from '@/hooks';
 
-import { ScrollTrigger } from '../Animation';
+import { CustomScrollTrigger } from '../Animation';
 import Title from './Title';
 import Text from './Text';
 import Picture from './Picture';
@@ -17,10 +18,14 @@ const SectionContact = ({ slice }) => {
   const scrollTriggerOptions = useMemo(
     () => ({
       start: '80% bottom',
+      end: 'bottom bottom',
       toggleActions: 'restart play reverse reverse',
+      invalidateOnRefresh: true,
     }),
     []
   );
+
+  const widerThanTabletLg = useWiderThanTabletLg();
 
   return (
     <section
@@ -29,35 +34,37 @@ const SectionContact = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <ScrollTrigger
-        shift="-220%"
-        trigger={sectionRef.current}
+      <CustomScrollTrigger
+        shift="-380%"
+        trigger={sectionRef}
         scrollTriggerOptions={scrollTriggerOptions}
         tweenOptions={{
           ease: 'power3.out',
           duration: 0.7,
           delay: 0.2,
         }}
-        axis={axisType.vertical}
+        axis={widerThanTabletLg ? axisType.vertical : axisType.horizontal}
       >
         <Title slice={slice} />
-      </ScrollTrigger>
-      <ScrollTrigger
-        shift="105%"
-        trigger={sectionRef.current}
+      </CustomScrollTrigger>
+
+      <CustomScrollTrigger
+        shift="205%"
+        trigger={sectionRef}
         scrollTriggerOptions={scrollTriggerOptions}
         tweenOptions={{
           ease: 'power3.out',
           duration: 0.7,
           delay: 0.4,
         }}
-        axis={axisType.vertical}
+        axis={widerThanTabletLg ? axisType.vertical : axisType.horizontal}
       >
         <Text slice={slice} />
-      </ScrollTrigger>
-      <ScrollTrigger
-        shift="-105%"
-        trigger={sectionRef.current}
+      </CustomScrollTrigger>
+
+      <CustomScrollTrigger
+        shift="-205%"
+        trigger={sectionRef}
         scrollTriggerOptions={scrollTriggerOptions}
         tweenOptions={{
           ease: 'power3.out',
@@ -66,7 +73,7 @@ const SectionContact = ({ slice }) => {
         axis={axisType.horizontal}
       >
         <Picture slice={slice} />
-      </ScrollTrigger>
+      </CustomScrollTrigger>
     </section>
   );
 };
