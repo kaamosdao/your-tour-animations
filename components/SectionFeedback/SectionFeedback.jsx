@@ -6,9 +6,10 @@ import { isFilled } from '@prismicio/client';
 import { createClient } from '@/prismicio';
 
 import { axisType } from '@/utils/types';
+import { useWiderThanTabletLg } from '@/hooks';
 
 import FeedbackContainer from './FeedbackContainer';
-import { ScrollTrigger } from '../Animation';
+import { CustomScrollTrigger } from '../Animation';
 
 import s from './SectionFeedback.module.scss';
 
@@ -21,6 +22,8 @@ const SectionFeedback = ({ slice }) => {
   const feedbackRef = useRef(null);
 
   const [feedbacks, setFeedbacks] = useState(null);
+
+  const widerThanTabletLg = useWiderThanTabletLg();
 
   useEffect(() => {
     const client = createClient();
@@ -53,20 +56,21 @@ const SectionFeedback = ({ slice }) => {
         components={components}
       />
       <ul ref={feedbackRef} className={s.list}>
-        <ScrollTrigger
+        <CustomScrollTrigger
           shift="-105%"
-          trigger={feedbackRef.current}
+          trigger={feedbackRef}
           scrollTriggerOptions={{
             start: '20% bottom',
             end: '20% 80%',
             toggleActions: 'restart play reverse reverse',
+            invalidateOnRefresh: true,
           }}
-          axis={axisType.vertical}
+          axis={widerThanTabletLg ? axisType.vertical : axisType.horizontal}
         >
           {feedbacks?.map(({ data, uid }) => (
             <FeedbackContainer key={uid} data={data} />
           ))}
-        </ScrollTrigger>
+        </CustomScrollTrigger>
       </ul>
     </section>
   );

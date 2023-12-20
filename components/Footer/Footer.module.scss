@@ -6,6 +6,7 @@
   justify-content: center;
   min-width: 360px;
   background-color: var(--sec-bg-color);
+  overflow: hidden;
 }
 
 .container {
@@ -93,4 +94,35 @@
   height: 1px;
   background-color: var(--main-text-color);
   content: '';
+}
+
+.backface {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-bottom: 2px solid var(--main-bg-color);
+}
+
+.icon {
+  width: 133px;
+  height: 22px;
+  margin: 59px 0;
+  fill: var(--nav-text-color);
+
+  text-align: center;
+
+  @media (min-width: $desktop-md-width) {
+    width: 181px;
+    height: 32px;
+  }
 }

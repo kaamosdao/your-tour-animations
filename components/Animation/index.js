@@ -1,2 +1,2 @@
 export { default as AppearOnMount } from './AppearOnMount';
-export { default as ScrollTrigger } from './ScrollTrigger';
+export { default as CustomScrollTrigger } from './CustomScrollTrigger';

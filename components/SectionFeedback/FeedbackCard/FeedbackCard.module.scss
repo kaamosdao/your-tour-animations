@@ -11,7 +11,7 @@
   box-sizing: border-box;
   text-align: start;
   background-color: var(--sec-bg-color);
-  border: none;
+  border: 1px solid var(--sec-bg-color);
 
   @media (min-width: $tablet-md-width) {
     width: 100%;
@@ -36,6 +36,10 @@
     height: 365px;
     padding: 7.1% 7% 6.9%;
   }
+}
+
+.card:hover {
+  border: 1px solid var(--btn-active-sec-color);
 }
 
 .cardModal {

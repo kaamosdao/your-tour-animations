@@ -1,5 +1,6 @@
 @import './styles/variables.scss';
 @import './styles/mixin.scss';
+
 .title {
   @include font(bold, 23px, 120%, 0.04em);
 
