@@ -4,6 +4,8 @@ import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import { PrismicPreview } from '@prismicio/next';
 import gsap from 'gsap/dist/gsap';
 
+import type { AppProps } from 'next/app';
+
 import { repositoryName } from '@/prismicio';
 
 import RootLayout from '@/components/RootLayout';
@@ -11,7 +13,7 @@ import { ReactSwitchTransition } from '@/components/TransitionGroup';
 
 import '@/styles/style.scss';
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps) {
   const pathName = usePathname();
 
   gsap.registerPlugin(ScrollTrigger);
