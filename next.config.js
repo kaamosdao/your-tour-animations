@@ -23,6 +23,7 @@ const nextConfig = {
       'utils',
       'styles',
       'components',
+      'hooks',
     ],
   },
 };
