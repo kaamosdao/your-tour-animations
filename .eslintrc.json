@@ -27,7 +27,7 @@
   "plugins": ["react"],
   "rules": {
     "react/function-component-definition": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/jsx-props-no-spreading": 0,
     "import/no-extraneous-dependencies": 0,
     "import/extensions": 0,
