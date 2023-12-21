@@ -2,10 +2,10 @@ import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { clamp } from 'three/src/math/MathUtils';
 
-import getLoopedNumber from './getLoopedNumber';
-
 import vShader from '@/shaders/vertex.glsl';
 import fShader from '@/shaders/fragment.glsl';
+
+import getLoopedNumber from './getLoopedNumber';
 
 class Scene {
   constructor(canvas, canvasHolder, setPlaying, images) {

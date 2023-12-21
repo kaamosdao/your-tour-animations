@@ -11,12 +11,12 @@ import Scene from '@/utils/Scene';
 import getLoopedNumber from '@/utils/getLoopedNumber';
 import { sliderEvent } from '@/utils/types';
 
+import Left from '@/public/img/svg-icons/arrow-left.svg';
+import Right from '@/public/img/svg-icons/arrow-right.svg';
+
 import CardList from './CardList';
 import ButtonMore from '../../ButtonMore';
 import HoverCursor from '../../CustomCursor/HoverCursor';
-
-import Left from '@/public/img/svg-icons/arrow-left.svg';
-import Right from '@/public/img/svg-icons/arrow-right.svg';
 
 import s from './HistorySlider.module.scss';
 
