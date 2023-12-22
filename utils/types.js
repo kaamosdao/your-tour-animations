@@ -11,10 +11,10 @@ export const sliderEvent = {
   click: 'click',
 };
 
-export const transitionAnimation = {
-  vertical: 'vertical',
-  horizontal: 'horizontal',
-};
+// export const transitionAnimation = {
+//   vertical: 'vertical',
+//   horizontal: 'horizontal',
+// };
 
 export const sizeType = {
   desktopLg: 'desktopLg',
