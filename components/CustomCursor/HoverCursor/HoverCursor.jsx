@@ -2,29 +2,29 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
 
 import { setCursor } from '@/store/slices/cursorSlice';
 
-import cursorState from '@/utils/types';
+import { useAppDispatch } from '@/hooks';
+import { CursorType } from '@/types';
 
 const HoverCursor = ({
   children,
-  cursorType,
-  data,
+  type,
+  data = null,
   activeLink,
   fnsOnEnter,
   fnsOnLeave,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onMouseEnter = (e) => {
     if (fnsOnEnter) {
       fnsOnEnter.forEach((fn) => fn());
     }
 
-    if (cursorType !== cursorState.stuck) {
-      dispatch(setCursor({ type: cursorState[cursorType], data }));
+    if (type !== CursorType.Stuck) {
+      dispatch(setCursor({ type: CursorType[type], data }));
       return;
     }
 
@@ -34,7 +34,7 @@ const HoverCursor = ({
     if ((activeLink && !link.className.includes(activeLink)) || !activeLink) {
       dispatch(
         setCursor({
-          type: cursorState[cursorType],
+          type: CursorType[type],
           data: {
             left,
             top,
@@ -53,7 +53,7 @@ const HoverCursor = ({
       fnsOnLeave.forEach((fn) => fn());
     }
 
-    dispatch(setCursor({ type: cursorState.default, data: null }));
+    dispatch(setCursor({ type: CursorType.Default, data: null }));
   };
 
   return React.cloneElement(children, {
@@ -64,7 +64,7 @@ const HoverCursor = ({
 
 HoverCursor.propTypes = {
   children: PropTypes.element.isRequired,
-  cursorType: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   data: PropTypes.string,
   activeLink: PropTypes.string,
   fnsOnEnter: PropTypes.arrayOf(PropTypes.func),

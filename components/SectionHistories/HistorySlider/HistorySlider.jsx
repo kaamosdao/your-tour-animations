@@ -11,6 +11,8 @@ import Scene from '@/utils/Scene';
 import getLoopedNumber from '@/utils/getLoopedNumber';
 import { sliderEvent } from '@/utils/types';
 
+import { CursorType } from '@/types';
+
 import Left from '@/public/img/svg-icons/arrow-left.svg';
 import Right from '@/public/img/svg-icons/arrow-right.svg';
 
@@ -148,7 +150,7 @@ const HistorySlider = ({ histories, addRef }) => {
         className={s.item}
       >
         <HoverCursor
-          cursorType="text"
+          type={CursorType.Text}
           data="Swipe"
           fnsOnEnter={[() => setHovered(true)]}
           fnsOnLeave={[() => setHovered(false), () => setClicked(false)]}
@@ -181,7 +183,7 @@ const HistorySlider = ({ histories, addRef }) => {
         </footer>
         <div className={s.socials}>
           {histories[slide.number].data.socials.map(({ text, link }) => (
-            <HoverCursor key={text} cursorType="stuck">
+            <HoverCursor key={text} type={CursorType.Stuck}>
               <PrismicNextLink field={link} className={s.socialLink}>
                 {text}
               </PrismicNextLink>
@@ -190,7 +192,7 @@ const HistorySlider = ({ histories, addRef }) => {
         </div>
       </div>
       <div ref={addRef} className={s.controls}>
-        <HoverCursor cursorType="pulse">
+        <HoverCursor type={CursorType.Pulse}>
           <button
             onClick={onLeftClick}
             type="button"
@@ -200,7 +202,7 @@ const HistorySlider = ({ histories, addRef }) => {
             <Left type="button" className={s.arrow} />
           </button>
         </HoverCursor>
-        <HoverCursor cursorType="pulse">
+        <HoverCursor type={CursorType.Pulse}>
           <button
             onClick={onRightClick}
             type="button"

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useDispatch, useSelector } from 'react-redux';
 import { usePathname, useRouter } from 'next/navigation';
 import { PrismicNextLink } from '@prismicio/next';
 import { createClient } from '@/prismicio';
@@ -12,9 +11,11 @@ import selectPlayingTransition, {
   selectActivePage,
 } from '@/store/selectors/transitionSelectors';
 
-import YourTourIcon from '@/public/img/svg-icons/yourtour.svg';
+import { useAppDispatch, useAppSelector } from '@/hooks';
 
-import { transitionAnimation } from '@/utils/types';
+import TransitionAnimation, { CursorType } from '@/types';
+
+import YourTourIcon from '@/public/img/svg-icons/yourtour.svg';
 
 import HoverCursor from '../CustomCursor/HoverCursor';
 
@@ -23,10 +24,10 @@ import s from './Navigation.module.scss';
 const Navigation = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const playing = useSelector(selectPlayingTransition);
-  const activePage = useSelector(selectActivePage);
+  const playing = useAppSelector(selectPlayingTransition);
+  const activePage = useAppSelector(selectActivePage);
 
   const [settings, setSettings] = useState(null);
 
@@ -52,8 +53,8 @@ const Navigation = () => {
 
     const animation =
       path === '/'
-        ? transitionAnimation.vertical
-        : transitionAnimation.horizontal;
+        ? TransitionAnimation.Vertical
+        : TransitionAnimation.Horizontal;
 
     dispatch(setActivePage(path));
     dispatch(setAnimation(animation));
@@ -63,7 +64,7 @@ const Navigation = () => {
 
   return (
     <nav className={s.navigation}>
-      <HoverCursor cursorType="pulse">
+      <HoverCursor type={CursorType.Pulse}>
         <Link className={s.logo} href="/" onClick={moveToRoute('/')}>
           <YourTourIcon className={s.icon} />
         </Link>
@@ -71,7 +72,7 @@ const Navigation = () => {
       <ul className={s.links}>
         {settings?.navigation.map(({ label, link }) => (
           <li key={label} className={s.item}>
-            <HoverCursor cursorType="stuck" activeLink="linkActive">
+            <HoverCursor type={CursorType.Stuck} activeLink="linkActive">
               <PrismicNextLink
                 className={
                   activePage === link.url ||
@@ -88,7 +89,7 @@ const Navigation = () => {
           </li>
         ))}
       </ul>
-      <HoverCursor cursorType="stuck">
+      <HoverCursor type={CursorType.Stuck}>
         <Link className={s.phone} href={`tel:${settings?.phone_number}`}>
           {settings?.phone_label}
         </Link>

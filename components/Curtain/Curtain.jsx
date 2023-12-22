@@ -1,34 +1,35 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { gsap } from 'gsap';
 
 import { setAnimation } from '@/store/slices/transitionSlice';
 import selectTransitionAnimation from '@/store/selectors/transitionSelectors';
 
-import { transitionAnimation } from '@/utils/types';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+
+import TransitionAnimation from '@/types';
 
 import s from './Curtain.module.scss';
 
 const Curtain = () => {
   const curtain = useRef(null);
-  const dispatch = useDispatch();
-  const animation = useSelector(selectTransitionAnimation);
+  const dispatch = useAppDispatch();
+  const animation = useAppSelector(selectTransitionAnimation);
 
   useEffect(() => {
     if (!animation) {
       return;
     }
-    const { vertical } = transitionAnimation;
+    const { Vertical } = TransitionAnimation;
 
-    const startClip1 = animation === vertical ? '--clipblY' : '--cliptrX';
-    const startClip2 = animation === vertical ? '--clipbrY' : '--clipbrX';
-    const endClip1 = animation === vertical ? '--cliptlY' : '--cliptlX';
-    const endClip2 = animation === vertical ? '--cliptrY' : '--clipblX';
+    const startClip1 = animation === Vertical ? '--clipblY' : '--cliptrX';
+    const startClip2 = animation === Vertical ? '--clipbrY' : '--clipbrX';
+    const endClip1 = animation === Vertical ? '--cliptlY' : '--cliptlX';
+    const endClip2 = animation === Vertical ? '--cliptrY' : '--clipblX';
 
-    const initClip1 = animation === vertical ? '--cliptrX' : '--clipbrY';
-    const initClip2 = animation === vertical ? '--clipbrX' : '--clipblY';
+    const initClip1 = animation === Vertical ? '--cliptrX' : '--clipbrY';
+    const initClip2 = animation === Vertical ? '--clipbrX' : '--clipblY';
 
     gsap
       .timeline({

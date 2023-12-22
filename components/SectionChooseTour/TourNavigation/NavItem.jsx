@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap/dist/gsap';
 import classnames from 'classnames/bind';
 
+import { CursorType } from '@/types';
+
 import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './NavItem.module.scss';
@@ -78,7 +80,7 @@ const NavItem = ({ onClick, activeNav, name, id, addRef }) => {
 
   return (
     <li ref={addRef} className={s.navItem} key={name}>
-      <HoverCursor cursorType="stuck" activeLink="navLinkCurrent">
+      <HoverCursor type={CursorType.Stuck} activeLink="navLinkCurrent">
         <button
           ref={button}
           className={cn(s.navLink, {

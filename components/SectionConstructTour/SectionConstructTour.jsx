@@ -5,6 +5,8 @@ import { useFormik } from 'formik';
 
 import tourSchema from '@/utils/validationSchema';
 
+import { CursorType } from '@/types';
+
 import AgeConfirm from './AgeConfirm/index';
 import InputFields from './InputFields/index';
 import LicenseConfirm from './LicenseConfirm/index';
@@ -66,12 +68,12 @@ const SectionConstructTour = ({ slice }) => {
           error={formik.errors.licenseConfirmed}
         />
         <div className={s.buttons}>
-          <HoverCursor cursorType="pulse">
+          <HoverCursor type={CursorType.Pulse}>
             <button className={s.buttonFind} type="submit">
               {slice.primary.submit_button_label}
             </button>
           </HoverCursor>
-          <HoverCursor cursorType="pulse">
+          <HoverCursor type={CursorType.Pulse}>
             <button
               className={s.buttonClear}
               type="button"

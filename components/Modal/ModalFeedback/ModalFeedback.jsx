@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import gsap from 'gsap/dist/gsap';
 
+import { CursorType } from '@/types';
+
 import FeedbackCard from '../../SectionFeedback/FeedbackCard';
 import HoverCursor from '../../CustomCursor/HoverCursor';
 
@@ -31,7 +33,7 @@ const ModalFeedback = ({ onClose, data, modalRef }) => {
         onClick={(e) => e.stopPropagation()}
         aria-hidden="true"
       >
-        <HoverCursor cursorType="pulse">
+        <HoverCursor type={CursorType.Pulse}>
           <button className={s.buttonClose} type="button" onClick={onClose}>
             <span className="visually-hidden">Close</span>+
           </button>

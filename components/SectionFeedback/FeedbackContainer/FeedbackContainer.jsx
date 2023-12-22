@@ -3,6 +3,8 @@ import gsap from 'gsap/dist/gsap';
 
 import { modals } from '@/utils/types';
 
+import { CursorType } from '@/types';
+
 import FeedbackCard from '../FeedbackCard';
 import Modal from '../../Modal';
 import HoverCursor from '../../CustomCursor/HoverCursor';
@@ -23,7 +25,7 @@ const FeedbackContainer = ({ data, addRef }) => {
 
   return (
     <>
-      <HoverCursor cursorType="pulse">
+      <HoverCursor type={CursorType.Pulse}>
         <button
           className={s.button}
           type="button"

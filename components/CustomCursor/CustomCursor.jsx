@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
 import { gsap } from 'gsap';
 import { EaselPlugin } from 'gsap/dist/EaselPlugin';
 import { TextPlugin } from 'gsap/dist/TextPlugin';
@@ -11,9 +10,11 @@ import selectCursorData, {
   selectCursorState,
 } from '@/store/selectors/cursorSelectors';
 
+import { useAppSelector } from '@/hooks';
 import { getMoveX, getMoveY } from '@/utils/getMoveCoordinate';
-import cursorStateType from '@/utils/types';
 import CursorAnimation from '@/utils/CursorAnimation';
+
+import { CursorType } from '@/types';
 
 import s from './CustomCursor.module.scss';
 
@@ -22,8 +23,8 @@ const CustomCursor = () => {
   const follower = useRef(null);
   const animation = useRef(null);
 
-  const cursorState = useSelector(selectCursorState);
-  const cursorData = useSelector(selectCursorData);
+  const cursorState = useAppSelector(selectCursorState);
+  const cursorData = useAppSelector(selectCursorData);
 
   useEffect(() => {
     gsap.registerPlugin(EaselPlugin, TextPlugin);
@@ -38,7 +39,7 @@ const CustomCursor = () => {
       let xFollower;
       let yFollower;
 
-      if (cursorState === cursorStateType.stuck) {
+      if (cursorState === CursorType.Stuck) {
         const { left, top, width, height } = cursorData;
 
         xFollower = Math.round(left + width / 2);
@@ -65,22 +66,22 @@ const CustomCursor = () => {
 
   const onEnter = () => {
     switch (cursorState) {
-      case cursorStateType.pulse:
+      case CursorType.Pulse:
         animation.current.pulse();
         break;
 
-      case cursorStateType.stuck:
+      case CursorType.Stuck:
         animation.current.stuck(cursorData);
         break;
 
-      case cursorStateType.growDot:
+      case CursorType.GrowDot:
         animation.current.growDot();
         break;
 
-      case cursorStateType.text:
+      case CursorType.Text:
         animation.current.text(cursorData);
         break;
-      case cursorStateType.default:
+      case CursorType.Default:
         animation.current.reset();
         break;
 
@@ -95,7 +96,7 @@ const CustomCursor = () => {
       <div ref={follower} className={s.follower} id="follower">
         <TransitionGroup component={null}>
           <Transition key={cursorState} timeout={0} onEnter={onEnter}>
-            {cursorState === 'text' ? (
+            {cursorState === CursorType.Text ? (
               <div className={s.text} id="text" />
             ) : (
               <div className={s.circle} id="circle" />

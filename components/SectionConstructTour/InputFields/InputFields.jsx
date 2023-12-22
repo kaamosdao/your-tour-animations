@@ -5,6 +5,8 @@ import cn from 'classnames';
 import { useEffect, useMemo, useState } from 'react';
 import { createClient } from '@/prismicio';
 
+import { CursorType } from '@/types';
+
 import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './InputFields.module.scss';
@@ -45,7 +47,7 @@ const InputFields = ({ slice, formik }) => {
       <legend className="visually-hidden">Заполните поля</legend>
       <ul className={s.list}>
         <li className={s.item}>
-          <HoverCursor cursorType="growDot">
+          <HoverCursor type={CursorType.GrowDot}>
             <label className={s.label} htmlFor={slice.primary.input_name_id}>
               {slice.primary.input_name_label}
               <input
@@ -70,7 +72,7 @@ const InputFields = ({ slice, formik }) => {
           </div>
         </li>
         <li className={cn(s.item, s.itemSelect)}>
-          <HoverCursor cursorType="growDot">
+          <HoverCursor type={CursorType.GrowDot}>
             <label className={s.label} htmlFor={slice.primary.select_id}>
               {slice.primary.select_label}
               <select
@@ -108,7 +110,7 @@ const InputFields = ({ slice, formik }) => {
           </div>
         </li>
         <li className={s.item}>
-          <HoverCursor cursorType="growDot">
+          <HoverCursor type={CursorType.GrowDot}>
             <label className={s.label} htmlFor={slice.primary.input_email_id}>
               {slice.primary.input_email_label}
               <input
@@ -133,7 +135,7 @@ const InputFields = ({ slice, formik }) => {
           </div>
         </li>
         <li className={s.item}>
-          <HoverCursor cursorType="growDot">
+          <HoverCursor type={CursorType.GrowDot}>
             <label className={s.label} htmlFor={slice.primary.input_phone_id}>
               {slice.primary.input_phone_label}
               <input
@@ -158,7 +160,7 @@ const InputFields = ({ slice, formik }) => {
           </div>
         </li>
         <li className={s.item}>
-          <HoverCursor cursorType="growDot">
+          <HoverCursor type={CursorType.GrowDot}>
             <label
               className={s.label}
               htmlFor={slice.primary.input_datefrom_id}
@@ -186,7 +188,7 @@ const InputFields = ({ slice, formik }) => {
           </div>
         </li>
         <li className={s.item}>
-          <HoverCursor cursorType="growDot">
+          <HoverCursor type={CursorType.GrowDot}>
             <label className={s.label} htmlFor={slice.primary.input_dateto_id}>
               {slice.primary.input_dateto_label}
               <input
@@ -212,7 +214,7 @@ const InputFields = ({ slice, formik }) => {
         </li>
         {inputs?.map(({ data, uid }) => (
           <li key={uid} className={s.item}>
-            <HoverCursor cursorType="growDot">
+            <HoverCursor type={CursorType.GrowDot}>
               <label className={s.label} htmlFor={data.name}>
                 {data.label}
                 <input
@@ -229,7 +231,7 @@ const InputFields = ({ slice, formik }) => {
         ))}
         {selects?.map(({ data, uid }) => (
           <li key={uid} className={cn(s.item, s.itemSelect)}>
-            <HoverCursor cursorType="growDot">
+            <HoverCursor type={CursorType.GrowDot}>
               <label className={s.label} htmlFor={data.name}>
                 {data.label}
                 <select
@@ -252,7 +254,7 @@ const InputFields = ({ slice, formik }) => {
           </li>
         ))}
         <li className={cn(s.item, s.itemTextarea)}>
-          <HoverCursor cursorType="growDot">
+          <HoverCursor type={CursorType.GrowDot}>
             <label className={s.label} htmlFor="comment">
               {slice.primary.textarea_label}
               <textarea

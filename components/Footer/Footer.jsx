@@ -8,6 +8,8 @@ import socials from '@/data/socials';
 
 import { axisType } from '@/utils/types';
 
+import { CursorType } from '@/types';
+
 import YourTourIcon from '@/public/img/svg-icons/yourtour.svg';
 
 import HoverCursor from '../CustomCursor/HoverCursor';
@@ -57,7 +59,7 @@ const Footer = () => {
               {socials.map(({ name, icon }) => (
                 <li key={name} className={s.socialsItem}>
                   {icon}
-                  <HoverCursor cursorType="pulse">
+                  <HoverCursor type={CursorType.Pulse}>
                     <PrismicNextLink
                       field={data?.[name]}
                       className={s.socialsLink}

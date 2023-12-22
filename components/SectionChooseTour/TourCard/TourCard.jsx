@@ -5,6 +5,8 @@ import cn from 'classnames';
 import { PrismicRichText } from '@prismicio/react';
 import { PrismicNextLink } from '@prismicio/next';
 
+import { CursorType } from '@/types';
+
 import ButtonMore from '../../ButtonMore/index';
 import HoverCursor from '../../CustomCursor/HoverCursor';
 
@@ -29,7 +31,7 @@ const TourCard = ({ card, devicePixelRatio }) => {
 
   return (
     <HoverCursor
-      cursorType="text"
+      type={CursorType.Text}
       data="Подробнее"
       fnsOnEnter={[() => setHovered(true)]}
       fnsOnLeave={[() => setHovered(false), () => setClicked(false)]}

@@ -1,5 +1,7 @@
 import cn from 'classnames';
 
+import { CursorType } from '@/types';
+
 import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './AgeConfirm.module.scss';
@@ -9,7 +11,7 @@ const AgeConfirm = ({ slice, touched, error, ...props }) => (
     <legend className={s.title}>{slice.primary.radio_legend}</legend>
     <ul className={s.list}>
       <li className={s.item}>
-        <HoverCursor cursorType="growDot">
+        <HoverCursor type={CursorType.GrowDot}>
           <label className={s.radio} htmlFor={slice.primary.radio_id_1}>
             <input
               className={cn('visually-hidden', s.radioInput)}
@@ -24,7 +26,7 @@ const AgeConfirm = ({ slice, touched, error, ...props }) => (
         </HoverCursor>
       </li>
       <li className={s.item}>
-        <HoverCursor cursorType="growDot">
+        <HoverCursor type={CursorType.GrowDot}>
           <label className={s.radio} htmlFor={slice.primary.radio_id_2}>
             <input
               className={cn('visually-hidden', s.radioInput)}

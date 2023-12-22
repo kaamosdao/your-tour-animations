@@ -5,6 +5,8 @@ import { PrismicNextLink } from '@prismicio/next';
 
 import { useArrayRef, useTransition } from '@/hooks';
 
+import { CursorType } from '@/types';
+
 import HoverCursor from '../CustomCursor/HoverCursor';
 import { AppearOnMount } from '../Animation';
 
@@ -44,7 +46,7 @@ const SectionDescription = ({ slice }) => {
             field={slice.primary.description}
             components={components(addRef)}
           />
-          <HoverCursor cursorType="pulse">
+          <HoverCursor type={CursorType.Pulse}>
             <PrismicNextLink
               ref={addRef}
               field={slice.primary.button}
