@@ -24,6 +24,7 @@ const nextConfig = {
       'styles',
       'components',
       'hooks',
+      'types',
     ],
   },
 };
