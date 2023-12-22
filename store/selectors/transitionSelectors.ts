@@ -1,12 +1,14 @@
 import { createSelector } from '@reduxjs/toolkit';
 
+import type { RootState } from '@/store';
+
 const selectTransitionAnimation = createSelector(
-  (state) => state.transition.animation,
+  (state: RootState) => state.transition.animation,
   (animation) => animation
 );
 
 export const selectActivePage = createSelector(
-  (state) => state.transition.activePage,
+  (state: RootState) => state.transition.activePage,
   (activePage) => activePage
 );
 

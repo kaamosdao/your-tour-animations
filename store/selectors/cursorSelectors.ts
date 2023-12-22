@@ -1,12 +1,14 @@
 import { createSelector } from '@reduxjs/toolkit';
 
+import type { RootState } from '@/store';
+
 const selectCursorData = createSelector(
-  (state) => state.cursor.data,
+  (state: RootState) => state.cursor.data,
   (isStuck) => isStuck
 );
 
 export const selectCursorState = createSelector(
-  (state) => state.cursor.state,
+  (state: RootState) => state.cursor.type,
   (state) => state
 );
 
