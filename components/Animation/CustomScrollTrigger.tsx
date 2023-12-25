@@ -1,10 +1,28 @@
 'use client';
 
-import { Children, cloneElement, useEffect } from 'react';
+import {
+  Children,
+  cloneElement,
+  useEffect,
+  ReactNode,
+  RefObject,
+  ReactElement,
+} from 'react';
 import { gsap } from 'gsap/dist/gsap';
 
-import { axisType } from '@/utils/types';
 import { useArrayRef } from '@/hooks';
+
+import Direction from '@/types';
+
+interface ICustomScrollTrigger {
+  children: ReactNode;
+  shift: string | number;
+  trigger: RefObject<HTMLElement>;
+  target: RefObject<HTMLElement> | null;
+  scrollTriggerOptions: ScrollTrigger.Vars;
+  tweenOptions: GSAPTweenVars;
+  axis: Direction;
+}
 
 const CustomScrollTrigger = ({
   children,
@@ -23,20 +41,20 @@ const CustomScrollTrigger = ({
     stagger: 0.2,
   },
   axis,
-}) => {
+}: ICustomScrollTrigger): ReactNode => {
   const [refs, addRef] = useArrayRef();
 
   useEffect(() => {
-    const initialPosition = 0;
+    const initialPosition: number = 0;
 
-    const tl = gsap.timeline({
+    const tl: GSAPTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: trigger.current,
         ...scrollTriggerOptions,
       },
     });
 
-    if (axis === axisType.horizontal) {
+    if (axis === Direction.Horizontal) {
       tl.fromTo(
         target ? target.current : refs.current,
         {
@@ -48,7 +66,7 @@ const CustomScrollTrigger = ({
           ...tweenOptions,
         }
       );
-    } else if (axis === axisType.vertical) {
+    } else if (axis === Direction.Vertical) {
       tl.fromTo(
         target ? target.current : refs.current,
         {
@@ -69,7 +87,9 @@ const CustomScrollTrigger = ({
 
   return target
     ? children
-    : Children.map(children, (child) => cloneElement(child, { addRef }));
+    : Children.map(children, (child) =>
+        cloneElement(child as ReactElement, { addRef })
+      );
 };
 
 export default CustomScrollTrigger;
