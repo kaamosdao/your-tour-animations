@@ -1,11 +1,23 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, ReactNode, RefObject } from 'react';
 import { gsap } from 'gsap/dist/gsap';
 
-const AppearOnMount = ({ children, shift, isVisible, refs }) => {
+interface AppearOnMountProps {
+  children: ReactNode;
+  shift: string | number;
+  isVisible: boolean;
+  refs: RefObject<Array<HTMLElement>>;
+}
+
+const AppearOnMount = ({
+  children,
+  shift,
+  isVisible,
+  refs,
+}: AppearOnMountProps): ReactNode => {
   useEffect(() => {
-    const initialPosition = 0;
+    const initialPosition: number = 0;
 
     if (isVisible) {
       gsap.set(refs.current, {
@@ -19,9 +31,9 @@ const AppearOnMount = ({ children, shift, isVisible, refs }) => {
   }, [isVisible, refs, shift]);
 
   useEffect(() => {
-    const initialPosition = 0;
+    const initialPosition: number = 0;
 
-    const animation = gsap.timeline();
+    const animation: GSAPTimeline = gsap.timeline();
 
     if (isVisible) {
       animation.to(refs.current, {
