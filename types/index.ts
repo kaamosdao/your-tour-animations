@@ -20,4 +20,11 @@ export type CursorData = {
   padding: 'string';
 };
 
+export enum TransitionState {
+  Entering = 'entering',
+  Entered = 'entered',
+  Exiting = 'exiting',
+  Exited = 'exited',
+}
+
 export default TransitionAnimation;
