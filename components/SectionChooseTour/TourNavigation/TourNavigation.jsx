@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 
-import { axisType } from '@/utils/types';
+import Direction from '@/types';
 
 import { CustomScrollTrigger } from '@/components/Animation';
 import NavItem from './NavItem';
@@ -27,7 +27,7 @@ const TourNavigation = ({ tours, activeNav, setActiveNav }) => {
           toggleActions: 'restart complete none reverse',
           invalidateOnRefresh: true,
         }}
-        axis={axisType.vertical}
+        axis={Direction.Vertical}
       >
         {tours?.map(({ data, uid }) => (
           <NavItem

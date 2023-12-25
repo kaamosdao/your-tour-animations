@@ -2,8 +2,9 @@
 
 import { useMemo, useRef } from 'react';
 
-import { axisType } from '@/utils/types';
 import { useWiderThanTabletLg } from '@/hooks';
+
+import Direction from '@/types';
 
 import { CustomScrollTrigger } from '../Animation';
 import Title from './Title';
@@ -43,7 +44,7 @@ const SectionContact = ({ slice }) => {
           duration: 0.7,
           delay: 0.2,
         }}
-        axis={widerThanTabletLg ? axisType.vertical : axisType.horizontal}
+        axis={widerThanTabletLg ? Direction.Vertical : Direction.Horizontal}
       >
         <Title slice={slice} />
       </CustomScrollTrigger>
@@ -57,7 +58,7 @@ const SectionContact = ({ slice }) => {
           duration: 0.7,
           delay: 0.4,
         }}
-        axis={widerThanTabletLg ? axisType.vertical : axisType.horizontal}
+        axis={widerThanTabletLg ? Direction.Vertical : Direction.Horizontal}
       >
         <Text slice={slice} />
       </CustomScrollTrigger>
@@ -70,7 +71,7 @@ const SectionContact = ({ slice }) => {
           ease: 'power3.out',
           duration: 0.7,
         }}
-        axis={axisType.horizontal}
+        axis={Direction.Horizontal}
       >
         <Picture slice={slice} />
       </CustomScrollTrigger>

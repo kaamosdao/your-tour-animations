@@ -6,9 +6,7 @@ import { createClient } from '@/prismicio';
 
 import socials from '@/data/socials';
 
-import { axisType } from '@/utils/types';
-
-import { CursorType } from '@/types';
+import Direction, { CursorType } from '@/types';
 
 import YourTourIcon from '@/public/img/svg-icons/yourtour.svg';
 
@@ -44,7 +42,7 @@ const Footer = () => {
         tweenOptions={{
           ease: 'none',
         }}
-        axis={axisType.vertical}
+        axis={Direction.Vertical}
         shift="-80%"
         target={backfaceRef}
         trigger={footerRef}

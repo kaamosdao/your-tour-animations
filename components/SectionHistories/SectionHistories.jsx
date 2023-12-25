@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { PrismicRichText } from '@prismicio/react';
 import { createClient } from '@/prismicio';
 
-import { axisType } from '@/utils/types';
+import Direction from '@/types';
 
 import HistorySlider from './HistorySlider/index';
 import { CustomScrollTrigger } from '../Animation';
@@ -55,7 +55,7 @@ const SectionHistories = ({ slice }) => {
             toggleActions: 'restart play reverse reverse',
             invalidateOnRefresh: true,
           }}
-          axis={axisType.horizontal}
+          axis={Direction.Horizontal}
         >
           {histories && <HistorySlider histories={histories} />}
         </CustomScrollTrigger>

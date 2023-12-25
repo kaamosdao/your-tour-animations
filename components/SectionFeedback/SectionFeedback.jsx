@@ -5,8 +5,9 @@ import { PrismicRichText } from '@prismicio/react';
 import { isFilled } from '@prismicio/client';
 import { createClient } from '@/prismicio';
 
-import { axisType } from '@/utils/types';
 import { useWiderThanTabletLg } from '@/hooks';
+
+import Direction from '@/types';
 
 import FeedbackContainer from './FeedbackContainer';
 import { CustomScrollTrigger } from '../Animation';
@@ -65,7 +66,7 @@ const SectionFeedback = ({ slice }) => {
             toggleActions: 'restart play reverse reverse',
             invalidateOnRefresh: true,
           }}
-          axis={widerThanTabletLg ? axisType.vertical : axisType.horizontal}
+          axis={widerThanTabletLg ? Direction.Vertical : Direction.Horizontal}
         >
           {feedbacks?.map(({ data, uid }) => (
             <FeedbackContainer key={uid} data={data} />

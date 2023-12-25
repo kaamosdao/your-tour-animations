@@ -13,7 +13,7 @@ import selectPlayingTransition, {
 
 import { useAppDispatch, useAppSelector } from '@/hooks';
 
-import TransitionAnimation, { CursorType } from '@/types';
+import Direction, { CursorType } from '@/types';
 
 import YourTourIcon from '@/public/img/svg-icons/yourtour.svg';
 
@@ -51,13 +51,10 @@ const Navigation = () => {
       return;
     }
 
-    const animation =
-      path === '/'
-        ? TransitionAnimation.Vertical
-        : TransitionAnimation.Horizontal;
+    const direction = path === '/' ? Direction.Vertical : Direction.Horizontal;
 
     dispatch(setActivePage(path));
-    dispatch(setAnimation(animation));
+    dispatch(setAnimation(direction));
 
     router.push(path);
   };

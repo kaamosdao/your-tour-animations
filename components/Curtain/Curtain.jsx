@@ -8,7 +8,7 @@ import selectTransitionAnimation from '@/store/selectors/transitionSelectors';
 
 import { useAppDispatch, useAppSelector } from '@/hooks';
 
-import TransitionAnimation from '@/types';
+import Direction from '@/types';
 
 import s from './Curtain.module.scss';
 
@@ -21,7 +21,7 @@ const Curtain = () => {
     if (!animation) {
       return;
     }
-    const { Vertical } = TransitionAnimation;
+    const { Vertical } = Direction;
 
     const startClip1 = animation === Vertical ? '--clipblY' : '--cliptrX';
     const startClip2 = animation === Vertical ? '--clipbrY' : '--clipbrX';
