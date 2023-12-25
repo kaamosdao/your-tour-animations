@@ -5,13 +5,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import TransitionAnimation from '@/types';
+import Direction from '@/types';
 
-type Animation = null | TransitionAnimation;
+type AnimationDirection = null | Direction;
 type ActivePage = null | string;
 
 interface TransitionState {
-  animation: Animation;
+  animation: AnimationDirection;
   activePage: ActivePage;
 }
 
@@ -24,7 +24,7 @@ const transitionSlice = createSlice({
   name: 'transition',
   initialState,
   reducers: {
-    setAnimation: (state, action: PayloadAction<Animation>) => {
+    setAnimation: (state, action: PayloadAction<AnimationDirection>) => {
       state.animation = action.payload;
     },
     setActivePage: (state, action: PayloadAction<ActivePage>) => {
