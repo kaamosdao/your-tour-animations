@@ -1,4 +1,4 @@
-enum TransitionAnimation {
+enum Direction {
   Vertical = 'Vertical',
   Horizontal = 'Horizontal',
 }
@@ -27,4 +27,4 @@ export enum TransitionState {
   Exited = 'exited',
 }
 
-export default TransitionAnimation;
+export default Direction;
