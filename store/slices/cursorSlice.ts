@@ -8,7 +8,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { CursorType, CursorData } from '@/types';
 
 interface CursorState {
-  data: null | CursorData;
+  data: CursorData;
   type: CursorType;
 }
 
