@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
 import { setAnimation } from '@/store/slices/transitionSlice';
@@ -8,12 +8,12 @@ import selectTransitionAnimation from '@/store/selectors/transitionSelectors';
 
 import { useAppDispatch, useAppSelector } from '@/hooks';
 
-import Direction from '@/types';
+import Direction, { ClipVar } from '@/types';
 
 import s from './Curtain.module.scss';
 
-const Curtain = () => {
-  const curtain = useRef(null);
+const Curtain: FC = () => {
+  const curtain = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
   const animation = useAppSelector(selectTransitionAnimation);
 
@@ -23,13 +23,19 @@ const Curtain = () => {
     }
     const { Vertical } = Direction;
 
-    const startClip1 = animation === Vertical ? '--clipblY' : '--cliptrX';
-    const startClip2 = animation === Vertical ? '--clipbrY' : '--clipbrX';
-    const endClip1 = animation === Vertical ? '--cliptlY' : '--cliptlX';
-    const endClip2 = animation === Vertical ? '--cliptrY' : '--clipblX';
+    const startClip1: ClipVar =
+      animation === Vertical ? ClipVar.BottomLeftY : ClipVar.TopRightX;
+    const startClip2: ClipVar =
+      animation === Vertical ? ClipVar.BottomRightY : ClipVar.BottomRightX;
+    const endClip1: ClipVar =
+      animation === Vertical ? ClipVar.TopLeftY : ClipVar.TopLeftX;
+    const endClip2: ClipVar =
+      animation === Vertical ? ClipVar.TopRightY : ClipVar.BottomLeftX;
 
-    const initClip1 = animation === Vertical ? '--cliptrX' : '--clipbrY';
-    const initClip2 = animation === Vertical ? '--clipbrX' : '--clipblY';
+    const initClip1: ClipVar =
+      animation === Vertical ? ClipVar.TopRightX : ClipVar.BottomRightY;
+    const initClip2: ClipVar =
+      animation === Vertical ? ClipVar.BottomRightX : ClipVar.BottomLeftY;
 
     gsap
       .timeline({

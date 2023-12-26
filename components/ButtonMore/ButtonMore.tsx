@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { FC } from 'react';
 import classnames from 'classnames/bind';
 
 import ArrowIcon from '@/public/img/svg-icons/arrow.svg';
@@ -7,7 +7,12 @@ import s from './ButtonMore.module.scss';
 
 const cn = classnames.bind(s);
 
-const ButtonMore = ({ isHovered, isClicked }) => (
+interface IButtonMore {
+  isHovered: boolean;
+  isClicked: boolean;
+}
+
+const ButtonMore: FC<IButtonMore> = ({ isHovered, isClicked }) => (
   <p
     className={cn(s.button, {
       hovered: isHovered,
@@ -18,10 +23,5 @@ const ButtonMore = ({ isHovered, isClicked }) => (
     Подробнее
   </p>
 );
-
-ButtonMore.propTypes = {
-  isHovered: PropTypes.bool.isRequired,
-  isClicked: PropTypes.bool.isRequired,
-};
 
 export default ButtonMore;
