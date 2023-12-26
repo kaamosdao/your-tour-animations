@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { EaselPlugin } from 'gsap/dist/EaselPlugin';
 import { TextPlugin } from 'gsap/dist/TextPlugin';
@@ -14,14 +14,14 @@ import { useAppSelector } from '@/hooks';
 import { getMoveX, getMoveY } from '@/utils/getMoveCoordinate';
 import CursorAnimation from '@/utils/CursorAnimation';
 
-import { CursorType } from '@/types';
+import { CursorType, StuckData } from '@/types';
 
 import s from './CustomCursor.module.scss';
 
-const CustomCursor = () => {
-  const cursor = useRef(null);
-  const follower = useRef(null);
-  const animation = useRef(null);
+const CustomCursor: FC = () => {
+  const cursor = useRef<HTMLDivElement | null>(null);
+  const follower = useRef<HTMLDivElement | null>(null);
+  const animation = useRef<CursorAnimation | null>(null);
 
   const cursorState = useAppSelector(selectCursorState);
   const cursorData = useAppSelector(selectCursorData);
@@ -32,15 +32,15 @@ const CustomCursor = () => {
   }, []);
 
   useEffect(() => {
-    const moveXFollower = getMoveX(follower.current, 0.6);
-    const moveYFollower = getMoveY(follower.current, 0.6);
+    const moveXFollower = getMoveX(follower.current!, 0.6);
+    const moveYFollower = getMoveY(follower.current!, 0.6);
 
-    const moveCursor = (e) => {
-      let xFollower;
-      let yFollower;
+    const moveCursor = (e: MouseEvent): void => {
+      let xFollower: number;
+      let yFollower: number;
 
       if (cursorState === CursorType.Stuck) {
-        const { left, top, width, height } = cursorData;
+        const { left, top, width, height } = cursorData as StuckData;
 
         xFollower = Math.round(left + width / 2);
         yFollower = Math.round(top + height / 2);
@@ -67,22 +67,22 @@ const CustomCursor = () => {
   const onEnter = () => {
     switch (cursorState) {
       case CursorType.Pulse:
-        animation.current.pulse();
+        animation.current!.pulse();
         break;
 
       case CursorType.Stuck:
-        animation.current.stuck(cursorData);
+        animation.current!.stuck(cursorData as StuckData);
         break;
 
       case CursorType.GrowDot:
-        animation.current.growDot();
+        animation.current!.growDot();
         break;
 
       case CursorType.Text:
-        animation.current.text(cursorData);
+        animation.current!.text(cursorData as string);
         break;
       case CursorType.Default:
-        animation.current.reset();
+        animation.current!.reset();
         break;
 
       default:

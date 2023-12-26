@@ -1,12 +1,20 @@
 'use client';
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode, ReactElement, MouseEvent } from 'react';
 
 import { setCursor } from '@/store/slices/cursorSlice';
 
 import { useAppDispatch } from '@/hooks';
-import { CursorType } from '@/types';
+import { CursorData, CursorType } from '@/types';
+
+interface IHoverCursor {
+  children: ReactNode;
+  type: CursorType;
+  data: CursorData;
+  activeLink: string;
+  fnsOnEnter: (() => void)[];
+  fnsOnLeave: (() => void)[];
+}
 
 const HoverCursor = ({
   children,
@@ -15,10 +23,10 @@ const HoverCursor = ({
   activeLink,
   fnsOnEnter,
   fnsOnLeave,
-}) => {
+}: IHoverCursor): ReactNode => {
   const dispatch = useAppDispatch();
 
-  const onMouseEnter = (e) => {
+  const onMouseEnter = (e: MouseEvent<HTMLElement>): void => {
     if (fnsOnEnter) {
       fnsOnEnter.forEach((fn) => fn());
     }
@@ -56,19 +64,10 @@ const HoverCursor = ({
     dispatch(setCursor({ type: CursorType.Default, data: null }));
   };
 
-  return React.cloneElement(children, {
+  return React.cloneElement(children as ReactElement, {
     onMouseEnter,
     onMouseLeave,
   });
-};
-
-HoverCursor.propTypes = {
-  children: PropTypes.element.isRequired,
-  type: PropTypes.string.isRequired,
-  data: PropTypes.string,
-  activeLink: PropTypes.string,
-  fnsOnEnter: PropTypes.arrayOf(PropTypes.func),
-  fnsOnLeave: PropTypes.arrayOf(PropTypes.func),
 };
 
 export default HoverCursor;
