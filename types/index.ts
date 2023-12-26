@@ -11,14 +11,16 @@ export enum CursorType {
   GrowDot = 'GrowDot',
 }
 
-export type CursorData = {
+export type StuckData = {
   left: number;
   top: number;
   width: number;
   height: number;
-  borderRadius: 'string';
-  padding: 'string';
+  borderRadius: string;
+  padding: string;
 };
+
+export type CursorData = StuckData | string | null;
 
 export enum TransitionState {
   Entering = 'entering',
