@@ -27,4 +27,15 @@ export enum TransitionState {
   Exited = 'exited',
 }
 
+export enum ClipVar {
+  TopRightX = '--cliptrX',
+  TopLeftX = '--cliptlX',
+  BottomRightX = '--clipbrX',
+  BottomLeftX = '--clipblX',
+  TopRightY = '--cliptrY',
+  TopLeftY = '--cliptlY',
+  BottomRightY = '--clipbrY',
+  BottomLeftY = '--clipblY',
+}
+
 export default Direction;
