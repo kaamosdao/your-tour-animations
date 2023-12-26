@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { MutableRefObject } from 'react';
 import { gsap } from 'gsap';
 
+import { StuckData } from '@/types';
+
 class CursorAnimation {
-  constructor(cursorRef, followerRef) {
+  private cursor: HTMLElement | null;
+
+  private follower: HTMLElement | null;
+
+  private pulseAnimation: GSAPTimeline | null;
+
+  private dotAnimation: GSAPTimeline | null;
+
+  constructor(
+    cursorRef: MutableRefObject<HTMLElement | null>,
+    followerRef: MutableRefObject<HTMLElement | null>
+  ) {
     this.cursor = cursorRef.current;
     this.follower = followerRef.current;
-    this.pulseAnimation = React.createRef(null).current;
-    this.dotAnimation = React.createRef(null).current;
+    this.pulseAnimation = React.createRef<GSAPTimeline>().current;
+    this.dotAnimation = React.createRef<GSAPTimeline>().current;
   }
 
-  pulse(toScale = 1.2, duration = 0.5, ease = 'power1.in') {
+  pulse(toScale = 1.2, duration = 0.5, ease = 'power1.in'): void {
     this.pulseAnimation = gsap.timeline().fromTo(
       [this.follower, this.cursor],
       {
@@ -25,9 +38,9 @@ class CursorAnimation {
     );
   }
 
-  stuck(stuckData, duration = 0.5) {
+  stuck(stuckData: StuckData, duration = 0.5): void {
     const { width, height, borderRadius, padding } = stuckData;
-    gsap.to(this.follower.querySelector('#circle'), {
+    gsap.to(this.follower!.querySelector('#circle'), {
       width,
       height,
       borderRadius,
@@ -40,7 +53,7 @@ class CursorAnimation {
     scales = { scaleStart: 2.0, scaleMid: 1.8, scaleEnd: 3.0 },
     durations = { durationStart: 0.3, durationMid: 0.2, durationEnd: 0.3 },
     ease = 'power1.in'
-  ) {
+  ): void {
     this.dotAnimation = gsap
       .timeline()
       .to([this.follower], {
@@ -79,14 +92,14 @@ class CursorAnimation {
     color = 'var(--third-text-color)',
     duration = 0.5,
     ease = 'sine.in'
-  ) {
+  ): void {
     gsap
       .timeline()
       .to(this.follower, {
         mixBlendMode: 'normal',
         duration: 0.0,
       })
-      .to(this.follower.querySelector('#text'), {
+      .to(this.follower!.querySelector('#text'), {
         color,
         text,
         opacity: 1,
@@ -94,7 +107,7 @@ class CursorAnimation {
         ease,
       })
       .to(
-        this.follower.querySelector('#circle'),
+        this.follower!.querySelector('#circle'),
         {
           scale: 0,
           duration: 0.3,
@@ -106,7 +119,7 @@ class CursorAnimation {
   reset(
     scales = { scaleDuration: 0.3, cssDuration: 0.5, textDuration: 0.5 },
     eases = { scaleEase: 'power1.in', textEase: 'sine.in' }
-  ) {
+  ): void {
     if (this.pulseAnimation) {
       this.pulseAnimation.kill();
     }
@@ -115,8 +128,8 @@ class CursorAnimation {
       this.dotAnimation.kill();
     }
 
-    if (this.follower.querySelector('#text')) {
-      gsap.to(this.follower.querySelector('#text'), {
+    if (this.follower!.querySelector('#text')) {
+      gsap.to(this.follower!.querySelector('#text'), {
         text: '',
         opacity: 0,
         duration: scales.textDuration,
@@ -127,7 +140,7 @@ class CursorAnimation {
     gsap
       .timeline()
       .to(
-        [this.follower.querySelector('#circle'), this.follower, this.cursor],
+        [this.follower!.querySelector('#circle'), this.follower, this.cursor],
         {
           scale: 1,
           duration: scales.scaleDuration,
@@ -136,7 +149,7 @@ class CursorAnimation {
         0
       )
       .fromTo(
-        this.follower.querySelector('#circle'),
+        this.follower!.querySelector('#circle'),
         {
           width: '0px',
           height: '0px',
