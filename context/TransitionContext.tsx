@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-const TransitionContext = createContext({});
+const TransitionContext = createContext<boolean>(true);
 
 export default TransitionContext;
