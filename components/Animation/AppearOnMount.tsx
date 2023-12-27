@@ -3,7 +3,7 @@
 import { useEffect, ReactNode, RefObject } from 'react';
 import { gsap } from 'gsap/dist/gsap';
 
-interface AppearOnMountProps {
+interface IAppearOnMountProps {
   children: ReactNode;
   shift: string | number;
   isVisible: boolean;
@@ -15,7 +15,7 @@ const AppearOnMount = ({
   shift,
   isVisible,
   refs,
-}: AppearOnMountProps): ReactNode => {
+}: IAppearOnMountProps): ReactNode => {
   useEffect(() => {
     const initialPosition: number = 0;
 

@@ -10,10 +10,10 @@ import { CursorData, CursorType } from '@/types';
 interface IHoverCursor {
   children: ReactNode;
   type: CursorType;
-  data: CursorData;
-  activeLink: string;
-  fnsOnEnter: (() => void)[];
-  fnsOnLeave: (() => void)[];
+  data?: CursorData;
+  activeLink?: string;
+  fnsOnEnter?: (() => void)[];
+  fnsOnLeave?: (() => void)[];
 }
 
 const HoverCursor = ({
