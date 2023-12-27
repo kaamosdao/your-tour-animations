@@ -1,6 +1,11 @@
 import { FacebookIcon, InstagramIcon, VkIcon } from '@/components/Footer/Icons';
 
-const socials = [
+type Social = {
+  name: 'instagram' | 'facebook' | 'vkontakte';
+  icon: JSX.Element;
+};
+
+const socials: Social[] = [
   {
     name: 'instagram',
     icon: <InstagramIcon />,
