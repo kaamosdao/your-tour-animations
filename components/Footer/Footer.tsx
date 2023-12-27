@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { PrismicNextLink } from '@prismicio/next';
 import { createClient } from '@/prismicio';
+import { AllDocumentTypes } from '@/prismicio-types';
+import type { SettingsDocumentData } from '@/prismicio-types';
 
 import socials from '@/data/socials';
 
@@ -19,15 +21,19 @@ const Footer = () => {
   const footerRef = useRef(null);
   const backfaceRef = useRef(null);
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<SettingsDocumentData | null>(null);
 
   useEffect(() => {
     const client = createClient();
-    const getSettings = async () => {
-      const { data: socialsData } = await client.getSingle('settings');
+    const getSettings = async (): Promise<void> => {
+      const { data: socialsData } = await client.getSingle<
+        AllDocumentTypes,
+        'settings'
+      >('settings');
       setData(socialsData);
     };
-    getSettings();
+
+    void getSettings();
   }, []);
 
   return (

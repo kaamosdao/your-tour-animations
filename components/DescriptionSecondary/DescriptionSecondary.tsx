@@ -2,17 +2,30 @@
 
 /* eslint-disable react/no-array-index-key */
 
+import { FC } from 'react';
 import { PrismicRichText } from '@prismicio/react';
 import cn from 'classnames';
+import { DescriptionSliceWithoutButton } from '@/prismicio-types';
+import { SharedSlice } from '@prismicio/client';
 
 import { useTransition, useArrayRef } from '@/hooks';
+
+import { SerializerReturnType } from '@/types';
 
 import OverflowWrapper from '../OverflowWrapper';
 import { AppearOnMount } from '../Animation';
 
 import s from './DescriptionSecondary.module.scss';
 
-const components = (addRef) => ({
+type SliceType = SharedSlice<'description', DescriptionSliceWithoutButton>;
+
+interface IDescriptionSecondary {
+  slice: SliceType;
+}
+
+const components = (
+  addRef: (el: HTMLElement | null) => void
+): SerializerReturnType => ({
   heading2: ({ children }) => (
     <h2 ref={addRef} className={cn('title', s.title)}>
       {children}
@@ -25,7 +38,7 @@ const components = (addRef) => ({
   ),
 });
 
-const DescriptionSecondary = ({ slice }) => {
+const DescriptionSecondary: FC<IDescriptionSecondary> = ({ slice }) => {
   const isVisible = useTransition();
 
   const [refs, addRef] = useArrayRef();
