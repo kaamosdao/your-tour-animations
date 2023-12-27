@@ -1,3 +1,5 @@
+import { JSXFunctionSerializer, JSXMapSerializer } from '@prismicio/react';
+
 enum Direction {
   Vertical = 'Vertical',
   Horizontal = 'Horizontal',
@@ -39,5 +41,10 @@ export enum ClipVar {
   BottomRightY = '--clipbrY',
   BottomLeftY = '--clipblY',
 }
+
+export type SerializerReturnType =
+  | JSXFunctionSerializer
+  | JSXMapSerializer
+  | undefined;
 
 export default Direction;
