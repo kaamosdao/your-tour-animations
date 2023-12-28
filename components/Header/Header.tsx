@@ -8,7 +8,7 @@ import Navigation from '../Navigation';
 import s from './Header.module.scss';
 
 const Header = () => {
-  const headerRef = useRef();
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     gsap
