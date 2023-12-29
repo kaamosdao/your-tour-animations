@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export default function useWiderThanTabletLg() {
-  const [widerThanTabletLg, setWiderThanTabletLg] = useState(true);
+  const [widerThanTabletLg, setWiderThanTabletLg] = useState<boolean>(true);
 
   useEffect(() => {
     const resize = () => {
