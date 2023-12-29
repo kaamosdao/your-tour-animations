@@ -1,4 +1,6 @@
 import { JSXFunctionSerializer, JSXMapSerializer } from '@prismicio/react';
+import type { FeedbackCardDocumentDataFeedbackItem } from '@/prismicio-types';
+import type * as prismic from '@prismicio/client';
 
 enum Direction {
   Vertical = 'Vertical',
@@ -46,5 +48,21 @@ export type SerializerReturnType =
   | JSXFunctionSerializer
   | JSXMapSerializer
   | undefined;
+
+export enum ModalType {
+  Feedback = 'feedback',
+}
+
+type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
+
+export interface FeedbackCardData {
+  name: prismic.RichTextField;
+  tour: prismic.RichTextField;
+  image: prismic.ImageField<never>;
+  imageRetina: prismic.ImageField<never>;
+  feedback: prismic.GroupField<Simplify<FeedbackCardDocumentDataFeedbackItem>>;
+}
+
+export interface ModalData extends FeedbackCardData {}
 
 export default Direction;

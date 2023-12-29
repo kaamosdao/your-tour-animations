@@ -1,14 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { FC, RefObject, useEffect } from 'react';
 import gsap from 'gsap/dist/gsap';
 
-import { CursorType } from '@/types';
+import { CursorType, ModalData } from '@/types';
 
 import FeedbackCard from '../../SectionFeedback/FeedbackCard';
 import HoverCursor from '../../CustomCursor/HoverCursor';
 
 import s from './ModalFeedback.module.scss';
 
-const ModalFeedback = ({ onClose, data, modalRef }) => {
+interface IModalFeedback {
+  onClose: () => void;
+  data: ModalData;
+  modalRef: RefObject<HTMLDivElement>;
+}
+
+const ModalFeedback: FC<IModalFeedback> = ({ onClose, data, modalRef }) => {
   const { feedback, image, imageRetina, name, tour } = data;
 
   useEffect(() => {
