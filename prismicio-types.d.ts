@@ -255,8 +255,7 @@ interface HomepageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<HomepageDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<HomepageDocumentDataSlicesSlice> /**
    * Meta Title field in *HomePage*
    *
    * - **Field Type**: Text
@@ -393,8 +392,7 @@ interface PageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<PageDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<PageDocumentDataSlicesSlice> /**
    * Meta Title field in *Page*
    *
    * - **Field Type**: Text
@@ -1439,16 +1437,6 @@ export interface ContactSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   text: prismic.KeyTextField;
-
-  /**
-   * Description field in *Contact → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.primary.description
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  description: prismic.RichTextField;
 
   /**
    * Email field in *Contact → Primary*

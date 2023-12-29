@@ -24,19 +24,7 @@
         "value": "prepare",
         "type": "Text"
       },
-      "description": {
-        "__TYPE__": "StructuredTextContent",
-        "value": [
-          {
-            "type": "paragraph",
-            "content": {
-              "text": "Anim ipsum Lorem nulla est cupidatat ullamco aliqua elit eu in et nisi cupidatat anim aliqua. Et elit nostrud adipisicing reprehenderit nostrud esse ut elit dolore minim nostrud do et ad eu. Enim sint enim ex cillum culpa consectetur consectetur et velit in minim occaecat nisi veniam eiusmod."
-            }
-          }
-        ]
-      },
       "image": {
-        "__TYPE__": "ImageContent",
         "origin": {
           "id": "main",
           "url": "https://images.unsplash.com/photo-1547394765-185e1e68f34e",
@@ -54,10 +42,12 @@
           },
           "background": "transparent"
         },
+        "credits": null,
+        "alt": null,
+        "__TYPE__": "ImageContent",
         "thumbnails": {}
       },
       "image_retina": {
-        "__TYPE__": "ImageContent",
         "origin": {
           "id": "main",
           "url": "https://images.unsplash.com/photo-1589321599763-d66926c29613",
@@ -75,6 +65,9 @@
           },
           "background": "transparent"
         },
+        "credits": null,
+        "alt": null,
+        "__TYPE__": "ImageContent",
         "thumbnails": {}
       }
     },

@@ -28,15 +28,6 @@
             "placeholder": ""
           }
         },
-        "description": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Description",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "single": "paragraph"
-          }
-        },
         "email": {
           "type": "Text",
           "config": {
