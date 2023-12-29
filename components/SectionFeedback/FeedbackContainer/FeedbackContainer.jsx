@@ -1,9 +1,7 @@
 import { useRef, useState } from 'react';
 import gsap from 'gsap/dist/gsap';
 
-import { modals } from '@/utils/types';
-
-import { CursorType } from '@/types';
+import { CursorType, ModalType } from '@/types';
 
 import FeedbackCard from '../FeedbackCard';
 import Modal from '../../Modal';
@@ -56,7 +54,7 @@ const FeedbackContainer = ({ data, addRef }) => {
               },
             });
           }}
-          type={modals.feedback}
+          type={ModalType.Feedback}
           data={{
             name: userName,
             image: userImage,

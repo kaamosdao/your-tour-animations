@@ -18,7 +18,7 @@ interface ICustomScrollTrigger {
   children: ReactNode;
   shift: string | number;
   trigger: RefObject<HTMLElement>;
-  target: RefObject<HTMLElement> | null;
+  target?: RefObject<HTMLElement> | null;
   scrollTriggerOptions: ScrollTrigger.Vars;
   tweenOptions: GSAPTweenVars;
   axis: Direction;
