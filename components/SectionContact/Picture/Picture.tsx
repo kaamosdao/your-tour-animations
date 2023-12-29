@@ -1,8 +1,16 @@
+import { FC } from 'react';
+import { ContactSlice } from '@/prismicio-types';
+
 import CustomImage from '../../CustomImage';
 
 import s from './Picture.module.scss';
 
-const Picture = ({ slice, addRef }) => (
+interface IPicture {
+  slice: ContactSlice;
+  addRef: ((el: HTMLElement | null) => void) | null;
+}
+
+const Picture: FC<IPicture> = ({ slice, addRef }) => (
   <div ref={addRef} className={s.picture}>
     <CustomImage
       image={slice.primary.image}

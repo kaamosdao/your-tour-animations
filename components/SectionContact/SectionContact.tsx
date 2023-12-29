@@ -1,6 +1,8 @@
 'use client';
 
-import { useMemo, useRef } from 'react';
+import { FC, useMemo, useRef } from 'react';
+
+import { ContactSlice } from '@/prismicio-types';
 
 import { useWiderThanTabletLg } from '@/hooks';
 
@@ -13,7 +15,11 @@ import Picture from './Picture';
 
 import s from './SectionContact.module.scss';
 
-const SectionContact = ({ slice }) => {
+interface ISectionContact {
+  slice: ContactSlice;
+}
+
+const SectionContact: FC<ISectionContact> = ({ slice }) => {
   const sectionRef = useRef(null);
 
   const scrollTriggerOptions = useMemo(
@@ -46,7 +52,7 @@ const SectionContact = ({ slice }) => {
         }}
         axis={widerThanTabletLg ? Direction.Vertical : Direction.Horizontal}
       >
-        <Title slice={slice} />
+        <Title addRef={() => {}} slice={slice} />
       </CustomScrollTrigger>
 
       <CustomScrollTrigger
@@ -60,7 +66,7 @@ const SectionContact = ({ slice }) => {
         }}
         axis={widerThanTabletLg ? Direction.Vertical : Direction.Horizontal}
       >
-        <Text slice={slice} />
+        <Text addRef={() => {}} slice={slice} />
       </CustomScrollTrigger>
 
       <CustomScrollTrigger
@@ -73,7 +79,7 @@ const SectionContact = ({ slice }) => {
         }}
         axis={Direction.Horizontal}
       >
-        <Picture slice={slice} />
+        <Picture addRef={() => {}} slice={slice} />
       </CustomScrollTrigger>
     </section>
   );

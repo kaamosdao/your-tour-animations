@@ -1,10 +1,14 @@
 'use client';
 
+// import { FC, MouseEvent, useEffect, useState } from 'react';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { PrismicNextLink } from '@prismicio/next';
 import { createClient } from '@/prismicio';
+
+// import { AllDocumentTypes } from '@/prismicio-types';
+// import type { SettingsDocumentData } from '@/prismicio-types';
 
 import { setActivePage, setAnimation } from '@/store/slices/transitionSlice';
 import selectPlayingTransition, {
@@ -21,6 +25,7 @@ import HoverCursor from '../CustomCursor/HoverCursor';
 
 import s from './Navigation.module.scss';
 
+// const Navigation: FC = () => {
 const Navigation = () => {
   const pathname = usePathname();
   const router = useRouter();
@@ -29,7 +34,19 @@ const Navigation = () => {
   const playing = useAppSelector(selectPlayingTransition);
   const activePage = useAppSelector(selectActivePage);
 
+  // const [settings, setSettings] = useState<SettingsDocumentData | null>(null);
   const [settings, setSettings] = useState(null);
+
+  // useEffect(() => {
+  //   const client = createClient();
+  //   const getSettings = async () => {
+  //     const { data } = await client.getSingle<AllDocumentTypes, 'settings'>(
+  //       'settings'
+  //     );
+  //     setSettings(data);
+  //   };
+  //   void getSettings();
+  // }, []);
 
   useEffect(() => {
     const client = createClient();
@@ -37,9 +54,10 @@ const Navigation = () => {
       const { data } = await client.getSingle('settings');
       setSettings(data);
     };
-    getSettings();
+    void getSettings();
   }, []);
 
+  // const moveToRoute = (path: string) => (e: MouseEvent) => {
   const moveToRoute = (path) => (e) => {
     e.preventDefault();
 
